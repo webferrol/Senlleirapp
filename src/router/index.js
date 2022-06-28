@@ -6,7 +6,7 @@ const requiereAuth = async (to, from, next) => {
   // -> En este caso no se puede usar el store directamente fuera de los componentes, tiene que ser dentro de un metodo como este caso <- //
   const userStore = useStoreUsers();
   // userStore.cargandoSesion = true;
-  const user = await userStore.userActual();
+  const user = await userStore.onAuthState();
   // -> Si existe el user con next va a la ruta correspondiente(InicioSesion) y else lo contrario<- //
   if (user) {
     next();
@@ -16,10 +16,6 @@ const requiereAuth = async (to, from, next) => {
   // userStore.cargandoSesion = false;
 };
 
-// const adminUsers = async () =>{
-//   const userStore = useStoreUsers();
-//   await store.userActual()
-// }
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
