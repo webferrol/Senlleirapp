@@ -33,23 +33,9 @@ export const useStoreUsers = defineStore("users", {
       //-> router.push() empuja a donde se quiera una vez se haya logeado el usuario <- //
       router.push("/");
     },
-    //-> Funcion para mantener la persistencia de sesion <- //
-    // logged() {
-    //   onAuthStateChanged(auth, (user) => {
-    //     const headerValidado = document.querySelector(".header-nav-app");
-    //     const footerValidado = document.querySelector(".menu-principal");
-    //     if (user) {
-    //       this.user = user;
-    //       headerValidado.style.backgroundColor = "red";
-    //       footerValidado.style.backgroundColor = "red";
-    //     } else {
-    //       this.user = null;
-    //     }
-    //   });
-    // },
     //-> Funcion cerrar sesion <- //
     logout() {
-        signOut(auth)
+      signOut(auth)
         .then(() => {
           this.user = null;
           //-> router.push() empuja a donde se quiera una vez se haya registrado el usuario <- //
@@ -59,7 +45,7 @@ export const useStoreUsers = defineStore("users", {
           console.log(error);
         });
     },
-
+    //-> Funcion para mantener la persistencia de sesion <- //
     async onAuthState() {
       // -> Resuesta positiva(resolve), negativa(reject) <- //
       return new Promise((resolve, reject) => {
