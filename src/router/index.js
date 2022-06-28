@@ -70,7 +70,7 @@ const router = createRouter({
     {
       path: "/catalogo-parques",
       name: "catalogo-parques",
-      component: () => import("@/views/CatalogoParques.vue"),
+      component: () => import("@/views/parques/CatalogoParques.vue"),
     },
     {
       path: `/arb-:id`,
@@ -80,7 +80,7 @@ const router = createRouter({
     {
       path: '/altaparque',
       name: 'parque',
-      component: () => import('@/views/AltaParque.vue')
+      component: () => import('@/components/forms/AltaParque.vue')
     }
   ],
 });

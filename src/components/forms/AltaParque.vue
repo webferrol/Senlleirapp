@@ -3,41 +3,39 @@
   <form id="alta-parque" @submit.prevent="altaParques">
     <h2>Formulario Alta Parque</h2>
     <fieldset class="data-parque">
-      <label for="nombre" class="form-label" required>Nombre</label>
-      <input
-        v-model.trim="form.nombre"
-        type="text"
-        required
-        name="nombre"
-        id="nombre"
-        placeholder="Nombre"
-      />
-      <br />
+      <div class="contain-form-parque">
+        <label for="nombre" class="form-label" required>Nombre</label>
+        <input
+          class="input-parque"
+          v-model.trim="form.nombre"
+          type="text"
+          required
+          name="nombre"
+          id="nombre"
+          placeholder="Nombre"
+        />
 
-      <label for="descripcion" class="form-label" required>Descripción</label>
-      <textarea
-        v-model.trim="form.descripcion"
-        cols="30"
-        rows="10"
-        type="textarea"
-        required
-        name="descripcion"
-        id="descripcion"
-        placeholder="Descripcion"
-      ></textarea>
-      <br />
-
-
-      <div class="data-parque">
-        <theUploader @emitirFichero="cargarParque"></theUploader>
-        <div v-if="error.error" class="error">
-          {{ error.message }}
-        </div>
+        <label for="descripcion" class="form-label" required>Descripción</label>
+        <textarea
+          class="input-parque"
+          v-model.trim="form.descripcion"
+          cols="30"
+          rows="10"
+          type="textarea"
+          required
+          name="descripcion"
+          id="descripcion"
+          placeholder="Descripcion"
+        ></textarea>
       </div>
+
+      <theUploader @emitirFichero="cargarParque"></theUploader>
+      
+      <div v-if="error.error" class="error">{{ error.message }}</div>
       <div v-if="spinner" class="spinner">Cargando....</div>
     </fieldset>
 
-    <button class="btn-parque">Dar de alta parque</button>
+    <button class="btn-parque">Insertar parque</button>
   </form>
 </template>
 
@@ -113,9 +111,32 @@ const cargarParque = async (imagenes) => {
 </script>
 
 <style scoped>
-form {
+h2 {
+  font-weight: bolder;
+}
+
+#alta-parque {
+  padding: 0.5rem;
+  margin: 1rem auto;
+  width: 50%;
+}
+
+.contain-form-parque {
+  display: grid;
+  grid-template-columns: auto;
+  gap: 0.4rem;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.btn-parque {
+  margin: auto;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 5px;
+  border: none;
+  background-color: black;
+  color: white;
 }
 </style> 
