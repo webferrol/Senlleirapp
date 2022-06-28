@@ -73,6 +73,11 @@ const router = createRouter({
       component: () => import("@/views/parques/CatalogoParques.vue"),
     },
     {
+      path: "/nuevo-parque",
+      name: "NuevoParque",
+      component: () => import("@/views/parques/NuevoParque.vue"),
+    },
+    {
       path: `/arb-:id`,
       name: "Senlleira",
       component: () => import("@/views/senlleira/FichaTecnica.vue"),
@@ -81,6 +86,11 @@ const router = createRouter({
       path: '/altaparque',
       name: 'parque',
       component: () => import('@/components/forms/AltaParque.vue')
+    },
+    {
+      path: '/editar-parque',
+      name: 'editar-parque',
+      component: () => import('@/components/forms/EditarParque.vue')
     }
   ],
 });

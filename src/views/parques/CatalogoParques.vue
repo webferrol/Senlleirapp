@@ -13,7 +13,7 @@
   </div>
 
 
-  <AltaParque></AltaParque>
+  
 
 
 </template>

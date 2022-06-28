@@ -1,6 +1,6 @@
 <template>
   <div class="formsenlleira" v-if="loaded">Cargando...</div>
-  <form id="alta-parque" @submit.prevent="handleSubmit">
+  <form id="alta-parque" @submit.prevent="altaParques">
     <h2>Formulario Alta Parque</h2>
     <fieldset class="data-parque">
       <div class="contain-form-parque">
@@ -29,44 +29,30 @@
         ></textarea>
       </div>
 
-      <!-- <theUploader @emitirFichero="cargarParque"></theUploader> -->
+      <theUploader @emitirFichero="cargarParque"></theUploader>
       
       <div v-if="error.error" class="error">{{ error.message }}</div>
       <div v-if="spinner" class="spinner">Cargando....</div>
     </fieldset>
 
-    <button class="btn-parque">{{buttonText}}</button>
+    <button class="btn-parque">Insertar parque</button>
   </form>
 </template>
 
 <script setup>
 import TheUploader from "@/components/theUploader.vue";
 import { useStoreParques } from "@/stores/parques";
-import { reactive, ref, inject } from "vue";
-
-const props = defineProps({
-
-  buttonText:{
-    type:String,
-    default:'Insertar Parque'
-}
-
-})
-
-const form = inject('form');
-const emits = defineEmits (["manipularFormulario"]);
-
-
+import { reactive, ref } from "vue";
 
 // llamada del store
 const setParques = useStoreParques();
 
-// const form = reactive({
-//   id: null,
-//   nombre: "",
-//   descripcion: "",
-//   urlficha: "",
-// });
+const form = reactive({
+  id: null,
+  nombre: "",
+  descripcion: "",
+  urlficha: "",
+});
 
 const loaded = ref(false);
 
@@ -86,44 +72,41 @@ const reset = () => {
   form.urlficha = "";
 };
 
+const altaParques = async () => {
+  form.id = Date.now();
+  form.urlficha = `parques/${form.id}/${tmpImagenes[0].name}`;
+  await setParques.insertarParque(form);
+  if (tmpImagenes !== null && form.id) {
+    try {
+      error.value = { error: false, message: "" };
+      spinner.value = true;
+      loaded.value = true;
+      for (let i = 0, tam = tmpImagenes.length; i < tam; i++) {
+        await setParques.subirParque({
+          id: `${form.id}`,
+          file: tmpImagenes[i],
+        });
+      }
+      spinner.value = false;
+      reset();
+    } catch (e) {
+      error.value.error = true;
+      error.value.message = e.message;
+    } finally {
+      loaded.value = false;
+    }
+  }
+};
 
-
-const handleSubmit = () => {
-  emits('manipularFormulario','Hola')
-//   form.id = Date.now();
-//   form.urlficha = `parques/${form.id}/${tmpImagenes[0].name}`;
-//   await setParques.insertarParque(form);
-//   if (tmpImagenes !== null && form.id) {
-//     try {
-//       error.value = { error: false, message: "" };
-//       spinner.value = true;
-//       loaded.value = true;
-//       for (let i = 0, tam = tmpImagenes.length; i < tam; i++) {
-//         await setParques.subirParque({
-//           id: `${form.id}`,
-//           file: tmpImagenes[i],
-//         });
-//       }
-//       spinner.value = false;
-//       reset();
-//     } catch (e) {
-//       error.value.error = true;
-//       error.value.message = e.message;
-//     } finally {
-//       loaded.value = false;
-//     }
-//   }
-// };
-
-// const cargarParque = async (imagenes) => {
-//   try {
-//     error.value = { error: false, message: "" };
-//     tmpImagenes = imagenes;
-//     //await store.subirFoto(imagen);
-//   } catch (e) {
-//     error.value.error = true;
-//     error.value.message = e.message;
-//   }
+const cargarParque = async (imagenes) => {
+  try {
+    error.value = { error: false, message: "" };
+    tmpImagenes = imagenes;
+    //await store.subirFoto(imagen);
+  } catch (e) {
+    error.value.error = true;
+    error.value.message = e.message;
+  }
 };
 </script>
 
