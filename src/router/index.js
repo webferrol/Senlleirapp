@@ -64,15 +64,20 @@ const router = createRouter({
       beforeEnter: requiereAuth,
     },
     {
-      path: "/catsenlleira",
-      name: "catsenlleira",
-      component: () => import("@/components/PruebaCargarFotos.vue"),
+      path: "/catalogo-parques",
+      name: "catalogo-parques",
+      component: () => import("@/views/parques/CatalogoParques.vue"),
     },
     {
       path: `/arb-:id`,
       name: "Senlleira",
       component: () => import("@/views/senlleira/FichaTecnica.vue"),
     },
+    {
+      path: '/altaparque',
+      name: 'parque',
+      component: () => import('@/components/forms/AltaParque.vue')
+    }
   ],
 });
 
