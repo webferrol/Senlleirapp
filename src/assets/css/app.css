@@ -1,0 +1,17 @@
+@font-face{
+    font-family: montserrat;
+    src: url(../fonts/Montserrat-Regular.ttf);
+}
+
+:root{
+    --colorprincipal: black;
+    --colorsecundario: green;
+    --colorterciario: rgb(50,50,50);
+    --colorclaro: rgba(255,255,255, 1);
+}
+
+#app{
+  font-family: montserrat;   
+  min-height: 100vh;
+  margin-bottom: 50px;
+}

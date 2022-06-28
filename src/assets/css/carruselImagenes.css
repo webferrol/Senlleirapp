@@ -1,0 +1,63 @@
+
+.carrusel-component{
+    display: grid;
+    width: 100%;
+    grid-template-rows: 1fr;
+}
+.carrusel-images-galery{
+    position: relative;
+    width: 100%;
+    height: 400px;
+    
+    background-color: red;
+}
+    .carrusel-images-galery img{
+        position: absolute;
+        object-fit: cover;
+        width: 100%;
+        height: inherit;
+        top: 0;
+        right: 0;
+    }
+
+/* Botones carrusel */
+.btn-carrusel{
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    z-index: 1;
+}
+.btn-carrusel svg{
+    font-size: 1.5rem;
+    color: var(--colorterciario)
+}
+    .--prev{
+        top: 50%;
+        left: 0%;
+        transform: translate(50% ,-50%);
+        
+    }
+    .--next{
+        top: 50%;
+        right: 0%;
+        transform: translate(-50% ,-50%);
+    }
+
+/* Posicion carrusel */
+.position {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .75rem;
+    padding: .5rem;
+}
+    .position svg{
+        font-size: 1.1rem;
+        color: var(--colorterciario)
+    }
