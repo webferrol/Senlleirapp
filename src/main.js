@@ -12,12 +12,12 @@ iconsLibrary()
 const app = createApp(App)
 
 app.use(createPinia())
-app.use(router)
 app.component("icono", FontAwesomeIcon)
 
 const store = useStoreUsers();
 
 (async() =>{
   await store.onAuthState();
+  app.use(router)
   app.mount('#app');
 })()
