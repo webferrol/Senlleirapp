@@ -15,12 +15,7 @@
 
 <script setup>
 import { ref } from "vue";
-<<<<<<< HEAD
-import { listAllUrls } from "../../hook/storage.hook"; //imágenes
 import { useStoreParques } from "../../stores/parques"; 
-=======
-import { listAllUrls } from "../../hook/storage.hook";
->>>>>>> 11934bfce697e006cbcd657df1c4f2158a775870
 
 const error = ref("");
 const ruta = ref([]);
