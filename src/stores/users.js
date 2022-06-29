@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 import router from "../router";
 
+// -> Exportamos el uso el store para que se pueda usar en cualquier parte <- //
 export const useStoreUsers = defineStore("users", {
   state: () => {
     return {
@@ -15,6 +16,7 @@ export const useStoreUsers = defineStore("users", {
     };
   },
   getters: {
+    // -> Nos devuelve el email/usuario activo <- //
     getEmailUser: (state) => {
       return state.user && state.user.email
         ? state.user.email
