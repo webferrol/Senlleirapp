@@ -44,11 +44,10 @@
             <div class="senlleira-localizacion">
                 <label for="zona" class="form-label" required> Zona xeográfica <span data-set="Campo obligatorio">*</span></label>
                 <input v-model="form.zona_geografica" type="text" required name="zona" id="zona"
-                    placeholder="Zona geográfica" />
-                
+                    placeholder="Zona geográfica" />                
                 <label for="localizacion" class="form-label"> Localizacion <span data-set="Campo obligatorio">*</span></label>
-                <select @change="handleSelect" v-model="form.idParque" name="localizacion" id="localizacion" required>
-                    <option v-for="valor in useStoreParques.parques" :key="valor.id" :value="valor.id">
+                <select v-model="form.idParque" name="localizacion" id="localizacion" required>
+                    <option v-for="valor in storeParques.parques" :key="valor.id" :value="valor.id">
                         {{ valor.nombre }} </option>
                 </select>
             </div>
@@ -99,6 +98,7 @@
 <script setup>
 import TheUploader from '@/components/theUploader.vue';
 import { useStoreSenlleiras } from '@/stores/senlleiras';
+import { useStoreParques } from '@/stores/parques';
 import { useStoreEspecies } from '@/stores/especies';
 import { reactive, ref } from 'vue';
 import "@/assets/css/formularioSenlleira.css";
@@ -125,6 +125,7 @@ const form = reactive({
 // llamada del store
 const storeSenlleiras = useStoreSenlleiras();
 const storeEspecies = useStoreEspecies();
+const storeParques = useStoreParques();
 const loaded = ref(false);
 
 // indica todos los errores que se presenten
@@ -133,6 +134,10 @@ const error = ref({
     message: '',
 });
 
+
+
+//Cargamos parques
+storeParques.setParques();
 
 let tmpImagenes = null; //variable que al principio está vacia
 const spinner = ref(false);
