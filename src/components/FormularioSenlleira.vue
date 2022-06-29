@@ -25,30 +25,64 @@
                     <option v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
                         {{ valor.nombre_comun }} </option>
                 </select>
-                <label for="arbore" class="form-label" required> nome da árbore <span data-set="Campo obligatorio">*</span></label>
-                <input v-model="form.zona_geografica" type="text" required name="arbore" id="arbore"
+                <label for="arbore" class="form-label" required> Nome da árbore <span data-set="Campo obligatorio">*</span></label>
+                <input v-model="form.nombre_arbol" type="text" required name="arbore" id="arbore"
                     placeholder="indica o nome da arbore" />
-            </div>
 
+                <label for="altura" class="form-label">Altura (metros)</label>
+                <input id="altura" name="altura" v-model.number="form.altura" type="number" 
+                step="any" placeholder="31"/>  
+                    
+                <label for="perimetroTronco" class="form-label">Diámetro do tronco (metros)</label>
+                <input id="perimetroTronco" name="perimetroTronco" v-model.number="form.diametroTronco" type="number"
+                    step="any" placeholder="10,5"  />
+            </div>
         </fieldset>
         <fieldset class="data-senlleira">
             <legend>Ubicación</legend>
 
             <div class="senlleira-localizacion">
                 <label for="zona" class="form-label" required> Zona xeográfica <span data-set="Campo obligatorio">*</span></label>
-                
                 <input v-model="form.zona_geografica" type="text" required name="zona" id="zona"
                     placeholder="Zona geográfica" />
-                <label for="localizacion" class="form-label"> Localizacion <span data-set="Campo obligatorio">*</span></label>
                 
-                <input v-model="form.localizacion" type="text" required name="localizacion" id="localizacion"
-                    placeholder="Indica la localizacion" />
+                <label for="localizacion" class="form-label"> Localizacion <span data-set="Campo obligatorio">*</span></label>
+                <select @change="handleSelect" v-model="form.idParque" name="localizacion" id="localizacion" required>
+                    <option v-for="valor in useStoreParques.parques" :key="valor.id" :value="valor.id">
+                        {{ valor.nombre }} </option>
+                </select>
             </div>
-
         </fieldset>
+        <fieldset class="data-senlleira">
+            <legend>Descripción</legend>
+            <div class="senlleira-localizacion">
+                <textarea v-model="form.descripcion" name="descripcion" id="descripcion" cols="30" rows="10" placeholder="breve descripción da árbore"></textarea>
+            </div>
+        </fieldset>
+        <fieldset class="data-senlleira">
+            <legend>Esta árbore é </legend>
+            <div class="senlleira-arbore">
+                 <input 
+                         type="checkbox" 
+                         v-model="form.senlleira"
+                         name="senlleira" 
+                         id="senlleira" 
+                    />&nbsp;
+                    <label class="form-label" for="senlleira">Senlleira</label> 
+                     <input 
+                         type="checkbox" 
+                         v-model="form.propSenlleira"
+                         name="propSenlleira" 
+                         id="propSenlleira" 
+                    />&nbsp;
+                    <label class="form-label" for="propSenlleira">Proposta de senlleira</label> 
+                
+            </div>
+        </fieldset>
+
         <fieldset>
 
-            <legend> Imagen </legend>
+            <legend> Imaxe </legend>
             <div class="data-senlleira">
                 <theUploader @emitirFichero="gestionFoto"></theUploader>
                 <div v-if="error.error" class="error">
@@ -83,7 +117,9 @@ const form = reactive({
     imagen_url: ``,
     altura:'',
     diametroTronco:'',
-    descripcion:''
+    descripcion:'',
+    senlleira: false,
+    propSenlleira: false,
 
 })
 // llamada del store
@@ -112,10 +148,12 @@ const reset = () => {
     form.nombre_comun_gal = '';
     form.zona_geografica = '';
     form.localizacion = '';
-    form.imagen_url = '',
-    form.altura='',
-    form.diametroTronco='',
-    form.descripcion=''
+    form.imagen_url = '';
+    form.altura ='';
+    form.diametroTronco ='';
+    form.descripcion ='';
+    form.senlleira = false;
+    form.propSenlleira = false;
 
 }
 
