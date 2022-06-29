@@ -17,38 +17,12 @@ import GaleriaVue from '../components/galeria/Galeria.vue';
 
 const router = useRouter();
 
-const imgs = reactive([
-    {
-    url:'./senlleiras_1.jpg',
-    text: 'Árbore sen flor, día sen sol.',
-    clases: { 'carrusel-image': true, 'carruselmostrado': true },//El primero mostrado
-    puntos: { 'posicionado': true },
-    },
-    {
-        url: './senlleiras_2.jpg',
-        text: 'De tal árbore, tal acha.',
-        clases: { 'carrusel-image': true, 'carruselmostrado': false },
-        puntos: { 'posicionado': false },
-    },
-    {
-        url: './senlleiras_5.jpg',
-        text: 'Árbore  trasplantado, ben regado.',
-        clases: { 'carrusel-image': true, 'carruselmostrado': false },
-        puntos: { 'posicionado': false },
-    },
-    {
-        url: './senlleiras_10.jpg',
-        text: 'Quen ten árbore, ten paxaros.',
-        clases: { 'carrusel-image': true, 'carruselmostrado': false },
-        puntos: { 'posicionado': false },
-    }
-]);
+const imgs =[
+    './senlleiras_1.jpg',
+   './senlleiras_2.jpg',
+    './senlleiras_5.jpg',
+    './senlleiras_10.jpg',
+];
 
-//Router para la galería. Al hacer click entrar en el catálogo
-const catalogoGo = () => {
-    router.push({
-        name: 'CatalogoSenlleira',
-      })
-}
 </script>
 

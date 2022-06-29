@@ -2,9 +2,8 @@
   <div class="carrusel">
     <!-- galeria -->
     <ul class="carrusel-images-galery">
-      <li v-for="(item, index) in images" :key="index" :class="item.clases">
-        <img class="carrusel__image" :src="item.url" :title="title" :alt="alt" />
-        <!-- <p v-if="showlegend" class="carrusel__description">{{ item.text }}</p> -->
+      <li v-for="(item, index) in images" :key="index" :class="item.clases"  v-show="index === posicion">
+        <img class="carrusel__image" :src="item" alt="imagen arbol senlleira" />
       </li>
     </ul>
 
@@ -18,132 +17,61 @@
 
     <!-- indicador de posicion -->
     <ul class="position">
-      <li class="position__item" @click="change(index)" v-for="(item, index) in images" :key="index">
-        <i class="fa-regular fa-circle" :class="item.puntos"></i>
+      <li class="position__item" @click="moverCarrusel(index)" v-for="(i, index) in images" :key="index">
+        <i class="fa-regular fa-circle"></i>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
-import '../assets/css/carruselImagenes.css'
+import { ref } from 'vue';
 
+const posicion = ref(0)
 
 const props = defineProps({
-  /**
-     * 
-     * @param {Array} images - Array de objetos con el formato descrito abajo
-     * @description Array de objetos. Formato:
-        [
-            {
-            url: './conxo.jpg',
-            text: 'Carballo del Bosque del Banquete de Conxo',
-            clases: { 'carrusel-image': true, 'carruselmostrado': true },//El primero mostrado
-            puntos: { 'posicionado': true },
-            },
-        ]
-    */
+
   images: {
     type: Array,
-  },
- 
-  // /**
-  //  * {String} La altura mínima que ponemos al carrusel
-  //  */
-  // minHeight: {
-  //   type: String,
-  //   default: "300px",
-  // },
-  /**
-   * {String} title - Atributo title de las imágenes
-   */
-  title: {
-    type: String,
-    default: "",
-  },
-  /**
-   * {String} alt - Atributo alt de las imágens
-   */
-  alt: {
-    type: String,
-    default: "",
-  },
-  /**
-   * {Number} contadorInit - Donde situar el contador por defecto
-   */
-  contadorInit: {
-    type: Number,
-    default: 0,
+    default : []
   },
 });
 
-let contador = props.contadorInit;
+// Posiciona carrusel con click de posicion
+const moverCarrusel = (index) => {
+  posicion.value = index;
+  return posicion
+}
 
-const change = (i) => {
-  limpiar();
-  contador = i;
-  props.images[i].clases["carruselmostrado"] = true;
-  props.images[i].puntos["posicionado"] = true;
-  //
-  deleteInterval();
-  galeriaLoad();
-};
-
-const turnLeft = () => {
-  limpiar();
-  contador--;
-  //console.log(contador)
-  if (contador < 0) {
-    contador = props.images.length - 1;
-    //console.log(contador)
-  }
-  props.images[contador].clases["carruselmostrado"] = true;
-  props.images[contador].puntos["posicionado"] = true;
-
-  //
-  deleteInterval();
-  galeriaLoad();
-};
-
+// Suma posicion
 const turnRight = () => {
-  limpiar();
-  contador++;
-  if (contador > props.images.length - 1) {
-    contador = 0;
-    //console.log(contador)
+  if(posicion.value  >= props.images.length -1){
+    posicion.value = 0;
+  }else{
+  posicion.value++
   }
-  props.images[contador].clases["carruselmostrado"] = true;
-  props.images[contador].puntos["posicionado"] = true;
-
-  //
-  deleteInterval();
-  galeriaLoad();
-};
-
-const limpiar = () => {
-  for (let i = 0, tam = props.images.length; i < tam; i++) {
-    props.images[i].clases["carruselmostrado"] = false;
-    props.images[i].puntos["posicionado"] = false;
+}
+// Resta posicion
+const turnLeft = () => {
+  if(posicion.value  <= 0){
+    posicion.value = props.images.length -1;
+  }else{
+  posicion.value--
   }
-};
+}
 
-let interval = null;
-const deleteInterval = () => {
-  clearInterval(interval);
-};
-const galeriaLoad = () => {
-  interval = setInterval(() => {
-    contador++;
-    if (contador > props.images.length - 1) {
-      contador = 0;
+// Cambia la imagen del carrusel cada x tiempo
+const slideAutomatico = () => {
+  setInterval(() => {
+    if(posicion.value >= props.images.length -1){
+      posicion.value = 0;
+    } else{
+  posicion.value++
     }
-    limpiar();
-    props.images[contador].clases["carruselmostrado"] = true;
-    props.images[contador].puntos["posicionado"] = true;
-  }, 12000);
-};
+  }, 16000);
+}
 
-galeriaLoad();
+slideAutomatico()
 </script>
 
 

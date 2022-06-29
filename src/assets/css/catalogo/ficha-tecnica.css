@@ -1,0 +1,49 @@
+.container-ficha-tecnica{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(155, 155, 155, .8);
+    backdrop-filter: blur(2px);
+    z-index: 2;
+    margin: auto;
+}
+
+.container-ficha-tecnica .ficha-tecnica{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin: auto;
+    height: 95vh;
+    width: 95vw;
+    overflow: scroll;
+    background-color: white;
+    border: .5rem solid white;
+    border-radius: 5px;
+}
+.ficha-tecnica .cerrar-ficha-tecnica{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 1.3rem;
+    width: 20px;
+    height: 20px;
+    padding: .1rem;
+    background-color: lightgray;
+    border-radius: 3px;
+}
+.ficha-tecnica h2{
+    font-size: 1.3rem;
+    margin-bottom: .25rem;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    width: calc(100% - 30px);
+}
+.ficha-tecnica p{
+    font-size: 1rem;
+    line-height: 1rem;
+}
