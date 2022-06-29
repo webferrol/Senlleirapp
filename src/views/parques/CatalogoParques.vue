@@ -21,7 +21,6 @@
 <script setup>
 import { ref } from "vue";
 import { listAllUrls } from "../../hook/storage.hook";
-import AltaParque from "@/components/forms/AltaParque.vue"
 
 const error = ref("");
 const ruta = ref([]);

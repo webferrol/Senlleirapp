@@ -78,11 +78,6 @@ const router = createRouter({
       name: "Senlleira",
       component: () => import("@/views/senlleira/FichaTecnica.vue"),
     },
-    {
-      path: '/editar-parque',
-      name: 'editar-parque',
-      component: () => import('@/components/forms/EditarParque.vue')
-    }
   ],
 });
 
