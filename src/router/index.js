@@ -64,6 +64,11 @@ const router = createRouter({
       beforeEnter: requiereAuth,
     },
     {
+      path: `/arb-:id`,
+      name: "Senlleira",
+      component: () => import("@/views/senlleira/FichaTecnica.vue"),
+    },
+    {
       path: "/catalogo-parques",
       name: "catalogo-parques",
       component: () => import("@/views/parques/CatalogoParques.vue"),
@@ -73,11 +78,7 @@ const router = createRouter({
       name: "NuevoParque",
       component: () => import("@/views/parques/NuevoParque.vue"),
     },
-    {
-      path: `/arb-:id`,
-      name: "Senlleira",
-      component: () => import("@/views/senlleira/FichaTecnica.vue"),
-    },
+   
   ]
 });
 
