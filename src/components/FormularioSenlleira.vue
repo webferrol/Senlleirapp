@@ -25,6 +25,9 @@
                     <option v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
                         {{ valor.nombre_comun }} </option>
                 </select>
+                <label for="arbore" class="form-label" required> nome da árbore <span data-set="Campo obligatorio">*</span></label>
+                <input v-model="form.zona_geografica" type="text" required name="arbore" id="arbore"
+                    placeholder="indica o nome da arbore" />
             </div>
 
         </fieldset>
@@ -71,11 +74,16 @@ const form = reactive({
     genero: '',
     especie: '',
     idEspecie: 0,
+    idParque: 0,
+    nombre_arbol:'',
     nombre_comun: '',
     nombre_comun_gal: '',
     zona_geografica: '',
     localizacion: '',
     imagen_url: ``,
+    altura:'',
+    diametroTronco:'',
+    descripcion:''
 
 })
 // llamada del store
@@ -98,11 +106,16 @@ const reset = () => {
     form.genero = '';
     form.especie = '';
     form.idEspecie = 0;
+    form.idParque= 0,
+    form.nombre_arbol='',
     form.nombre_comun = '';
     form.nombre_comun_gal = '';
     form.zona_geografica = '';
     form.localizacion = '';
-    form.imagen_url = ''
+    form.imagen_url = '',
+    form.altura='',
+    form.diametroTronco='',
+    form.descripcion=''
 
 }
 

@@ -79,10 +79,17 @@ const router = createRouter({
       component: () => import("@/views/parques/NuevoParque.vue"),
     },
     {
+<<<<<<< HEAD
       path: '/editar-parque',
       name: 'editar-parque',
       component: () => import('@/components/forms/EditarParque.vue')
     }
+=======
+      path: `/arb-:id`,
+      name: "Senlleira",
+      component: () => import("@/views/senlleira/FichaTecnica.vue"),
+    },
+>>>>>>> 11934bfce697e006cbcd657df1c4f2158a775870
   ],
 });
 
