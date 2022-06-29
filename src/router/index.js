@@ -78,7 +78,7 @@ const router = createRouter({
       name: "Senlleira",
       component: () => import("@/views/senlleira/FichaTecnica.vue"),
     },
-  ],
+  ]
 });
 
 export default router;
