@@ -1,10 +1,10 @@
 <template>
   <h1>Nuevo Parque</h1>
-  <AltaParque @manipularFormulario="insertarParque"></AltaParque>
+  <FormParque @manipularFormulario="insertarParque"></FormParque>
 </template>
 
 <script setup>
-import AltaParque from "@/components/forms/FormParque.vue";
+import FormParque from "@/components/forms/FormParque.vue";
 import { useStoreParques } from "@/stores/parques";
 import { ref, reactive, provide } from "vue";
 
@@ -32,7 +32,7 @@ provide("spinner", spinner);
 const loaded = ref(false);
 provide("loaded", loaded);
 
-//Finalizo el bloque de provides
+//Finalizó el bloque de provides
 
 const reset = () => {
   form.id = null;
@@ -43,8 +43,10 @@ const reset = () => {
 
 const insertarParque = async (tmpImagenes) => {
   form.id = Date.now();
-  if(tmpImagenes!==null){
-    form.urlficha = `parques/${form.id}/${tmpImagenes[0].name}`;
+  if (tmpImagenes !== null) {
+    const file1 = tmpImagenes[0].name;
+    const [ext, ...fileName] = file1.split('.').reverse();
+    form.urlficha = `parques/${form.id}.${ext}`;
   }
   await setParques.insertarParque(form);
   if (tmpImagenes !== null && form.id) {
@@ -67,6 +69,6 @@ const insertarParque = async (tmpImagenes) => {
       loaded.value = false;
     }
   }
-}
+};
 </script>
 
