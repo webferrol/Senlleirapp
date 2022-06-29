@@ -1,6 +1,6 @@
 <template>
   <div class="formsenlleira" v-if="loaded">Cargando...</div>
-  <form id="alta-parque" @submit.prevent="altaParques">
+  <form id="alta-parque" @submit.prevent="handleSubmit">
     <h2>Formulario Alta Parque</h2>
     <fieldset class="data-parque">
       <div class="contain-form-parque">
@@ -35,67 +35,34 @@
       <div v-if="spinner" class="spinner">Cargando....</div>
     </fieldset>
 
-    <button class="btn-parque">Insertar parque</button>
+    <button class="btn-parque">{{buttonText}}</button>
   </form>
 </template>
-
 <script setup>
 import TheUploader from "@/components/theUploader.vue";
-import { useStoreParques } from "@/stores/parques";
-import { reactive, ref } from "vue";
+import { inject } from "vue";
 
-// llamada del store
-const setParques = useStoreParques();
+const props = defineProps({
 
-const form = reactive({
-  id: null,
-  nombre: "",
-  descripcion: "",
-  urlficha: "",
-});
+  buttonText:{
+    type:String,
+    default:'Insertar Parque'
+}
+})
 
-const loaded = ref(false);
+//Inyectando formulario que esta fuera
 
-// indica todos los errores que se presenten
-const error = ref({
-  error: false,
-  message: "",
-});
+let tmpImagenes = null;
+const form = inject('form');
+const error = inject ('error');
+const spinner = inject('spinner');
+const loaded = inject('loaded');
 
-let tmpImagenes = null; //variable que al principio está vacia
-const spinner = ref(false);
+const emits = defineEmits (["manipularFormulario"]);
 
-const reset = () => {
-  form.id = null;
-  form.nombre = "";
-  form.descripcion = "";
-  form.urlficha = "";
-};
-
-const altaParques = async () => {
-  form.id = Date.now();
-  form.urlficha = `parques/${form.id}/${tmpImagenes[0].name}`;
-  await setParques.insertarParque(form);
-  if (tmpImagenes !== null && form.id) {
-    try {
-      error.value = { error: false, message: "" };
-      spinner.value = true;
-      loaded.value = true;
-      for (let i = 0, tam = tmpImagenes.length; i < tam; i++) {
-        await setParques.subirParque({
-          id: `${form.id}`,
-          file: tmpImagenes[i],
-        });
-      }
-      spinner.value = false;
-      reset();
-    } catch (e) {
-      error.value.error = true;
-      error.value.message = e.message;
-    } finally {
-      loaded.value = false;
-    }
-  }
+const handleSubmit = () => {
+  emits('manipularFormulario', tmpImagenes)
+ 
 };
 
 const cargarParque = async (imagenes) => {
