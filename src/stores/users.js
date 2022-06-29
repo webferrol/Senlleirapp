@@ -33,29 +33,11 @@ export const useStoreUsers = defineStore("users", {
       //-> router.push() empuja a donde se quiera una vez se haya logeado el usuario <- //
       router.push("/");
     },
-    //-> Funcion para mantener la persistencia de sesion <- //
-    // logged() {
-    //   onAuthStateChanged(auth, (user) => {
-    //     const headerValidado = document.querySelector(".header-nav-app");
-    //     const footerValidado = document.querySelector(".menu-principal");
-    //     if (user) {
-    //       this.user = user;
-    //       headerValidado.style.backgroundColor = "red";
-    //       footerValidado.style.backgroundColor = "red";
-    //     } else {
-    //       this.user = null;
-    //     }
-    //   });
-    // },
     //-> Funcion cerrar sesion <- //
     logout() {
-      const headerValidado = document.querySelector(".header-nav-app");
-      const footerValidado = document.querySelector(".menu-principal");
       signOut(auth)
         .then(() => {
           this.user = null;
-          headerValidado.style.backgroundColor = "var(--colorprincipal)";
-          footerValidado.style.backgroundColor = "var(--colorprincipal)";
           //-> router.push() empuja a donde se quiera una vez se haya registrado el usuario <- //
           router.push("/");
         })
@@ -63,19 +45,15 @@ export const useStoreUsers = defineStore("users", {
           console.log(error);
         });
     },
-
-    userActual() {
+    //-> Funcion para mantener la persistencia de sesion <- //
+    async onAuthState() {
       // -> Resuesta positiva(resolve), negativa(reject) <- //
       return new Promise((resolve, reject) => {
         // -> Observador que vigilia para que se cierre automatico la sesion pasado un tiempo o cuando salga de la sesion/cierra pestaña <- //
         const unsuscribe = onAuthStateChanged(
           auth,
           (user) => {
-            const headerValidado = document.querySelector(".header-nav-app");
-            const footerValidado = document.querySelector(".menu-principal");
             if (user) {
-              headerValidado.style.backgroundColor = "red";
-              footerValidado.style.backgroundColor = "red";
               this.user = { email: user.email, uid: user.uid };
             } else {
               this.user = null;

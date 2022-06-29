@@ -1,6 +1,6 @@
 <template>
    <footer class="main-footer">
-        <nav class="menu-principal">
+        <nav class="menu-principal" :class="{'red':userStore.user}">
             <ul class="menu-elements">
                 <li>
                     <router-link class="menu-catalogo" to="/catalogo">
@@ -27,4 +27,12 @@
 
 <script setup>
 import '../assets/css/footer.css'
+import { useStoreUsers } from '../stores/users'
+
+const userStore = useStoreUsers();
 </script>
+
+<style>
+.menu-principal.red{
+  background-color: red;
+}</style>

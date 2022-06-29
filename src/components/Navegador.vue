@@ -1,7 +1,7 @@
 <template>
   <!-- Header -->
   <header class="main-header">
-    <nav class="header-nav-app">
+    <nav class="header-nav-app" :class="{'rojo':userStore.user}">
       <router-link to="/" class="header-logo"
         ><img src="../assets/img/logotipo-app.png" alt="logo senlleirap"
       /></router-link>
@@ -30,6 +30,7 @@
 <script setup>
 //Dependencias
 import { ref } from "vue";
+
 import "@/assets/css/navegador.css";
 
 import { useStoreUsers } from "../stores/users";
@@ -38,5 +39,7 @@ const userStore = useStoreUsers();
 </script>
 
 <style>
-
+.header-nav-app.rojo{
+  background-color: red;
+}
 </style>
