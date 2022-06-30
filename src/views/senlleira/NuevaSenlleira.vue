@@ -7,8 +7,11 @@
         <fieldset class="data-senlleira --localizacion">
             <legend> Datos senlleira </legend>
             <div class="senlleira-nombre-cientifico">
+                 <label for="arbore" class="form-label" required> Nome da árbore <span data-set="Campo obligatorio">*</span></label>
+                <input v-model="form.nombre_arbol" type="text" required name="arbore" id="arbore"
+                 placeholder="indica o nome da arbore" />
+
                 <label for="especie" class="form-label">Nome científico <span data-set="Campo obligatorio">*</span></label>
-                
                 <select @change="handleSelect" v-model="form.idEspecie" name="especie" id="especie" required>
                     <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
                         {{ valor.genero }} {{ valor.especie }}</option>
@@ -20,14 +23,12 @@
                         {{ valor.nombre_comun_gal }}
                     </option>
                 </select>
+
                 <label for="nome" class="form-label"> Nome en castelan</label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano" required>
                     <option v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
                         {{ valor.nombre_comun }} </option>
                 </select>
-                <label for="arbore" class="form-label" required> Nome da árbore <span data-set="Campo obligatorio">*</span></label>
-                <input v-model="form.nombre_arbol" type="text" required name="arbore" id="arbore"
-                    placeholder="indica o nome da arbore" />
             </div>
         </fieldset>
         <fieldset class="data-senlleira">
@@ -36,7 +37,8 @@
             <div class="senlleira-localizacion">
                 <label for="zona" class="form-label" required> Zona xeográfica <span data-set="Campo obligatorio">*</span></label>
                 <input v-model="form.zona_geografica" type="text" required name="zona" id="zona"
-                    placeholder="Zona geográfica" />                
+                    placeholder="Zona geográfica" />       
+
                 <label for="localizacion" class="form-label"> Localizacion <span data-set="Campo obligatorio">*</span></label>
                 <select v-model="form.idParque" name="localizacion" id="localizacion" required>
                     <option v-for="valor in storeParques.parques" :key="valor.id" :value="valor.id">
@@ -49,8 +51,7 @@
             <legend> Imaxe </legend>
             <div class="data-senlleira">
                 <theUploader @emitirFichero="gestionFoto"></theUploader>
-                <div v-if="error.error" class="error">
-                    {{ error.message }} </div>
+                <div v-if="error.error" class="error"> {{ error.message }} </div>
             </div>
             <div v-if="spinner" class="spinner"> Cargando.... </div>
         </fieldset>
@@ -96,10 +97,9 @@ const error = ref({
     error: false,
     message: '',
 });
-let tmpImagenes = null; //variable que al principio está vacia
+let tmpImagenes = null; 
 const spinner = ref(false);
 const loaded = ref(false);
-
 
 const reset = () => {
     form.id = null;
@@ -126,7 +126,6 @@ const handleSelect = (e) => {
         form.nombre_comun = especie.nombre_comun;
         form.nombre_comun_gal = especie.nombre_comun_gal;
     }
-    //const datosEspecies = e.target.value)
 }
 
 const gestionFoto = async (imagenes) => {
