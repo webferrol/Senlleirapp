@@ -1,30 +1,31 @@
 <template>
   <div v-if="loaded" class="especies_alert especies_loaded">Cargando...</div>
   <div v-if="errores.error" class="especies_alert especies_error">{{errores.message}}</div>
-  <form id="especies" @submit.prevent="subirDatos">
-    <fieldset class="data_especies">
-
-      <h2>Cargar Especie</h2>
-
-      <input v-model.trim="form.genero" type="text" id="genero" placeholder="Género" required>
-      <input v-model.trim="form.especie" type="text" id="especie" placeholder="Especie" required>
-      <span class="label_nombre">
-        <label for="nombre_comun">Nombre común - Castellano</label>
-        <input v-model="form.nombre_comun" type="text" id="nombre_comun" name="nombre_comun" placeholder="(Castellano)"
-          required>
-      </span>
-      <span class="label_nombre">
-        <label for="nombre_comun_gal">Nombre común - Gallego</label>
-        <input v-model="form.nombre_comun_gal" type="text" name="nombre_comun_gal" id="nombre_comun_gal"
-          placeholder="(Gallego)" required>
-      </span>
-        <textarea v-model="form.origen_descripcion" name="origen" id="origen_descripcion" cols="30" rows="10" placeholder="Origen y descripción"></textarea>
-        <textarea v-model="form.usos" name="usos" id="usos" cols="30" rows="10" placeholder="usos"></textarea>
-        <textarea v-model="form.curiosidades" name="curiosidades" id="curisosidades" cols="30" rows="10" placeholder="Curiosidades"></textarea>
-
-      <input type="submit" value="Cargar Especie">
-    </fieldset>
-  </form>
+  <div class="form-container">
+    <form id="especies" @submit.prevent="subirDatos">
+    <icono  class="close-form" :icon="['fa', 'xmark']"
+    @click="$emit('cerrarFormulario')" ></icono>
+      <fieldset class="data_especies">
+        <h2>Cargar Especie</h2>
+        <input v-model.trim="form.genero" type="text" id="genero" placeholder="Género" required>
+        <input v-model.trim="form.especie" type="text" id="especie" placeholder="Especie" required>
+        <span class="label_nombre">
+          <label for="nombre_comun">Nombre común - Castellano</label>
+          <input v-model="form.nombre_comun" type="text" id="nombre_comun" name="nombre_comun" placeholder="(Castellano)"
+            required>
+        </span>
+        <span class="label_nombre">
+          <label for="nombre_comun_gal">Nombre común - Gallego</label>
+          <input v-model="form.nombre_comun_gal" type="text" name="nombre_comun_gal" id="nombre_comun_gal"
+            placeholder="(Gallego)" required>
+        </span>
+          <textarea v-model="form.origen_descripcion" name="origen" id="origen_descripcion" cols="30" rows="10" placeholder="Origen y descripción"></textarea>
+          <textarea v-model="form.usos" name="usos" id="usos" cols="30" rows="10" placeholder="usos"></textarea>
+          <textarea v-model="form.curiosidades" name="curiosidades" id="curisosidades" cols="30" rows="10" placeholder="Curiosidades"></textarea>
+        <input type="submit" value="Cargar Especie">
+      </fieldset>
+    </form>
+  </div>
 </template>
 
 <script setup>

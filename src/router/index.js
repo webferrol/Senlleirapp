@@ -45,16 +45,11 @@ const router = createRouter({
       name: "MapaSenlleiras",
       component: () => import("@/views/senlleira/MapaSenlleiras.vue"),
     },
-    // {
-    //   path: "/especies",
-    //   name: "especies",
-    //   component: () => import("@/components/admin/FormAdminEspecies.vue"),
-    //   beforeEnter: requiereAuth,
-    // },
+
     {
       path: "/catalogo-especies",
       name: "catalogo-especies",
-      component: () => import("@/components/admin/AdminCatalogoEspecies.vue"),
+      component: () => import("@/views/vista-admin/Vista-especies.vue"),
       beforeEnter: requiereAuth,
     },
     {
