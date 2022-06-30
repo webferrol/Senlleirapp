@@ -37,6 +37,8 @@
     grid-template-columns: auto;
     margin: auto;
     width: 90%;
+    max-height: 90vh;
+    overflow-x: hidden;
     max-width: 800px;
     border: 2px solid black;
     border-radius: 5px;
@@ -57,6 +59,7 @@
     height: 25px;
     margin: .1rem;
     cursor: pointer;
+    z-index: 2;
   
   }
   
