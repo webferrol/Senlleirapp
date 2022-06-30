@@ -10,6 +10,8 @@
         |
         <router-link to="/catalogo-especies">cat-especies</router-link>
         |
+        <router-link to="/catalogo-parque">cat-parques</router-link>
+        |
         <router-link to="/admin">admin</router-link>
       </ul>
       <ul class="header-nav-buttons">

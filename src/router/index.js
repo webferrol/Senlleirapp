@@ -60,15 +60,16 @@ const router = createRouter({
       beforeEnter: requiereAuth,
     },
     {
-      path: "/catalogo-parques",
-      name: "catalogo-parques",
-      component: () => import("@/views/parques/CatalogoParques.vue"),
+      path: "/catalogo-parque",
+      name: "admin-parque",
+      component: () => import("@/views/vista-admin/Vista-parques.vue"),
     },
     {
-      path: "/nuevo-parque",
-      name: "NuevoParque",
-      component: () => import("@/views/parques/NuevoParque.vue"),
-    }
+      path: "/lista-parques",
+      name: "lista-parques",
+      component: () => import("@/views/parques/ListaParques.vue"),
+    },
+    
   ],
 });
 
