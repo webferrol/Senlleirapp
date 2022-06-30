@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import FormParque from "@/components/forms/FormParque.vue";
+import FormParque from "@/components/admin/forms/FormParque.vue";
 import { useStoreParques } from "@/stores/parques";
 import { ref, reactive, provide } from "vue";
 
@@ -15,6 +15,10 @@ const setParques = useStoreParques();
 const form = reactive({
   id: null,
   nombre: "",
+  tipoloxia: "",
+  localizacion: "",
+  cronoloxía: "",
+  superficie: "",
   descripcion: "",
   urlficha: "",
 });
@@ -35,6 +39,10 @@ provide("loaded", loaded);
 //Finalizó el bloque de provides
 
 const reset = () => {
+  form.tipoloxia = "";
+  form.localizacion = "";
+  form.cronoloxía = "";
+  form.superficie = "";
   form.id = null;
   form.nombre = "";
   form.descripcion = "";

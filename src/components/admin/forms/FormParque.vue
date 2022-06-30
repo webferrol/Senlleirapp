@@ -4,7 +4,7 @@
     <h2>Formulario Alta Parque</h2>
     <fieldset class="data-parque">
       <div class="contain-form-parque">
-        <label for="nombre" class="form-label" required>Nombre</label>
+        <label for="nombre" class="form-label" required>Nome</label>
         <input
           class="input-parque"
           v-model.trim="form.nombre"
@@ -13,6 +13,50 @@
           name="nombre"
           id="nombre"
           placeholder="Nombre"
+        />
+
+        <label for="tipoloxia" class="form-label" required>Tipoloxía</label>
+        <input
+          class="input-parque"
+          v-model.trim="form.tipoloxia"
+          type="text"
+          required
+          name="tipoloxia"
+          id="tipoloxia"
+          placeholder="Tipoloxia"
+        />
+
+        <label for="localización" class="form-label" required>Localización</label>
+        <input
+          class="input-parque"
+          v-model.trim="form.localizacion"
+          type="text"
+          required
+          name="localización"
+          id="localización"
+          placeholder="Localización"
+        />
+
+        <label for="cronoloxía" class="form-label" required>Cronoloxía</label>
+        <input
+          class="input-parque"
+          v-model.trim="form.cronoloxía"
+          type="text"
+          required
+          name="cronoloxía"
+          id="cronoloxía"
+          placeholder="Cronoloxía"
+        />
+
+        <label for="superficie" class="form-label" required>Superficie</label>
+        <input
+          class="input-parque"
+          v-model.number="form.superficie"
+          type="number"
+          required
+          name="superficie"
+          id="superficie"
+          placeholder="Superficie"
         />
 
         <label for="descripcion" class="form-label" required>Descripción</label>
