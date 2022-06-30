@@ -30,11 +30,7 @@ const router = createRouter({
       name: "formulario",
       component: () => import("@/components/FormularioSenlleira.vue"),
     },
-    {
-      path: "/admin",
-      name: "administrador",
-      component: () => import("@/components/admin/LoginAdmin.vue"),
-    },
+    
     {
       path: "/catalogo",
       name: "Catalogo",
@@ -45,22 +41,22 @@ const router = createRouter({
       name: "MapaSenlleiras",
       component: () => import("@/views/senlleira/MapaSenlleiras.vue"),
     },
-    // {
-    //   path: "/especies",
-    //   name: "especies",
-    //   component: () => import("@/components/admin/FormAdminEspecies.vue"),
-    //   beforeEnter: requiereAuth,
-    // },
+    // ADMIN
+    {
+      path: "/admin",
+      name: "administrador",
+      component: () => import("@/components/admin/LoginAdmin.vue"),
+    },
     {
       path: "/catalogo-especies",
       name: "catalogo-especies",
-      component: () => import("@/components/admin/AdminCatalogoEspecies.vue"),
+      component: () => import("@/views/vista-admin/Vista-especies.vue"),
       beforeEnter: requiereAuth,
     },
     {
       path: "/catalogo-senlleira",
       name: "catalogosenlleira",
-      component: () => import("@/components/admin/AdminCatalogoSenlleiras.vue"),
+      component: () => import("@/views/vista-admin/Vista-senlleiras.vue"),
       beforeEnter: requiereAuth,
     },
     {

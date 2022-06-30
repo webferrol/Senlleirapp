@@ -1,7 +1,6 @@
 <template>
 <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
-       <td></td>
         <td>Nome científico</td>
         <td>Nome en Galego</td>
         <td>Nome en Castelán</td>
@@ -14,7 +13,6 @@
         </td>
     </tr>
      <tr v-for="(senlleira, index) in senlleira" :key="index">
-            <td class="mostrar_info" @click="detailDataElement"></td>
             <td >{{ senlleira.genero }} {{senlleira.especie}}</td>
             <td >{{ senlleira.nombre_comun }}</td>
             <td >{{ senlleira.nombre_comun_gal }}</td>
@@ -50,7 +48,7 @@
 import { getDatos } from "@/hook/firestore.hook";
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
-import { useStoreSenlleiras } from "../../stores/senlleiras";
+import { useStoreSenlleiras } from "../../../stores/senlleiras";
 const storeSenlleira = useStoreSenlleiras()
 
 const senlleira = ref(null);
