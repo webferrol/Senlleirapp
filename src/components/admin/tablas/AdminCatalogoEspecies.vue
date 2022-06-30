@@ -2,7 +2,6 @@
     <table class="tabla_datos_administrativo">
 
         <tr class="header_administrativo">
-            <td class="mostrar_info"></td>
             <td class="genero">Genero</td>
             <td class="especie">Especie</td>
             <td class="nombre_comun">Nombre Comun</td>
@@ -19,7 +18,6 @@
         </tr>
 
         <tr class="catalogo_administrativo" v-for="(especie, index) in storeSpecies.especies" :key="index">
-            <td class="mostrar_info" @click="detailDataElement"></td>
             <td class="genero">{{ especie.nombre_comun }}</td>
             <td class="especie">{{ especie.especie }}</td>
             <td class="nombre_comun">{{ especie.nombre_comun }}</td>
@@ -75,7 +73,8 @@ const handleDelete = ({ id, name }) => {
 
 const borrarEspecie = async() => {
     if(itemDelete){
-        await storeSpecies.borrarEspecie(itemDelete)
+        await storeSpecies.borrarEspecie(itemDelete);
+        mostrar.value = false;
     }
 }
 

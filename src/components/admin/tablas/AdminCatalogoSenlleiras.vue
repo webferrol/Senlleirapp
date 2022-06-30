@@ -49,7 +49,9 @@
 <script setup>
 import { getDatos } from "@/hook/firestore.hook";
 import { ref } from "vue";
-import "@/assets/css/admin-css/catalogoAdmin.css"
+import "@/assets/css/admin-css/catalogoAdmin.css";
+import { useStoreSenlleiras } from "../../stores/senlleiras";
+const storeSenlleira = useStoreSenlleiras()
 
 const senlleira = ref(null);
 (async ()=>{

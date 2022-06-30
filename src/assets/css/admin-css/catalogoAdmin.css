@@ -41,6 +41,9 @@
     justify-content: center;
     align-items: center;
 }
+.tabla_administrativo_options{
+    width: 70px;
+  }
 
 .tabla_administrativo_options span{
     display: flex;
