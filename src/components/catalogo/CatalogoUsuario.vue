@@ -3,7 +3,7 @@
     <div class="catalogo-section-component">
         <div class="arbol-catalogo-element" data-titulo="Mostrar" title="Máis info"
             v-for="(senlleira, index) in storeSenlleira.senlleiras" :key="index" identificador=senlleira.id
-            @click="mostrarFicha(senlleira); mostrarFichaTecnica = true">
+            @click="mostrarFicha(senlleira); $emit('mostrarFicha') ">
             <div class="content-img">
                 <img alt="imagen del arbol senlleiro" :src="senlleira.google_url">
             </div>
@@ -19,19 +19,7 @@
             </div>
         </div>
     </div>
-    <FichaTecnicaVue v-if="mostrarFichaTecnica"></FichaTecnicaVue>
-    <pre>
-        {{
-            senlleira
-        }}
-    </pre>
-
-    <div class="ficha-tecnica">
-        <h2 class="nombre-arbol">{{senlleira?.nombre_comun}}</h2>
-        <CarruselImagenesVue :images="imagenesFichaTecnica"></CarruselImagenesVue>
-
-    </div>
-
+     
 </template>
 
 <script setup>
@@ -40,39 +28,35 @@
 import "@/assets/css/catalogo/catalogo.css";
 import { useStoreSenlleiras } from "@/stores/senlleiras";
 import { useStoreEspecies } from "../../stores/especies";
-import { reactive, ref } from "vue";
-import CarruselImagenesVue from "../CarruselImagenes.vue";
-import FichaTecnicaVue from "./FichaTecnica.vue";
-
+import { ref } from "vue";
 
 const storeSenlleira = useStoreSenlleiras();
 const storeEspecies = useStoreEspecies();
 storeSenlleira.setSenlleiras();
 storeEspecies.setEspecies();
 
-const senlleira = ref(null);
-
-const mostrarFichaTecnica = ref(false)
-
+const props = defineProps({
+    fichaDatos: {
+        type: Array,
+        default: []
+    },
+    imagenesFichaTecnica: {
+        type: Array,
+        default: []
+    }
+})
 // Funcion para cargar las imagenes correspondientes de la ficha tecnica
-const imagenesFichaTecnica = ref([])
 const mostrarFicha = async (objeto) => {
-    //console.log(objeto)
     const especie = storeEspecies.especies.find(el=>el.id,objeto.idEspecie);
-    senlleira.value = {...objeto,...especie};
-    imagenesFichaTecnica.value = [];
+    props.fichaDatos.pop();
+    props.fichaDatos.push({...objeto,...especie});
+    props.imagenesFichaTecnica.pop();
     await storeSenlleira.setImagenes('senlleiras/' + objeto.id)
     for (let i = 0; i < storeSenlleira.imagenes.length; i++) {
-        imagenesFichaTecnica.value.push(storeSenlleira.imagenes[i])
+        props.imagenesFichaTecnica.push(storeSenlleira.imagenes[i])
     }
     await storeEspecies.setEspecies()
-    console.log(storeEspecies.especies)
+
+    // console.log("datos son  => ",props.fichaDatos, "imagenes son => ",props.imagenesFichaTecnica)
 }
-
-const cargarInfoEspecie = () => {
-    
-}
-
-
-
 </script>

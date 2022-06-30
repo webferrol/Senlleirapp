@@ -28,7 +28,7 @@ const router = createRouter({
     {
       path: "/formulario",
       name: "formulario",
-      component: () => import("@/components/FormularioSenlleira.vue"),
+      component: () => import("@/views/senlleira/NuevaSenlleira.vue"),
     },
     
     {
