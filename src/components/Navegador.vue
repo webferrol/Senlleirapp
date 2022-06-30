@@ -6,8 +6,6 @@
         ><img src="../assets/img/logotipo-app.png" alt="logo senlleirap"
       /></router-link>
       <ul class="ulbasura" v-if="userStore.user">
-        <router-link to="/especies">especies</router-link>
-        |
         <router-link to="/catalogo-senlleira">cat-senlleira</router-link>
         |
         <router-link to="/catalogo-especies">cat-especies</router-link>
