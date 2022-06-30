@@ -2,10 +2,10 @@
    <div class="formsenlleira" v-if="loaded"> Cargando... </div>
 
     <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
-        <span class="h2-background"> <h2>Nova senlleira </h2> <icono :icon="['fa', 'leaf']"></icono></span>
+        <span class="h2-background"> <h2>Nova árbore </h2> <icono :icon="['fa', 'leaf']"></icono></span>
         
         <fieldset class="data-senlleira --localizacion">
-            <legend> Datos senlleira </legend>
+            <legend> Datos da árbore </legend>
             <div class="senlleira-nombre-cientifico">
                  <label for="arbore" class="form-label" required> Nome da árbore <span data-set="Campo obligatorio">*</span></label>
                 <input v-model="form.nombre_arbol" type="text" required name="arbore" id="arbore"
@@ -40,7 +40,7 @@
                     placeholder="Zona geográfica" />       
 
                 <label for="localizacion" class="form-label"> Localizacion <span data-set="Campo obligatorio">*</span></label>
-                <select v-model="form.idParque" name="localizacion" id="localizacion" required>
+                <select @change="handleSelect" v-model="form.idParque" name="localizacion" id="localizacion" required>
                     <option v-for="valor in storeParques.parques" :key="valor.id" :value="valor.id">
                         {{ valor.nombre }} </option>
                 </select>
@@ -64,9 +64,10 @@
 
 <script setup>
 import TheUploader from '@/components/theUploader.vue';
+import {useStoreArbores} from '@/stores/arbores';
 import {useStoreEspecies} from '@/stores/especies';
 import {useStoreParques} from '@/stores/parques';
-import {useStoreSenlleiras} from '@/stores/senlleiras'
+import {useStoreSenlleiras} from '@/stores/senlleiras';
 import { reactive,ref } from 'vue';
 import "@/assets/css/formularioSenlleira.css";
 
@@ -74,8 +75,11 @@ import "@/assets/css/formularioSenlleira.css";
 const storeSenlleiras = useStoreSenlleiras();
 const storeEspecies = useStoreEspecies();
 const storeParques = useStoreParques();
+const storeArbores = useStoreArbores();
 //Cargamos parques
 storeParques.setParques();
+storeSenlleiras.setSenlleiras();
+storeArbores.setArbores();
 
 const form = reactive({
     id: null,
@@ -126,13 +130,17 @@ const handleSelect = (e) => {
         form.nombre_comun = especie.nombre_comun;
         form.nombre_comun_gal = especie.nombre_comun_gal;
     }
+     if (storeParques.parques.length) {
+        const parques = storeParques.parques.find(item=> item.id == e.target.value);
+        console.log(parques)
+        form.localizacion = parques.nombre;
+     }
 }
 
 const gestionFoto = async (imagenes) => {
     try {
         error.value = { error: false, message: '', }
         tmpImagenes = imagenes;
-        //await store.subirFoto(imagen);
     } catch (e) {
         error.value.error = true;
         error.value.message = e.message;
@@ -143,16 +151,16 @@ const handleSubmit = async () => {
     //Enviar
     if (storeEspecies.especies.length) {
         form.id = Date.now();
-        form.imagen_url= `senlleiras/${form.id}/${tmpImagenes[0].name}`
-        await storeSenlleiras.insertarSenlleira(form);
+        form.imagen_url= `arbores/${form.id}/${tmpImagenes[0].name}`
+        await storeArbores.insertarArbore(form);
         if (tmpImagenes !== null && form.id) {
             try {
                 error.value = { error: false, message: '', }
                 spinner.value = true;
                 loaded.value = true;
                 for(let i =0,tam=tmpImagenes.length; i<tam; i++){
-                await storeSenlleiras.subirFoto({
-                    ref: `senlleiras/${form.id}`,
+                await storeArbores.subirFoto({
+                    ref: `arbores/${form.id}`,
                     file: tmpImagenes[i],
                 });
                 }
