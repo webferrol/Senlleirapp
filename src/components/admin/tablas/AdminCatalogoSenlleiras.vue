@@ -13,7 +13,6 @@
         </td>
     </tr>
      <tr v-for="(senlleira, index) in senlleira" :key="index">
-            <td class="mostrar_info" @click="detailDataElement"></td>
             <td >{{ senlleira.genero }} {{senlleira.especie}}</td>
             <td >{{ senlleira.nombre_comun }}</td>
             <td >{{ senlleira.nombre_comun_gal }}</td>

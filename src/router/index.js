@@ -30,11 +30,7 @@ const router = createRouter({
       name: "formulario",
       component: () => import("@/components/FormularioSenlleira.vue"),
     },
-    {
-      path: "/admin",
-      name: "administrador",
-      component: () => import("@/components/admin/LoginAdmin.vue"),
-    },
+    
     {
       path: "/catalogo",
       name: "Catalogo",
@@ -45,7 +41,12 @@ const router = createRouter({
       name: "MapaSenlleiras",
       component: () => import("@/views/senlleira/MapaSenlleiras.vue"),
     },
-
+    // ADMIN
+    {
+      path: "/admin",
+      name: "administrador",
+      component: () => import("@/components/admin/LoginAdmin.vue"),
+    },
     {
       path: "/catalogo-especies",
       name: "catalogo-especies",
@@ -55,7 +56,7 @@ const router = createRouter({
     {
       path: "/catalogo-senlleira",
       name: "catalogosenlleira",
-      component: () => import("@/components/admin/AdminCatalogoSenlleiras.vue"),
+      component: () => import("@/views/vista-admin/Vista-senlleiras.vue"),
       beforeEnter: requiereAuth,
     },
     {
