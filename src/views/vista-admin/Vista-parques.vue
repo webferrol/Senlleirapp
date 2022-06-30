@@ -1,12 +1,19 @@
 <template>
-  <h1>Nuevo Parque</h1>
-  <FormParque @manipularFormulario="insertarParque"></FormParque>
+  <div>
+    <button class="admin-add" @click="añadirParque = true">Añadir Parque</button>
+    <AdminCatalogoParquesVue></AdminCatalogoParquesVue>
+    <FormParque v-if="añadirParque" @cerrarForm="añadirParque =false" @manipularFormulario="insertarParque" ></FormParque>
+
+
+  </div>
 </template>
 
-<script setup>
+<script setup >
+import { ref, reactive, provide } from 'vue';
 import FormParque from "@/components/admin/forms/FormParque.vue";
+import AdminCatalogoParquesVue from "../../components/admin/tablas/AdminCatalogoParques.vue";
 import { useStoreParques } from "@/stores/parques";
-import { ref, reactive, provide } from "vue";
+const añadirParque = ref(false)
 
 //Llamada al store
 const setParques = useStoreParques();
@@ -78,5 +85,20 @@ const insertarParque = async (tmpImagenes) => {
     }
   }
 };
+
 </script>
+<style scoped>
+.admin-add{
+    background-color: var(--colorsecundario);
+    color: white;
+    font-size: 1.2rem;
+    margin: 1rem;
+    border-radius: 5px;
+    transition: transform .3s linear;
+    border: 2px solid black;
+}
+.admin-add:hover{
+    transform: scale(1.1)
+}
+</style>
 
