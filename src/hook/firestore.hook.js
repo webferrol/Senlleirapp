@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where } from "firebase/firestore";
 
 // import { updateDoc } from "firebase/database";
 
@@ -65,4 +65,28 @@ export const editarDatos = async(id, especie, genero, nombre_comun, nombre_comun
     origen_descripcion: descripcion,
     usos: usos
   })
+}
+
+
+/**
+ * 
+ * @param {string} selecColec 
+ * @param {string} selecDoc 
+ * @param {string} buscar 
+ * @returns 
+ */
+ export const busquedaDatos = async (selecColec, selecDoc, buscar) => {
+  const arbolRef = collection(db, selecColec);
+
+  const q = query(arbolRef, where(selecDoc, "==", buscar));
+  const querySnapshot = await getDocs(q);
+  const tmp = [];
+  querySnapshot.forEach((doc) => {
+    tmp.push({
+      idCollection: doc.id,
+      ...doc.data(),
+    });
+    // console.log(doc.id, " => ", doc.data());
+  })
+  return tmp;
 }
