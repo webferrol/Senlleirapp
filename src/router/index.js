@@ -1,80 +1,25 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useStoreUsers } from "../stores/users";
-
-// -> Antes de que entre a la ruta pasa por aqui con 'beforeEnter' <- //
-const requiereAuth = async (to, from, next) => {
-  // -> En este caso no se puede usar el store directamente fuera de los componentes, tiene que ser dentro de un metodo como este caso <- //
-  const userStore = useStoreUsers();
-  // userStore.cargandoSesion = true;
-  const user = await userStore.onAuthState();
-  // -> Si existe el user con next va a la ruta correspondiente(InicioSesion) y else lo contrario<- //
-  if (user) {
-    next();
-  } else {
-    next("/admin");
-  }
-  // userStore.cargandoSesion = false;
-};
+import { routes } from "./routes";
 
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: "/",
-      name: "inicio",
-      component: () => import("../views/Inicio.vue"),
-    },
-    {
-      path: "/formulario",
-      name: "formulario",
-      component: () => import("@/views/senlleira/NuevaSenlleira.vue"),
-    },
-    
-    {
-      path: "/catalogo",
-      name: "Catalogo",
-      component: () => import("@/views/senlleira/Catalogo.vue"),
-    },
-    {
-      path: "/mapa-senlleiras",
-      name: "MapaSenlleiras",
-      component: () => import("@/views/senlleira/MapaSenlleiras.vue"),
-    },
-    // ADMIN
-    {
-      path: "/admin",
-      name: "administrador",
-      component: () => import("@/components/admin/LoginAdmin.vue"),
-    },
-    {
-      path: "/catalogo-especies",
-      name: "catalogo-especies",
-      component: () => import("@/views/vista-admin/Vista-especies.vue"),
-      beforeEnter: requiereAuth,
-    },
-    {
-      path: "/catalogo-senlleira",
-      name: "catalogosenlleira",
-      component: () => import("@/views/vista-admin/Vista-senlleiras.vue"),
-      beforeEnter: requiereAuth,
-    },
-    {
-      path: "/catalogo-parque",
-      name: "admin-parque",
-      component: () => import("@/views/vista-admin/Vista-parques.vue"),
-    },
-    {
-      path: "/lista-parques",
-      name: "lista-parques",
-      component: () => import("@/views/parques/ListaParques.vue"),
-    },
-    {
-      path: "/camara",
-      name: "camara",
-      component: () => import("@/views/camara/Camara.vue"),
-    }    
-  ],
+  routes,
+});
+
+
+// -> Antes de que entre a la ruta pasa por aqui con 'beforeEnter' <- //
+router.beforeEach((to,from,next)=>{
+  // -> En este caso no se puede usar el store directamente fuera de los componentes, tiene que ser dentro de un metodo como este caso <- //
+  const userStore = useStoreUsers();
+  //console.log(userStore.user?.uid)
+  // -> Si existe el user con next va a la ruta correspondiente(InicioSesion) y else lo contrario<- //
+  if(to.meta.requiereAuth===true && userStore.user?.uid===undefined){
+    next('/');
+  }else{
+    next();
+  }
 });
 
 export default router;

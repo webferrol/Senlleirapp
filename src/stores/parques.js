@@ -4,6 +4,7 @@ import { subirFicheros, listAllUrls } from '@/hook/storage.hook';
 import { cargarDatosFormulario, getDatos, deleteDatos } from '@/hook/firestore.hook';
 
 
+
 // useStore could be anything like useUser, useCart
 // the first argument is a unique id of the store across your application
 import { getDownURL } from "@/hook/storage.hook.js"
@@ -41,19 +42,16 @@ export const useStoreParques = defineStore('parques', {
             }
         },
         //Esta funcion es para subir la imagen de los parques con ID y su extension.
-        async subirParque({ id, file }) {
-            const file1 = file.name;
-            const [ext, ...fileName] = file1.split('.').reverse();
-            await subirFicheros(file, `parques/${id}.${ext}`)
+        async subirParque({ ref, file }) {
+            // const file1 = file.name;
+            // const [ext, ...fileName] = file1.split('.').reverse();
+            await subirFicheros(file,`${ref}/${file.name}`)
             // console.log(ext)
 
         },
         async listarImagenes(uid) {
             this.imagenes = await listAllUrls(uid)
         },
-
-
-
     }
 }
 

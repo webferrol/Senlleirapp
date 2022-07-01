@@ -65,8 +65,11 @@ const desconectar = () => {
 
 <style scoped>
 .caja-formulario {
-  width: fit-content;
-  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 92px);
 }
 
 #adminForm {

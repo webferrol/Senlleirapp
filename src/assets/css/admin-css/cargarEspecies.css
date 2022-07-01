@@ -32,7 +32,7 @@
   backdrop-filter: blur(3px);
   z-index: 999;
 }
-  #especies {
+  form{
     display: grid;
     grid-template-columns: auto;
     margin: auto;
@@ -63,18 +63,23 @@
   
   }
   
-  #especies h2 {
+  form h2 {
     font-size: 1.5rem;
     line-height: 1.5rem;
     text-align: center;
   }
   
-  .data_especies {
+  fieldset{
     display: grid;
     grid-template-columns: auto;
     font-size: 1.1rem;
     line-height: 1.1rem;
     gap: .5rem;
+  }
+
+  fieldset span{
+    display: grid;
+    grid-template-columns: 120px 1fr;
   }
   
   .data_especies label {
@@ -82,7 +87,7 @@
     align-items: center;
   }
   
-  .data_especies textarea{
+  textarea{
     resize: none;
     font-size: 1.2rem
   }

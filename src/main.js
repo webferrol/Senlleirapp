@@ -18,6 +18,7 @@ const store = useStoreUsers();
 
 (async() =>{
   await store.onAuthState();
+  //console.log(store.user)
   app.use(router)
   app.mount('#app');
 })()
