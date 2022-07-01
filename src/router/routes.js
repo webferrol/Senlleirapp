@@ -59,4 +59,9 @@ export const routes = [
       name: "CatalogoDeEspecies",
       component: () => import("@/views/especies/CatalogoEspecies.vue"),
     },
+    {
+    path: '/busqueda',
+    name: 'Busqueda',
+    component: () => import('@/components/busqueda/Busqueda.vue')
+    },
   ]
