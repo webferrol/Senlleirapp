@@ -1,7 +1,7 @@
 <template>
     <div class="stories-navigator">
       <router-link to="/" class="component-arbol" v-for="(parque, index) in storeParques.parques" >
-        <img :src="parque.url_google" alt="sdsd">
+        <img :src="parque.url_google" :alt="parque.url_google">
         <p class="arbol-name"> {{parque.nombre}}</p>
       </router-link>    
 
