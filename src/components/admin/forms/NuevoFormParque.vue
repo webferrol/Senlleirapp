@@ -151,33 +151,33 @@ const cargarParque = async (imagenes) => {
 };
 
 const handleSubmit = async () => {
-    //Se comprueban errores antes de enviar nada
-    //Enviar
-    if (setParques.parques.length) {
-        form.id = Date.now();
-        form.urlficha= `parques/${form.id}/${tmpImagenes[0].name}`
-        await setParques.insertarParque(form);
-        if (tmpImagenes !== null && form.id) {
-            try {
-                error.value = { error: false, message: '', }
-                spinner.value = true;
-                loaded.value = true;
-                for(let i =0,tam=tmpImagenes.length; i<tam; i++){
-                await setParques.subirParque({
-                    ref: `parques/${form.id}`,
-                    file: tmpImagenes[i],
-                });
-                }
-                spinner.value = false;
-                reset();
-            } catch (e) {
-                error.value.error = true;
-                error.value.message = e.message;
-            } finally {
-                loaded.value = false;
-            }
+  //Se comprueban errores antes de enviar nada
+  //Enviar
+  if (setParques.parques.length) {
+    form.id = Date.now();
+    form.urlficha = `parques/${form.id}/${tmpImagenes[0].name}`
+    await setParques.insertarParque(form);
+    if (tmpImagenes !== null && form.id) {
+      try {
+        error.value = { error: false, message: '', }
+        spinner.value = true;
+        loaded.value = true;
+        for (let i = 0, tam = tmpImagenes.length; i < tam; i++) {
+          await setParques.subirParque({
+            ref: `parques/${form.id}`,
+            file: tmpImagenes[i],
+          });
         }
+        spinner.value = false;
+        reset();
+      } catch (e) {
+        error.value.error = true;
+        error.value.message = e.message;
+      } finally {
+        loaded.value = false;
+      }
     }
+  }
 };
 
 

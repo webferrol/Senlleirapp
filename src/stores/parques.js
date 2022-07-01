@@ -4,6 +4,7 @@ import { subirFicheros, listAllUrls } from '@/hook/storage.hook';
 import { cargarDatosFormulario, getDatos, deleteDatos } from '@/hook/firestore.hook';
 
 
+
 // useStore could be anything like useUser, useCart
 // the first argument is a unique id of the store across your application
 import { getDownURL } from "@/hook/storage.hook.js"
@@ -51,9 +52,6 @@ export const useStoreParques = defineStore('parques', {
         async listarImagenes(uid) {
             this.imagenes = await listAllUrls(uid)
         },
-
-
-
     }
 }
 
