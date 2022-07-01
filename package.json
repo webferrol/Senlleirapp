@@ -2,6 +2,7 @@
   "name": "senlleirapp",
   "version": "0.0.0",
   "scripts": {
+    "server": "nodemon Camara.vue",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 4173",
@@ -13,9 +14,12 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/vue-fontawesome": "^3.0.1",
+    "@google-cloud/vision": "^2.4.2",
     "@googlemaps/js-api-loader": "^1.14.3",
+
     "firebase": "^9.8.3",
     "google-maps": "^4.3.3",
+   
     "pinia": "^2.0.14",
     "sass": "^1.52.3",
     "vue": "^3.2.36",
