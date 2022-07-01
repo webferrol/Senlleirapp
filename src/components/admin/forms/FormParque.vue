@@ -130,6 +130,8 @@ const cargarParque = async (imagenes) => {
 </script>
 
 <style scoped>
+
+
 h2 {
   font-weight: bolder;
 }
@@ -138,6 +140,9 @@ h2 {
   padding: 0.5rem;
   margin: 1rem auto;
   width: 50%;
+  border: 1px solid black;
+  background-color: rgba(160,160,160, .8);
+  backdrop-filter: blur(3px);
 }
 
 .contain-form-parque {

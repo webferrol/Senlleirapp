@@ -26,7 +26,7 @@
         <span>
           <icono
             :icon="['fa', 'trash']"
-            @click="borrarParque()"
+            @click="handleDelete({ id: parque.idCollection })"
           >
           </icono>
           <icono :icon="['fa', 'pen']"></icono>
@@ -34,6 +34,19 @@
       </td>
     </tr>
   </table>
+  <div v-if="mostrar" class="alerta_container">
+    <div class="alerta_borrar_especie">
+      <h2>Atención</h2>
+      <span class="borrar_txt">
+        <icono :icon="['fa', 'circle-exclamation']"></icono>
+        <p>Se eliminará el parque de manera irrevesible</p>
+      </span>
+      <span class="borrar_btn">
+        <button @click="borrarParque">Eliminar</button>
+        <button @click="mostrar = false">Cancelar</button>
+      </span>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -43,7 +56,7 @@ import "@/assets/css/admin-css/catalogoAdmin.css";
 import { useStoreParques } from "../../../stores/parques";
 
 const storeParques = useStoreParques();
-console.log(storeParques);
+storeParques.setParques().catch((error) => console.log(error));
 
 const parque = ref(null);
 (async () => {
@@ -59,10 +72,16 @@ let itemDelete = null;
 
 const mostrar = ref(false);
 
+const handleDelete = ({ id, name }) => {
+  itemDelete = id;
+  nombre.value = name;
+  mostrar.value = true;
+};
 
 const borrarParque = async () => {
   if (itemDelete) {
     await storeParques.borrarParque(itemDelete);
+    mostrar.value = false;
   }
 };
 </script>
