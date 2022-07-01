@@ -1,5 +1,7 @@
 import { db } from "./firebase";
-import { collection, addDoc, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
+
+// import { updateDoc } from "firebase/database";
 
 /**
  *
@@ -37,4 +39,30 @@ export const getDatos = async (uid) => {
  */
 export const deleteDatos = async (collection, uid) => {
   await deleteDoc(doc(db,collection, uid ))
+}
+
+
+/**
+ * 
+ * @param {string} id optiene la uid del documento
+ * @param {string}} especie Cambia el valor del campo especie
+ * @param {string}} genero Cambia el valor del campo genero
+ * @param {string}} nombre_comun Cambia el valor del campo nombre_comun
+ * @param {string}} nombre_comun_gal Cambia el valor del campo nombre_comun_gal
+ * @param {string}} descripcion Cambia el valor del campo origen_descripcion
+ * @param {string}} usos Cambia el valor del campo usos
+ */
+export const editarDatos = async(id, especie, genero, nombre_comun, nombre_comun_gal, descripcion, usos) => {
+  
+  var editarLosDatos = doc(db, "Especies", id);
+  console.log(editarLosDatos)
+
+  await updateDoc(editarLosDatos, {
+    especie: especie,
+    genero: genero,
+    nombre_comun: nombre_comun,
+    nombre_comun_gal: nombre_comun_gal,
+    origen_descripcion: descripcion,
+    usos: usos
+  })
 }
