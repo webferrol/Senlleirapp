@@ -69,7 +69,11 @@ const router = createRouter({
       name: "lista-parques",
       component: () => import("@/views/parques/ListaParques.vue"),
     },
-    
+    {
+      path: "/camara",
+      name: "camara",
+      component: () => import("@/views/camara/Camara.vue"),
+    }    
   ],
 });
 
