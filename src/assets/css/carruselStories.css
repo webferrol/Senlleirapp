@@ -4,7 +4,7 @@
   .stories-navigator {
     width: 100%;
     display: flex;
-    gap: .2rem;
+    gap: .5rem;
     padding: .5rem 0;
     overflow: scroll;
     overflow: -webkit-overflow-scrolling;
@@ -15,39 +15,42 @@
   }
   
   .component-arbol {
+    position: relative;
     display: grid;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto;
     align-items: center;
     align-content: center;
-    width: 80px;
+    width: 140px;
+    height: 180px;
     gap: .1rem;
     text-decoration: none;
+    background-color: green;
   }
   .component-arbol:nth-child(1){
-    margin-left: 1.5rem;
+    margin-left: .5rem;
   }
   
   .stories-navigator .component-arbol img {
     margin: auto;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    padding: .2rem;
-    border: 4px solid green;
-    object-fit: fill;
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
     position: relative;
-  }
-  .stories-navigator .component-arbol:visited img{
-    border: 4px solid var(--colorsecundario)
+    background-color: green;
   }
   
+  
   .stories-navigator .arbol-name {
-    width: 80px;
-    font-size: .9rem;
+    position: absolute;
+    bottom: 20px;
+    width: inherit;
+    padding: .25rem;
+    font-size: 1rem;
     line-height: .9rem;
     text-align: center;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: var(--colorterciario);
+    color: black;
+    font-weight: 900;
   }
