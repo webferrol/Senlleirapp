@@ -20,6 +20,11 @@ export const routes = [
       name: "MapaSenlleiras",
       component: () => import("@/views/senlleira/MapaSenlleiras.vue"),
     },
+    {
+      path: "/lista-parques",
+      name: "lista-parques",
+      component: () => import("@/views/parques/ListaParques.vue"),
+    },
     // ADMIN
     {
       path: "/admin",
@@ -47,12 +52,8 @@ export const routes = [
       name: "admin-parque",
       component: () => import("@/views/vista-admin/Vista-parques.vue"),
     },
-    {
-      path: "/lista-parques",
-      name: "lista-parques",
-      component: () => import("@/views/parques/ListaParques.vue"),
-    },
-    
+   
+    // test
     {
       path: "/catalogo-de-especies",
       name: "CatalogoDeEspecies",

@@ -1,11 +1,36 @@
 ::-webkit-scrollbar {
     display: none;
   }
+
+  .componente-stories{
+    margin: .2rem 0;
+    padding: .4rem 0;
+    display: grid;
+    gap: .5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .componente-stories .tittle{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: .25rem;
+    font-size: 1rem;
+    line-height: 1rem;
+    margin-left: 1rem;
+    font-weight: 700;
+  }
+    .componente-stories .tittle svg{
+      color: green;
+      font-size: 1.2rem;
+    }
+
+    /*Elementos  */
   .stories-navigator {
     width: 100%;
     display: flex;
     gap: .5rem;
-    padding: .5rem 0;
     overflow: scroll;
     overflow: -webkit-overflow-scrolling;
     scrollbar-width: none;
@@ -21,14 +46,18 @@
     align-items: center;
     align-content: center;
     width: 140px;
-    height: 180px;
+    height: 200px;
     gap: .1rem;
     text-decoration: none;
     background-color: green;
   }
   .component-arbol:nth-child(1){
-    margin-left: .5rem;
+    margin-left: 1rem;
   }
+  .component-arbol:last-child{
+    margin-right: 1rem;
+  }
+  
   
   .stories-navigator .component-arbol img {
     margin: auto;
@@ -42,15 +71,21 @@
   
   .stories-navigator .arbol-name {
     position: absolute;
-    bottom: 20px;
+    top: 80%;
     width: inherit;
     padding: .25rem;
-    font-size: 1rem;
+    font-size: .9rem;
     line-height: .9rem;
     text-align: center;
     overflow: hidden;
-    white-space: nowrap;
+    /* white-space: nowrap; */
     text-overflow: ellipsis;
     color: white;
     font-weight: 900;
+  }
+
+  .borde-final{
+    z-index: 999;
+   width: 1px;
+   height: 180px;
   }
