@@ -5,8 +5,7 @@
     <icono
       class="close-form"
       :icon="['fa', 'xmark']"
-      @click="$emit('cerrarForm')"
-      :key="index"
+      @click="cerrarForm"
       
     ></icono>
 
@@ -97,6 +96,12 @@ import TheUploader from "@/components/theUploader.vue";
 import { reactive, ref } from 'vue';
 import { useStoreParques } from '@/stores/parques';
 import "@/assets/css/formularioSenlleira.css";
+//
+const emits = defineEmits(['cerrarForm']);
+
+const cerrarForm = () => {
+  emits('cerrarForm');
+}
 
 //Llamada al store
 const setParques = useStoreParques();

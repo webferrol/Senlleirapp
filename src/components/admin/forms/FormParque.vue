@@ -121,7 +121,6 @@ const cargarParque = async (imagenes) => {
   try {
     error.value = { error: false, message: "" };
     tmpImagenes = imagenes;
-    //await store.subirFoto(imagen);
   } catch (e) {
     error.value.error = true;
     error.value.message = e.message;
