@@ -58,7 +58,7 @@
 import { ref } from "vue";
 import { useStoreEspecies } from "@/stores/especies.js";
 import '@/assets/css/admin-css/catalogoAdmin.css';
-import router from "../../router";
+import router from "@/router";
 
 
 const storeSpecies = useStoreEspecies();
