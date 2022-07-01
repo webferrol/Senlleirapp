@@ -70,6 +70,11 @@ const router = createRouter({
       component: () => import("@/views/parques/ListaParques.vue"),
     },
     
+    {
+      path: "/catalogo-de-especies",
+      name: "CatalogoDeEspecies",
+      component: () => import("@/views/especies/CatalogoEspecies.vue"),
+    },
   ],
 });
 

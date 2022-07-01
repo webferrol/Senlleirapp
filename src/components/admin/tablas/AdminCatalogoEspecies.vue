@@ -30,7 +30,10 @@
                     <icono :icon="['fa', 'trash']"
                         @click="handleDelete({ id: especie.idCollection, name: `${especie.genero} ${especie.especie}` })">
                     </icono>
-                    <icono :icon="['fa', 'pen']"></icono>
+                    
+                        <icono :icon="['fa', 'pen']" to="/arb-:id"></icono>
+                    
+                        
                 </span>
             </td>
         </tr>
@@ -55,6 +58,7 @@
 import { ref } from "vue";
 import { useStoreEspecies } from "@/stores/especies.js";
 import '@/assets/css/admin-css/catalogoAdmin.css';
+import router from "../../router";
 
 
 const storeSpecies = useStoreEspecies();
