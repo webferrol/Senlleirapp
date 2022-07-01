@@ -1,0 +1,20 @@
+.modal-stories {
+    min-width: 100%;
+    display: flex;
+    gap: .5rem;
+    padding: .5rem 0;
+    /* overflow: scroll; */
+    overflow: -webkit-overflow-scrolling;
+    /* scrollbar-width: none; */
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    align-items: center;
+    background-color: blue;
+  }
+
+  .modal-stories .ficha-parques{
+    display: flex;
+    width: 500px;
+    height: 500px;
+    background-color: red;
+  }

@@ -12,6 +12,7 @@
         <div class="borde-final"></div>
       </div>
     </section>
+    <!-- <FichaStoriesVue></FichaStoriesVue> -->
 
 </template>
 
@@ -19,11 +20,10 @@
 import "@/assets/css/carruselStories.css"
 import { ref } from "vue";
 import { useStoreParques } from "@/stores/parques"; 
+import FichaStoriesVue from "./FichaStories.vue";
 
 const error = ref("");
 const ruta = ref([]);
-
-
 
 const storeParques = useStoreParques();
 storeParques.setParques();

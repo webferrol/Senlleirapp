@@ -3,12 +3,12 @@
   }
 
   .componente-stories{
-    margin: .2rem 0;
+    margin: .4rem 0;
     padding: .4rem 0;
     display: grid;
-    gap: .5rem;
     justify-content: center;
     align-items: center;
+    background-color: rgb(185, 185, 185);
   }
 
   .componente-stories .tittle{
@@ -31,6 +31,7 @@
     width: 100%;
     display: flex;
     gap: .5rem;
+    padding: .5rem 0;
     overflow: scroll;
     overflow: -webkit-overflow-scrolling;
     scrollbar-width: none;
