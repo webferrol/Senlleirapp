@@ -78,6 +78,11 @@ const router = createRouter({
       name: "Senlleira",
       component: () => import("@/views/senlleira/FichaTecnica.vue"),
     },
+    {
+      path: "/catalogo-de-especies",
+      name: "CatalogoDeEspecies",
+      component: () => import("@/views/especies/CatalogoEspecies.vue"),
+    },
   ],
 });
 
