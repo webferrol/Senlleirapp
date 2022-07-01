@@ -7,7 +7,7 @@ export const routes = [
     {
       path: "/formulario",
       name: "formulario",
-      component: () => import("@/views/senlleira/NuevaSenlleira.vue"),
+      component: () => import("@/views/senlleira/NuevoArbol.vue"),
     },
     
     {

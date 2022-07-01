@@ -40,7 +40,7 @@
                     placeholder="Zona geográfica" />       
 
                 <label for="localizacion" class="form-label"> Localizacion <span data-set="Campo obligatorio">*</span></label>
-                <select @change="handleSelect" v-model="form.idParque" name="localizacion" id="localizacion" required>
+                <select v-model="form.idParque" name="localizacion" id="localizacion" required>
                     <option v-for="valor in storeParques.parques" :key="valor.id" :value="valor.id">
                         {{ valor.nombre }} </option>
                 </select>
@@ -130,11 +130,11 @@ const handleSelect = (e) => {
         form.nombre_comun = especie.nombre_comun;
         form.nombre_comun_gal = especie.nombre_comun_gal;
     }
-     if (storeParques.parques.length) {
-        const parques = storeParques.parques.find(item=> item.id == e.target.value);
-        console.log(parques)
-        form.localizacion = parques.nombre;
-     }
+    //  if (storeParques.parques.length) {
+    //     const parques = storeParques.parques.find(item=> item.id == e.target.value);
+    //     console.log(parques)
+    //     form.localizacion = parques.nombre;
+    //  }
 }
 
 const gestionFoto = async (imagenes) => {

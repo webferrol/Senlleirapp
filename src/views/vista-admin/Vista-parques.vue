@@ -1,8 +1,8 @@
 <template>
   <div>
-    <button class="admin-add" @click="añadirParque = true">Añadir Parque</button>
+    <button class="admin-add" @click="open = true">Añadir Parque</button>
     <AdminCatalogoParquesVue></AdminCatalogoParquesVue>
-    <NuevoFormParque v-if="añadirParque" @cerrarForm="añadirParque = false" ></NuevoFormParque>
+    <NuevoFormParque v-if="open" @cerrarForm="open = false" ></NuevoFormParque>
     <!-- <NuevoFormParque v-if="añadirParque" @cerrarForm="añadirParque =false "></NuevoFormParque> -->
 
 
@@ -12,11 +12,8 @@
 <script setup >
 import {ref} from 'vue';
 import AdminCatalogoParquesVue from '@/components/admin/tablas/AdminCatalogoParques.vue';
-import NuevoFormParqueVue from '@/components/admin/forms/NuevoFormParque.vue';
 import NuevoFormParque from '../../components/admin/forms/NuevoFormParque.vue';
-
-const añadirParque = ref(false)
-
+const open = ref(false);
 
 </script>
 <style scoped>
