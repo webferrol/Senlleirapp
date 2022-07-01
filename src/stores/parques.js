@@ -41,10 +41,10 @@ export const useStoreParques = defineStore('parques', {
             }
         },
         //Esta funcion es para subir la imagen de los parques con ID y su extension.
-        async subirParque({ id, file }) {
-            const file1 = file.name;
-            const [ext, ...fileName] = file1.split('.').reverse();
-            await subirFicheros(file, `parques/${id}.${ext}`)
+        async subirParque({ ref, file }) {
+            // const file1 = file.name;
+            // const [ext, ...fileName] = file1.split('.').reverse();
+            await subirFicheros(file,`${ref}/${file.name}`)
             // console.log(ext)
 
         },
