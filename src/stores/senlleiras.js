@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 // importacion de la función del firebase para subir las fotos
 import { subirFicheros, listAllUrls,getDownURL} from '@/hook/storage.hook';
 
-import { cargarDatosFormulario, getDatos, deleteDatos } from '@/hook/firestore.hook';
+import { addDocument, getDocumnents, deleteDocument } from '@/hook/firestore.hook';
 
 // useStore could be anything like useUser, useCart
 // the first argument is a unique id of the store across your application
