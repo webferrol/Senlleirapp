@@ -14,7 +14,7 @@
       </td>
     </tr>
 
-    <tr v-for="(parque, index) in parque" :key="index">
+    <tr v-for="(parque, index) in storeParques.parques" :key="index">
       <td>{{ parque.nombre }}</td>
       <td>{{ parque.tipoloxia }}</td>
       <td>{{ parque.localizacion }}</td>
@@ -29,11 +29,15 @@
             @click="handleDelete({ id: parque.idCollection })"
           >
           </icono>
-          <icono :icon="['fa', 'pen']"></icono>
+
+          <button @click="editar( parque ) " >
+            <icono :icon="['fa', 'pen']" to="/arb-:id"></icono>
+          </button>
         </span>
       </td>
     </tr>
   </table>
+  <!-- Alerta para eliminar parque -->
   <div v-if="mostrar" class="alerta_container">
     <div class="alerta_borrar_especie">
       <h2>Atención</h2>
@@ -47,31 +51,73 @@
       </span>
     </div>
   </div>
+  <!-- Modulo para editar -->
+  
+    <form
+      id="parques"
+      @submit.prevent="cambiarDatos(`${parque.idCollection}`)"
+      v-if="parque"
+    >
+      <fieldset class="data_especies">
+        <h2>Editar Parques</h2>
+        <input
+          type="text"
+          v-model="parque.nombre"
+          id="nombre"
+          placeholder="Nome"
+        />
+        <input
+          type="text"
+          v-model="parque.tipoloxia"
+          id="tipoloxia"
+          placeholder="Tipoloxia"
+        />
+        <input
+          type="text"
+          v-model="parque.cronoloxía"
+          id="cronoloxia"
+          placeholder="Cronoloxía"
+        />
+        <input
+          type="text"
+          v-model="parque.superficie"
+          id="superficie"
+          placeholder="Superficie"
+        />
+        <textarea
+        type="text"
+          v-model="parque.descripcion"
+          id="descripcion"
+          placeholder="Descripción"
+        ></textarea>
+          
+      
+
+        <input type="submit" value="Editar Parque" :disabled="parque===null" />
+        <div v-if="loading">Guardando...</div>
+      </fieldset>
+    </form>
+  
 </template>
 
 <script setup>
-import { getDatos } from "@/hook/firestore.hook";
+
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import { useStoreParques } from "../../../stores/parques";
+import { updateDocument } from "../../../hook/firestore.hook";
 
 const storeParques = useStoreParques();
 storeParques.setParques().catch((error) => console.log(error));
 
-const parque = ref(null);
-(async () => {
-  try {
-    parque.value = await getDatos("Parques");
-  } catch (error) {
-    console.log(error);
-  }
-})();
 
 const nombre = ref("");
+const loading = ref(false);
 let itemDelete = null;
 
 const mostrar = ref(false);
 
+// FUNCION PARA ELIMINAR PARQUE
 const handleDelete = ({ id, name }) => {
   itemDelete = id;
   nombre.value = name;
@@ -84,6 +130,29 @@ const borrarParque = async () => {
     mostrar.value = false;
   }
 };
+
+// FUNCION PARA EDITAR PARQUE
+  
+const parque = ref(null);
+const editar = (par) => {
+  //console.log(par);
+  parque.value = par;
+  
+};
+const cambiarDatos = async (id) => {
+  //console.log("uid",id);
+  try {
+    loading.value = true;
+    await updateDocument(id,"Parques",parque.value);
+  } catch (error) {
+    console.log("aaaaah",error);
+  } finally {
+    loading.value= false;
+  }
+
+  
+}
+
 </script>
 
 

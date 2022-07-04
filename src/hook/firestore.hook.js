@@ -67,6 +67,13 @@ export const editarDatos = async(id, especie, genero, nombre_comun, nombre_comun
   })
 }
 
+/**
+ * 
+ * @param {string} id optiene la uid del documento
+ * @param {string} collection 
+ * @param {Object} data
+ */
+ export const updateDocument = async(id = "Qsdfa1fdfdfjdfdj", collection = "especies", data = {}) => await updateDoc(doc(db, collection, id), data);
 
 /**
  * 
