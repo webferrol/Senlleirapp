@@ -60,6 +60,12 @@
     >
       <fieldset class="data_especies">
         <h2>Editar Parques</h2>
+        <icono
+      class="close-form"
+      :icon="['fa', 'xmark']"
+      @click="cerrarForm"
+      
+    ></icono>
         <input
           type="text"
           v-model="parque.nombre"
@@ -107,6 +113,12 @@ import "@/assets/css/admin-css/catalogoAdmin.css";
 import { useStoreParques } from "../../../stores/parques";
 import { updateDocument } from "../../../hook/firestore.hook";
 
+const emits = defineEmits(['cerrarForm']);
+
+const cerrarForm = () => {
+  emits('cerrarForm');
+}
+
 const storeParques = useStoreParques();
 storeParques.setParques().catch((error) => console.log(error));
 
@@ -140,7 +152,7 @@ const editar = (par) => {
   
 };
 const cambiarDatos = async (id) => {
-  //console.log("uid",id);
+  console.log("uid",id);
   try {
     loading.value = true;
     await updateDocument(id,"Parques",parque.value);
