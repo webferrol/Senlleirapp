@@ -103,7 +103,7 @@
           
       
 
-        <input type="submit" value="Editar Senlleira" :disabled="parque===null" />
+        <input type="submit" value="Editar Senlleira" :disabled="senlleira===null" />
         <div v-if="loading">Guardando...</div>
       </fieldset>
     </form>
@@ -149,14 +149,14 @@ const borrarSenlleira = async () => {
 const senlleira = ref(null);
 const editar = (sen) => {
   //console.log(par);
-  parque.value = sen;
+  senlleira.value = sen;
   
 };
 const cambiarDatos = async (id) => {
   //console.log("uid",id);
   try {
     loading.value = true;
-    await updateDocument(id,"Parques",parque.value);
+    await updateDocument(id,"Singulares",senlleira.value);
   } catch (error) {
     console.log("aaaaah",error);
   } finally {
