@@ -1,81 +1,169 @@
 <template>
-<table class="tabla_datos_administrativo">
+  <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
-        <td>Nome científico</td>
-        <td>Nome en Galego</td>
-        <td>Nome en Castelán</td>
-        <td>Zona xeográfica</td>
-        <td>Localización</td>
-        <td class="tabla_administrativo_options">
-            <span>
-                <icono :icon="['fa', 'gears']"></icono>
-            </span>
-        </td>
+      <td>Nome científico</td>
+      <td>Nome en Galego</td>
+      <td>Nome en Castelán</td>
+      <td>Zona xeográfica</td>
+      <td>Localización</td>
+      <td class="tabla_administrativo_options">
+        <span>
+          <icono :icon="['fa', 'gears']"></icono>
+        </span>
+      </td>
     </tr>
-     <tr  class="catalogo_administrativo" v-for="(senlleira, index) in senlleira" :key="index">
-            <td >{{ senlleira.genero }} {{senlleira.especie}}</td>
-            <td >{{ senlleira.nombre_comun }}</td>
-            <td >{{ senlleira.nombre_comun_gal }}</td>
-            <td >{{ senlleira.zona_geografica }}</td>
-            <td >{{ senlleira.localizacion }}</td>
-             <td class="tabla_administrativo_options">
-                <span>
-                    <icono :icon="['fa', 'trash']"
-                        @click="handleDelete({ id: senlleira.idCollection, name: `${senlleira.genero} ${senlleira.especie}` })">
-                    </icono>
-                    <icono :icon="['fa', 'pen']"></icono>
-                </span>
-            </td>
-        </tr>
-</table>
-   <div v-if="mostrar" class="alerta_container">
-        <div class="alerta_borrar_especie">
-            <h2>Atención</h2>
-            <span class="borrar_txt">
-                <icono :icon="['fa', 'circle-exclamation']"></icono>
-                <p>Se eliminará: {{ nombre }} de manera irrevesible</p>
-                <p>!Todas las senlleiras que contentan esta especie se verán afectadas!</p>
-            </span>
-            <span class="borrar_btn">
-                <button @click="borrarSenlleira">Eliminar</button>
-                <button @click="mostrar = false">Cancelar</button>
-            </span>
-        </div>
+    <tr
+      class="catalogo_administrativo"
+      v-for="(senlleira, index) in storeSenlleira.senlleiras"
+      :key="index"
+    >
+      <td>{{ senlleira.genero }} {{ senlleira.especie }}</td>
+      <td>{{ senlleira.nombre_comun }}</td>
+      <td>{{ senlleira.nombre_comun_gal }}</td>
+      <td>{{ senlleira.zona_geografica }}</td>
+      <td>{{ senlleira.localizacion }}</td>
+      <td class="tabla_administrativo_options">
+        <span>
+          <icono
+            :icon="['fa', 'trash']"
+            @click="
+              handleDelete({
+                id: senlleira.idCollection,
+                name: `${senlleira.genero} ${senlleira.especie}`,
+              })
+            "
+          >
+          </icono>
+
+          <button @click="editar( senlleira ) " >
+           <icono :icon="['fa', 'pen']"></icono> 
+          </button>
+
+          
+        </span>
+      </td>
+    </tr>
+  </table>
+  <!-- Alerta para eliminar senlleira -->
+  <div v-if="mostrar" class="alerta_container">
+    <div class="alerta_borrar_especie">
+      <h2>Atención</h2>
+      <span class="borrar_txt">
+        <icono :icon="['fa', 'circle-exclamation']"></icono>
+        <p>Se eliminará: {{ nombre }} de manera irrevesible</p>
+        <p>
+          !Todas las senlleiras que contentan esta especie se verán afectadas!
+        </p>
+      </span>
+      <span class="borrar_btn">
+        <button @click="borrarSenlleira">Eliminar</button>
+        <button @click="mostrar = false">Cancelar</button>
+      </span>
     </div>
+  </div>
+
+<!-- Modulo para editar senlleira -->
+<form
+      id="senlleiras"
+      @submit.prevent="cambiarDatos(`${senlleira.idCollection}`)"
+      v-if="senlleira"
+    >
+      <fieldset class="data_especies">
+        <h2>Editar Senlleiras</h2>
+        <!-- <input
+          type="text"
+          v-model="parque.nombre"
+          id="nombre"
+          placeholder="Nome"
+        /> -->
+        <input
+          type="text"
+          v-model="senlleira.nombre_comun"
+          id="nombre_comun"
+          placeholder="Nome en Castelán"
+        />
+        <input
+          type="text"
+          v-model="senlleira.nombre_comun_gal"
+          id="nombre_comun_gal"
+          placeholder="Nome en Galego"
+        />
+        <input
+          type="text"
+          v-model="senlleira.zona_geografica"
+          id="zona-geografica"
+          placeholder="Zona xeográfica"
+        />
+        <input
+        type="text"
+          v-model="senlleira.localizacion"
+          id="localizacion"
+          placeholder="Localización"
+        />
+          
+      
+
+        <input type="submit" value="Editar Senlleira" :disabled="parque===null" />
+        <div v-if="loading">Guardando...</div>
+      </fieldset>
+    </form>
+
+
+
+
+
+
+
 </template>
 
 <script setup>
-import { getDatos } from "@/hook/firestore.hook";
+
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import { useStoreSenlleiras } from "../../../stores/senlleiras";
-const storeSenlleira = useStoreSenlleiras()
+import { updateDocument } from "../../../hook/firestore.hook";
 
-const senlleira = ref(null);
-(async ()=>{
-    try {
-        senlleira.value = await getDatos('Singulares');
-    } catch (error) {
-        
-    }
-
-})();
+const storeSenlleira = useStoreSenlleiras();
+storeSenlleira.setSenlleiras().catch((error) => console.log(error));
 
 const nombre = ref("");
+const loading = ref(false);
 let itemDelete = null;
 
 const mostrar = ref(false);
 
 const handleDelete = ({ id, name }) => {
-    itemDelete = id;
-    nombre.value = name;
-    mostrar.value = true
-}
+  itemDelete = id;
+  nombre.value = name;
+  mostrar.value = true;
+};
 
-const borrarSenlleira = async() => {
-    if(itemDelete){
-        await storeSenlleira.borrarSenlleira(itemDelete)
-    }
+const borrarSenlleira = async () => {
+  if (itemDelete) {
+    await storeSenlleira.borrarSenlleira(itemDelete);
+  }
+};
+
+
+//Editar Senlleira
+const senlleira = ref(null);
+const editar = (sen) => {
+  //console.log(par);
+  parque.value = sen;
+  
+};
+const cambiarDatos = async (id) => {
+  //console.log("uid",id);
+  try {
+    loading.value = true;
+    await updateDocument(id,"Parques",parque.value);
+  } catch (error) {
+    console.log("aaaaah",error);
+  } finally {
+    loading.value= false;
+  }
+
+  
 }
 
 

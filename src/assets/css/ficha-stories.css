@@ -1,22 +1,70 @@
 .modal-stories {
-    min-width: 100%;
-    display: flex;
-    gap: .5rem;
-    padding: .5rem 0;
-    overflow-x: scroll;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    align-items: center;
-    background-color: blue;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: calc(100vh - 43px);
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  align-items: center;
+  background-color: var(--colorsecundario);
+  z-index: 2;
+}
+/* Ficha tecnica */
+.modal-stories .ficha-parques {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100%;
+  scroll-snap-align: center;
+  background-color: white;
+  overflow-x: scroll;
+  gap: .25rem;
+}
+
+  .cerrar-ficha-parques{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    font-size: 1.5rem;
+    padding: .25rem;
+  }
+  .ficha-parques h2{
+    text-align: center;
+    width: 100%;
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 
-  .modal-stories .ficha-parques{
-    flex: none;
-    display: flex;
-    width: 100vw;
-    height: 500px;
-    background-color: red;
-    scroll-snap-align: center;
+/* Caracteristicas parque */
+
+.caracteristicas-parque{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: .25rem;
+}
+  .caracteristicas-parque span{
+    text-align: center;
+    border: 2px solid black;
   }
+  .caracteristicas-parque span h3{
+    width: 100%;
+    background-color: var(--colorsecundario);
+    color: white;
+  }
+
+.descripcion h3{
+  text-align: center;
+  background-color: var(--colorsecundario);
+  color: white;
+}
+.descripcion p{
+  padding: .25rem;
+}
