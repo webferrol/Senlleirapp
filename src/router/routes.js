@@ -37,7 +37,7 @@ export const routes = [
       meta: {
         requiereAuth:true,
       },
-      component: () => import("@/views/vista-admin/Vista-especies.vue"),
+      component: () => import("@/views/admin/CatalogoEspecies.vue"),
     },
     {
       path: "/catalogo-senlleira",
@@ -45,12 +45,12 @@ export const routes = [
       meta: {
         requiereAuth:true,
       },
-      component: () => import("@/views/vista-admin/Vista-senlleiras.vue"),
+      component: () => import("@/views/admin/CatalogoSenlleiras.vue"),
     },
     {
       path: "/catalogo-parque",
       name: "admin-parque",
-      component: () => import("@/views/vista-admin/Vista-parques.vue"),
+      component: () => import("@/views/admin/CatalogoParques.vue"),
     },
    
     // test

@@ -30,14 +30,19 @@
                     <icono :icon="['fa', 'trash']"
                         @click="handleDelete({ id: especie.idCollection, name: `${especie.genero} ${especie.especie}` })">
                     </icono>
-                    
+                    <button @click="editar(especie)" >
                         <icono :icon="['fa', 'pen']" to="/arb-:id"></icono>
+
+                    </button>
+                        
                     
                         
                 </span>
             </td>
         </tr>
     </table>
+
+    <!-- Alerta antes de eliminar especie -->
     <div v-if="mostrar" class="alerta_container">
         <div class="alerta_borrar_especie">
             <h2>Atención</h2>
@@ -52,22 +57,85 @@
             </span>
         </div>
     </div>
+
+    <!-- Formulario para editar especie -->
+
+    <form
+    id="especies"
+    @submit.prevent="cambiarDatos(`${especie.idCollection}`)"
+    v-if="especie"
+  >
+    <fieldset class="data_especies">
+      <h2>Editar Especies</h2>
+      <input
+        type="text"
+        v-model="especie.genero"
+        id="genero"
+        placeholder="Género"
+      />
+      <input
+        type="text"
+        v-model="especie.especie"
+        id="especie"
+        placeholder="Especie"
+      />
+      <input
+        type="text"
+        v-model="especie.nombre_comun"
+        id="nombre_comun"
+        placeholder="Nombre común"
+      />
+      <input
+        type="text"
+        v-model="especie.nombre_comun_gal"
+        id="nombre_comun_gal"
+        placeholder="Nombre gallego"
+      />
+      <textarea
+        type="text"
+        v-model="especie.descripcion"
+        id="descripcion"
+        placeholder="Descripción"
+      ></textarea>
+      <textarea
+        type="text"
+        v-model="especie.usos"
+        id="usos"
+        placeholder="Usos"
+      ></textarea>
+      <textarea
+        type="text"
+        v-model="especie.curiosidades"
+        id="curiosidades"
+        placeholder="Curiosidades"
+      ></textarea>
+      
+
+      <input type="submit" value="Editar Especies" />
+       <div v-if="loading">Guardando...</div>
+    </fieldset>
+  </form>
+
+
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useStoreEspecies } from "@/stores/especies.js";
 import '@/assets/css/admin-css/catalogoAdmin.css';
-import router from "@/router";
+import { updateDocument } from "../../../hook/firestore.hook";
 
 
 const storeSpecies = useStoreEspecies();
 storeSpecies.setEspecies().catch(error=>console.log(error));
 
 const nombre = ref("");
+const loading = ref(false);
 let itemDelete = null;
 
 const mostrar = ref(false);
+
+//FUNCION PARA ELIMINAR ESPECIE
 
 const handleDelete = ({ id, name }) => {
     itemDelete = id;
@@ -80,6 +148,28 @@ const borrarEspecie = async() => {
         await storeSpecies.borrarEspecie(itemDelete);
         mostrar.value = false;
     }
+}
+
+// FUNCION PARA EDITAR ESPECIE
+
+  
+const especie = ref(null);
+const editar = (esp) => {
+  //console.log(par);
+  especie.value = esp;
+  
+};
+const cambiarDatos = async (id) => {
+  //console.log("uid",id);
+  try {
+    loading.value = true;
+    await updateDocument(id,"Especies",especie.value);
+  } catch (error) {
+    console.log("aaaaah",error);
+  } finally {
+    loading.value= false;
+  }
+
 }
 
 </script>

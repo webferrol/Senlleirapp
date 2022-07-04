@@ -45,28 +45,10 @@ export const deleteDatos = async (collection, uid) => {
 /**
  * 
  * @param {string} id optiene la uid del documento
- * @param {string}} especie Cambia el valor del campo especie
- * @param {string}} genero Cambia el valor del campo genero
- * @param {string}} nombre_comun Cambia el valor del campo nombre_comun
- * @param {string}} nombre_comun_gal Cambia el valor del campo nombre_comun_gal
- * @param {string}} descripcion Cambia el valor del campo origen_descripcion
- * @param {string}} usos Cambia el valor del campo usos
+ * @param {string} collection 
+ * @param {Object} data
  */
-export const editarDatos = async(id, especie, genero, nombre_comun, nombre_comun_gal, descripcion, usos) => {
-  
-  var editarLosDatos = doc(db, "Especies", id);
-  console.log(editarLosDatos)
-
-  await updateDoc(editarLosDatos, {
-    especie: especie,
-    genero: genero,
-    nombre_comun: nombre_comun,
-    nombre_comun_gal: nombre_comun_gal,
-    origen_descripcion: descripcion,
-    usos: usos
-  })
-}
-
+ export const updateDocument = async(id = "Qsdfa1fdfdfjdfdj", collection = "especies", data = {}) => await updateDoc(doc(db, collection, id), data);
 
 /**
  * 

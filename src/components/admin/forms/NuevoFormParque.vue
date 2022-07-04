@@ -82,7 +82,7 @@
         ></textarea>
       </div>
 
-      <theUploader @emitirFichero="cargarParque"></theUploader>
+      <TheUploader @emitirFichero="cargarParque"></TheUploader>
 
       <div v-if="error.error" class="error">{{ error.message }}</div>
       <div v-if="spinner" class="spinner">Cargando....</div>
@@ -95,7 +95,7 @@
 import TheUploader from "@/components/theUploader.vue";
 import { reactive, ref } from 'vue';
 import { useStoreParques } from '@/stores/parques';
-import "@/assets/css/formularioSenlleira.css";
+import "@/assets/css/admin-css/cargarEspecies.css";
 //
 const emits = defineEmits(['cerrarForm']);
 

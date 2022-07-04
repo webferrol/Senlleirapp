@@ -3,13 +3,13 @@
     <article class="ficha-tecnica">
         <span class="head-ficha-tecnica">
             <icono  class="cerrar-ficha-tecnica" :icon="['fa', 'xmark']" @click="$emit('cerrarFicha')"></icono>
-                <h2>{{title}}</h2>
+                <h2>{{nombre_arbol}}</h2>
         </span>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt minima, ab perspiciatis quam fugiat eveniet molestias voluptatum mollitia voluptate? Ad, in. Praesentium enim ipsam itaque amet et magnam ipsa, vel ratione! Nemo necessitatibus nam animi adipisci quidem dolor ea velit, veniam incidunt vel reprehenderit omnis ducimus voluptas veritatis ipsa provident?</p>
-    <CarruselImagenesVue></CarruselImagenesVue>
+    <p>{{descripcion}}</p>
+    <CarruselImagenesVue :images="images"></CarruselImagenesVue>
     <div class="caracteristicas-tecnicas">
-        <p>Altura: <span>15m</span></p>
-        <p>Diametro tronco: <span>4,3m</span></p>
+        <p>Altura: <span>{{altura}} metros</span></p>
+        <p>Diametro tronco: <span>{{diametro}} metros</span></p>
     </div>
     
     </article>
@@ -22,10 +22,26 @@ import CarruselImagenesVue from '../CarruselImagenes.vue';
 import "@/assets/css/catalogo/ficha-tecnica.css";
 
 const props = defineProps({
-   title: {
+   nombre_arbol: {
     type: String,
     default: 'Título de ejemplo'
    }, 
+   descripcion: {
+    type: String,
+    default: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos exercitationem debitis reiciendis autem, mollitia officiis vero delectus incidunt, blanditiis doloremque eius ab illo nam? Laborum odio, dolorum quo amet eveniet,'
+   },
+   images: {
+    type: Array,
+   },
+   altura: {
+    type: Number,
+    default: 10
+   },
+   diametro: {
+    type: Number,
+    default: 4
+   }
+
 });
 
 //props.title

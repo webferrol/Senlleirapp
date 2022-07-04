@@ -3,7 +3,7 @@
 
     <div class="form-background">
         <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
-            <span class="h2-background"> <h2>Formulario senlleira </h2> <icono @click="$emit('cerrarForm')" :icon="['fa', 'xmark']"></icono></span>
+            <span class="h2-background"> <h2>Formulario senlleira </h2> <icono @click="cerrarForm" :icon="['fa', 'xmark']"></icono></span>
         
             <fieldset class="data-senlleira --localizacion">
                 <legend> Datos senlleira </legend>
@@ -100,6 +100,8 @@ import { useStoreEspecies } from '@/stores/especies';
 import { reactive, ref } from 'vue';
 import "@/assets/css/formularioSenlleira.css";
 
+const emits = defineEmits(['cerrarForm']);
+
 const form = reactive({
     id: null,
     genero: '',
@@ -177,10 +179,10 @@ const handleSelect = (e) => {
     if (storeEspecies.especies.length) {
         const especie = storeEspecies.especies.find(item => item.id == e.target.value);
         // console.log(especie)
-        form.genero = especie.genero;
-        form.especie = especie.especie;
-        form.nombre_comun = especie.nombre_comun;
-        form.nombre_comun_gal = especie.nombre_comun_gal;
+        form.genero = especie?.genero;
+        form.especie = especie?.especie;
+        form.nombre_comun = especie?.nombre_comun;
+        form.nombre_comun_gal = especie?.nombre_comun_gal;
     }
     //const datosEspecies = e.target.value)
 }
@@ -214,6 +216,10 @@ const handleSubmit = async () => {
         }
     }
 };
+
+const cerrarForm = () => {
+    emits('cerrarForm');
+}
 
 storeEspecies.setEspecies().then().catch(e => alert(e));
 </script>

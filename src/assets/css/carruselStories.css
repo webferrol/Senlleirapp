@@ -29,11 +29,12 @@
     /*Elementos  */
   .stories-navigator {
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-auto-columns: auto;
+    grid-auto-flow: column;
     gap: .5rem;
     padding: .5rem 0;
     overflow: scroll;
-    overflow: -webkit-overflow-scrolling;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
