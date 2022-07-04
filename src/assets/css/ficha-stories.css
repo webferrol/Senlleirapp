@@ -3,18 +3,20 @@
     display: flex;
     gap: .5rem;
     padding: .5rem 0;
-    /* overflow: scroll; */
-    overflow: -webkit-overflow-scrolling;
-    /* scrollbar-width: none; */
+    overflow-x: scroll;
+    scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     align-items: center;
     background-color: blue;
   }
 
   .modal-stories .ficha-parques{
+    flex: none;
     display: flex;
-    width: 500px;
+    width: 100vw;
     height: 500px;
     background-color: red;
+    scroll-snap-align: center;
   }

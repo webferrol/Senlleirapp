@@ -12,7 +12,7 @@
         <div class="borde-final"></div>
       </div>
     </section>
-    <!-- <FichaStoriesVue></FichaStoriesVue> -->
+    <FichaStoriesVue></FichaStoriesVue>
 
 </template>
 
