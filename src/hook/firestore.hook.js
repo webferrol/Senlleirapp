@@ -25,8 +25,7 @@ export const getDatos = async (uid) => {
   const tmp = [];
   querySnapshot.forEach((doc) => {
     tmp.push({
-      id: doc.id,
-      timeRef: Date.now(),
+      idDoc: doc.id,
       ...doc.data(), //DESTRUCTURING
     });
   });
