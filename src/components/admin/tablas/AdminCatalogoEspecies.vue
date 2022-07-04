@@ -62,7 +62,7 @@
 
     <form
     id="especies"
-    @submit.prevent="cambiarDatos(`${especie.idCollection}`)"
+    @submit.prevent="cambiarDatos(especie.idDoc)"
     v-if="especie"
   >
     <fieldset class="data_especies">
@@ -160,7 +160,6 @@ const editar = (esp) => {
   
 };
 const cambiarDatos = async (id) => {
-  //console.log("uid",id);
   try {
     loading.value = true;
     await updateDocument(id,"Especies",especie.value);

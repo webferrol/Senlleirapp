@@ -152,7 +152,7 @@ const editar = (par) => {
   
 };
 const cambiarDatos = async (id) => {
-  //console.log("uid",id);
+  console.log("uid",id);
   try {
     loading.value = true;
     await updateDocument(id,"Parques",parque.value);
