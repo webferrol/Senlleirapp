@@ -1,7 +1,7 @@
 // importar libreria de pinia. sirve para centralizar toda la información
 import { defineStore } from 'pinia';
 import { subirFicheros, listAllUrls } from '@/hook/storage.hook';
-import { cargarDatosFormulario, getDatos, deleteDatos } from '@/hook/firestore.hook';
+import { addDocument, getDocuments, deleteDocument } from '@/hook/firestore.hook';
 
 
 
@@ -19,16 +19,16 @@ export const useStoreParques = defineStore('parques', {
     },
     actions: {
         async insertarParque(datos) {
-            return await cargarDatosFormulario("Parques", datos)
+            return await addDocument("Parques", datos)
         },
         async borrarParque(ID) {
-            await deleteDatos("Parques", ID);
+            await deleteDocument("Parques", ID);
         },
         // -> Funcion donde introducimos los mapas de los parques y sus datos <- //
         async setParques() {
             if (this.parques.length > 0) //Por si el array ya está cargado
                 return
-            this.parques = await getDatos("Parques");
+            this.parques = await getDocuments("Parques");
             for (let i = 0; i < this.parques.length; i++) {
                 {
                     try {
