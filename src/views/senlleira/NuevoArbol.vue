@@ -40,10 +40,13 @@
                     placeholder="Zona geográfica" />       
 
                 <label for="localizacion" class="form-label"> Localizacion <span data-set="Campo obligatorio">*</span></label>
-                <select v-model="form.idParque" name="localizacion" id="localizacion" required>
+                <select
+                @change="form.localizacion= $event.target.options[$event.target.selectedIndex].text"
+                 v-model="form.idParque" name="localizacion" id="localizacion" required>
                     <option v-for="valor in storeParques.parques" :key="valor.id" :value="valor.id">
                         {{ valor.nombre }} </option>
                 </select>
+                <input type="hidden" v-model="form.localizacion">
             </div>
         </fieldset>
         <fieldset>
@@ -125,17 +128,17 @@ const handleSelect = (e) => {
     if (storeEspecies.especies.length) {
         const especie = storeEspecies.especies.find(item => item.id == e.target.value);
         // console.log(especie)
-        form.genero = especie.genero;
-        form.especie = especie.especie;
-        form.nombre_comun = especie.nombre_comun;
-        form.nombre_comun_gal = especie.nombre_comun_gal;
+        form.genero = especie?.genero;
+        form.especie = especie?.especie;
+        form.nombre_comun = especie?.nombre_comun;
+        form.nombre_comun_gal = especie?.nombre_comun_gal;
     }
-    //  if (storeParques.parques.length) {
-    //     const parques = storeParques.parques.find(item=> item.id == e.target.value);
-    //     console.log(parques)
-    //     form.localizacion = parques.nombre;
-    //  }
 }
+
+
+//@change="form.localizacion= $event.target.options[$event.target.selectedIndex].text"
+// propiedad: quiero la localización 
+// evento del selector , options que son un array en el que quiero evento del selector el index y lo que quiero es el texto
 
 const gestionFoto = async (imagenes) => {
     try {
