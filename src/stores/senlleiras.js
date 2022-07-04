@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 // importacion de la función del firebase para subir las fotos
 import { subirFicheros, listAllUrls,getDownURL} from '@/hook/storage.hook';
 
-import { cargarDatosFormulario, getDatos, deleteDatos } from '@/hook/firestore.hook';
+import { addDocument, getDocuments, deleteDocument } from '@/hook/firestore.hook';
 
 // useStore could be anything like useUser, useCart
 // the first argument is a unique id of the store across your application
@@ -32,10 +32,10 @@ export const useStoreSenlleiras = defineStore('subirFoto', {
          * @returns los datos de la senlleira que se meten y el catalogo al que se suben
          */
         async insertarSenlleira(datos) {
-            return await cargarDatosFormulario("Singulares", datos)
+            return await addDocument("Singulares", datos)
         },
         async borrarSenlleira(ID){
-            await deleteDatos("Singulares", ID);
+            await deleteDocument("Singulares", ID);
         },
         
         /**
@@ -45,7 +45,7 @@ export const useStoreSenlleiras = defineStore('subirFoto', {
         async setSenlleiras(){
             if (this.senlleiras.length > 0) //Por si el array ya está cargado
                 return
-            this.senlleiras = await getDatos("Singulares") 
+            this.senlleiras = await getDocuments("Singulares") 
             await this.getDownloadURL();
         },
         async setImagenes(uid) {

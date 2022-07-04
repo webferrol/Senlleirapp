@@ -93,7 +93,7 @@
       />
       <textarea
         type="text"
-        v-model="especie.descripcion"
+        v-model="especie.origen_descripcion"
         id="descripcion"
         placeholder="Descripción"
       ></textarea>
