@@ -12,7 +12,7 @@ export const routes = [
     
     {
       path: "/catalogo",
-      name: "Catalogo",
+      name: "catalogo",
       component: () => import("@/views/senlleira/Catalogo.vue"),
     },
     {

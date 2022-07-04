@@ -10,7 +10,7 @@
                 <span class="arbol">
                     <icono :icon="['fa', 'leaf']"></icono>
                 </span>
-                <h3 class="arbol-nombre">{{ senlleira.genero }}</h3>
+                <h3 class="arbol-nombre">{{ senlleira.nombre_arbol }}</h3>
                 <span class="lugar">
                     <icono :icon="['fa', 'location-dot']"></icono>
                 </span>

@@ -66,8 +66,9 @@
     color: rgba(49, 49, 49, 1);
     font-size: 0.8rem;
   }
-  .arbol-catalogo-element .arbol-info .arbol-bombre {
-    margin: 0 0.2rem;
+  .arbol-catalogo-element .arbol-info .arbol-nombre {
+    display: flex;
+    align-items: center;
     font-size: 0.9rem;
     line-height: 0.9rem;
     font-weight: 700;
@@ -77,9 +78,10 @@
     color: var(--colorprincipal);
   }
   .arbol-catalogo-element .arbol-info h4 {
-    margin: 0 0.2rem;
-    font-size: 0.7rem;
-    font-weight: 0.7rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 0.9rem;
     text-align: left;
     overflow: hidden;
     white-space: nowrap;

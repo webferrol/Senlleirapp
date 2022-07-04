@@ -15,11 +15,16 @@
         <router-link to="/admin">admin</router-link>
       </ul>
       <ul class="header-nav-buttons">
-        <li class="header-upload">
+      <li class="header-upload" v-if="$route.name == 'inicio'">
           <router-link to="/formulario">
             <icono :icon="['fa', 'upload']"></icono>
           </router-link>
         </li>
+        <li class="buscador"  v-if="$route.name == 'catalogo'">
+        <icono :icon="['fa', 'magnifying-glass']"></icono>
+            <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup="filtrar">
+        </li>
+        
       </ul>
     </nav>
   </header>
@@ -29,7 +34,7 @@
 
 <script setup>
 //Dependencias
-import { ref } from "vue";
+
 
 import "@/assets/css/navegador.css";
 
@@ -40,6 +45,9 @@ const userStore = useStoreUsers();
 
 <style>
 .header-nav-app.rojo{
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   background-color: red;
 }
+
 </style>

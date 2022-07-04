@@ -1,5 +1,4 @@
 <template>
-    <FiltroBusquedaVue></FiltroBusquedaVue>
     <CatalogoUsuarioVue></CatalogoUsuarioVue>
 </template>
 
