@@ -20,7 +20,7 @@ export const cargarDatosFormulario = async (uid, data) => await addDoc(collectio
  * @param {string} uid ruta firestore de donde quiero bajar los datos
  * @returns {array} de objetos donde estan almacenados los datos
  */
-export const getDatos = async (uid) => {
+export const getDocuments = async (uid) => {
   const querySnapshot = await getDocs(collection(db, uid));
   const tmp = [];
   querySnapshot.forEach((doc) => {
