@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, setDoc, query, where } from "firebase/firestore";
 
 /**
  *
@@ -43,6 +43,14 @@ export const deleteDocument = async (collection, uid) => {
  * @param {Object} data
  */
  export const updateDocument = async(uid = "Qsdfa1fdfdfjdfdj", collection = "especies", data = {}) => await updateDoc(doc(db, collection, uid), data);
+
+ /**
+ * 
+ * @param {string} uid optiene la uid del documento
+ * @param {string} collection 
+ * @param {Object} data
+ */
+  export const updateField = async(uid = "Qsdfa1fdfdfjdfdj", collection = "especies", data = {campo1:'value1',campo2:'value2',campon:'valuen'}) => await setDoc(doc(db, collection, uid), data, { merge: true});
 
 /**
  * 

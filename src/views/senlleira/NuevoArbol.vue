@@ -10,23 +10,26 @@
                  <label for="arbore" class="form-label" required> Nome da árbore <span data-set="Campo obligatorio">*</span></label>
                 <input v-model="form.nombre_arbol" type="text" required name="arbore" id="arbore"
                  placeholder="indica o nome da arbore" />
-
+                <pre>
+                    {{storeParques.parques}}
+                    {{form}}
+                </pre>
                 <label for="especie" class="form-label">Nome científico <span data-set="Campo obligatorio">*</span></label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="especie" id="especie" required>
-                    <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
+                    <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.genero }} {{ valor.especie }}</option>
                 </select>
 
                 <label for="nome" class="form-label"> Nome en galego</label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-gallego" required>
-                    <option v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
+                    <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre_comun_gal }}
                     </option>
                 </select>
 
                 <label for="nome" class="form-label"> Nome en castelan</label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano" required>
-                    <option v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
+                    <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre_comun }} </option>
                 </select>
             </div>
@@ -43,7 +46,7 @@
                 <select
                 @change="form.localizacion= $event.target.options[$event.target.selectedIndex].text"
                  v-model="form.idParque" name="localizacion" id="localizacion" required>
-                    <option v-for="valor in storeParques.parques" :key="valor.id" :value="valor.id">
+                    <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre }} </option>
                 </select>
                 <input type="hidden" v-model="form.localizacion">
@@ -72,6 +75,7 @@ import {useStoreEspecies} from '@/stores/especies';
 import {useStoreParques} from '@/stores/parques';
 import {useStoreSenlleiras} from '@/stores/senlleiras';
 import { reactive,ref } from 'vue';
+import {updateField} from '@/hook/firestore.hook'
 import "@/assets/css/formularioSenlleira.css";
 
 // llamada del store
@@ -85,7 +89,6 @@ storeSenlleiras.setSenlleiras();
 storeArbores.setArbores();
 
 const form = reactive({
-    id: null,
     genero: '',
     especie: '',
     idEspecie: 0,
@@ -109,7 +112,6 @@ const spinner = ref(false);
 const loaded = ref(false);
 
 const reset = () => {
-    form.id = null;
     form.genero = '';
     form.especie = '';
     form.idEspecie = 0;
@@ -125,9 +127,10 @@ const reset = () => {
 // esta funcion encuentra dentro del array de espacies el id necesario para poder obtener los 
 //  datos que necesito para la base de datos de senlleira
 const handleSelect = (e) => {
+    // alert(e.target.value)
     if (storeEspecies.especies.length) {
-        const especie = storeEspecies.especies.find(item => item.id == e.target.value);
-        // console.log(especie)
+        const especie = storeEspecies.especies.find(item => item.idDoc == e.target.value);
+        console.log('-->',especie)
         form.genero = especie?.genero;
         form.especie = especie?.especie;
         form.nombre_comun = especie?.nombre_comun;
@@ -153,17 +156,22 @@ const handleSubmit = async () => {
     //Se comprueban errores antes de enviar nada
     //Enviar
     if (storeEspecies.especies.length) {
-        form.id = Date.now();
-        form.imagen_url= `arbores/${form.id}/${tmpImagenes[0].name}`
-        await storeArbores.insertarArbore(form);
-        if (tmpImagenes !== null && form.id) {
+       
+        
+        const data = await storeArbores.insertarArbore(form);
+        if(data.id){
+            form.imagen_url= `arbores/${data.id}/${tmpImagenes[0].name}`
+            //alert(form.imagen_url)
+            await updateField(data.id,'arbores',{imagen_url:form.imagen_url});
+        }
+        if (tmpImagenes !== null && data.id) {
             try {
                 error.value = { error: false, message: '', }
                 spinner.value = true;
                 loaded.value = true;
                 for(let i =0,tam=tmpImagenes.length; i<tam; i++){
                 await storeArbores.subirFoto({
-                    ref: `arbores/${form.id}`,
+                    ref: `arbores/${data.id}`,
                     file: tmpImagenes[i],
                 });
                 }

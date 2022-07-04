@@ -1,7 +1,7 @@
 // importar libreria de pinia. sirve para centralizar toda la información
 import { defineStore } from 'pinia';
 // importacion de la función del firebase para subir las fotos
-import { subirFicheros, listAllUrls,getDownURL} from '@/hook/storage.hook';
+import { subirFicheros, listAllUrls} from '@/hook/storage.hook';
 
 import { addDocument, getDocuments, deleteDocument} from '@/hook/firestore.hook';
 
