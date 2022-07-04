@@ -1,19 +1,13 @@
 import { db } from "./firebase";
 import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, query, where } from "firebase/firestore";
 
-// import { updateDoc } from "firebase/database";
-
 /**
  *
  * @param {*} uid ruta en firestore donde quiero que se manden los datos.
- * @param {Object} data objeto en el que estan almacenados los datos del formulario:
- * Ejemplo: {nombre: "",
- * descripcion_breve: "",
- * descripcion: "",
- * fecha: Timestamp}
+ * @param {Object} data objeto en el que estan almacenados los datos del formulario: Ejemplo: {nombre: "",descripcion_breve: "",descripcion: "",fecha: Timestamp}
  * @return {Object} El Objetos con las propiedades de los datos insertados
  */
-export const cargarDatosFormulario = async (uid, data) => await addDoc(collection(db, uid), data); 
+export const addDocument = async (uid, data) => await addDoc(collection(db, uid), data); 
 
 /**
  *
@@ -37,18 +31,18 @@ export const getDocuments = async (uid) => {
  * @param {string} collection nombre de la colección en la que se encuentra el archivo que se va a borrar
  * @param {string} uid código del documento que vamos a borrar  
  */
-export const deleteDatos = async (collection, uid) => {
+export const deleteDocument = async (collection, uid) => {
   await deleteDoc(doc(db,collection, uid ))
 }
 
 
 /**
  * 
- * @param {string} id optiene la uid del documento
+ * @param {string} uid optiene la uid del documento
  * @param {string} collection 
  * @param {Object} data
  */
- export const updateDocument = async(id = "Qsdfa1fdfdfjdfdj", collection = "especies", data = {}) => await updateDoc(doc(db, collection, id), data);
+ export const updateDocument = async(uid = "Qsdfa1fdfdfjdfdj", collection = "especies", data = {}) => await updateDoc(doc(db, collection, uid), data);
 
 /**
  * 
