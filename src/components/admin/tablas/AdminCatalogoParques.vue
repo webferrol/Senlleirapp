@@ -26,7 +26,7 @@
         <span>
           <icono
             :icon="['fa', 'trash']"
-            @click="handleDelete({ id: parque.idDoc })"
+            @click="handleDelete({ id: parque.idDoc,name:parque.nombre })"
           >
           </icono>
 
@@ -43,7 +43,7 @@
       <h2>Atención</h2>
       <span class="borrar_txt">
         <icono :icon="['fa', 'circle-exclamation']"></icono>
-        <p>Se eliminará el parque de manera irrevesible</p>
+        <p>Se eliminará {{nombre }} de manera irrevesible</p>
       </span>
       <span class="borrar_btn">
         <button @click="borrarParque">Eliminar</button>
@@ -60,7 +60,7 @@
     > <icono
       class="close-form"
       :icon="['fa', 'xmark']"
-      @click="cerrarForm"
+      @click="parque=null"
       
     ></icono>
       <fieldset class="data_especies">
@@ -77,6 +77,12 @@
           v-model="parque.tipoloxia"
           id="tipoloxia"
           placeholder="Tipoloxia"
+        />
+         <input
+          type="text"
+          v-model="parque.localizacion"
+          id="localizacion"
+          placeholder="Localización"
         />
         <input
           type="text"
@@ -113,11 +119,8 @@ import "@/assets/css/admin-css/catalogoAdmin.css";
 import { useStoreParques } from "../../../stores/parques";
 import { updateDocument } from "../../../hook/firestore.hook";
 
-const emits = defineEmits(['cerrarForm']);
 
-const cerrarForm = () => {
-  emits('cerrarForm');
-}
+
 
 const storeParques = useStoreParques();
 storeParques.setParques().catch((error) => console.log(error));
@@ -147,7 +150,7 @@ const borrarParque = async () => {
   
 const parque = ref(null);
 const editar = (par) => {
-  //console.log(par);
+  console.log(par);
   parque.value = par;
   
 };
