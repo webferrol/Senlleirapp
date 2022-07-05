@@ -1,117 +1,112 @@
 <template>
-  <div>
-    <h1>Mapas</h1>
-    <div>
-        <strong>Start: </strong>
-        <select id="start" onchange="calcRoute()">
-          <option value="chicago, il">Chicago</option>
-          <option value="st louis, mo">St Louis</option>
-          <option value="joplin, mo">Joplin, MO</option>
-          <option value="oklahoma city, ok">Oklahoma City</option>
-          <option value="amarillo, tx">Amarillo</option>
-          <option value="gallup, nm">Gallup, NM</option>
-          <option value="flagstaff, az">Flagstaff, AZ</option>
-          <option value="winona, az">Winona</option>
-          <option value="kingman, az">Kingman</option>
-          <option value="barstow, ca">Barstow</option>
-          <option value="san bernardino, ca">San Bernardino</option>
-          <option value="los angeles, ca">Los Angeles</option>
-        </select>
-        <strong>End: </strong>
-        <select id="end" onchange="calcRoute()">
-          <option value="chicago, il">Chicago</option>
-          <option value="st louis, mo">St Louis</option>
-          <option value="joplin, mo">Joplin, MO</option>
-          <option value="oklahoma city, ok">Oklahoma City</option>
-          <option value="amarillo, tx">Amarillo</option>
-          <option value="gallup, nm">Gallup, NM</option>
-          <option value="flagstaff, az">Flagstaff, AZ</option>
-          <option value="winona, az">Winona</option>
-          <option value="kingman, az">Kingman</option>
-          <option value="barstow, ca">Barstow</option>
-          <option value="san bernardino, ca">San Bernardino</option>
-          <option value="los angeles, ca">Los Angeles</option>
-        </select>
-      </div>
-    <div id="map" style="width: 95%; height: 80vh">
-      
-    </div>
-  </div>
+  <div :data-set="data" ref="mapDiv" style="width: 100%; height: 95vh"></div>
 </template>
 
 <script setup>
-// -> Impotacion del loader e instalacion de npm googlemaps <- //
+//Dependendencias
 import { Loader } from "@googlemaps/js-api-loader";
+import { computed, ref, reactive } from "vue";
+import { useRouter } from "vue-router";
 
-// -> Loader que carga la ApiKey de Google <- //
-const loader = new Loader({
-  apiKey: "AIzaSyDJUNfgGrajFUqtFZBX6WoX3gTRVavpzpE",
-
+const props = defineProps({
+  /**
+   * {Number} zoom - Zoom que tendrá por defecto el mapa de google
+   */
   zoom: {
     type: Number,
     default: 17,
   },
+  /**
+   * {Object} CurrPos - Punto central  definido por una latitud y una longitud  en la que aparecerán todos los marcadores del mapas
+   * @default {lat: 42.8775066,lng: -8.5489188}
+   */
+  currPos: {
+    type: Object,
+    default: () => ({ lat: 42.8775066, lng: -8.5489188 }),
+  },
 });
 
-// -> Array para almacenar las marcas <- //
-let marcadores = [];
+//Objeto instanciado de google.maps.Map
+const apikey = "AIzaSyDJUNfgGrajFUqtFZBX6WoX3gTRVavpzpE";
+let map = null;
+const mapDiv = ref(null);
+const data = null;
+// let markers = [];
+
+// -> Coordenadas <- //
+let puntos = [
+  { lat: 42.8805962, lng: -8.5446412 },
+  { lat: 42.86116699999999, lng: -8.552389 },
+];
 
 // -> Icono del marcador <- //
-const imagen = "src/assets/prueba.png";
+const image = "src/assets/prueba.png";
 
-// -> Funcion que lanza el mapa y marcas <- //
-const pintar = async () => {
-  if (!loader.loading) await loader.load();
-  
+// -> Cargamos el loader para llamara la apiKey <- //
+const loader = new Loader({ apiKey: apikey.value });
 
-  marcadores.push(
-    new google.maps.Marker({
-      position: {
-        lat: 42.8775066,
-        lng: -8.5489188,
-      },
-      map,
-      animation: google.maps.Animation.DROP,
-      icon: imagen,
-    })
-  );
-  var directionsService = new google.maps.DirectionsService();
-  var directionsRenderer = new google.maps.DirectionsRenderer();
-  var chicago = new google.maps.LatLng(41.850033, -87.6500523);
-  var mapOptions = {
-    zoom: 7,
-    center: chicago,
-  };
-  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
-  directionsRenderer.setMap(map);
-};
+// -> Pintamos/cargamos el mapa de google en la vista <- //
 
-function calcRoute() {
-  var start = document.getElementById("start").value;
-  var end = document.getElementById("end").value;
-  var request = {
-    origin: start,
-    destination: end,
-    travelMode: "DRIVING",
-  };
-  directionsService.route(request, function (result, status) {
-    if (status == "OK") {
-      directionsRenderer.setDirections(result);
-    }
-  });
-}
+/**
+ * @description Nos permite enrutar la senlleira hacia su ficha
+ * @param {String} id - Código da árbore senlleira
+ */
+// const showRoute = (id) => {
+//   if (id) {
+//     router.push({
+//       path: "/arb-:id",
+//       name: "Senlleira",
+//       params: {
+//         id: id,
+//       },
+//     });
+//   }
+// };
 
-// -> Funcion que lanza el cargador del mapa "loader.load()" <- //
+/**
+ * Limpiamos marcadores de google maps
+ */
+// const limpiar = () => {
+//   for (let i = 0, tam = markers.length; i < tam; i++) {
+//     markers[i].setMap(null);
+//   }
+//   markers = [];
+// };
+
+/**
+ * Función asíncrona que lanza el lodader
+ */
 (async () => {
   try {
     if (!loader.loading) await loader.load();
-    map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: 42.8775066, lng: -8.5489188 },
-      zoom: 18,
+    //console.log(loader.loading)
+    map = new google.maps.Map(mapDiv.value, {
+      center: props.currPos,
+      zoom: props.zoom,
     });
-    await pintar();
+
+    puntos.forEach((item) => {
+      new google.maps.Marker({
+        map,
+        position: item,
+        icon: image
+      });
+    });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 })();
+
+// const pintar = async () => {
+//   console.log(loader.loading)
+//   await loader.load();
+//   new google.maps.Marker({
+//     map,
+//     position: catedral,
+//   });
+//     new google.maps.Marker({
+//       map,
+//       position: conxo,
+//     });
+// };
 </script>
