@@ -17,35 +17,34 @@
     </tr>
     <tr
       class="catalogo_administrativo"
-      v-for="(arbore, index) in storeArbores.arbores"
+      v-for="(arbores, index) in storeArbores.arbores"
       :key="index"
     >
-      <td>{{arbore.nombre_arbol}}</td>
-      <td>{{ arbore.genero }} {{ arbore.especie }}</td>
-      <td>{{ arbore.nombre_comun }}</td>
-      <td>{{ arbore.nombre_comun_gal }}</td>
-      <td>{{ arbore.zona_geografica }}</td>
-      <td>{{ arbore.localizacion }}</td>
-      <td>{{arbore.latitud}}</td>
-      <td>{{arbore.longitud}}</td>
+      <td>{{arbores.nombre_arbol}}</td>
+      <td>{{ arbores.genero }} {{ arbores.especie }}</td>
+      <td>{{ arbores.nombre_comun }}</td>
+      <td>{{ arbores.nombre_comun_gal }}</td>
+      <td>{{ arbores.zona_geografica }}</td>
+      <td>{{ arbores.localizacion }}</td>
+      <td>{{arbores.latitud}}</td>
+      <td>{{arbores.longitud}}</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono
             :icon="['fa', 'trash']"
             @click="
               handleDelete({
-                id: arbore.idDoc,
-                name: `${arbore.genero} ${arbore.especie}`,
+                id: arbores.idDoc,
+                name: `${arbores.genero} ${arbores.especie}`,
               })
             "
           >
           </icono>
 
-          <button @click="editar( arbore ) " >
+          <button @click="editar( arbores ) " >
            <icono :icon="['fa', 'pen']"></icono> 
           </button>
-
-          
+        
         </span>
       </td>
     </tr>
@@ -56,9 +55,9 @@
       <h2>Atención</h2>
       <span class="borrar_txt">
         <icono :icon="['fa', 'circle-exclamation']"></icono>
-        <p>Se eliminará: {{ nombre }} de manera irrevesible</p>
+        <p>Se eliminará: {{ nombre }} de maneira irrevesible</p>
         <p>
-          !Todas las arbores que contentan esta especie se verán afectadas!
+          !Todalas arbores que conteñan esta especie veranse afectadas!
         </p>
       </span>
       <span class="borrar_btn">
@@ -117,8 +116,7 @@
           id="longitud"
           placeholder="867543934"
         />
-          
-          
+               
         <input type="submit" value="Editar Arbore" :disabled="arbore===null" />
         <div v-if="loading">Guardando...</div>
       </fieldset>
@@ -127,9 +125,10 @@
 </template>
 
 <script setup >
-import { useStoreArbores } from '@/stores/arbores';
-import { updateDocument } from ".@/hook/firestore.hook";
+import { useStoreArbores } from '@/stores/arbores.js';
+import { updateDocument } from "@/hook/firestore.hook";
 import {ref} from 'vue';
+import "@/assets/css/admin-css/catalogoAdmin.css";
 
 const storeArbores = useStoreArbores();
 storeArbores.setArbores().catch((error) => console.log(error));
@@ -170,7 +169,6 @@ const cambiarDatos = async (id) => {
     loading.value= false;
   }
 
-  
 }
 
 </script>
