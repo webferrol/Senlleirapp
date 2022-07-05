@@ -1,10 +1,8 @@
 <template>
-    <CatalogoUsuarioVue></CatalogoUsuarioVue>
+    <CatalogoSenlleirasUsuarioVue></CatalogoSenlleirasUsuarioVue>
 </template>
 
 <script setup>
-import CatalogoUsuarioVue from '@/components/catalogo/CatalogoUsuario.vue';
-import FiltroBusquedaVue from '../../components/catalogo/FiltroBusqueda.vue';
-
+import CatalogoSenlleirasUsuarioVue from '@/components/catalogo/CatalogoSenlleirasUsuario.vue';
 
 </script>
