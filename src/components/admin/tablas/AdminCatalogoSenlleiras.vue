@@ -35,11 +35,9 @@
           >
           </icono>
 
-          <button @click="editar( senlleira ) " >
-           <icono :icon="['fa', 'pen']"></icono> 
+          <button @click="editar(senlleira)">
+            <icono :icon="['fa', 'pen']"></icono>
           </button>
-
-          
         </span>
       </td>
     </tr>
@@ -62,32 +60,61 @@
     </div>
   </div>
 
-<!-- Modulo para editar senlleira -->
-<form
-      id="senlleiras"
-      @submit.prevent="cambiarDatos(`${senlleira.idDoc}`)"
-      v-if="senlleira"
-    >
-      <fieldset class="data_especies">
-        <h2>Editar Senlleiras</h2>
-        <!-- <input
-          type="text"
-          v-model="parque.nombre"
-          id="nombre"
-          placeholder="Nome"
-        /> -->
-        <input
-          type="text"
-          v-model="senlleira.nombre_comun"
-          id="nombre_comun"
-          placeholder="Nome en Castelán"
-        />
-        <input
-          type="text"
-          v-model="senlleira.nombre_comun_gal"
-          id="nombre_comun_gal"
-          placeholder="Nome en Galego"
-        />
+  <!-- Modulo para editar senlleira -->
+  <form
+    id="senlleiras"
+    @submit.prevent="cambiarDatos(`${senlleira.idDoc}`)"
+    v-if="senlleira"
+  >
+    <icono
+      class="close-form"
+      :icon="['fa', 'xmark']"
+      @click="senlleira = null"
+    ></icono>
+    <h2>Editar Senlleiras</h2>
+    <fieldset class="data_especies">
+      <legend>Datos senlleira</legend>
+      <input
+        type="text"
+        v-model="senlleira.genero"
+        id="genero"
+        placeholder="Género"
+      />
+      <input
+        type="text"
+        v-model="senlleira.especie"
+        id="genero"
+        placeholder="Especie"
+      />
+      <input
+        type="text"
+        v-model="senlleira.nombre_comun"
+        id="nombre_comun"
+        placeholder="Nome en Castelán"
+      />
+      <input
+        type="text"
+        v-model="senlleira.nombre_comun_gal"
+        id="nombre_comun_gal"
+        placeholder="Nome en Galego"
+      />
+      <input 
+      type="text"
+      v-model="senlleira.nombre_arbol" 
+      id="nombre_arbol" 
+      placeholder="Nome da árbore" />
+      <input 
+      type="number" 
+      v-model="senlleira.altura" 
+      id="altura" 
+      placeholder="Altura (metros)" />
+      <input 
+      type="number" 
+      v-model="senlleira.diametroTronco" 
+      id="diametroTronco" 
+      placeholder="Diámetro do tronco (metros)" />
+      <fieldset>
+        <legend>Ubicación</legend>
         <input
           type="text"
           v-model="senlleira.zona_geografica"
@@ -95,29 +122,33 @@
           placeholder="Zona xeográfica"
         />
         <input
-        type="text"
+          type="text"
           v-model="senlleira.localizacion"
           id="localizacion"
           placeholder="Localización"
         />
-          
-      
-
-        <input type="submit" value="Editar Senlleira" :disabled="senlleira===null" />
-        <div v-if="loading">Guardando...</div>
       </fieldset>
-    </form>
+      <fieldset>
+        <legend>Descripción</legend>
+        <textarea
+          type="text"
+          v-model="senlleira.descripcion" 
+          id="descripcion"
+          placeholder="Descripción"
+        ></textarea>
+      </fieldset>
 
-
-
-
-
-
-
+      <input
+        type="submit"
+        value="Editar Senlleira"
+        :disabled="senlleira === null"
+      />
+      <div v-if="loading">Guardando...</div>
+    </fieldset>
+  </form>
 </template>
 
 <script setup>
-
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import { useStoreSenlleiras } from "../../../stores/senlleiras";
@@ -144,27 +175,21 @@ const borrarSenlleira = async () => {
   }
 };
 
-
 //Editar Senlleira
 const senlleira = ref(null);
 const editar = (sen) => {
   //console.log(par);
   senlleira.value = sen;
-  
 };
 const cambiarDatos = async (id) => {
   //console.log("uid",id);
   try {
     loading.value = true;
-    await updateDocument(id,"Singulares",senlleira.value);
+    await updateDocument(id, "Singulares", senlleira.value);
   } catch (error) {
-    console.log("aaaaah",error);
+    console.log("aaaaah", error);
   } finally {
-    loading.value= false;
+    loading.value = false;
   }
-
-  
-}
-
-
+};
 </script>

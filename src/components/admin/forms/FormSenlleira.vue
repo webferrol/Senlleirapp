@@ -11,18 +11,18 @@
                     <label for="especie" class="form-label">Nome científico <span data-set="Campo obligatorio">*</span></label>
         
                     <select @change="handleSelect" v-model="form.idEspecie" name="especie" id="especie" required>
-                        <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
+                        <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                             {{ valor.genero }} {{ valor.especie }}</option>
                     </select>
                     <label for="nome" class="form-label"> Nome en galego</label>
                     <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-gallego" required>
-                        <option v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
+                        <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                             {{ valor.nombre_comun_gal }}
                         </option>
                     </select>
                     <label for="nome" class="form-label"> Nome en castelan</label>
                     <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano" required>
-                        <option v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
+                        <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                             {{ valor.nombre_comun }} </option>
                     </select>
                     <label for="arbore" class="form-label" required> Nome da árbore <span data-set="Campo obligatorio">*</span></label>
@@ -44,10 +44,13 @@
                     <input v-model="form.zona_geografica" type="text" required name="zona" id="zona"
                         placeholder="Zona geográfica" />
                     <label for="localizacion" class="form-label"> Localizacion <span data-set="Campo obligatorio">*</span></label>
-                    <select v-model="form.idParque" name="localizacion" id="localizacion" required>
-                        <option v-for="valor in storeParques.parques" :key="valor.id" :value="valor.id">
+                    <select 
+                    @change = "form.localizacion = $event.target.options[$event.target.selectedIndex].text"                    
+                    v-model="form.idParque" name="localizacion" id="localizacion" required>
+                        <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
                             {{ valor.nombre }} </option>
                     </select>
+                    <input type="hidden" v-model="form.localizacion">
                 </div>
             </fieldset>
             <fieldset class="data-senlleira">
@@ -99,11 +102,11 @@ import { useStoreParques } from '@/stores/parques';
 import { useStoreEspecies } from '@/stores/especies';
 import { reactive, ref } from 'vue';
 import "@/assets/css/formularioSenlleira.css";
+import { updateDocument } from '../../../hook/firestore.hook';
 
 const emits = defineEmits(['cerrarForm']);
 
 const form = reactive({
-    id: null,
     genero: '',
     especie: '',
     idEspecie: 0,
@@ -142,7 +145,6 @@ let tmpImagenes = null; //variable que al principio está vacia
 const spinner = ref(false);
 
 const reset = () => {
-    form.id = null;
     form.genero = '';
     form.especie = '';
     form.idEspecie = 0;
@@ -177,7 +179,7 @@ const gestionFoto = async (imagenes) => {
 //  datos que necesito para la base de datos de senlleira
 const handleSelect = (e) => {
     if (storeEspecies.especies.length) {
-        const especie = storeEspecies.especies.find(item => item.id == e.target.value);
+        const especie = storeEspecies.especies.find(item => item.idDoc == e.target.value);
         // console.log(especie)
         form.genero = especie?.genero;
         form.especie = especie?.especie;
@@ -191,17 +193,20 @@ const handleSubmit = async () => {
     //Se comprueban errores antes de enviar nada
     //Enviar
     if (storeEspecies.especies.length) {
-        form.id = Date.now();
-        form.imagen_url= `senlleiras/${form.id}/${tmpImagenes[0].name}`
-        await storeSenlleiras.insertarSenlleira(form);
-        if (tmpImagenes !== null && form.id) {
+        const data = await storeSenlleiras.insertarSenlleira(form);
+        if(data.id){
+            const imagen_url= `senlleiras/${data.id}/${tmpImagenes[0].name}`
+            await updateDocument(data.id,"Singulares",{'imagen_url':imagen_url});
+        }
+        
+            if (tmpImagenes !== null && data.id) {
             try {
                 error.value = { error: false, message: '', }
                 spinner.value = true;
                 loaded.value = true;
                 for(let i =0,tam=tmpImagenes.length; i<tam; i++){
                 await storeSenlleiras.subirFoto({
-                    ref: `senlleiras/${form.id}`,
+                    ref: `senlleiras/${data.id}`,
                     file: tmpImagenes[i],
                 });
                 }
