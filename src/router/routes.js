@@ -5,12 +5,12 @@ export const routes = [
       component: () => import("../views/Inicio.vue"),
     },
     {
-      path: "/catalogo-arbol",
+      path: "/catalogo-arbore",
       name: "catalogoArbol",
       component: () => import("@/views/senlleira/CatalogoNuevoArbol.vue"),
     },
     {
-      path: "/nuevo-arbol",
+      path: "/nova-arbore",
       name: "NuevoArbol",
       component: () => import("@/views/senlleira/NuevoArbol.vue"),
     },

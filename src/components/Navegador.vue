@@ -16,7 +16,7 @@
       </ul>
       <ul class="header-nav-buttons">
       <li class="header-upload" v-if="$route.name == 'inicio'">
-          <router-link to="/nuevo-arbol">
+          <router-link to="/nova-arbore">
             <icono :icon="['fa', 'upload']"></icono>
           </router-link>
         </li>
