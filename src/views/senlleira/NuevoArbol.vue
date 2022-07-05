@@ -10,10 +10,7 @@
                  <label for="arbore" class="form-label" required> Nome da árbore <span data-set="Campo obligatorio">*</span></label>
                 <input v-model="form.nombre_arbol" type="text" required name="arbore" id="arbore"
                  placeholder="indica o nome da arbore" />
-                <pre>
-                    {{storeParques.parques}}
-                    {{form}}
-                </pre>
+            
                 <label for="especie" class="form-label">Nome científico <span data-set="Campo obligatorio">*</span></label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="especie" id="especie" required>
                     <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
@@ -61,12 +58,9 @@
             </div>
             <div v-if="spinner" class="spinner"> Cargando.... </div>
         </fieldset>
-        <button class="btn-form">Publicar Arbore</button>
-        <!-- {{form.genero}}  {{form.especie}} {{form.nombre_comun}} {{form.nombre_comun_gal}} -->
+        <button class="btn-form">Publicar Arbore</button>   
     </form>
-
 </template>
-
 
 <script setup>
 import TheUploader from '@/components/theUploader.vue';
@@ -75,7 +69,7 @@ import {useStoreEspecies} from '@/stores/especies';
 import {useStoreParques} from '@/stores/parques';
 import {useStoreSenlleiras} from '@/stores/senlleiras';
 import { reactive,ref } from 'vue';
-import {updateField} from '@/hook/firestore.hook'
+import {updateDocument} from '@/hook/firestore.hook'
 import "@/assets/css/formularioSenlleira.css";
 
 // llamada del store
@@ -83,7 +77,7 @@ const storeSenlleiras = useStoreSenlleiras();
 const storeEspecies = useStoreEspecies();
 const storeParques = useStoreParques();
 const storeArbores = useStoreArbores();
-//Cargamos parques
+
 storeParques.setParques();
 storeSenlleiras.setSenlleiras();
 storeArbores.setArbores();
@@ -98,7 +92,7 @@ const form = reactive({
     nombre_comun_gal: '',
     zona_geografica: '',
     localizacion: '',
-    imagen_url: ``,
+    imagen_url:'',
 
 })
 
@@ -121,27 +115,20 @@ const reset = () => {
     form.nombre_comun_gal = '';
     form.zona_geografica = '';
     form.localizacion = '';
-    form.imagen_url = '';
+    form.imagen_url='';
 }
 
-// esta funcion encuentra dentro del array de espacies el id necesario para poder obtener los 
-//  datos que necesito para la base de datos de senlleira
+// esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito 
 const handleSelect = (e) => {
-    // alert(e.target.value)
     if (storeEspecies.especies.length) {
         const especie = storeEspecies.especies.find(item => item.idDoc == e.target.value);
-        console.log('-->',especie)
+        // console.log('-->',especie)
         form.genero = especie?.genero;
         form.especie = especie?.especie;
         form.nombre_comun = especie?.nombre_comun;
         form.nombre_comun_gal = especie?.nombre_comun_gal;
     }
 }
-
-
-//@change="form.localizacion= $event.target.options[$event.target.selectedIndex].text"
-// propiedad: quiero la localización 
-// evento del selector , options que son un array en el que quiero evento del selector el index y lo que quiero es el texto
 
 const gestionFoto = async (imagenes) => {
     try {
@@ -155,14 +142,11 @@ const gestionFoto = async (imagenes) => {
 const handleSubmit = async () => {
     //Se comprueban errores antes de enviar nada
     //Enviar
-    if (storeEspecies.especies.length) {
-       
-        
+    if (storeEspecies.especies.length) {      
         const data = await storeArbores.insertarArbore(form);
         if(data.id){
-            form.imagen_url= `arbores/${data.id}/${tmpImagenes[0].name}`
-            //alert(form.imagen_url)
-            await updateField(data.id,'arbores',{imagen_url:form.imagen_url});
+            const imagen_url= `Arbores/${data.id}/${tmpImagenes[0].name}`
+            await updateDocument(data.id,'Arbores',{'imagen_url':imagen_url});
         }
         if (tmpImagenes !== null && data.id) {
             try {
@@ -171,7 +155,7 @@ const handleSubmit = async () => {
                 loaded.value = true;
                 for(let i =0,tam=tmpImagenes.length; i<tam; i++){
                 await storeArbores.subirFoto({
-                    ref: `arbores/${data.id}`,
+                    ref: `Arbores/${data.id}`,
                     file: tmpImagenes[i],
                 });
                 }

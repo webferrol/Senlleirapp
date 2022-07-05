@@ -37,6 +37,7 @@ export const deleteDocument = async (collection, uid) => {
 
 
 /**
+ * Función que actualiza la información de un documento parcial o completo de firestore db
  * 
  * @param {string} uid optiene la uid del documento
  * @param {string} collection 
@@ -44,13 +45,6 @@ export const deleteDocument = async (collection, uid) => {
  */
  export const updateDocument = async(uid = "Qsdfa1fdfdfjdfdj", collection = "especies", data = {}) => await updateDoc(doc(db, collection, uid), data);
 
- /**
- * 
- * @param {string} uid optiene la uid del documento
- * @param {string} collection 
- * @param {Object} data
- */
-  export const updateField = async(uid = "Qsdfa1fdfdfjdfdj", collection = "especies", data = {campo1:'value1',campo2:'value2',campon:'valuen'}) => await setDoc(doc(db, collection, uid), data, { merge: true});
 
 /**
  * 
