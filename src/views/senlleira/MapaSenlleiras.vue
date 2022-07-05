@@ -83,13 +83,16 @@ const loader = new Loader({ apiKey: apikey.value });
     map = new google.maps.Map(mapDiv.value, {
       center: props.currPos,
       zoom: props.zoom,
+      
     });
 
     puntos.forEach((item) => {
       new google.maps.Marker({
         map,
         position: item,
-        icon: image
+        icon: image,
+        animation: google.maps.Animation.DROP
+        // streetViewService: true
       });
     });
   } catch (error) {
