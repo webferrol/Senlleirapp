@@ -2,7 +2,7 @@
    <div class="formsenlleira" v-if="loaded"> Cargando... </div>
 
     <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
-        <span class="h2-background"> <h2>Nova árbore </h2> <icono :icon="['fa', 'leaf']"></icono></span>
+        <span class="h2-background"> <h2>Nova árbore </h2><icono @click="cerrarForm" :icon="['fa', 'xmark']"></icono></span>
         
         <fieldset class="data-senlleira --localizacion">
             <legend> Datos da árbore </legend>
@@ -24,7 +24,7 @@
                     </option>
                 </select>
 
-                <label for="nome" class="form-label"> Nome en castelan</label>
+                <label for="nome" class="form-label"> Nome en castelán</label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano" required>
                     <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre_comun }} </option>
@@ -79,6 +79,10 @@ import {useStoreSenlleiras} from '@/stores/senlleiras';
 import { reactive,ref } from 'vue';
 import {updateDocument} from '@/hook/firestore.hook'
 import "@/assets/css/formularioSenlleira.css";
+
+
+const emits = defineEmits(['cerrarForm']);
+
 
 // llamada del store
 const storeSenlleiras = useStoreSenlleiras();
@@ -182,6 +186,11 @@ const handleSubmit = async () => {
         }
     }
 };
+
+const cerrarForm = () => {
+    emits('cerrarForm');
+}
+
 
 storeEspecies.setEspecies().then().catch(e => alert(e));
 
