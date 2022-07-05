@@ -4,7 +4,6 @@
   width: 100%;
   height: calc(100vh - 43px);
   display: flex;
-  gap: 0.5rem;
   overflow-x: scroll;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -24,7 +23,6 @@
   scroll-snap-align: center;
   background-color: white;
   overflow-x: scroll;
-  gap: .25rem;
 }
 
   .cerrar-ficha-parques{

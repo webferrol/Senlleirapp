@@ -15,26 +15,27 @@
 .container-ficha-tecnica .ficha-tecnica{
     display: flex;
     flex-direction: column;
-    gap: .5rem;
     margin: auto;
     height: 95vh;
-    max-width: 95%;
+    width: 95%;
     overflow-x: hidden;
     background-color: white;
-    border: .5rem solid white;
+    /* border-top: .5rem solid var(--colorsecundario); */
+    border-bottom: .75rem solid white;
     border-radius: 5px;
 }
 
 .ficha-tecnica .head-ficha-tecnica{
     position: sticky;
+    padding: .25rem;
     top: 0;
-    background-color: white;
+    background-color: var(--colorsecundario);
     z-index: 2;
 }
 .ficha-tecnica .cerrar-ficha-tecnica{
     position: absolute;
-    right: 0;
-    top: 0;
+    right: .25rem;
+    top: .25rem;
     font-size: 1.3rem;
     width: 20px;
     height: 20px;
@@ -48,9 +49,36 @@
     text-align: center;
     font-weight: 600;
     text-transform: uppercase;
-    width: calc(100% - 30px);
+    width: calc(100% - 25px);
+    color: white;
 }
 .ficha-tecnica p{
+    padding: .5rem;
     font-size: 1rem;
     line-height: 1rem;
+    text-align: justify;
 }
+/* Caracteristicas tecnicas */
+
+.datos-especie{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    border: 1px solid black;
+}
+    .datos-especie span{
+        border:1px solid black;
+    }
+    .datos-especie h3, .descripcion h3{
+        width: 100%;
+        background-color: var(--colorsecundario);
+        color: white;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    .datos-especie p{
+        text-align: center;
+    }
+    /* Footer */
+    .descripcion p{
+        text-align: justify;
+    }

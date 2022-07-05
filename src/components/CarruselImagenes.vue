@@ -76,5 +76,5 @@ slideAutomatico()
 
 
 <style scoped>
-@import url(@/assets/scss/carrusel.css);
+@import url(../assets/css/carrusel.css);
 </style>

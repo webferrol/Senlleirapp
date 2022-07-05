@@ -43,7 +43,7 @@ const form = reactive({
   origen_descripcion: "",
   usos: "",
   curiosidades: "",
-  localizacion: []
+  
 })
 // Alertas de usuario
 const loaded = ref(false);
@@ -60,7 +60,6 @@ const reset = () => {
   form.origen_descripcion = "";
   form.usos = "";
   form.curiosidades = "";
-  form.localizacion = [];
 }
 
 // Sube los datos del formulario a la base de datos, en caso de errores se muestra por pantalla

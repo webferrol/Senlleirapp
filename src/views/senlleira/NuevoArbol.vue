@@ -10,23 +10,23 @@
                  <label for="arbore" class="form-label" required> Nome da árbore <span data-set="Campo obligatorio">*</span></label>
                 <input v-model="form.nombre_arbol" type="text" required name="arbore" id="arbore"
                  placeholder="indica o nome da arbore" />
-
+            
                 <label for="especie" class="form-label">Nome científico <span data-set="Campo obligatorio">*</span></label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="especie" id="especie" required>
-                    <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
+                    <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.genero }} {{ valor.especie }}</option>
                 </select>
 
                 <label for="nome" class="form-label"> Nome en galego</label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-gallego" required>
-                    <option v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
+                    <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre_comun_gal }}
                     </option>
                 </select>
 
                 <label for="nome" class="form-label"> Nome en castelan</label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano" required>
-                    <option v-for="valor in storeEspecies.especies" :key="valor.id" :value="valor.id">
+                    <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre_comun }} </option>
                 </select>
             </div>
@@ -40,10 +40,13 @@
                     placeholder="Zona geográfica" />       
 
                 <label for="localizacion" class="form-label"> Localizacion <span data-set="Campo obligatorio">*</span></label>
-                <select v-model="form.idParque" name="localizacion" id="localizacion" required>
-                    <option v-for="valor in storeParques.parques" :key="valor.id" :value="valor.id">
+                <select
+                @change="form.localizacion= $event.target.options[$event.target.selectedIndex].text"
+                 v-model="form.idParque" name="localizacion" id="localizacion" required>
+                    <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre }} </option>
                 </select>
+                <input type="hidden" v-model="form.localizacion">
             </div>
         </fieldset>
         <fieldset>
@@ -55,12 +58,9 @@
             </div>
             <div v-if="spinner" class="spinner"> Cargando.... </div>
         </fieldset>
-        <button class="btn-form">Publicar Arbore</button>
-        <!-- {{form.genero}}  {{form.especie}} {{form.nombre_comun}} {{form.nombre_comun_gal}} -->
+        <button class="btn-form">Publicar Arbore</button>   
     </form>
-
 </template>
-
 
 <script setup>
 import TheUploader from '@/components/theUploader.vue';
@@ -69,6 +69,7 @@ import {useStoreEspecies} from '@/stores/especies';
 import {useStoreParques} from '@/stores/parques';
 import {useStoreSenlleiras} from '@/stores/senlleiras';
 import { reactive,ref } from 'vue';
+import {updateDocument} from '@/hook/firestore.hook'
 import "@/assets/css/formularioSenlleira.css";
 
 // llamada del store
@@ -76,13 +77,12 @@ const storeSenlleiras = useStoreSenlleiras();
 const storeEspecies = useStoreEspecies();
 const storeParques = useStoreParques();
 const storeArbores = useStoreArbores();
-//Cargamos parques
+
 storeParques.setParques();
 storeSenlleiras.setSenlleiras();
 storeArbores.setArbores();
 
 const form = reactive({
-    id: null,
     genero: '',
     especie: '',
     idEspecie: 0,
@@ -92,7 +92,7 @@ const form = reactive({
     nombre_comun_gal: '',
     zona_geografica: '',
     localizacion: '',
-    imagen_url: ``,
+    imagen_url:'',
 
 })
 
@@ -106,7 +106,6 @@ const spinner = ref(false);
 const loaded = ref(false);
 
 const reset = () => {
-    form.id = null;
     form.genero = '';
     form.especie = '';
     form.idEspecie = 0;
@@ -116,25 +115,24 @@ const reset = () => {
     form.nombre_comun_gal = '';
     form.zona_geografica = '';
     form.localizacion = '';
-    form.imagen_url = '';
+    form.imagen_url='';
 }
 
-// esta funcion encuentra dentro del array de espacies el id necesario para poder obtener los 
-//  datos que necesito para la base de datos de senlleira
+// esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito 
 const handleSelect = (e) => {
     if (storeEspecies.especies.length) {
+<<<<<<< HEAD
         const especie = storeEspecies.especies.find(item => item.id == e.target.value);
         // console.log(especie)
-        form.genero = especie.genero;
-        form.especie = especie.especie;
-        form.nombre_comun = especie.nombre_comun;
-        form.nombre_comun_gal = especie.nombre_comun_gal;
+=======
+        const especie = storeEspecies.especies.find(item => item.idDoc == e.target.value);
+        // console.log('-->',especie)
+>>>>>>> 7a58f469ab5c7a5f4f2810e67d10a7a1936bee6f
+        form.genero = especie?.genero;
+        form.especie = especie?.especie;
+        form.nombre_comun = especie?.nombre_comun;
+        form.nombre_comun_gal = especie?.nombre_comun_gal;
     }
-    //  if (storeParques.parques.length) {
-    //     const parques = storeParques.parques.find(item=> item.id == e.target.value);
-    //     console.log(parques)
-    //     form.localizacion = parques.nombre;
-    //  }
 }
 
 const gestionFoto = async (imagenes) => {
@@ -149,18 +147,20 @@ const gestionFoto = async (imagenes) => {
 const handleSubmit = async () => {
     //Se comprueban errores antes de enviar nada
     //Enviar
-    if (storeEspecies.especies.length) {
-        form.id = Date.now();
-        form.imagen_url= `arbores/${form.id}/${tmpImagenes[0].name}`
-        await storeArbores.insertarArbore(form);
-        if (tmpImagenes !== null && form.id) {
+    if (storeEspecies.especies.length) {      
+        const data = await storeArbores.insertarArbore(form);
+        if(data.id){
+            const imagen_url= `Arbores/${data.id}/${tmpImagenes[0].name}`
+            await updateDocument(data.id,'Arbores',{'imagen_url':imagen_url});
+        }
+        if (tmpImagenes !== null && data.id) {
             try {
                 error.value = { error: false, message: '', }
                 spinner.value = true;
                 loaded.value = true;
                 for(let i =0,tam=tmpImagenes.length; i<tam; i++){
                 await storeArbores.subirFoto({
-                    ref: `arbores/${form.id}`,
+                    ref: `Arbores/${data.id}`,
                     file: tmpImagenes[i],
                 });
                 }

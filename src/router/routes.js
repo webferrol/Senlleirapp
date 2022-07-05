@@ -5,14 +5,14 @@ export const routes = [
       component: () => import("../views/Inicio.vue"),
     },
     {
-      path: "/formulario",
-      name: "formulario",
+      path: "/nuevo-arbol",
+      name: "NuevoArbol",
       component: () => import("@/views/senlleira/NuevoArbol.vue"),
     },
     
     {
       path: "/catalogo",
-      name: "Catalogo",
+      name: "catalogo",
       component: () => import("@/views/senlleira/Catalogo.vue"),
     },
     {
