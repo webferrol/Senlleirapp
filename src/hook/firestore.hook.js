@@ -5,7 +5,7 @@ import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, setDoc, query, 
  *
  * @param {*} uid ruta en firestore donde quiero que se manden los datos.
  * @param {Object} data objeto en el que estan almacenados los datos del formulario: Ejemplo: {nombre: "",descripcion_breve: "",descripcion: "",fecha: Timestamp}
- * @return {Object} El Objetos con las propiedades de los datos insertados
+ * @return {Object} El Objeto insertado con varias propiedades interesantes entre ello el id
  */
 export const addDocument = async (uid, data) => await addDoc(collection(db, uid), data); 
 
