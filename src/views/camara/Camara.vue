@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>
-      <input type="file" accept="image/*" capture="camera" />
+      <input @change="obtenr" type="file" accept="image/*" capture="camera" />
     </h1>
   </div>
 </template>
@@ -32,6 +32,12 @@ process.on('unhandledRejection', err => {
 });
 
 main(...process.argv.slice(2));
+
+obtenr = (e) => {
+  const fot = e.target;
+  fot === null
+}
+
 </script>
 
 <style scoped></style>
