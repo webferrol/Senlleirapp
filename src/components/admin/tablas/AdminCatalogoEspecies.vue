@@ -20,7 +20,7 @@
       v-for="(especie, index) in storeSpecies.especies"
       :key="index"
     >
-      <td class="genero">{{ especie.nombre_comun }}</td>
+      <td class="genero">{{ especie.genero }}</td>
       <td class="especie">{{ especie.especie }}</td>
       <td class="nombre_comun">{{ especie.nombre_comun }}</td>
       <td class="nombre_comun_gal">{{ especie.nombre_comun_gal }}</td>
