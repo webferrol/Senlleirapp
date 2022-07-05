@@ -46,14 +46,14 @@
                     <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre }} </option>
                 </select>
-                <input type="hidden" v-model="form.localizacion">
+                <input type="hidden" v-model="form.ubicacion_parque">
 
                 <label for="latitud" class="form-label">Latitude <span data-set="Campo obligatorio">*</span></label>
-                <input v-model.number="form.latitud" type="number" required  name="latitud" id="latitud"
+                <input v-model.number="form.lat" type="number" required  name="latitud" id="latitud"
                     placeholder="indicar latitude" />     
 
                 <label for="longitud" class="form-label">Lonxitude <span data-set="Campo obligatorio">*</span></label>
-                <input v-model.number="form.longitud" type="number" required  name="longitud" id="longitud"
+                <input v-model.number="form.lng" type="number" required  name="longitud" id="longitud"
                     placeholder="indicar lonxitude" />  
             </div>
         </fieldset>
@@ -95,14 +95,21 @@ const form = reactive({
     especie: '',
     idEspecie: 0,
     idParque: 0,
+    ubicacion_parque: '',
+    zona_geografica: '', //Conxo por exemplo, onde está situado
+    senlleira: false,
+    propuesta_senlleria: false, //Si no es Senlleira ni propuesta es un árbol común
     nombre_arbol:'',
-    nombre_comun: '',
+    nombre_comun: '',//Nombre castellano
     nombre_comun_gal: '',
-    zona_geografica: '',
-    localizacion: '',
-    imagen_url:'',
-    longitud:'',
-    latitud:'',
+
+    storage_ref:'', //es el identificador donde se guarda un fichero en el Storage Cloud
+    google_url:'',
+
+    lng:'',//longitud
+    lat:'',//latitud
+    diametro: 0,
+    altura: 0,
 
 })
 
@@ -116,18 +123,18 @@ const spinner = ref(false);
 const loaded = ref(false);
 
 const reset = () => {
-    form.genero = '';
-    form.especie = '';
-    form.idEspecie = 0;
-    form.idParque= 0,
-    form.nombre_arbol='',
-    form.nombre_comun = '';
-    form.nombre_comun_gal = '';
-    form.zona_geografica = '';
-    form.localizacion = '';
-    form.imagen_url='';
-    form.latitud ='';
-    form.longitud ='';
+    // form.genero = '';
+    // form.especie = '';
+    // form.idEspecie = 0;
+    // form.idParque= 0,
+    // form.nombre_arbol='',
+    // form.nombre_comun = '';
+    // form.nombre_comun_gal = '';
+    // form.zona_geografica = '';
+    // form.localizacionParque = '';
+    // form.imagen_url='';
+    // form.latitud ='';
+    // form.longitud ='';
 }
 
 // esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito 
@@ -158,7 +165,7 @@ const handleSubmit = async () => {
         const data = await storeArbores.insertarArbore(form);
         if(data.id){
             const imagen_url= `Arbores/${data.id}/${tmpImagenes[0].name}`
-            await updateDocument(data.id,'Arbores',{'imagen_url':imagen_url});
+            await updateDocument(data.id,'Arbores',{'storage_ref':imagen_url});
         }
         if (tmpImagenes !== null && data.id) {
             try {
