@@ -74,65 +74,93 @@
     <h2>Editar Senlleiras</h2>
     <fieldset class="data_especies">
       <legend>Datos senlleira</legend>
+
+      <label for="genero"> Xénero</label>
       <input
         type="text"
         v-model="senlleira.genero"
         id="genero"
         placeholder="Género"
       />
+      <label for="especie"> Especie</label>
       <input
         type="text"
         v-model="senlleira.especie"
-        id="genero"
+        id="especie"
         placeholder="Especie"
       />
+      <label for="nombre_comun"> Nome común (Castelán)</label>
       <input
         type="text"
         v-model="senlleira.nombre_comun"
         id="nombre_comun"
         placeholder="Nome en Castelán"
       />
+      <label for="nombre_comun_gal"> Nome común (Galego)</label>
       <input
         type="text"
         v-model="senlleira.nombre_comun_gal"
         id="nombre_comun_gal"
         placeholder="Nome en Galego"
       />
-      <input 
-      type="text"
-      v-model="senlleira.nombre_arbol" 
-      id="nombre_arbol" 
-      placeholder="Nome da árbore" />
-      <input 
-      type="number" 
-      v-model="senlleira.altura" 
-      id="altura" 
-      placeholder="Altura (metros)" />
-      <input 
-      type="number" 
-      v-model="senlleira.diametroTronco" 
-      id="diametroTronco" 
-      placeholder="Diámetro do tronco (metros)" />
+      <label for="nombre_arbol"> Nome da árbore</label>
+      <input
+        type="text"
+        v-model="senlleira.nombre_arbol"
+        id="nombre_arbol"
+        placeholder="Nome da árbore"
+      />
+      <label for="altura"> Altura</label>
+      <input
+        type="number"
+        v-model="senlleira.altura"
+        id="altura"
+        placeholder="Altura (metros)"
+      />
+      <label for="diametroTronco"> Diámetro do tronco</label>
+      <input
+        type="number"
+        v-model="senlleira.diametroTronco"
+        id="diametroTronco"
+        placeholder="Diámetro do tronco (metros)"
+      />
       <fieldset>
         <legend>Ubicación</legend>
+        <label for="zona-geografica"> Zona xeográfica</label>
         <input
           type="text"
           v-model="senlleira.zona_geografica"
           id="zona-geografica"
           placeholder="Zona xeográfica"
         />
+        <label for="localizacion"> Localización</label>
         <input
           type="text"
           v-model="senlleira.localizacion"
           id="localizacion"
           placeholder="Localización"
         />
+        <label for="lat" class="form-label">Latitud</label>
+        <input
+          type="text"
+          v-model="senlleira.lat"
+          id="latitud"
+          placeholder="Latitud"
+        />
+        <label for="lng" class="form-label">Longitud</label>
+        <input
+          type="text"
+          v-model="senlleira.lng"
+          id="lng"
+          placeholder="Longitud"
+        />
       </fieldset>
       <fieldset>
         <legend>Descripción</legend>
+        <label for="descripcion"> Descrición</label>
         <textarea
           type="text"
-          v-model="senlleira.descripcion" 
+          v-model="senlleira.descripcion"
           id="descripcion"
           placeholder="Descripción"
         ></textarea>
