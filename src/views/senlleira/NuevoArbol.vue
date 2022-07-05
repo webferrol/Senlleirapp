@@ -125,10 +125,10 @@ const handleSelect = (e) => {
     if (storeEspecies.especies.length) {
         const especie = storeEspecies.especies.find(item => item.id == e.target.value);
         // console.log(especie)
-        form.genero = especie.genero;
-        form.especie = especie.especie;
-        form.nombre_comun = especie.nombre_comun;
-        form.nombre_comun_gal = especie.nombre_comun_gal;
+        form.genero = especie?.genero;
+        form.especie = especie?.especie;
+        form.nombre_comun = especie?.nombre_comun;
+        form.nombre_comun_gal = especie?.nombre_comun_gal;
     }
     //  if (storeParques.parques.length) {
     //     const parques = storeParques.parques.find(item=> item.id == e.target.value);

@@ -21,8 +21,51 @@
      
 
     <FichaTecnicaVue 
+    
     v-if="mostrarFicha" @cerrarFicha="mostrarFicha = false"
-    :nombre_arbol="fichaDatos.nombre_arbol" :images="imagenesFichaTecnica"></FichaTecnicaVue>
+    :data="fichaDatos" :images="imagenesFichaTecnica">
+    <!-- Template de los datos que se van a cargar en el componente hijo -->
+     <template #titulo>
+        <h2 class="ficha-tittle">{{fichaDatos.nombre_arbol}}</h2>
+     </template>
+     <template #content>
+        <div class="datos-especie">
+            <span>
+                <h3>Especie</h3>
+                <p>{{fichaDatos.genero}} {{fichaDatos.especie}}</p>
+            </span>
+            <span>
+                <h3>Localizacion</h3>
+                <p>{{fichaDatos.localizacion}}</p>
+            </span>
+            <span>
+                <h3>Nombre</h3>
+                <p>{{fichaDatos.nombre_comun}}</p>
+            </span>
+            <span>
+                <h3>Nome</h3>
+                <p>{{fichaDatos.nombre_comun_gal}}</p>
+            </span>
+            <span>
+                <h3>Altura</h3>
+                <p>{{fichaDatos.altura}} metros</p>
+            </span>
+            <span>
+                <h3>Diametro</h3>
+                <p>{{fichaDatos.diametroTronco}} metros</p>
+            </span>
+        
+        </div>
+     </template>
+
+     <template #footer>
+     <div class="descripcion">
+         <h3>Descrición</h3>
+         <p>{{fichaDatos.descripcion}}</p>
+     </div>
+     </template>
+     
+    </FichaTecnicaVue>
 
      
 </template>
@@ -61,14 +104,13 @@ const cargarDatosFicha = async (objeto) => {
     const especie = storeEspecies.especies.find(el=>el.id,objeto.idEspecie);
     fichaDatos.value = null;
     fichaDatos.value= {...objeto,...especie};
+    console.log(fichaDatos)
     // Limpiamos y cargamos las imagenes de la ficha
     imagenesFichaTecnicaVaciar()
-    await storeSenlleira.setImagenes('senlleiras/' + objeto.id)
+    await storeSenlleira.setImagenes('senlleiras/' + objeto.idDoc)
     for (let i = 0; i < storeSenlleira.imagenes.length; i++) {
         imagenesFichaTecnica.value.push(storeSenlleira.imagenes[i])
     }
     await storeEspecies.setEspecies()
-
-    console.log("datos son  => ",fichaDatos, "imagenes son => ",imagenesFichaTecnica.value)
 }
 </script>
