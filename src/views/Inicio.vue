@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import CarruselStoriesVue from '@/components/storis/CarruselStories.vue';
+import CarruselStoriesVue from '@/components/parques/CarruselStories.vue';
 import CarruselImagenesVue from '../components/CarruselImagenes.vue';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';

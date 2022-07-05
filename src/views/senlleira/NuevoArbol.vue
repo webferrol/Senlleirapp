@@ -121,8 +121,13 @@ const reset = () => {
 // esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito 
 const handleSelect = (e) => {
     if (storeEspecies.especies.length) {
+<<<<<<< HEAD
+        const especie = storeEspecies.especies.find(item => item.id == e.target.value);
+        // console.log(especie)
+=======
         const especie = storeEspecies.especies.find(item => item.idDoc == e.target.value);
         // console.log('-->',especie)
+>>>>>>> 7a58f469ab5c7a5f4f2810e67d10a7a1936bee6f
         form.genero = especie?.genero;
         form.especie = especie?.especie;
         form.nombre_comun = especie?.nombre_comun;
