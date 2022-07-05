@@ -2,7 +2,7 @@
    <div class="formsenlleira" v-if="loaded"> Cargando... </div>
 
     <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
-        <span class="h2-background"> <h2>Nova árbore </h2><icono @click="cerrarForm" :icon="['fa', 'xmark']"></icono></span>
+        <span class="h2-background"> <h2>Nova árbore </h2> <icono :icon="['fa', 'leaf']"></icono></span>
         
         <fieldset class="data-senlleira --localizacion">
             <legend> Datos da árbore </legend>
@@ -24,7 +24,7 @@
                     </option>
                 </select>
 
-                <label for="nome" class="form-label"> Nome en castelán</label>
+                <label for="nome" class="form-label"> Nome en casteln</label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano" required>
                     <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre_comun }} </option>
@@ -80,10 +80,6 @@ import { reactive,ref } from 'vue';
 import {updateDocument} from '@/hook/firestore.hook'
 import "@/assets/css/formularioSenlleira.css";
 
-
-const emits = defineEmits(['cerrarForm']);
-
-
 // llamada del store
 const storeSenlleiras = useStoreSenlleiras();
 const storeEspecies = useStoreEspecies();
@@ -137,13 +133,8 @@ const reset = () => {
 // esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito 
 const handleSelect = (e) => {
     if (storeEspecies.especies.length) {
-<<<<<<< HEAD
-        const especie = storeEspecies.especies.find(item => item.id == e.target.value);
-        // console.log(especie)
-=======
         const especie = storeEspecies.especies.find(item => item.idDoc == e.target.value);
         // console.log('-->',especie)
->>>>>>> 7a58f469ab5c7a5f4f2810e67d10a7a1936bee6f
         form.genero = especie?.genero;
         form.especie = especie?.especie;
         form.nombre_comun = especie?.nombre_comun;
@@ -191,11 +182,6 @@ const handleSubmit = async () => {
         }
     }
 };
-
-const cerrarForm = () => {
-    emits('cerrarForm');
-}
-
 
 storeEspecies.setEspecies().then().catch(e => alert(e));
 

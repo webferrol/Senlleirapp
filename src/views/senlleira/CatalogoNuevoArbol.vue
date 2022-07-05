@@ -119,12 +119,10 @@
         />
           
           
-
         <input type="submit" value="Editar Arbore" :disabled="arbore===null" />
         <div v-if="loading">Guardando...</div>
       </fieldset>
     </form>
-
 
 </template>
 
@@ -175,9 +173,4 @@ const cambiarDatos = async (id) => {
   
 }
 
-
 </script>
-
-<style>
-
-</style>
