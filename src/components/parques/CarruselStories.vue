@@ -38,9 +38,11 @@ const imagenesFichaTecnicaVaciar = () => {
 
 // Funcion para cargar datos de la ficha y sus respectivas imágenes
 const cargarDatosFicha = async (objeto) => {
+  console
     mostrarFicha.value = true;
     // Limpiamos y cargamos los datos tecnicos de la ficha
-    const parque = storeParques.Parques.find(el=>el.id,objeto.idEspecie);
+    const parque = storeParques.parques.find(el=>objeto.idDoc===el.idDoc);
+    console.log(parque)
     fichaDatos.value = null;
     fichaDatos.value= {...objeto,...parque};
     console.log(fichaDatos)

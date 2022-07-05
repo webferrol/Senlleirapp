@@ -99,12 +99,14 @@ const imagenesFichaTecnicaVaciar = () => {
 
 // Funcion para cargar datos de la ficha y sus respectivas imágenes
 const cargarDatosFicha = async (objeto) => {
+    //console.log(objeto)
     mostrarFicha.value = true;
     // Limpiamos y cargamos los datos tecnicos de la ficha
-    const especie = storeEspecies.especies.find(el=>el.id,objeto.idEspecie);
+    //const especie = storeEspecies.especies.find(el=>el.idDoc===objeto.idEspecie);
     fichaDatos.value = null;
-    fichaDatos.value= {...objeto,...especie};
-    console.log(fichaDatos)
+    //fichaDatos.value= {...objeto,...especie};
+    fichaDatos.value = objeto;
+    //console.log(fichaDatos)
     // Limpiamos y cargamos las imagenes de la ficha
     imagenesFichaTecnicaVaciar()
     await storeSenlleira.setImagenes('senlleiras/' + objeto.idDoc)
