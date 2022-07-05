@@ -28,7 +28,7 @@
             :icon="['fa', 'trash']"
             @click="
               handleDelete({
-                id: senlleira.idCollection,
+                id: senlleira.idDoc,
                 name: `${senlleira.genero} ${senlleira.especie}`,
               })
             "
@@ -65,7 +65,7 @@
 <!-- Modulo para editar senlleira -->
 <form
       id="senlleiras"
-      @submit.prevent="cambiarDatos(`${senlleira.idCollection}`)"
+      @submit.prevent="cambiarDatos(`${senlleira.idDoc}`)"
       v-if="senlleira"
     >
       <fieldset class="data_especies">

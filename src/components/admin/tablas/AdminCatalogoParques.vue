@@ -14,7 +14,7 @@
       </td>
     </tr>
 
-    <tr v-for="(parque, index) in storeParques.parques" :key="index">
+    <tr class="catalogo_administrativo" v-for="(parque, index) in storeParques.parques" :key="index">
       <td>{{ parque.nombre }}</td>
       <td>{{ parque.tipoloxia }}</td>
       <td>{{ parque.localizacion }}</td>
@@ -26,7 +26,7 @@
         <span>
           <icono
             :icon="['fa', 'trash']"
-            @click="handleDelete({ id: parque.idCollection })"
+            @click="handleDelete({ id: parque.idDoc })"
           >
           </icono>
 
@@ -55,17 +55,17 @@
   
     <form
       id="parques"
-      @submit.prevent="cambiarDatos(`${parque.idCollection}`)"
+      @submit.prevent="cambiarDatos(`${parque.idDoc}`)"
       v-if="parque"
-    >
-      <fieldset class="data_especies">
-        <h2>Editar Parques</h2>
-        <icono
+    > <icono
       class="close-form"
       :icon="['fa', 'xmark']"
       @click="cerrarForm"
       
     ></icono>
+      <fieldset class="data_especies">
+        <h2>Editar Parques</h2>
+       
         <input
           type="text"
           v-model="parque.nombre"

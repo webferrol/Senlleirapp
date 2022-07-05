@@ -28,7 +28,7 @@
             <td class="tabla_administrativo_options">
                 <span>
                     <icono :icon="['fa', 'trash']"
-                        @click="handleDelete({ id: especie.idCollection, name: `${especie.genero} ${especie.especie}` })">
+                        @click="handleDelete({ id: especie.idDoc, name: `${especie.genero} ${especie.especie}` })">
                     </icono>
                     <button @click="editar(especie)" >
                         <icono :icon="['fa', 'pen']" to="/arb-:id"></icono>
