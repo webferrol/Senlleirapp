@@ -39,7 +39,7 @@
                 <input v-model="form.zona_geografica" type="text" required name="zona" id="zona"
                     placeholder="Zona geográfica" />       
 
-                <label for="localizacion" class="form-label"> Localizacion <span data-set="Campo obligatorio">*</span></label>
+                <label for="localizacion" class="form-label"> Localizacion, Parque <span data-set="Campo obligatorio">*</span></label>
                 <select
                 @change="form.localizacion= $event.target.options[$event.target.selectedIndex].text"
                  v-model="form.idParque" name="localizacion" id="localizacion" required>
@@ -47,6 +47,14 @@
                         {{ valor.nombre }} </option>
                 </select>
                 <input type="hidden" v-model="form.localizacion">
+
+                <label for="latitud" class="form-label">Latitude <span data-set="Campo obligatorio">*</span></label>
+                <input v-model.number="form.latitud" type="number" required  name="latitud" id="latitud"
+                    placeholder="indicar latitude" />     
+
+                <label for="longitud" class="form-label">Lonxitude <span data-set="Campo obligatorio">*</span></label>
+                <input v-model.number="form.longitud" type="number" required  name="longitud" id="longitud"
+                    placeholder="indicar lonxitude" />  
             </div>
         </fieldset>
         <fieldset>
@@ -93,6 +101,8 @@ const form = reactive({
     zona_geografica: '',
     localizacion: '',
     imagen_url:'',
+    longitud:'',
+    latitud:'',
 
 })
 
@@ -116,6 +126,8 @@ const reset = () => {
     form.zona_geografica = '';
     form.localizacion = '';
     form.imagen_url='';
+    form.latitud ='';
+    form.longitud ='';
 }
 
 // esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito 
