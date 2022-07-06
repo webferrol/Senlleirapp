@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 // importacion de la función del firebase para subir las fotos
 import { subirFicheros, listAllUrls,getDownURL} from '@/hook/storage.hook';
 
-import { addDocument, getDocuments, deleteDocument} from '@/hook/firestore.hook';
+import { addDocument, getDocuments, deleteDocument, updateDocument} from '@/hook/firestore.hook';
 
 
 // useStore could be anything like useUser, useCart
@@ -31,8 +31,13 @@ export const useStoreArbores = defineStore('arbores', {
          * @param {object} datos datos de la senlleira
          * @returns los datos de la senlleira que se meten y el catalogo al que se suben
          */
-        async insertarArbore(datos) {
-            return await addDocument("Arbores", datos)
+        async insertarArbore(datos,fileName) {
+            const data = await addDocument("Arbores", datos);
+            if (data.id && fileName.length) {
+                const storage_ref = `Arbores/${data.id}/${fileName}`;
+                await updateDocument(data.id, "Arbores", {'storage_ref': storage_ref });//creado la referencia
+            }  
+            return data;
         },
         async borrarArbore(ID){
             await deleteDocument("Arbores", ID);
@@ -54,8 +59,8 @@ export const useStoreArbores = defineStore('arbores', {
         },
         async getDownloadURL (){
             for(let i=0,tam=this.arbores.length;i<tam;i++){
-                 const url = this.arbores[i].imagen_url;
-                 this.arbores[i].google_url = await getDownURL(url);
+                 const ref = this.arbores[i].storage_ref;
+                 this.arbores[i].google_url = await getDownURL(ref);
             }
          }
     },

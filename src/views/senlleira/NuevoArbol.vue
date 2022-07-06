@@ -24,7 +24,7 @@
                     </option>
                 </select>
 
-                <label for="nome" class="form-label"> Nome en casteln</label>
+                <label for="nome" class="form-label"> Nome en castelán</label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano" required>
                     <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre_comun }} </option>
@@ -39,9 +39,9 @@
                 <input v-model="form.zona_geografica" type="text" required name="zona" id="zona"
                     placeholder="Zona geográfica" />       
 
-                <label for="localizacion" class="form-label"> Localizacion, Parque <span data-set="Campo obligatorio">*</span></label>
+                <label for="localizacion" class="form-label"> Ubicación parque <span data-set="Campo obligatorio">*</span></label>
                 <select
-                @change="form.localizacion= $event.target.options[$event.target.selectedIndex].text"
+                @change="form.ubicacion_parque= $event.target.options[$event.target.selectedIndex].text"
                  v-model="form.idParque" name="localizacion" id="localizacion" required>
                     <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre }} </option>
@@ -49,11 +49,11 @@
                 <input type="hidden" v-model="form.ubicacion_parque">
 
                 <label for="latitud" class="form-label">Latitude <span data-set="Campo obligatorio">*</span></label>
-                <input v-model.number="form.lat" type="number" required  name="latitud" id="latitud"
+                <input v-model.number="form.lat" type="number" required  name="latitud" id="latitud" step="any"
                     placeholder="indicar latitude" />     
 
                 <label for="longitud" class="form-label">Lonxitude <span data-set="Campo obligatorio">*</span></label>
-                <input v-model.number="form.lng" type="number" required  name="longitud" id="longitud"
+                <input v-model.number="form.lng" type="number" required  name="longitud" id="longitud" step="any"
                     placeholder="indicar lonxitude" />  
             </div>
         </fieldset>
@@ -75,19 +75,15 @@ import TheUploader from '@/components/theUploader.vue';
 import {useStoreArbores} from '@/stores/arbores';
 import {useStoreEspecies} from '@/stores/especies';
 import {useStoreParques} from '@/stores/parques';
-import {useStoreSenlleiras} from '@/stores/senlleiras';
 import { reactive,ref } from 'vue';
-import {updateDocument} from '@/hook/firestore.hook'
 import "@/assets/css/formularioSenlleira.css";
 
 // llamada del store
-const storeSenlleiras = useStoreSenlleiras();
 const storeEspecies = useStoreEspecies();
 const storeParques = useStoreParques();
 const storeArbores = useStoreArbores();
 
 storeParques.setParques();
-storeSenlleiras.setSenlleiras();
 storeArbores.setArbores();
 
 const form = reactive({
@@ -102,10 +98,8 @@ const form = reactive({
     nombre_arbol:'',
     nombre_comun: '',//Nombre castellano
     nombre_comun_gal: '',
-
     storage_ref:'', //es el identificador donde se guarda un fichero en el Storage Cloud
     google_url:'',
-
     lng:'',//longitud
     lat:'',//latitud
     diametro: 0,
@@ -127,14 +121,19 @@ const reset = () => {
     // form.especie = '';
     // form.idEspecie = 0;
     // form.idParque= 0,
+    // form.zona_geografica = '';
+    // form.ubicacion_parque = '';
     // form.nombre_arbol='',
     // form.nombre_comun = '';
     // form.nombre_comun_gal = '';
-    // form.zona_geografica = '';
-    // form.localizacionParque = '';
-    // form.imagen_url='';
-    // form.latitud ='';
-    // form.longitud ='';
+    // form.storage_ref='';
+    // form.google_url='',
+    // form.lat ='';
+    // form.lng ='';
+     // form.altura =0;
+    // form.diametro =0;
+    // form.senlleira= false;
+    // form.propuesta_senlleria= false; //Si no es Senlleira ni propuesta es un árbol común
 }
 
 // esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito 
@@ -161,12 +160,8 @@ const gestionFoto = async (imagenes) => {
 const handleSubmit = async () => {
     //Se comprueban errores antes de enviar nada
     //Enviar
-    if (storeEspecies.especies.length) {      
-        const data = await storeArbores.insertarArbore(form);
-        if(data.id){
-            const imagen_url= `Arbores/${data.id}/${tmpImagenes[0].name}`
-            await updateDocument(data.id,'Arbores',{'storage_ref':imagen_url});
-        }
+    if (storeEspecies.especies.length) {     
+          const data = await storeArbores.insertarArbore(form,tmpImagenes[0].name);
         if (tmpImagenes !== null && data.id) {
             try {
                 error.value = { error: false, message: '', }

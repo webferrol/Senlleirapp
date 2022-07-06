@@ -5,7 +5,7 @@
       <td>Nome en Galego</td>
       <td>Nome en Castelán</td>
       <td>Zona xeográfica</td>
-      <td>Localización</td>
+      <td>Ubicación parque</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono :icon="['fa', 'gears']"></icono>
@@ -14,28 +14,28 @@
     </tr>
     <tr
       class="catalogo_administrativo"
-      v-for="(senlleira, index) in storeSenlleira.senlleiras"
+      v-for="(arbore, index) in storeArbores.arbores"
       :key="index"
     >
-      <td>{{ senlleira.genero }} {{ senlleira.especie }}</td>
-      <td>{{ senlleira.nombre_comun }}</td>
-      <td>{{ senlleira.nombre_comun_gal }}</td>
-      <td>{{ senlleira.zona_geografica }}</td>
-      <td>{{ senlleira.localizacion }}</td>
+      <td>{{ arbore.genero }} {{ arbore.especie }}</td>
+      <td>{{ arbore.nombre_comun }}</td>
+      <td>{{ arbore.nombre_comun_gal }}</td>
+      <td>{{ arbore.zona_geografica }}</td>
+      <td>{{ arbore.ubicacion_parque }}</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono
             :icon="['fa', 'trash']"
             @click="
               handleDelete({
-                id: senlleira.idDoc,
-                name: `${senlleira.genero} ${senlleira.especie}`,
+                id: arbore.idDoc,
+                name: `${arbore.genero} ${arbore.especie}`,
               })
             "
           >
           </icono>
 
-          <button @click="editar(senlleira)">
+          <button @click="editar(arbore)">
             <icono :icon="['fa', 'pen']"></icono>
           </button>
         </span>
@@ -48,13 +48,13 @@
       <h2>Atención</h2>
       <span class="borrar_txt">
         <icono :icon="['fa', 'circle-exclamation']"></icono>
-        <p>Se eliminará: {{ nombre }} de manera irrevesible</p>
+        <p>Se eliminará: {{ nombre }} de maneira irrevesible</p>
         <p>
           !Todas las senlleiras que contentan esta especie se verán afectadas!
         </p>
       </span>
       <span class="borrar_btn">
-        <button @click="borrarSenlleira">Eliminar</button>
+        <button @click="borrarArbore">Eliminar</button>
         <button @click="mostrar = false">Cancelar</button>
       </span>
     </div>
@@ -63,13 +63,13 @@
   <!-- Modulo para editar senlleira -->
   <form
     id="senlleiras"
-    @submit.prevent="cambiarDatos(`${senlleira.idDoc}`)"
-    v-if="senlleira"
+    @submit.prevent="cambiarDatos(`${arbore.idDoc}`)"
+    v-if="arbore"
   >
     <icono
       class="close-form"
       :icon="['fa', 'xmark']"
-      @click="senlleira = null"
+      @click="arbore = null"
     ></icono>
     <h2>Editar Senlleiras</h2>
     <fieldset class="data_especies">
@@ -78,49 +78,49 @@
       <label for="genero"> Xénero</label>
       <input
         type="text"
-        v-model="senlleira.genero"
+        v-model="arbore.genero"
         id="genero"
         placeholder="Género"
       />
       <label for="especie"> Especie</label>
       <input
         type="text"
-        v-model="senlleira.especie"
+        v-model="arbore.especie"
         id="especie"
         placeholder="Especie"
       />
       <label for="nombre_comun"> Nome común (Castelán)</label>
       <input
         type="text"
-        v-model="senlleira.nombre_comun"
+        v-model="arbore.nombre_comun"
         id="nombre_comun"
         placeholder="Nome en Castelán"
       />
       <label for="nombre_comun_gal"> Nome común (Galego)</label>
       <input
         type="text"
-        v-model="senlleira.nombre_comun_gal"
+        v-model="arbore.nombre_comun_gal"
         id="nombre_comun_gal"
         placeholder="Nome en Galego"
       />
       <label for="nombre_arbol"> Nome da árbore</label>
       <input
         type="text"
-        v-model="senlleira.nombre_arbol"
+        v-model="arbore.nombre_arbol"
         id="nombre_arbol"
         placeholder="Nome da árbore"
       />
       <label for="altura"> Altura</label>
       <input
         type="number"
-        v-model="senlleira.altura"
+        v-model="arbore.altura"
         id="altura"
         placeholder="Altura (metros)"
       />
       <label for="diametroTronco"> Diámetro do tronco</label>
       <input
         type="number"
-        v-model="senlleira.diametroTronco"
+        v-model="arbore.diametro"
         id="diametroTronco"
         placeholder="Diámetro do tronco (metros)"
       />
@@ -129,28 +129,28 @@
         <label for="zona-geografica"> Zona xeográfica</label>
         <input
           type="text"
-          v-model="senlleira.zona_geografica"
+          v-model="arbore.zona_geografica"
           id="zona-geografica"
-          placeholder="Zona xeográfica"
+          placeholder="Lugar donde se sitúa"
         />
-        <label for="localizacion"> Localización</label>
+        <label for="localizacion">Ubicación parque</label>
         <input
           type="text"
-          v-model="senlleira.localizacion"
+          v-model="arbore.ubicacion_parque"
           id="localizacion"
-          placeholder="Localización"
+          placeholder="parque"
         />
         <label for="lat" class="form-label">Latitud</label>
         <input
           type="text"
-          v-model="senlleira.lat"
+          v-model="arbore.lat"
           id="latitud"
           placeholder="Latitud"
         />
         <label for="lng" class="form-label">Longitud</label>
         <input
           type="text"
-          v-model="senlleira.lng"
+          v-model="arbore.lng"
           id="lng"
           placeholder="Longitud"
         />
@@ -160,7 +160,7 @@
         <label for="descripcion"> Descrición</label>
         <textarea
           type="text"
-          v-model="senlleira.descripcion"
+          v-model="arbore.descripcion"
           id="descripcion"
           placeholder="Descripción"
         ></textarea>
@@ -169,7 +169,7 @@
       <input
         type="submit"
         value="Editar Senlleira"
-        :disabled="senlleira === null"
+        :disabled="arbore === null"
       />
       <div v-if="loading">Guardando...</div>
     </fieldset>
@@ -179,11 +179,11 @@
 <script setup>
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
-import { useStoreSenlleiras } from "../../../stores/senlleiras";
+import { useStoreArbores } from "../../../stores/arbores";
 import { updateDocument } from "../../../hook/firestore.hook";
 
-const storeSenlleira = useStoreSenlleiras();
-storeSenlleira.setSenlleiras().catch((error) => console.log(error));
+const storeArbores = useStoreArbores();
+storeArbores.setArbores().catch((error) => console.log(error));
 
 const nombre = ref("");
 const loading = ref(false);
@@ -197,23 +197,23 @@ const handleDelete = ({ id, name }) => {
   mostrar.value = true;
 };
 
-const borrarSenlleira = async () => {
+const borrarArbore = async () => {
   if (itemDelete) {
-    await storeSenlleira.borrarSenlleira(itemDelete);
+    await storeArbores.borrarArbore(itemDelete);
   }
 };
 
 //Editar Senlleira
-const senlleira = ref(null);
+const arbore = ref(null);
 const editar = (sen) => {
   //console.log(par);
-  senlleira.value = sen;
+  arbore.value = sen;
 };
 const cambiarDatos = async (id) => {
   //console.log("uid",id);
   try {
     loading.value = true;
-    await updateDocument(id, "Singulares", senlleira.value);
+    await updateDocument(id, "Arbores", arbore.value);
   } catch (error) {
     console.log("aaaaah", error);
   } finally {
