@@ -12,7 +12,43 @@
       </div>
     </section>
    
-    <FichaTecnicaVue v-if="mostrarFicha"></FichaTecnicaVue>
+    <FichaTecnicaVue v-if="mostrarFicha"
+      @cerrarFicha="mostrarFicha = false"
+      :data="fichaDatos"
+      :images="imagenesFichaTecnica"
+    >
+     <template #titulo>
+        <h2 class="ficha-tittle">{{fichaDatos.nombre}}</h2>
+     </template>
+     <template #content>
+        <div class="datos-especie">
+            <span>
+                <h3>Tipoloxía</h3>
+                <p>{{fichaDatos.tipoloxia}}</p>
+            </span>
+            <span>
+                <h3>Localizacion</h3>
+                <p>{{fichaDatos.localizacion}}</p>
+            </span>
+            <span>
+                <h3>Superficie</h3>
+                <p>{{fichaDatos.superficie}} metros cadrados</p>
+            </span>
+            <span>
+                <h3>Cronoloxía</h3>
+                <p>{{fichaDatos.cronoloxia}}</p>
+            </span>
+
+        </div>
+     </template>
+
+     <template #footer>
+     <div class="descripcion">
+         <h3>Descrición</h3>
+         <p>{{fichaDatos.descripcion}}</p>
+     </div>
+     </template>
+    </FichaTecnicaVue>
 
 </template>
 
@@ -41,18 +77,16 @@ const cargarDatosFicha = async (objeto) => {
   console
     mostrarFicha.value = true;
     // Limpiamos y cargamos los datos tecnicos de la ficha
-    const parque = storeParques.parques.find(el=>objeto.idDoc===el.idDoc);
-    console.log(parque)
+    // const parque = storeParques.parques.find(el=>objeto.idDoc===el.idDoc);
     fichaDatos.value = null;
-    fichaDatos.value= {...objeto,...parque};
-    console.log(fichaDatos)
+    // fichaDatos.value= {...objeto,...parque};
+    fichaDatos.value = objeto
     // Limpiamos y cargamos las imagenes de la ficha
     imagenesFichaTecnicaVaciar()
-    // await storeSenlleira.setImagenes('senlleiras/' + objeto.idDoc)
-    // for (let i = 0; i < storeSenlleira.imagenes.length; i++) {
-    //     imagenesFichaTecnica.value.push(storeSenlleira.imagenes[i])
-    // }
-    // await storeEspecies.setEspecies()
+    await storeParques.listarImagenes('parques/' + fichaDatos.value.idDoc)
+    for (let i = 0; i < storeParques.imagenes.length; i++) {
+        imagenesFichaTecnica.value.push(storeParques.imagenes[i])
+    }
 }
 
 </script>

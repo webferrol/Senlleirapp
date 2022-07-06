@@ -68,7 +68,7 @@
           <label for="cronoloxía" class="form-label">Cronoloxía</label>
           <input
             class="input-parque"
-            v-model.trim="form.cronoloxía"
+            v-model.trim="form.cronoloxia"
             type="text"
             required
             name="cronoloxía"
@@ -130,7 +130,7 @@ const form = reactive({
   localizacion: "",
   lat: "",
   lng: "",
-  cronoloxía: "",
+  cronoloxia: "",
   superficie: "",
   descripcion: "",
   urlficha: "",
@@ -150,7 +150,7 @@ const reset = () => {
   form.localizacion = "";
   form.lat = "";
   form.lng="";
-  form.cronoloxía = "";
+  form.cronoloxia = "";
   form.superficie = "";
   form.nombre = "";
   form.descripcion = "";

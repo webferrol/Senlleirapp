@@ -22,7 +22,7 @@
       <td>{{ parque.nombre }}</td>
       <td>{{ parque.tipoloxia }}</td>
       <td>{{ parque.localizacion }}</td>
-      <td>{{ parque.cronoloxía }}</td>
+      <td>{{ parque.cronoloxia }}</td>
       <td>{{ parque.superficie }}</td>
       <td>{{ parque.descripcion }}</td>
 
@@ -100,10 +100,10 @@
       <label for="lng" class="form-label">Longitud</label>
       <input type="text" v-model="parque.lng" id="lng" placeholder="Longitud" />
 
-      <label for="cronoloxía" class="form-label">Cronoloxía</label>
+      <label for="cronoloxia" class="form-label">Cronoloxía</label>
       <input
         type="text"
-        v-model="parque.cronoloxía"
+        v-model="parque.cronoloxia"
         id="cronoloxia"
         placeholder="Cronoloxía"
       />
