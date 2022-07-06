@@ -1,12 +1,13 @@
 <template>
+<div><h1>{{useParques.insertarParque}}</h1></div>
   <div :data-set="data" ref="mapDiv" style="width: 100%; height: 95vh"></div>
 </template>
 
 <script setup>
 //Dependendencias
 import { Loader } from "@googlemaps/js-api-loader";
-import { computed, ref, reactive } from "vue";
-import { useRouter } from "vue-router";
+import { ref } from "vue";
+import { useStoreParques } from "../../stores/parques";
 
 const props = defineProps({
   /**
@@ -39,29 +40,18 @@ let puntos = [
   { lat: 42.86116699999999, lng: -8.552389 },
 ];
 
+const useParques = useStoreParques();
+// console.log(useParques.setParques);
+let puntosParques = [{}];
+
+
 // -> Icono del marcador <- //
-const image = "src/assets/prueba.png";
+const arbol = "src/assets/prueba.png";
+const parque = "src/assets/parque.png"
 
 // -> Cargamos el loader para llamara la apiKey <- //
 const loader = new Loader({ apiKey: apikey.value });
 
-// -> Pintamos/cargamos el mapa de google en la vista <- //
-
-/**
- * @description Nos permite enrutar la senlleira hacia su ficha
- * @param {String} id - Código da árbore senlleira
- */
-// const showRoute = (id) => {
-//   if (id) {
-//     router.push({
-//       path: "/arb-:id",
-//       name: "Senlleira",
-//       params: {
-//         id: id,
-//       },
-//     });
-//   }
-// };
 
 /**
  * Limpiamos marcadores de google maps
@@ -74,7 +64,7 @@ const loader = new Loader({ apiKey: apikey.value });
 // };
 
 /**
- * Función asíncrona que lanza el lodader
+ * Función asíncrona que lanza el loader/cargador y marcas.
  */
 (async () => {
   try {
@@ -90,26 +80,17 @@ const loader = new Loader({ apiKey: apikey.value });
       new google.maps.Marker({
         map,
         position: item,
-        icon: image,
+        icon: arbol,
         animation: google.maps.Animation.DROP
-        // streetViewService: true
       });
     });
+
+    puntosParques.forEach((item))
+
   } catch (error) {
     //console.log(error);
   }
 })();
 
-// const pintar = async () => {
-//   console.log(loader.loading)
-//   await loader.load();
-//   new google.maps.Marker({
-//     map,
-//     position: catedral,
-//   });
-//     new google.maps.Marker({
-//       map,
-//       position: conxo,
-//     });
-// };
+
 </script>
