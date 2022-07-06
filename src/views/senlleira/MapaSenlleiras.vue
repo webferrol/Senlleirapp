@@ -1,96 +1,34 @@
 <template>
-<div><h1>{{useParques.insertarParque}}</h1></div>
-  <div :data-set="data" ref="mapDiv" style="width: 100%; height: 95vh"></div>
+  <div >
+  <TheGoogleMaps v-if="loader" icon="src/assets/arbol.png" :coords="coordsArbol"></TheGoogleMaps>
+  </div>
+  
 </template>
 
 <script setup>
-//Dependendencias
-import { Loader } from "@googlemaps/js-api-loader";
+// -> Importaciones <- //
 import { ref } from "vue";
-import { useStoreParques } from "../../stores/parques";
+import { useStoreArbores } from "../../stores/arbores";
+import TheGoogleMaps from "../../components/TheGoogleMaps.vue";
 
-const props = defineProps({
-  /**
-   * {Number} zoom - Zoom que tendrá por defecto el mapa de google
-   */
-  zoom: {
-    type: Number,
-    default: 17,
-  },
-  /**
-   * {Object} CurrPos - Punto central  definido por una latitud y una longitud  en la que aparecerán todos los marcadores del mapas
-   * @default {lat: 42.8775066,lng: -8.5489188}
-   */
-  currPos: {
-    type: Object,
-    default: () => ({ lat: 42.8775066, lng: -8.5489188 }),
-  },
-});
+// -> Constantes / Variables <- //
+const loader = ref(false);
+const useArbol = useStoreArbores();
+const coordsArbol = ref([]);
 
-//Objeto instanciado de google.maps.Map
-const apikey = "AIzaSyDJUNfgGrajFUqtFZBX6WoX3gTRVavpzpE";
-let map = null;
-const mapDiv = ref(null);
-const data = null;
-// let markers = [];
-
-// -> Coordenadas <- //
-let puntos = [
-  { lat: 42.8805962, lng: -8.5446412 },
-  { lat: 42.86116699999999, lng: -8.552389 },
-];
-
-const useParques = useStoreParques();
-// console.log(useParques.setParques);
-let puntosParques = [{}];
-
-
-// -> Icono del marcador <- //
-const arbol = "src/assets/prueba.png";
-const parque = "src/assets/parque.png"
-
-// -> Cargamos el loader para llamara la apiKey <- //
-const loader = new Loader({ apiKey: apikey.value });
-
-
-/**
- * Limpiamos marcadores de google maps
- */
-// const limpiar = () => {
-//   for (let i = 0, tam = markers.length; i < tam; i++) {
-//     markers[i].setMap(null);
-//   }
-//   markers = [];
-// };
-
-/**
- * Función asíncrona que lanza el loader/cargador y marcas.
- */
+// -> Funcion asincrona que recorre el array para calcular las coordenadas de cada arbol y las pinta en el mapa <- //
 (async () => {
   try {
-    if (!loader.loading) await loader.load();
-    //console.log(loader.loading)
-    map = new google.maps.Map(mapDiv.value, {
-      center: props.currPos,
-      zoom: props.zoom,
-      
-    });
-
-    puntos.forEach((item) => {
-      new google.maps.Marker({
-        map,
-        position: item,
-        icon: arbol,
-        animation: google.maps.Animation.DROP
+    await useArbol.setArbores();
+    for (let i = 0; i < useArbol.arbores.length; i++) {
+      coordsArbol.value.push({
+        lat: useArbol.arbores[i].lat,
+        lng: useArbol.arbores[i].lng,
       });
-    });
-
-    puntosParques.forEach((item))
-
+    }
+    loader.value = true;
   } catch (error) {
-    //console.log(error);
+    // console.log(error);
   }
 })();
-
-
 </script>

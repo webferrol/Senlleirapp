@@ -102,6 +102,68 @@
         <TheUploader @emitirFichero="fotosParques"></TheUploader>
         <TheUploader :multiple="false" @emitirFichero="fotoMapa"></TheUploader>
 
+<<<<<<< HEAD
+=======
+          <label for="lat" class="form-label">Latitud</label>
+          <input
+            class="input-parque"
+            v-model.number="form.lat"
+            step="any"
+            type="number"
+            required
+            name="lat"
+            id="lat"
+            placeholder="Latitud"
+          />
+          <br>
+          <label for="lng" class="form-label">Longitud</label>
+          <input
+            class="input-parque"
+            v-model.number="form.lng"
+            step="any"
+            type="number"
+            required
+            name="lng"
+            id="lng"
+            placeholder="Longitud"
+          />
+          <br>
+          <label for="cronoloxía" class="form-label">Cronoloxía</label>
+          <input
+            class="input-parque"
+            v-model.trim="form.cronoloxia"
+            type="text"
+            required
+            name="cronoloxía"
+            id="cronoloxía"
+            placeholder="Cronoloxía"
+          />
+          <label for="superficie" class="form-label">Superficie</label>
+          <input
+            class="input-parque"
+            v-model.number="form.superficie"
+            type="number"
+            required
+            name="superficie"
+            id="superficie"
+            placeholder="Superficie"
+          />
+          <br />
+          <label for="descripcion" class="form-label">Descripción</label>
+          <textarea
+            class="input-parque"
+            v-model.trim="form.descripcion"
+            cols="30"
+            rows="10"
+            type="textarea"
+            required
+            name="descripcion"
+            id="descripcion"
+            placeholder="Descripcion"
+          ></textarea>
+        </div>
+        <TheUploader @emitirFichero="cargarParque"></TheUploader>
+>>>>>>> f197205b51ec7073c6e24c0f777d6c69d0142601
         <div v-if="error.error" class="error">{{ error.message }}</div>
         <div v-if="spinner" class="spinner">Cargando....</div>
       </fieldset>
@@ -153,7 +215,11 @@ const reset = () => {
   form.tipoloxia = "";
   form.localizacion = "";
   form.lat = "";
+<<<<<<< HEAD
   form.lng = "";
+=======
+  form.lng="";
+>>>>>>> f197205b51ec7073c6e24c0f777d6c69d0142601
   form.cronoloxia = "";
   form.superficie = "";
   form.nombre = "";

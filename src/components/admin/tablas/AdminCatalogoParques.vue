@@ -101,10 +101,10 @@
       <label for="lng" class="form-label">Longitud</label>
       <input type="number" step="any"  v-model="parque.lng" id="lng" placeholder="Longitud" />
 
-      <label for="cronoloxía" class="form-label">Cronoloxía</label>
+      <label for="cronoloxia" class="form-label">Cronoloxía</label>
       <input
         type="text"
-        v-model="parque.cronoloxía"
+        v-model="parque.cronoloxia"
         id="cronoloxia"
         placeholder="Cronoloxía"
       />
