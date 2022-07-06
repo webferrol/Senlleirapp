@@ -45,6 +45,7 @@
           <input
             class="input-parque"
             v-model.number="form.lat"
+            step="any"
             type="number"
             required
             name="lat"
@@ -56,6 +57,7 @@
           <input
             class="input-parque"
             v-model.number="form.lng"
+            step="any"
             type="number"
             required
             name="lng"
