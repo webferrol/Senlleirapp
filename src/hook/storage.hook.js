@@ -1,5 +1,5 @@
 import { storage } from "@/hook/firebase";
-import { ref,uploadBytes, listAll, getDownloadURL } from "firebase/storage";
+import { ref,uploadBytes, listAll, getDownloadURL ,deleteObject} from "firebase/storage";
 
 
 // para poder subir fotos al storage
@@ -10,9 +10,22 @@ export const subirFicheros = async (file,ruta='carpeta/imagen.ext') => {
 }
 
 
+/**para borrar fotos del storage
+ * 
+ * @param {string} ruta codigo de la foto
+ */
+export const deleteFile = async (ruta='carpeta/imagen.ext') =>{
+// Create a reference to the file to delete
+   const desertRef = ref(storage, ruta);
+  // Delete the file  
+   return await deleteObject(desertRef,);  
+  
+}
+
+
 /**para listar las imagenes del storage
  * 
- * @param {string} uid carpeta del storage donde estan guardadas las fotos
+ * @param {string} uid Referencia donde estan guardadas las fotos
  * @returns devuelve las imagenes que se encuentran en el storage
  */
 export const listAllUrls = async (uid) => {

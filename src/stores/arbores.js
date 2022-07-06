@@ -1,7 +1,7 @@
 // importar libreria de pinia. sirve para centralizar toda la información
 import { defineStore } from 'pinia';
 // importacion de la función del firebase para subir las fotos
-import { subirFicheros, listAllUrls,getDownURL} from '@/hook/storage.hook';
+import { subirFicheros, listAllUrls,getDownURL, deleteFile} from '@/hook/storage.hook';
 
 import { addDocument, getDocuments, deleteDocument, updateDocument} from '@/hook/firestore.hook';
 
@@ -19,12 +19,18 @@ export const useStoreArbores = defineStore('arbores', {
     actions: {
         /**subir fotos al storage de firebase 
          * 
-         * @param {*} ref hace referencia al id de cada senlleira  y su foto
+         * @param {*} ref hace referencia al id de cada senlleira  
          * @param {*} file referencia al nombre de cada senlleira
          */
         async subirFoto({ ref, file }) {
             await subirFicheros(file, `${ref}/${file.name}`)
         },
+
+        // borrar fotos del storage
+         async borrarFoto(ref){
+           await deleteFile(ref);
+         },
+
         //subir formulario al firestore de firebase 
         /**
          * 
