@@ -1,5 +1,7 @@
 <template>
-<div><h1>{{useParques.insertarParque}}</h1></div>
+  <div>
+    <!-- <h1 v-for="(coordenadas, index) in useParques.parques">{{ coordenadas.lat }} - {{coordenadas.lng}}</h1> -->
+  </div>
   <div :data-set="data" ref="mapDiv" style="width: 100%; height: 95vh"></div>
 </template>
 
@@ -8,6 +10,13 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import { ref } from "vue";
 import { useStoreParques } from "../../stores/parques";
+import { useStoreArbores } from "../../stores/arbores";
+
+const useParques = useStoreParques();
+const useArbol = useStoreArbores();
+
+const coordsParques = ref([]);
+const coordsSingulares = ref([]);
 
 const props = defineProps({
   /**
@@ -35,62 +44,70 @@ const data = null;
 // let markers = [];
 
 // -> Coordenadas <- //
-let puntos = [
-  { lat: 42.8805962, lng: -8.5446412 },
-  { lat: 42.86116699999999, lng: -8.552389 },
-];
+// let puntos = [
+//   { lat: 42.8805962, lng: -8.5446412 },
+//   { lat: 42.86116699999999, lng: -8.552389 },
+// ];
 
-const useParques = useStoreParques();
-// console.log(useParques.setParques);
-let puntosParques = [{}];
-
-
-// -> Icono del marcador <- //
-const arbol = "src/assets/prueba.png";
-const parque = "src/assets/parque.png"
+// -> Iconos marcadores <- //
+const arbol = "src/assets/arbol.png";
+const parque = "src/assets/parque.png";
 
 // -> Cargamos el loader para llamara la apiKey <- //
 const loader = new Loader({ apiKey: apikey.value });
 
 
-/**
- * Limpiamos marcadores de google maps
- */
-// const limpiar = () => {
-//   for (let i = 0, tam = markers.length; i < tam; i++) {
-//     markers[i].setMap(null);
-//   }
-//   markers = [];
-// };
 
 /**
- * Función asíncrona que lanza el loader/cargador y marcas.
+ * Función asíncrona que lanza el loader y recorre las coordenadas de parques y arbores .js.
  */
 (async () => {
   try {
+    await useParques.setParques();
+    for (let i = 0; i < useParques.parques.length; i++) {
+      coordsParques.value.push({
+        lat: useParques.parques[i].lat,
+        lng: useParques.parques[i].lng,
+      });
+    }
+    for (let i = 0; i < useArbol.arbores.length; i++) {
+      coordsSingulares.value.push({
+        lat: useArbol.arbores[i].lat,
+        lng: useArbol.arbores[i].lng,
+      });
+    }
+
     if (!loader.loading) await loader.load();
     //console.log(loader.loading)
     map = new google.maps.Map(mapDiv.value, {
       center: props.currPos,
       zoom: props.zoom,
-      
     });
 
-    puntos.forEach((item) => {
+    // -> Bucle para recorrer y pintar los parques <- //
+    coordsParques.value.forEach((item) => {
+      new google.maps.Marker({
+        map,
+        position: item,
+        icon: parque,
+        animation: google.maps.Animation.DROP,
+      });
+    });
+
+    // -> Bucle para recorrer y pintar los arboles singulares <- //
+    coordsSingulares.value.forEach((item) => {
       new google.maps.Marker({
         map,
         position: item,
         icon: arbol,
-        animation: google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP,
       });
     });
 
-    puntosParques.forEach((item))
+
 
   } catch (error) {
     //console.log(error);
   }
 })();
-
-
 </script>
