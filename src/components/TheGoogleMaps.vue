@@ -3,7 +3,7 @@
     <router-link to="/mapaSenlleiras">Senlleiras</router-link>
     <router-link to="/mapaParques">Parques</router-link>
     </nav>
-  <div :data-set="data" ref="mapDiv" style="width: 100%; height: calc(100vh - 91px)"></div>
+  <div :data-set="data" ref="mapDiv" style="width: 100%; height: calc(100vh - 90px); top: 0"></div>
 </template>
 
 <script setup>
