@@ -22,7 +22,7 @@
       <td>{{ parque.nombre }}</td>
       <td>{{ parque.tipoloxia }}</td>
       <td>{{ parque.localizacion }}</td>
-      <td>{{ parque.cronoloxía }}</td>
+      <td>{{ parque.cronoloxia }}</td>
       <td>{{ parque.superficie }}</td>
       <td>{{ parque.descripcion }}</td>
 
@@ -58,7 +58,7 @@
   <!-- Modulo para editar -->
 
   <form
-    id="parques"
+    id="parques" 
     @submit.prevent="cambiarDatos(`${parque.idDoc}`)"
     v-if="parque"
   >
@@ -92,13 +92,14 @@
       />
       <label for="lat" class="form-label">Latitud</label>
       <input
-        type="text"
+        type="number"
+        step="any"
         v-model="parque.lat"
         id="latitud"
         placeholder="Latitud"
       />
       <label for="lng" class="form-label">Longitud</label>
-      <input type="text" v-model="parque.lng" id="lng" placeholder="Longitud" />
+      <input type="number" step="any"  v-model="parque.lng" id="lng" placeholder="Longitud" />
 
       <label for="cronoloxía" class="form-label">Cronoloxía</label>
       <input

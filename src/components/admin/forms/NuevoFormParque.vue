@@ -2,104 +2,106 @@
   <div class="especies_alert" v-if="loaded">Cargando...</div>
   <div class="form-container">
     <form id="alta-parque" @submit.prevent="handleSubmit">
-      <h2>Formulario Alta Parque</h2>
       <icono
         class="close-form"
         :icon="['fa', 'xmark']"
         @click="cerrarForm"
       ></icono>
       <fieldset class="data-parque">
-        <div class="contain-form-parque">
-          <label for="nombre" class="form-label" required>Nome</label>
-          <input
-            class="input-parque"
-            v-model.trim="form.nombre"
-            type="text"
-            required
-            name="nombre"
-            id="nombre"
-            placeholder="Nombre"
-          />
-          <label for="tipoloxia" class="form-label">Tipoloxía</label>
-          <input
-            class="input-parque"
-            v-model.trim="form.tipoloxia"
-            type="text"
-            required
-            name="tipoloxia"
-            id="tipoloxia"
-            placeholder="Tipoloxia"
-          />
-          <label for="localización" class="form-label">Localización</label>
-          <input
-            class="input-parque"
-            v-model.trim="form.localizacion"
-            type="text"
-            required
-            name="localización"
-            id="localización"
-            placeholder="Localización"
-          />
+        <h2>Formulario Alta Parque</h2>
 
-          <label for="lat" class="form-label">Latitud</label>
-          <input
-            class="input-parque"
-            v-model.number="form.lat"
-            step="any"
-            type="number"
-            required
-            name="lat"
-            id="lat"
-            placeholder="Latitud"
-          />
-          <br>
-          <label for="lng" class="form-label">Longitud</label>
-          <input
-            class="input-parque"
-            v-model.number="form.lng"
-            step="any"
-            type="number"
-            required
-            name="lng"
-            id="lng"
-            placeholder="Longitud"
-          />
-          <br>
-          <label for="cronoloxía" class="form-label">Cronoloxía</label>
-          <input
-            class="input-parque"
-            v-model.trim="form.cronoloxía"
-            type="text"
-            required
-            name="cronoloxía"
-            id="cronoloxía"
-            placeholder="Cronoloxía"
-          />
-          <label for="superficie" class="form-label">Superficie</label>
-          <input
-            class="input-parque"
-            v-model.number="form.superficie"
-            type="number"
-            required
-            name="superficie"
-            id="superficie"
-            placeholder="Superficie"
-          />
-          <br />
-          <label for="descripcion" class="form-label">Descripción</label>
-          <textarea
-            class="input-parque"
-            v-model.trim="form.descripcion"
-            cols="30"
-            rows="10"
-            type="textarea"
-            required
-            name="descripcion"
-            id="descripcion"
-            placeholder="Descripcion"
-          ></textarea>
-        </div>
-        <TheUploader @emitirFichero="cargarParque"></TheUploader>
+        <label for="nombre" class="form-label" >Nome</label>
+        <input
+          class="input-parque"
+          v-model.trim="form.nombre"
+          type="text"
+          
+          name="nombre"
+          id="nombre"
+          placeholder="Nombre"
+        />
+        <label for="tipoloxia" class="form-label">Tipoloxía</label>
+        <input
+          class="input-parque"
+          v-model.trim="form.tipoloxia"
+          type="text"
+          
+          name="tipoloxia"
+          id="tipoloxia"
+          placeholder="Tipoloxia"
+        />
+        <label for="localización" class="form-label">Localización</label>
+        <input
+          class="input-parque"
+          v-model.trim="form.localizacion"
+          type="text"
+          
+          name="localización"
+          id="localización"
+          placeholder="Localización"
+        />
+
+        <label for="lat" class="form-label">Latitud</label>
+        <input
+          class="input-parque"
+          v-model.number="form.lat"
+          step="any"
+          type="number"
+          
+          name="lat"
+          id="lat"
+          placeholder="Latitud"
+        />
+
+        <label for="lng" class="form-label">Longitud</label>
+        <input
+          class="input-parque"
+          v-model.number="form.lng"
+          step="any"
+          type="number"
+          
+          name="lng"
+          id="lng"
+          placeholder="Longitud"
+        />
+
+        <label for="cronoloxía" class="form-label">Cronoloxía</label>
+        <input
+          class="input-parque"
+          v-model.trim="form.cronoloxia"
+          type="text"
+          
+          name="cronoloxía"
+          id="cronoloxía"
+          placeholder="Cronoloxía"
+        />
+        <label for="superficie" class="form-label">Superficie</label>
+        <input
+          class="input-parque"
+          v-model.number="form.superficie"
+          type="number"
+          
+          name="superficie"
+          id="superficie"
+          placeholder="Superficie"
+        />
+
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea
+          class="input-parque"
+          v-model.trim="form.descripcion"
+          cols="30"
+          rows="10"
+          type="textarea"
+          
+          name="descripcion"
+          id="descripcion"
+          placeholder="Descripcion"
+        ></textarea>
+
+        <TheUploader @emitirFichero="fotosParques"></TheUploader>
+        <TheUploader :multiple="false" @emitirFichero="fotoMapa"></TheUploader>
+
         <div v-if="error.error" class="error">{{ error.message }}</div>
         <div v-if="spinner" class="spinner">Cargando....</div>
       </fieldset>
@@ -123,6 +125,7 @@ const cerrarForm = () => {
 //Llamada al store
 const store = useStoreParques();
 let tmpImagenes = null;
+let tmpMapa = null;
 
 const form = reactive({
   nombre: "",
@@ -130,10 +133,11 @@ const form = reactive({
   localizacion: "",
   lat: "",
   lng: "",
-  cronoloxía: "",
+  cronoloxia: "",
   superficie: "",
   descripcion: "",
-  urlficha: "",
+  urlficha: "", //La ruta de la primera foto del parque
+  urlmapa: "", //La ruta de la foto del mapa
 });
 
 const error = ref({
@@ -149,15 +153,17 @@ const reset = () => {
   form.tipoloxia = "";
   form.localizacion = "";
   form.lat = "";
-  form.lng="";
-  form.cronoloxía = "";
+  form.lng = "";
+  form.cronoloxia = "";
   form.superficie = "";
   form.nombre = "";
   form.descripcion = "";
   form.urlficha = "";
+  form.urlmapa = "";
 };
 
-const cargarParque = async (imagenes) => {
+//Funcion para cargar fotos de los parques
+const fotosParques = async (imagenes) => {
   try {
     error.value = { error: false, message: "" };
     tmpImagenes = imagenes;
@@ -168,23 +174,30 @@ const cargarParque = async (imagenes) => {
   }
 };
 
-const handleSubmit = async () => {
-  //Se comprueban errores antes de enviar nada
-  //Enviar
+//Funcion para cargar mapa del parque
 
-  //form.urlficha = `parques/${form.id}/${tmpImagenes[0].name}`
-  const docRef = await store.insertarParque(form);
-  if (tmpImagenes !== null && docRef.id) {
-    const urlficha = `parques/${docRef.id}/${tmpImagenes[0].name}`;
-    await updateDocument(docRef.id, "Parques", { urlficha: urlficha });
+const fotoMapa = async (imagen) => {
+  try {  
+    error.value = { error: false, message: "" };
+    tmpMapa = imagen;
+    //await store.subirFoto(imagen);
+  } catch (e) {
+    error.value.error = true;
+    error.value.message = e.message;
+  }
+};
+
+const subidaImagen = async (imagenes,id,name=false) => {
+  //Subida al Store
     try {
       error.value = { error: false, message: "" };
       spinner.value = true;
       loaded.value = true;
-      for (let i = 0, tam = tmpImagenes.length; i < tam; i++) {
+      for (let i = 0, tam = imagenes.length; i < tam; i++) {
         await store.subirParque({
-          ref: `parques/${docRef.id}`,
-          file: tmpImagenes[i],
+          ref: `parques/${id}`,
+          file: imagenes[i],
+          name: name,
         });
       }
       spinner.value = false;
@@ -195,6 +208,23 @@ const handleSubmit = async () => {
     } finally {
       loaded.value = false;
     }
+}
+
+const handleSubmit = async () => {
+  const docRef = await store.insertarParque(form);
+
+  if (tmpImagenes !== null && docRef.id) {
+    //Firestore
+    const urlficha = `parques/${docRef.id}/${tmpImagenes[0].name}`;
+    await updateDocument(docRef.id, "Parques", { urlficha: urlficha });
+    await subidaImagen(tmpImagenes,docRef.id);    
+  }
+
+  if (tmpMapa !== null && docRef.id) {
+    //Firestore
+    const urlMapa = `parques/${docRef.id}/ficha`;
+    await updateDocument(docRef.id, "Parques", { urlmapa: urlMapa }); 
+    await subidaImagen(tmpMapa,docRef.id,'ficha');  
   }
 };
 </script>
