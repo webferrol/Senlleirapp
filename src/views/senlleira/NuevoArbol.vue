@@ -24,7 +24,7 @@
                     </option>
                 </select>
 
-                <label for="nome" class="form-label"> Nome en castelan</label>
+                <label for="nome" class="form-label"> Nome en casteln</label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano" required>
                     <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre_comun }} </option>
@@ -39,14 +39,22 @@
                 <input v-model="form.zona_geografica" type="text" required name="zona" id="zona"
                     placeholder="Zona geográfica" />       
 
-                <label for="localizacion" class="form-label"> Localizacion <span data-set="Campo obligatorio">*</span></label>
+                <label for="localizacion" class="form-label"> Localizacion, Parque <span data-set="Campo obligatorio">*</span></label>
                 <select
                 @change="form.localizacion= $event.target.options[$event.target.selectedIndex].text"
                  v-model="form.idParque" name="localizacion" id="localizacion" required>
                     <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre }} </option>
                 </select>
-                <input type="hidden" v-model="form.localizacion">
+                <input type="hidden" v-model="form.ubicacion_parque">
+
+                <label for="latitud" class="form-label">Latitude <span data-set="Campo obligatorio">*</span></label>
+                <input v-model.number="form.lat" type="number" required  name="latitud" id="latitud"
+                    placeholder="indicar latitude" />     
+
+                <label for="longitud" class="form-label">Lonxitude <span data-set="Campo obligatorio">*</span></label>
+                <input v-model.number="form.lng" type="number" required  name="longitud" id="longitud"
+                    placeholder="indicar lonxitude" />  
             </div>
         </fieldset>
         <fieldset>
@@ -87,12 +95,21 @@ const form = reactive({
     especie: '',
     idEspecie: 0,
     idParque: 0,
+    ubicacion_parque: '',
+    zona_geografica: '', //Conxo por exemplo, onde está situado
+    senlleira: false,
+    propuesta_senlleria: false, //Si no es Senlleira ni propuesta es un árbol común
     nombre_arbol:'',
-    nombre_comun: '',
+    nombre_comun: '',//Nombre castellano
     nombre_comun_gal: '',
-    zona_geografica: '',
-    localizacion: '',
-    imagen_url:'',
+
+    storage_ref:'', //es el identificador donde se guarda un fichero en el Storage Cloud
+    google_url:'',
+
+    lng:'',//longitud
+    lat:'',//latitud
+    diametro: 0,
+    altura: 0,
 
 })
 
@@ -106,16 +123,18 @@ const spinner = ref(false);
 const loaded = ref(false);
 
 const reset = () => {
-    form.genero = '';
-    form.especie = '';
-    form.idEspecie = 0;
-    form.idParque= 0,
-    form.nombre_arbol='',
-    form.nombre_comun = '';
-    form.nombre_comun_gal = '';
-    form.zona_geografica = '';
-    form.localizacion = '';
-    form.imagen_url='';
+    // form.genero = '';
+    // form.especie = '';
+    // form.idEspecie = 0;
+    // form.idParque= 0,
+    // form.nombre_arbol='',
+    // form.nombre_comun = '';
+    // form.nombre_comun_gal = '';
+    // form.zona_geografica = '';
+    // form.localizacionParque = '';
+    // form.imagen_url='';
+    // form.latitud ='';
+    // form.longitud ='';
 }
 
 // esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito 
@@ -146,7 +165,7 @@ const handleSubmit = async () => {
         const data = await storeArbores.insertarArbore(form);
         if(data.id){
             const imagen_url= `Arbores/${data.id}/${tmpImagenes[0].name}`
-            await updateDocument(data.id,'Arbores',{'imagen_url':imagen_url});
+            await updateDocument(data.id,'Arbores',{'storage_ref':imagen_url});
         }
         if (tmpImagenes !== null && data.id) {
             try {

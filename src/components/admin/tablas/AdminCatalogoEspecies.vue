@@ -1,11 +1,11 @@
 <template>
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
-      <td class="genero">Genero</td>
+      <td class="genero">Xénero</td>
       <td class="especie">Especie</td>
-      <td class="nombre_comun">Nombre Comun</td>
-      <td class="nombre_comun_gal">Nombre comun (gallego)</td>
-      <td class="origen_descripcion">Origen - Descripción</td>
+      <td class="nombre_comun">Nome Común (Castelan)</td>
+      <td class="nombre_comun_gal">Nome común (Galego)</td>
+      <td class="origen_descripcion">Orixe - Descrición</td>
       <td class="usos">Usos</td>
       <td class="curiosidades">Curiosidades</td>
       <td class="tabla_administrativo_options">
@@ -79,42 +79,49 @@
     ></icono>
     <fieldset class="data_especies">
       <h2>Editar Especies</h2>
+      <label for="genero">Xénero</label>
       <input
         type="text"
         v-model="especie.genero"
         id="genero"
         placeholder="Género"
       />
+      <label for="especie">Especie</label>
       <input
         type="text"
         v-model="especie.especie"
         id="especie"
         placeholder="Especie"
       />
+      <label for="nombre_comun">Nome común - (Castelán)</label>
       <input
         type="text"
         v-model="especie.nombre_comun"
         id="nombre_comun"
         placeholder="Nombre común"
       />
+      <label for="nombre_comun_gal">Nome común - (Galego)</label>
       <input
         type="text"
         v-model="especie.nombre_comun_gal"
         id="nombre_comun_gal"
         placeholder="Nombre gallego"
       />
+      <label for="descripcion">Descrición</label>
       <textarea
         type="text"
         v-model="especie.origen_descripcion"
         id="descripcion"
         placeholder="Descripción"
       ></textarea>
+      <label for="usos">Usos</label>
       <textarea
         type="text"
         v-model="especie.usos"
         id="usos"
         placeholder="Usos"
       ></textarea>
+      <label for="curiosidades">Curiosidades</label>
       <textarea
         type="text"
         v-model="especie.curiosidades"
@@ -123,7 +130,7 @@
       ></textarea>
 
       <input type="submit" value="Editar Especies" />
-      <div v-if="loading">Guardando...</div>
+      <div v-if="loading">Gardando...</div>
     </fieldset>
   </form>
 </template>

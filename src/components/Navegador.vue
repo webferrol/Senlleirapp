@@ -16,7 +16,11 @@
       </ul>
       <ul class="header-nav-buttons">
       <li class="header-upload" v-if="$route.name == 'inicio'">
+<<<<<<< HEAD
           <router-link to="/nuevo-arbol">
+=======
+          <router-link to="/nova-arbore">
+>>>>>>> 730d1c3ea65b4e30550fa7defd2f1b831043ac72
             <icono :icon="['fa', 'upload']"></icono>
           </router-link>
         </li>
