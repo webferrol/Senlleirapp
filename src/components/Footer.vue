@@ -15,7 +15,7 @@
               </router-link>
                 </li>
                 <li>
-              <router-link class="mapa" to="/mapa-senlleiras">
+              <router-link class="mapa" to="/mapaSenlleiras">
                         <icono :icon="['fa', 'map']"></icono>
                         <p>Mapa</p>
                     </router-link>

@@ -1,16 +1,15 @@
 <template>
-  <div 
-  :data-set="data" 
-  ref="mapDiv" 
-  style="width: 100%; height: 95vh">
-  </div>
+  <nav>
+    <router-link to="/mapaSenlleiras">Senlleiras</router-link> -
+    <router-link to="/mapaParques">Parques</router-link>
+    </nav>
+  <div :data-set="data" ref="mapDiv" style="width: 100%; height: 95vh"></div>
 </template>
 
 <script setup>
 //Dependendencias
 import { Loader } from "@googlemaps/js-api-loader";
 import { ref } from "vue";
-
 
 const props = defineProps({
   /**
@@ -19,13 +18,9 @@ const props = defineProps({
   zoom: {
     type: Number,
     default: 17,
-  },  
+  },
   coords: {
     type: Array,
-    default: [
-      { lat: 42.8775066, lng: -8.5489188 },
-       { lat: 42.86116699999999, lng: -8.552389 }
-    ],
   },
   /**
    * {Object} CurrPos - Punto central  definido por una latitud y una longitud  en la que aparecerán todos los marcadores del mapas
@@ -37,12 +32,12 @@ const props = defineProps({
   },
   icon: {
     type: String,
-    default: 'src/assets/arbol.png'
+    default: "src/assets/arbol.png",
   },
   apikey: {
     type: String,
-    default:"AIzaSyDJUNfgGrajFUqtFZBX6WoX3gTRVavpzpE"
-  }
+    default: "AIzaSyDJUNfgGrajFUqtFZBX6WoX3gTRVavpzpE",
+  },
 });
 
 //Objeto instanciado de google.maps.Map
@@ -50,12 +45,8 @@ let map = null;
 const mapDiv = ref(null);
 const data = null;
 
-
-
 // -> Cargamos el loader para llamara la apiKey <- //
 const loader = new Loader({ apiKey: props.apikey });
-
-
 
 /**
  * Función asíncrona que lanza el loader y recorre las coordenadas de parques y arbores .js.

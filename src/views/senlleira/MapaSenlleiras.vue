@@ -1,35 +1,34 @@
 <template>
   <div >
-  <h1>Parques</h1>
-  <TheGoogleMaps v-if="loader" icon="src/assets/parque.png" :coords="coordsParques"></TheGoogleMaps>
+  <TheGoogleMaps v-if="loader" icon="src/assets/arbol.png" :coords="coordsArbol"></TheGoogleMaps>
   </div>
   
 </template>
 
 <script setup>
-//Dependendencias
-
+// -> Importaciones <- //
 import { ref } from "vue";
-import { useStoreParques } from "../../stores/parques";
+import { useStoreArbores } from "../../stores/arbores";
 import TheGoogleMaps from "../../components/TheGoogleMaps.vue";
 
+// -> Constantes / Variables <- //
 const loader = ref(false);
-const useParques = useStoreParques();
-const coordsParques = ref([]);
+const useArbol = useStoreArbores();
+const coordsArbol = ref([]);
 
-
+// -> Funcion asincrona que recorre el array para calcular las coordenadas de cada arbol y las pinta en el mapa <- //
 (async () => {
   try {
-    await useParques.setParques();
-    for (let i = 0; i < useParques.parques.length; i++) {
-      coordsParques.value.push({
-        lat: useParques.parques[i].lat,
-        lng: useParques.parques[i].lng,
+    await useArbol.setArbores();
+    for (let i = 0; i < useArbol.arbores.length; i++) {
+      coordsArbol.value.push({
+        lat: useArbol.arbores[i].lat,
+        lng: useArbol.arbores[i].lng,
       });
     }
     loader.value = true;
   } catch (error) {
-    //console.log(error);
+    // console.log(error);
   }
 })();
 </script>
