@@ -1,16 +1,16 @@
 <template>
-  <nav>
-    <router-link to="/mapaSenlleiras">Senlleiras</router-link> -
+  <nav class="nav-mapa">
+    <router-link to="/mapaSenlleiras">Senlleiras</router-link>
     <router-link to="/mapaParques">Parques</router-link>
     </nav>
-  <div :data-set="data" ref="mapDiv" style="width: 100%; height: 95vh"></div>
+  <div :data-set="data" ref="mapDiv" style="width: 100%; height: calc(100vh - 91px)"></div>
 </template>
 
 <script setup>
 //Dependendencias
 import { Loader } from "@googlemaps/js-api-loader";
 import { ref } from "vue";
-
+import "../assets/css/mapa/google-maps.css"
 const props = defineProps({
   /**
    * {Number} zoom - Zoom que tendrá por defecto el mapa de google

@@ -1,7 +1,9 @@
 /* CARRUSEL */
 .carrusel {
   position: relative;
+  margin: auto;
   width: 100%;
+  max-width: 1080px;
   height: 400px;
   background-color: var(--colorsecundario);
 }
@@ -109,9 +111,6 @@
 }
 
 @media screen and (max-width: 900px) {
-  .carrusel {
-    height: calc(100vh - (43px + 40px + 102px));
-  }
   .carrusel__button--prev:active {
     background: rgb(186, 186, 186);
     background: linear-gradient(

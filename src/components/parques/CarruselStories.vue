@@ -81,6 +81,7 @@ const cargarDatosFicha = async (objeto) => {
     fichaDatos.value = null;
     // fichaDatos.value= {...objeto,...parque};
     fichaDatos.value = objeto
+    console.log(fichaDatos.value)
     // Limpiamos y cargamos las imagenes de la ficha
     imagenesFichaTecnicaVaciar()
     await storeParques.listarImagenes('parques/' + fichaDatos.value.idDoc)
