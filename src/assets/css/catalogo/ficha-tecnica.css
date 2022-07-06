@@ -16,12 +16,10 @@
     display: flex;
     flex-direction: column;
     margin: auto;
-    height: 95vh;
-    width: 95%;
+    height: 100vh;
+    width: 100%;
     overflow-x: hidden;
     background-color: white;
-    /* border-top: .5rem solid var(--colorsecundario); */
-    border-bottom: .75rem solid white;
     border-radius: 5px;
 }
 

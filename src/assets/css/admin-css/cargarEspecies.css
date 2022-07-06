@@ -88,6 +88,7 @@
   }
   
   textarea{
+    width: 100%;
     resize: none;
     font-size: 1.2rem
   }
@@ -97,8 +98,18 @@
     grid-template-columns: 280px 1fr;
     gap: .5rem;
   }
+
+  .label_doble{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .label_parque {
+    grid: grid;
+    grid-template-columns: fit-content auto;
+  }
   
-  input[type="text"] {
+  input[type="text"], input[type="number"] {
     width: 100%;
     font-size: 1.2rem;
   }
@@ -108,4 +119,20 @@
     margin: 1rem auto auto auto;
     font-size: 1rem;
   
+  }
+
+  /* apartado subir datos */
+
+  .form-upload{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .form-upload span{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem
+  }
+  .form-upload span h3{
+    font-size: 1.2rem;
+    font-weight: 600;
   }

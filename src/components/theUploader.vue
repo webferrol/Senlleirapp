@@ -1,6 +1,6 @@
 <template>
     <!-- subir una foto a firestore para luego utilizarla  -->
-    <label for="subirImagen" class="subir-imagen-btn"><icono :icon="['fa', 'upload']"></icono> Subir Imagen</label>
+    <!-- <label for="subirImagen" class="subir-imagen-btn"><icono :icon="['fa', 'upload']"></icono> Subir Imagen</label> -->
     <input multiple name="subirImagen" type="file" accept="image/*" @change="subirFoto" id="subirImagen">
 
 </template>
