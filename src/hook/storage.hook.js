@@ -38,10 +38,10 @@ export const listAllUrls = async (uid) => {
     
     }
 
-    /**para buscar las imagenes y luego eliminarlas
+/** busca el listado de las imagenes para luego eliminarlas
  * 
  * @param {string} uid Referencia donde estan guardadas las fotos
- * @returns devuelve las imagenes del storage
+ * @returns devuelve el path las imagenes del storage ejemplo:(Arbores/gfue84574585/image.jpg)
  */
 export const listAllRef = async (uid) => {
     // create  a reference under which you want to list

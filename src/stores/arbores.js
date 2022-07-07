@@ -4,7 +4,7 @@ import { defineStore } from 'pinia';
 import { subirFicheros, listAllUrls,getDownURL, deleteFile,listAllRef} from '@/hook/storage.hook';
 
 import { addDocument, getDocuments, deleteDocument, updateDocument} from '@/hook/firestore.hook';
-import { connectStorageEmulator } from 'firebase/storage';
+
 
 
 // useStore could be anything like useUser, useCart
