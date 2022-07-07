@@ -22,8 +22,8 @@ const coordsArbol = ref([]);
     await useArbol.setArbores();
     for (let i = 0; i < useArbol.arbores.length; i++) {
       coordsArbol.value.push({
-        lat: useArbol.arbores[i].lat,
-        lng: useArbol.arbores[i].lng,
+        lat: Number(useArbol.arbores[i].lat),
+        lng: Number(useArbol.arbores[i].lng),
       });
     }
     loader.value = true;
