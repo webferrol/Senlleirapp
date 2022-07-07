@@ -2,7 +2,7 @@
   <div class="especies_alert" v-if="loaded">Cargando...</div>
   <div class="form-container">
     <form id="alta-parque" @submit.prevent="handleSubmit">
-<<<<<<< HEAD
+
       <icono
         class="close-form"
         :icon="['fa', 'xmark']"
@@ -103,121 +103,6 @@
         <TheUploader @emitirFichero="fotosParques"></TheUploader>
         <TheUploader :multiple="false" @emitirFichero="fotoMapa"></TheUploader>
 
-<<<<<<< HEAD
-=======
-          <label for="lat" class="form-label">Latitud</label>
-          <input
-            class="input-parque"
-            v-model.number="form.lat"
-            step="any"
-            type="number"
-            required
-            name="lat"
-            id="lat"
-            placeholder="Latitud"
-          />
-          <br>
-          <label for="lng" class="form-label">Longitud</label>
-          <input
-            class="input-parque"
-            v-model.number="form.lng"
-            step="any"
-            type="number"
-            required
-            name="lng"
-            id="lng"
-            placeholder="Longitud"
-          />
-          <br>
-          <label for="cronoloxía" class="form-label">Cronoloxía</label>
-          <input
-            class="input-parque"
-            v-model.trim="form.cronoloxia"
-            type="text"
-            required
-            name="cronoloxía"
-            id="cronoloxía"
-            placeholder="Cronoloxía"
-          />
-          <label for="superficie" class="form-label">Superficie</label>
-          <input
-            class="input-parque"
-            v-model.number="form.superficie"
-            type="number"
-            required
-            name="superficie"
-            id="superficie"
-            placeholder="Superficie"
-          />
-          <br />
-          <label for="descripcion" class="form-label">Descripción</label>
-          <textarea
-            class="input-parque"
-            v-model.trim="form.descripcion"
-            cols="30"
-            rows="10"
-            type="textarea"
-            required
-            name="descripcion"
-            id="descripcion"
-            placeholder="Descripcion"
-          ></textarea>
-        </div>
-        <TheUploader @emitirFichero="cargarParque"></TheUploader>
->>>>>>> f197205b51ec7073c6e24c0f777d6c69d0142601
-=======
-      <h2>Formulario Alta Parque</h2>
-      <icono class="close-form" :icon="['fa', 'xmark']" @click="cerrarForm"></icono>
-      <fieldset class="data-parque">
-          <label for="nombre" class="form-label" required>Nome</label>
-          <input class="input-parque" v-model.trim="form.nombre" type="text" required name="nombre" id="nombre"
-            placeholder="Nombre" />
-          <label for="tipoloxia" class="form-label">Tipoloxía</label>
-          <input class="input-parque" v-model.trim="form.tipoloxia" type="text" required name="tipoloxia" id="tipoloxia"
-            placeholder="Tipoloxia" />
-            <h2>Datos localización</h2>
-          <label for="localización" class="form-label">Localización</label>
-          <input class="input-parque" v-model.trim="form.localizacion" type="text" required name="localización"
-            id="localización" placeholder="Localización" />
-<!-- localizacion -->
-
-          <span class="label_doble">
-            <span class="label_parque">
-              <label for="lat" class="form-label">Latitud</label>
-              <input class="input-parque" v-model.number="form.lat" step="any" type="number" required name="lat" id="lat"
-                placeholder="Latitud" />
-            </span>
-            
-            <span class="label_parque">
-              <label for="lng" class="form-label">Longitud</label>
-              <input class="input-parque" v-model.number="form.lng" step="any" type="number" required name="lng" id="lng"
-                placeholder="Longitud" />
-            </span>
-          </span>
-          
-          
-            <label for="cronoloxía" class="form-label">Cronoloxía</label>
-            <input class="input-parque" v-model.trim="form.cronoloxia" type="text" required name="cronoloxía"
-              id="cronoloxía" placeholder="Cronoloxía" />
-                   
-            <label for="superficie" class="form-label">Superficie</label>
-            <input class="input-parque" v-model.number="form.superficie" type="number" required name="superficie"
-              id="superficie" placeholder="Superficie" />
-          
-          
-          <label for="descripcion" class="form-label">Descripción</label>
-          <textarea class="input-parque" v-model.trim="form.descripcion" cols="30" rows="10" type="textarea" required
-            name="descripcion" id="descripcion" placeholder="Descripcion"></textarea>
-        
-        <span class="form-upload">
-          <span>
-            <h3>Imagenes parque</h3><TheUploader @emitirFichero="cargarParque"></TheUploader> 
-          </span>
-          <span>
-            <h3>Mapa parque</h3><TheUploader @emitirFichero="cargarParque"></TheUploader> 
-          </span>
-        </span>
->>>>>>> 61e01599eb4471a5fc425a662ea7ae4df1f95210
         <div v-if="error.error" class="error">{{ error.message }}</div>
         <div v-if="spinner" class="spinner">Cargando....</div>
       </fieldset>
@@ -269,15 +154,13 @@ const reset = () => {
   form.tipoloxia = "";
   form.localizacion = "";
   form.lat = "";
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   form.lng = "";
-=======
+
   form.lng="";
->>>>>>> f197205b51ec7073c6e24c0f777d6c69d0142601
-=======
+
   form.lng = "";
->>>>>>> 61e01599eb4471a5fc425a662ea7ae4df1f95210
+
   form.cronoloxia = "";
   form.superficie = "";
   form.nombre = "";
