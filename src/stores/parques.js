@@ -19,10 +19,18 @@ export const useStoreParques = defineStore('parques', {
     },
     actions: {
         async insertarParque(datos) {
-            return await addDocument("Parques", datos)
+            const docRef = await addDocument("Parques", datos);
+            const data = { idDoc: docRef.id, ...datos };
+            this.parques.push(data)
+            return docRef;
         },
+
+
         async borrarParque(ID) {
             await deleteDocument("Parques", ID);
+            const indice = this.parques.findIndex(parque => (parque.idDoc === ID));
+            this.parques.splice(indice,1);
+
         },
         // -> Funcion donde introducimos los mapas de los parques y sus datos <- //
         async setParques() {
@@ -42,13 +50,13 @@ export const useStoreParques = defineStore('parques', {
             }
         },
         //Esta funcion es para subir la imagen de los parques con ID y su extension.
-        async subirParque({ ref, file,name }) {
+        async subirParque({ ref, file, name }) {
             // const file1 = file.name;
             // const [ext, ...fileName] = file1.split('.').reverse();
-            if(!name)
-                await subirFicheros(file,`${ref}/${file.name}`)
+            if (!name)
+                await subirFicheros(file, `${ref}/${file.name}`)
             else
-                await subirFicheros(file,`${ref}/${name}`)
+                await subirFicheros(file, `${ref}/${name}`)
             // console.log(ext)
 
         },

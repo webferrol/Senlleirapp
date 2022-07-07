@@ -68,6 +68,7 @@
   <!-- Formulario para editar especie -->
 
   <form
+  class="edit-form"
     id="especies"
     @submit.prevent="cambiarDatos(especie.idDoc)"
     v-if="especie"

@@ -7,17 +7,17 @@
     @click="$emit('cerrarFormulario')" ></icono>
       <fieldset class="data_especies">
         <h2>Cargar Especie</h2>
-        <input v-model.trim="form.genero" type="text" id="genero" placeholder="Género" required>
-        <input v-model.trim="form.especie" type="text" id="especie" placeholder="Especie" required>
+        <input v-model.trim="form.genero" type="text" id="genero" placeholder="Género" >
+        <input v-model.trim="form.especie" type="text" id="especie" placeholder="Especie" >
         <span class="label_nombre">
           <label for="nombre_comun">Nombre común - Castellano</label>
           <input v-model="form.nombre_comun" type="text" id="nombre_comun" name="nombre_comun" placeholder="(Castellano)"
-            required>
+            >
         </span>
         <span class="label_nombre">
           <label for="nombre_comun_gal">Nombre común - Gallego</label>
           <input v-model="form.nombre_comun_gal" type="text" name="nombre_comun_gal" id="nombre_comun_gal"
-            placeholder="(Gallego)" required>
+            placeholder="(Gallego)" >
         </span>
           <textarea v-model="form.origen_descripcion" name="origen" id="origen_descripcion" cols="30" rows="10" placeholder="Origen y descripción"></textarea>
           <textarea v-model="form.usos" name="usos" id="usos" cols="30" rows="10" placeholder="usos"></textarea>
@@ -32,6 +32,12 @@
 import { useStoreEspecies } from '@/stores/especies';
 import { reactive,ref } from 'vue';
 import '@/assets/css/admin-css/cargarEspecies.css';
+
+const emits = defineEmits(["cerrarFormulario"]);
+
+const cerrarForm = () => {
+  emits("cerrarFormulario");
+};
 
 const store = useStoreEspecies();
 
@@ -64,10 +70,11 @@ const reset = () => {
 
 // Sube los datos del formulario a la base de datos, en caso de errores se muestra por pantalla
 const subirDatos = async () => {
+  const docRef = await store.loadEspecie(form);
   try {
     errores.value={error: false, message: '',};
     loaded.value=true;
-    await store.loadEspecie(form);
+    // await store.loadEspecie(form);
     reset();
   } catch (error) {
     errores.value.error=true;
@@ -75,5 +82,7 @@ const subirDatos = async () => {
   } finally{
     loaded.value=false;
   }
+
+  if (docRef) emits("cerrarFormulario");
 }
 </script>

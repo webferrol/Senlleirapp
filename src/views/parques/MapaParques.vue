@@ -1,6 +1,6 @@
 <template>
   <div >
-  <TheGoogleMaps v-if="loader" icon="src/assets/parque.png" :coords="coordsParques"></TheGoogleMaps>
+  <TheGoogleMaps v-if="loader" icon="src/assets/bosque.png" :coords="coordsParques"></TheGoogleMaps>
   </div>
   
 </template>
@@ -22,8 +22,8 @@ const coordsParques = ref([]);
     await useParques.setParques();
     for (let i = 0; i < useParques.parques.length; i++) {
       coordsParques.value.push({
-        lat: useParques.parques[i].lat,
-        lng: useParques.parques[i].lng,
+        lat: Number(useParques.parques[i].lat),
+        lng: Number(useParques.parques[i].lng),
       });
     }
     loader.value = true;

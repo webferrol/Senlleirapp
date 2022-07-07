@@ -17,7 +17,7 @@ const props = defineProps({
    */
   zoom: {
     type: Number,
-    default: 17,
+    default: 16,
   },
   coords: {
     type: Array,

@@ -58,7 +58,8 @@
   <!-- Modulo para editar -->
 
   <form
-    id="parques" 
+    class="edit-form"
+    id="parques"
     @submit.prevent="cambiarDatos(`${parque.idDoc}`)"
     v-if="parque"
   >
@@ -99,7 +100,13 @@
         placeholder="Latitud"
       />
       <label for="lng" class="form-label">Longitud</label>
-      <input type="number" step="any"  v-model="parque.lng" id="lng" placeholder="Longitud" />
+      <input
+        type="number"
+        step="any"
+        v-model="parque.lng"
+        id="lng"
+        placeholder="Longitud"
+      />
 
       <label for="cronoloxia" class="form-label">Cronoloxía</label>
       <input
