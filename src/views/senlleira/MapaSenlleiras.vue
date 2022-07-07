@@ -1,8 +1,11 @@
 <template>
-  <div >
-  <TheGoogleMaps v-if="loader" icon="src/assets/arbol.png" :coords="coordsArbol"></TheGoogleMaps>
+  <div>
+    <TheGoogleMaps
+      v-if="loader"
+      icon="src/assets/arbol.png"
+      :coords="coordsArbol"
+    ></TheGoogleMaps>
   </div>
-  
 </template>
 
 <script setup>
@@ -21,10 +24,15 @@ const coordsArbol = ref([]);
   try {
     await useArbol.setArbores();
     for (let i = 0; i < useArbol.arbores.length; i++) {
-      coordsArbol.value.push({
-        lat: Number(useArbol.arbores[i].lat),
-        lng: Number(useArbol.arbores[i].lng),
-      });
+      coordsArbol.value.push(
+        {
+          id: `arboles/id=${useArbol.arbores[i].idDoc}`,
+          coords: {
+           lat: Number(useArbol.arbores[i].lat),
+            lng: Number(useArbol.arbores[i].lng),
+          }
+      }
+      );
     }
     loader.value = true;
   } catch (error) {

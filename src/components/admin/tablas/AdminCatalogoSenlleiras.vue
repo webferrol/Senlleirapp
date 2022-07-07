@@ -61,132 +61,132 @@
   </div>
 
   <!-- Modulo para editar senlleira -->
-  <form
-  class="edit-form"
-    id="senlleiras"
-    @submit.prevent="cambiarDatos(`${arbore.idDoc}`)"
-    v-if="arbore"
-  >
-    <icono
-      class="close-form"
-      :icon="['fa', 'xmark']"
-      @click="arbore = null"
-    ></icono>
-    <h2>Editar Senlleiras</h2>
-    <fieldset class="data_especies">
-      <legend>Datos senlleira</legend>
-
-      <label for="genero"> Xénero</label>
-      <input
-        type="text"
-        v-model="arbore.genero"
-        id="genero"
-        placeholder="Género"
-      />
-      <label for="especie"> Especie</label>
-      <input
-        type="text"
-        v-model="arbore.especie"
-        id="especie"
-        placeholder="Especie"
-      />
-      <label for="nombre_comun"> Nome común (Castelán)</label>
-      <input
-        type="text"
-        v-model="arbore.nombre_comun"
-        id="nombre_comun"
-        placeholder="Nome en Castelán"
-      />
-      <label for="nombre_comun_gal"> Nome común (Galego)</label>
-      <input
-        type="text"
-        v-model="arbore.nombre_comun_gal"
-        id="nombre_comun_gal"
-        placeholder="Nome en Galego"
-      />
-      <label for="nombre_arbol"> Nome da árbore</label>
-      <input
-        type="text"
-        v-model="arbore.nombre_arbol"
-        id="nombre_arbol"
-        placeholder="Nome da árbore"
-      />
-      <label for="altura"> Altura</label>
-      <input
-        type="number"
-        v-model="arbore.altura"
-        id="altura"
-        placeholder="Altura (metros)"
-      />
-      <label for="diametroTronco"> Diámetro do tronco</label>
-      <input
-        type="number"
-        v-model="arbore.diametro"
-        id="diametroTronco"
-        placeholder="Diámetro do tronco (metros)"
-      />
-      <fieldset>
-        <legend>Ubicación</legend>
-        <label for="zona-geografica"> Zona xeográfica</label>
+  <div class="form-container" v-if="arbore">
+    <form
+      id="senlleiras"
+      @submit.prevent="cambiarDatos(`${arbore.idDoc}`)"
+      
+    >
+      <icono
+        class="close-form"
+        :icon="['fa', 'xmark']"
+        @click="arbore = null"
+      ></icono>
+      <h2>Editar Senlleiras</h2>
+      <fieldset class="data_especies">
+        <legend>Datos senlleira</legend>
+        <label for="genero"> Xénero</label>
         <input
           type="text"
-          v-model="arbore.zona_geografica"
-          id="zona-geografica"
-          placeholder="Lugar donde se sitúa"
+          v-model="arbore.genero"
+          id="genero"
+          placeholder="Género"
         />
-        <label for="localizacion">Ubicación parque</label>
+        <label for="especie"> Especie</label>
         <input
           type="text"
-          v-model="arbore.ubicacion_parque"
-          id="localizacion"
-          placeholder="parque"
+          v-model="arbore.especie"
+          id="especie"
+          placeholder="Especie"
         />
-        <label for="numero-mapa">Número en el mapa</label>
+        <label for="nombre_comun"> Nome común (Castelán)</label>
+        <input
+          type="text"
+          v-model="arbore.nombre_comun"
+          id="nombre_comun"
+          placeholder="Nome en Castelán"
+        />
+        <label for="nombre_comun_gal"> Nome común (Galego)</label>
+        <input
+          type="text"
+          v-model="arbore.nombre_comun_gal"
+          id="nombre_comun_gal"
+          placeholder="Nome en Galego"
+        />
+        <label for="nombre_arbol"> Nome da árbore</label>
+        <input
+          type="text"
+          v-model="arbore.nombre_arbol"
+          id="nombre_arbol"
+          placeholder="Nome da árbore"
+        />
+        <label for="altura"> Altura</label>
         <input
           type="number"
-          v-model.number="arbore.numero_mapa"
-          id="numero-mapa"
-          placeholder="Número en el mapa"
+          v-model="arbore.altura"
+          id="altura"
+          placeholder="Altura (metros)"
         />
-        <label for="lat" class="form-label">Latitud</label>
+        <label for="diametroTronco"> Diámetro do tronco</label>
         <input
-          type="text"
-          v-model="arbore.lat"
-          id="latitud"
-          placeholder="Latitud"
+          type="number"
+          v-model="arbore.diametro"
+          id="diametroTronco"
+          placeholder="Diámetro do tronco (metros)"
         />
-        <label for="lng" class="form-label">Longitud</label>
+        <fieldset>
+          <legend>Ubicación</legend>
+          <label for="zona-geografica"> Zona xeográfica</label>
+          <input
+            type="text"
+            v-model="arbore.zona_geografica"
+            id="zona-geografica"
+            placeholder="Lugar donde se sitúa"
+          />
+          <label for="localizacion">Ubicación parque</label>
+          <input
+            type="text"
+            v-model="arbore.ubicacion_parque"
+            id="localizacion"
+            placeholder="parque"
+          />
+          <label for="numero-mapa">Número en el mapa</label>
+          <input
+            type="number"
+            v-model.number="arbore.numero_mapa"
+            id="numero-mapa"
+            placeholder="Número en el mapa"
+          />
+          <label for="lat" class="form-label">Latitud</label>
+          <input
+            type="text"
+            v-model="arbore.lat"
+            id="latitud"
+            placeholder="Latitud"
+          />
+          <label for="lng" class="form-label">Longitud</label>
+          <input
+            type="text"
+            v-model="arbore.lng"
+            id="lng"
+            placeholder="Longitud"
+          />
+        </fieldset>
+        <fieldset>
+          <legend>Descripción</legend>
+          <label for="descripcion"> Descrición</label>
+          <textarea
+            type="text"
+            v-model="arbore.descripcion"
+            id="descripcion"
+            placeholder="Descripción"
+          ></textarea>
+        </fieldset>
         <input
-          type="text"
-          v-model="arbore.lng"
-          id="lng"
-          placeholder="Longitud"
+          type="submit"
+          value="Editar Senlleira"
+          :disabled="arbore === null"
         />
+        <div v-if="loading">Guardando...</div>
       </fieldset>
-      <fieldset>
-        <legend>Descripción</legend>
-        <label for="descripcion"> Descrición</label>
-        <textarea
-          type="text"
-          v-model="arbore.descripcion"
-          id="descripcion"
-          placeholder="Descripción"
-        ></textarea>
-      </fieldset>
-
-      <input
-        type="submit"
-        value="Editar Senlleira"
-        :disabled="arbore === null"
-      />
-      <div v-if="loading">Guardando...</div>
-    </fieldset>
-  </form>
+    </form>
+  </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
+import "@/assets/css/admin-css/cargarEspecies.css";
 import { useStoreArbores } from "../../../stores/arbores";
 import { updateDocument } from "../../../hook/firestore.hook";
 
@@ -228,5 +228,6 @@ const cambiarDatos = async (id) => {
   } finally {
     loading.value = false;
   }
+  arbore.value = null;
 };
 </script>

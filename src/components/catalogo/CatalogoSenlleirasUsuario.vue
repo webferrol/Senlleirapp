@@ -14,7 +14,7 @@
                 <span class="lugar">
                     <icono :icon="['fa', 'location-dot']"></icono>
                 </span>
-                <h4 class="arbol-lugar">{{ senlleira.localizacion }}</h4>
+                <h4 class="arbol-lugar">{{ senlleira.ubicacion_parque }}</h4>
             </div>
         </div>
     </div>
