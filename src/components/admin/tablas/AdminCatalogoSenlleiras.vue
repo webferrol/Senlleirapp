@@ -208,6 +208,7 @@ const handleDelete = ({ id, name }) => {
 const borrarArbore = async () => {
   if (itemDelete) {
     await storeArbores.borrarArbore(itemDelete);
+     mostrar.value = false;
   }
 };
 
