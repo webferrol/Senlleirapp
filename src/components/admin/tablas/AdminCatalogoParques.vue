@@ -57,88 +57,88 @@
   </div>
   <!-- Modulo para editar -->
 
-  <form
-    class="edit-form"
-    id="parques"
-    @submit.prevent="cambiarDatos(`${parque.idDoc}`)"
-    v-if="parque"
-  >
-    <icono
-      class="close-form"
-      :icon="['fa', 'xmark']"
-      @click="parque = null"
-    ></icono>
-    <fieldset class="data_especies">
-      <h2>Editar Parques</h2>
-      <label for="nombre" class="form-label" required>Nome</label>
-      <input
-        type="text"
-        v-model="parque.nombre"
-        id="nombre"
-        placeholder="Nome"
-      />
-      <label for="tipoloxia" class="form-label">Tipoloxía</label>
-      <input
-        type="text"
-        v-model="parque.tipoloxia"
-        id="tipoloxia"
-        placeholder="Tipoloxia"
-      />
-      <label for="localización" class="form-label">Localización</label>
-      <input
-        type="text"
-        v-model="parque.localizacion"
-        id="localizacion"
-        placeholder="Localización"
-      />
-      <label for="lat" class="form-label">Latitud</label>
-      <input
-        type="number"
-        step="any"
-        v-model="parque.lat"
-        id="latitud"
-        placeholder="Latitud"
-      />
-      <label for="lng" class="form-label">Longitud</label>
-      <input
-        type="number"
-        step="any"
-        v-model="parque.lng"
-        id="lng"
-        placeholder="Longitud"
-      />
-
-      <label for="cronoloxia" class="form-label">Cronoloxía</label>
-      <input
-        type="text"
-        v-model="parque.cronoloxia"
-        id="cronoloxia"
-        placeholder="Cronoloxía"
-      />
-      <label for="superficie" class="form-label">Superficie</label>
-      <input
-        type="text"
-        v-model="parque.superficie"
-        id="superficie"
-        placeholder="Superficie"
-      />
-      <label for="descripcion" class="form-label">Descripción</label>
-      <textarea
-        type="text"
-        v-model="parque.descripcion"
-        id="descripcion"
-        placeholder="Descripción"
-      ></textarea>
-
-      <input type="submit" value="Editar Parque" :disabled="parque === null" />
-      <div v-if="loading">Guardando...</div>
-    </fieldset>
-  </form>
+  <div class="form-container" v-if="parque">
+    <form id="parques" @submit.prevent="cambiarDatos(`${parque.idDoc}`)">
+      <icono
+        class="close-form"
+        :icon="['fa', 'xmark']"
+        @click="parque = null"
+      ></icono>
+      <fieldset class="data_especies">
+        <h2>Editar Parques</h2>
+        <label for="nombre" class="form-label" required>Nome</label>
+        <input
+          type="text"
+          v-model="parque.nombre"
+          id="nombre"
+          placeholder="Nome"
+        />
+        <label for="tipoloxia" class="form-label">Tipoloxía</label>
+        <input
+          type="text"
+          v-model="parque.tipoloxia"
+          id="tipoloxia"
+          placeholder="Tipoloxia"
+        />
+        <label for="localización" class="form-label">Localización</label>
+        <input
+          type="text"
+          v-model="parque.localizacion"
+          id="localizacion"
+          placeholder="Localización"
+        />
+        <label for="lat" class="form-label">Latitud</label>
+        <input
+          type="number"
+          step="any"
+          v-model="parque.lat"
+          id="latitud"
+          placeholder="Latitud"
+        />
+        <label for="lng" class="form-label">Longitud</label>
+        <input
+          type="number"
+          step="any"
+          v-model="parque.lng"
+          id="lng"
+          placeholder="Longitud"
+        />
+        <label for="cronoloxia" class="form-label">Cronoloxía</label>
+        <input
+          type="text"
+          v-model="parque.cronoloxia"
+          id="cronoloxia"
+          placeholder="Cronoloxía"
+        />
+        <label for="superficie" class="form-label">Superficie</label>
+        <input
+          type="text"
+          v-model="parque.superficie"
+          id="superficie"
+          placeholder="Superficie"
+        />
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea
+          type="text"
+          v-model="parque.descripcion"
+          id="descripcion"
+          placeholder="Descripción"
+        ></textarea>
+        <input
+          type="submit"
+          value="Editar Parque"
+          :disabled="parque === null"
+        />
+        <div v-if="loading">Guardando...</div>
+      </fieldset>
+    </form>
+  </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
+import "@/assets/css/admin-css/cargarEspecies.css";
 import { useStoreParques } from "../../../stores/parques";
 import { updateDocument } from "../../../hook/firestore.hook";
 
@@ -169,19 +169,19 @@ const borrarParque = async () => {
 
 const parque = ref(null);
 const editar = (par) => {
-  console.log(par);
   parque.value = par;
 };
 const cambiarDatos = async (id) => {
-  console.log("uid", id);
+  const docRef = await updateDocument(id, "Parques", parque.value);
   try {
     loading.value = true;
     await updateDocument(id, "Parques", parque.value);
   } catch (error) {
-    console.log("aaaaah", error);
+    console.log(error);
   } finally {
     loading.value = false;
   }
+
 };
 </script>
 

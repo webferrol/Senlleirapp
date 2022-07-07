@@ -67,73 +67,69 @@
 
   <!-- Formulario para editar especie -->
 
-  <form
-  class="edit-form"
-    id="especies"
-    @submit.prevent="cambiarDatos(especie.idDoc)"
-    v-if="especie"
-  >
-    <icono
-      class="close-form"
-      :icon="['fa', 'xmark']"
-      @click="especie = null"
-    ></icono>
-    <fieldset class="data_especies">
-      <h2>Editar Especies</h2>
-      <label for="genero">Xénero</label>
-      <input
-        type="text"
-        v-model="especie.genero"
-        id="genero"
-        placeholder="Género"
-      />
-      <label for="especie">Especie</label>
-      <input
-        type="text"
-        v-model="especie.especie"
-        id="especie"
-        placeholder="Especie"
-      />
-      <label for="nombre_comun">Nome común - (Castelán)</label>
-      <input
-        type="text"
-        v-model="especie.nombre_comun"
-        id="nombre_comun"
-        placeholder="Nombre común"
-      />
-      <label for="nombre_comun_gal">Nome común - (Galego)</label>
-      <input
-        type="text"
-        v-model="especie.nombre_comun_gal"
-        id="nombre_comun_gal"
-        placeholder="Nombre gallego"
-      />
-      <label for="descripcion">Descrición</label>
-      <textarea
-        type="text"
-        v-model="especie.origen_descripcion"
-        id="descripcion"
-        placeholder="Descripción"
-      ></textarea>
-      <label for="usos">Usos</label>
-      <textarea
-        type="text"
-        v-model="especie.usos"
-        id="usos"
-        placeholder="Usos"
-      ></textarea>
-      <label for="curiosidades">Curiosidades</label>
-      <textarea
-        type="text"
-        v-model="especie.curiosidades"
-        id="curiosidades"
-        placeholder="Curiosidades"
-      ></textarea>
-
-      <input type="submit" value="Editar Especies" />
-      <div v-if="loading">Gardando...</div>
-    </fieldset>
-  </form>
+  <div class="form-container" v-if="especie">
+    <form id="especies" @submit.prevent="cambiarDatos(especie.idDoc)">
+      <icono
+        class="close-form"
+        :icon="['fa', 'xmark']"
+        @click="especie = null"
+      ></icono>
+      <fieldset class="data_especies">
+        <h2>Editar Especies</h2>
+        <label for="genero">Xénero</label>
+        <input
+          type="text"
+          v-model="especie.genero"
+          id="genero"
+          placeholder="Género"
+        />
+        <label for="especie">Especie</label>
+        <input
+          type="text"
+          v-model="especie.especie"
+          id="especie"
+          placeholder="Especie"
+        />
+        <label for="nombre_comun">Nome común - (Castelán)</label>
+        <input
+          type="text"
+          v-model="especie.nombre_comun"
+          id="nombre_comun"
+          placeholder="Nombre común"
+        />
+        <label for="nombre_comun_gal">Nome común - (Galego)</label>
+        <input
+          type="text"
+          v-model="especie.nombre_comun_gal"
+          id="nombre_comun_gal"
+          placeholder="Nombre gallego"
+        />
+        <label for="descripcion">Descrición</label>
+        <textarea
+          type="text"
+          v-model="especie.origen_descripcion"
+          id="descripcion"
+          placeholder="Descripción"
+        ></textarea>
+        <label for="usos">Usos</label>
+        <textarea
+          type="text"
+          v-model="especie.usos"
+          id="usos"
+          placeholder="Usos"
+        ></textarea>
+        <label for="curiosidades">Curiosidades</label>
+        <textarea
+          type="text"
+          v-model="especie.curiosidades"
+          id="curiosidades"
+          placeholder="Curiosidades"
+        ></textarea>
+        <input type="submit" value="Editar Especies" />
+        <div v-if="loading">Gardando...</div>
+      </fieldset>
+    </form>
+  </div>
 </template>
 
 <script setup>
