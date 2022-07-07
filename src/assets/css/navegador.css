@@ -10,6 +10,7 @@
   position: fixed;
   top: 0;
   display: grid;
+  gap: 1rem;
   grid-template-columns: auto 1fr;
   align-items: center;
   width: 100%;
@@ -43,9 +44,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
   width: fit-content;
   height: 100%;
+  width: 100%;
 }
 .buscador svg{
     color: white;
@@ -55,7 +57,7 @@
   color: white;
 }
 #buscar {
-  width: 150px;
+  width: 100%;
   border: none;
   font-size: 1rem;
   padding: 0.25rem;
