@@ -16,7 +16,7 @@
           class="input-parque"
           v-model.trim="form.nombre"
           type="text"
-          
+          required
           name="nombre"
           id="nombre"
           placeholder="Nombre"
@@ -26,7 +26,7 @@
           class="input-parque"
           v-model.trim="form.tipoloxia"
           type="text"
-          
+          required
           name="tipoloxia"
           id="tipoloxia"
           placeholder="Tipoloxia"
@@ -36,7 +36,7 @@
           class="input-parque"
           v-model.trim="form.localizacion"
           type="text"
-          
+          required
           name="localización"
           id="localización"
           placeholder="Localización"
@@ -48,7 +48,7 @@
           v-model.number="form.lat"
           step="any"
           type="number"
-          
+          required
           name="lat"
           id="lat"
           placeholder="Latitud"
@@ -60,7 +60,7 @@
           v-model.number="form.lng"
           step="any"
           type="number"
-          
+          required
           name="lng"
           id="lng"
           placeholder="Longitud"
@@ -71,7 +71,7 @@
           class="input-parque"
           v-model.trim="form.cronoloxia"
           type="text"
-          
+          required
           name="cronoloxía"
           id="cronoloxía"
           placeholder="Cronoloxía"
@@ -232,6 +232,7 @@ const handleSubmit = async () => {
     const urlMapa = `parques/${docRef.id}/ficha`;
     await updateDocument(docRef.id, "Parques", { urlmapa: urlMapa }); 
     await subidaImagen(tmpMapa,docRef.id,'ficha');  
-  }
-};
+  // }
+  if (docRef) emits("cerrarForm");
+}};
 </script>

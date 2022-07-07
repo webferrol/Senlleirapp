@@ -3,9 +3,7 @@
     <button class="admin-add" @click="open = true">Añadir Parque</button>
     <AdminCatalogoParquesVue></AdminCatalogoParquesVue>
     <NuevoFormParque v-if="open" @cerrarForm="open = false" ></NuevoFormParque>
-    <!-- <NuevoFormParque v-if="añadirParque" @cerrarForm="añadirParque =false "></NuevoFormParque> -->
-
-
+   
   </div>
 </template>
 
