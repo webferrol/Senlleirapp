@@ -1,27 +1,34 @@
-.tabla_datos_administrativo{
+.tabla_datos_administrativo {
     width: 100%;
 }
-.header_administrativo{
+
+.header_administrativo {
     width: 100%;
     background-color: green;
     color: white;
     font-size: 1rem;
 }
-.tabla_datos_administrativo .catalogo_administrativo:nth-child(odd){
+
+.tabla_datos_administrativo .catalogo_administrativo:nth-child(odd) {
     background-color: lightgrey;
 }
-.tabla_datos_administrativo tr td{
+
+.tabla_datos_administrativo tr td {
     border-left: 2px solid black;
     border-bottom: 2px solid black;
     padding: .25rem;
 }
 
-.mostrar_info{
+.mostrar_info {
     min-width: 40px;
     width: 40px;
 }
 
-.id ,.genero, .especie, .nombre_comun, .nombre_comun_gal{
+.id,
+.genero,
+.especie,
+.nombre_comun,
+.nombre_comun_gal {
     max-width: 200px;
     width: 100px;
     overflow: hidden;
@@ -29,23 +36,26 @@
     white-space: nowrap;
 }
 
-.origen_descripcion, .usos, .curiosidades{
+.origen_descripcion,
+.usos,
+.curiosidades {
     max-width: 300px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.header_especies .tabla_administrativo_options span{
+.header_especies .tabla_administrativo_options span {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.tabla_administrativo_options{
-    width: 70px;
-  }
 
-.tabla_administrativo_options span{
+.tabla_administrativo_options {
+    width: 70px;
+}
+
+.tabla_administrativo_options span {
     display: flex;
     gap: .75rem;
     justify-content: center;
@@ -55,16 +65,17 @@
 
 /* Alerta de borrar especie */
 
-.alerta_container{
+.alerta_container {
     position: absolute;
     top: 0;
     right: 0;
     width: 100%;
     height: 100vh;
-    background-color: rgba(200,200,200, .5);
+    background-color: rgba(200, 200, 200, .5);
     backdrop-filter: blur(3px);
 }
-.alerta_borrar_especie{
+
+.alerta_borrar_especie {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -79,41 +90,59 @@
     padding: 1rem;
     border-radius: 5px;
 }
-    .alerta_borrar_especie h2{
-        font-size: 2rem;
-        text-align: center;
-        font-weight: 800;
-        text-transform: uppercase;
-    }
-    .alerta_borrar_especie .borrar_txt{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .alerta_borrar_especie svg{
-        margin: .5rem;
-        font-size: 4rem;
-    }
-    .alerta_borrar_especie p {
-        font-size: 1.2rem;
-        text-align: center;
-    }
-    .borrar_btn{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        width: 100%;
-    }
-        .borrar_btn button{
-            width: fit-content;
-            font-size: 1.2rem;
-            border: none;
-            cursor: pointer;
-            transition: all .2s linear;
-        }
-        .borrar_btn button:hover{
-            transform: scale(1.1);
-            background-color: lightgray;
-        }
+
+.alerta_borrar_especie h2 {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.alerta_borrar_especie .borrar_txt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.alerta_borrar_especie svg {
+    margin: .5rem;
+    font-size: 4rem;
+}
+
+.alerta_borrar_especie p {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.borrar_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.borrar_btn button {
+    width: fit-content;
+    font-size: 1.2rem;
+    border: none;
+    cursor: pointer;
+    transition: all .2s linear;
+}
+
+.borrar_btn button:hover {
+    transform: scale(1.1);
+    background-color: lightgray;
+}
+
+/* Formularios de edición */
+.edit-form {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(200, 200, 200);
+    backdrop-filter: blur(3px);
+}

@@ -18,12 +18,17 @@ export const useStoreEspecies = defineStore('especies', {
             this.especies = await getDocuments('Especies');
         },
         async loadEspecie(form){
-            await addDocument("Especies", form);
+            const docRef = await addDocument("Especies", form);
+            const data = {idDoc: docRef.id, ...form};
+            this.especies.push(data)
+            return docRef;
             //this.especies.push(form);
-            this.especies = [];
+            // this.especies = [];
         },
         async borrarEspecie(ID){
             await deleteDocument("Especies", ID);
+            const indice = this.especies.findIndex(especie => (especie.idDoc === ID));
+            this.especies.splice(indice,1);
         }
     }
 })

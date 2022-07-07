@@ -62,6 +62,7 @@
 
   <!-- Modulo para editar senlleira -->
   <form
+  class="edit-form"
     id="senlleiras"
     @submit.prevent="cambiarDatos(`${arbore.idDoc}`)"
     v-if="arbore"

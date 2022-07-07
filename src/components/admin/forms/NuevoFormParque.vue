@@ -232,6 +232,7 @@ const handleSubmit = async () => {
     const urlMapa = `parques/${docRef.id}/ficha`;
     await updateDocument(docRef.id, "Parques", { urlmapa: urlMapa }); 
     await subidaImagen(tmpMapa,docRef.id,'ficha');  
-  }
-};
+  // }
+  if (docRef) emits("cerrarForm");
+}};
 </script>
