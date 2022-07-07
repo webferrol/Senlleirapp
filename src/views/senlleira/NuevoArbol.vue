@@ -104,6 +104,7 @@ const form = reactive({
     lat:'',//latitud
     diametro: 0,
     altura: 0,
+    descripcion:'',
 
 })
 
@@ -132,6 +133,7 @@ const reset = () => {
     // form.lng ='';
      // form.altura =0;
     // form.diametro =0;
+    // form.descripcion = '';
     // form.senlleira= false;
     // form.propuesta_senlleria= false; //Si no es Senlleira ni propuesta es un árbol común
 }
