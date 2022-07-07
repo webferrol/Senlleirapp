@@ -148,10 +148,6 @@
           id="numero-mapa"
           placeholder="Número en el mapa"
         />
-
-
-
-
         <label for="lat" class="form-label">Latitud</label>
         <input
           type="text"
@@ -211,8 +207,8 @@ const handleDelete = ({ id, name }) => {
 
 const borrarArbore = async () => {
   if (itemDelete) {
-    console.log(itemDelete)
-    //await storeArbores.borrarArbore(itemDelete);
+    await storeArbores.borrarArbore(itemDelete);
+     mostrar.value = false;
   }
 };
 

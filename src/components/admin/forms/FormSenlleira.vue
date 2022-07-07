@@ -2,213 +2,102 @@
   <div class="formsenlleira" v-if="loaded">Cargando...</div>
 
   <div class="form-background">
-    <form
-      id="senlleiras"
-      method="post"
-      enctype="multipart/form-data"
-      @submit.prevent="handleSubmit"
-    >
+    <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
       <span class="h2-background">
         <h2>Formulario senlleira</h2>
         <icono @click="cerrarForm" :icon="['fa', 'xmark']"></icono>
       </span>
-
       <fieldset class="data-senlleira --localizacion">
         <legend>Datos senlleira</legend>
         <div class="senlleira-nombre-cientifico">
           <label for="arbore" class="form-label">
-            Nome da árbore <span data-set="Campo obligatorio">*</span></label
-          >
-          <input
-            v-model="form.nombre_arbol"
-            type="text"
-            name="arbore"
-            id="arbore"
-            placeholder="indica o nome da arbore"
-          />
+            Nome da árbore <span data-set="Campo obligatorio">*</span></label>
+          <input v-model="form.nombre_arbol" type="text" name="arbore" id="arbore"
+            placeholder="indica o nome da arbore" />
 
-          <label for="especie" class="form-label"
-            >Nome científico <span data-set="Campo obligatorio">*</span></label
-          >
+          <label for="especie" class="form-label">Nome científico <span data-set="Campo obligatorio">*</span></label>
 
-          <select
-            @change="handleSelect"
-            v-model="form.idEspecie"
-            name="especie"
-            id="especie"
-          >
-            <option
-              class="especie-option"
-              v-for="valor in storeEspecies.especies"
-              :key="valor.idDoc"
-              :value="valor.idDoc"
-            >
+          <select @change="handleSelect" v-model="form.idEspecie" name="especie" id="especie">
+            <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.idDoc"
+              :value="valor.idDoc">
               {{ valor.genero }} {{ valor.especie }}
             </option>
           </select>
           <label for="nome" class="form-label"> Nome en galego</label>
-          <select
-            @change="handleSelect"
-            v-model="form.idEspecie"
-            name="nome"
-            id="nombre-gallego"
-          >
-            <option
-              v-for="valor in storeEspecies.especies"
-              :key="valor.idDoc"
-              :value="valor.idDoc"
-            >
+          <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-gallego">
+            <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
               {{ valor.nombre_comun_gal }}
             </option>
           </select>
           <label for="nome" class="form-label"> Nome en castelán</label>
-          <select
-            @change="handleSelect"
-            v-model="form.idEspecie"
-            name="nome"
-            id="nombre-castellano"
-          >
-            <option
-              v-for="valor in storeEspecies.especies"
-              :key="valor.idDoc"
-              :value="valor.idDoc"
-            >
+          <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano">
+            <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
               {{ valor.nombre_comun }}
             </option>
           </select>
           <label for="altura" class="form-label">Altura (metros)</label>
-          <input
-            id="altura"
-            name="altura"
-            v-model.number="form.altura"
-            type="number"
-            step="any"
-            placeholder="31"
-          />
+          <input id="altura" name="altura" v-model.number="form.altura" type="number" step="any" placeholder="31" />
 
-          <label for="perimetroTronco" class="form-label"
-            >Diámetro do tronco (metros)</label
-          >
-          <input
-            id="perimetroTronco"
-            name="perimetroTronco"
-            v-model.number="form.diametro"
-            type="number"
-            step="any"
-            placeholder="10,5"
-          />
+          <label for="perimetroTronco" class="form-label">Diámetro do tronco (metros)</label>
+          <input id="perimetroTronco" name="perimetroTronco" v-model.number="form.diametro" type="number" step="any"
+            placeholder="10,5" />
         </div>
       </fieldset>
       <fieldset class="data-senlleira">
         <legend>Ubicación</legend>
         <div class="senlleira-localizacion">
           <label for="zona" class="form-label">
-            Zona xeográfica <span data-set="Campo obligatorio">*</span></label
-          >
-          <input
-            v-model="form.zona_geografica"
-            type="text"
-            name="zona"
-            id="zona"
-            placeholder="lugar de situacion"
-          />
+            Zona xeográfica <span data-set="Campo obligatorio">*</span></label>
+          <input v-model="form.zona_geografica" type="text" name="zona" id="zona" placeholder="lugar de situacion" />
 
           <label for="lat" class="form-label">Latitud</label>
-          <input
-            class="input-senlleira"
-            v-model.number="form.lat"
-            type="number"
-            name="lat"
-            id="lat"
-            step="any"
-            placeholder="Latitud"
-          />
+          <input class="input-senlleira" v-model.number="form.lat" type="number" name="lat" id="lat" step="any"
+            placeholder="Latitud" />
           <label for="lng" class="form-label">Longitud</label>
-          <input
-            class="input-senlleira"
-            v-model.number="form.lng"
-            type="number"
-            name="lng"
-            id="lng"
-            step="any"
-            placeholder="Longitud"
-          />
+          <input class="input-senlleira" v-model.number="form.lng" type="number" name="lng" id="lng" step="any"
+            placeholder="Longitud" />
         </div>
       </fieldset>
       <fieldset class="data-senlleira">
         <div class="senlleira-localizacion">
           <legend>Parque</legend>
           <label for="localizacion" class="form-label">
-            Ubicación parque <span data-set="Campo obligatorio">*</span></label
-          >
-          <select
-            @change="
-              form.ubicacion_parque =
-                $event.target.options[$event.target.selectedIndex].text
-            "
-            v-model="form.idParque"
-            name="localizacion"
-            id="localizacion"
-          >
-            <option
-              v-for="valor in storeParques.parques"
-              :key="valor.idDoc"
-              :value="valor.idDoc"
-            >
+            Ubicación parque <span data-set="Campo obligatorio">*</span></label>
+          <select @change="
+            form.ubicacion_parque =
+            $event.target.options[$event.target.selectedIndex].text
+          " v-model="form.idParque" name="localizacion" id="localizacion">
+            <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
               {{ valor.nombre }}
             </option>
           </select>
-          <label class="form-label"  for="numero-mapa">Número en el mapa</label>
-          <input
-            name="numero-mapa"
-            id="numero-mapa"
-            type="number"
-            v-model.number="form.numero_mapa"
-          />
+          <label class="form-label" for="numero-mapa">Número en el mapa</label>
+          <input name="numero-mapa" id="numero-mapa" type="number" v-model.number="form.numero_mapa" />
           <input type="hidden" v-model="form.ubicacion_parque" />
         </div>
       </fieldset>
       <fieldset class="data-senlleira">
         <legend>Descripción</legend>
         <div class="senlleira-localizacion">
-          <textarea
-            v-model="form.descripcion"
-            name="descripcion"
-            id="descripcion"
-            cols="30"
-            rows="10"
-            placeholder="breve descripción da árbore"
-          ></textarea>
+          <textarea v-model="form.descripcion" name="descripcion" id="descripcion" cols="30" rows="10"
+            placeholder="breve descripción da árbore"></textarea>
         </div>
       </fieldset>
       <fieldset class="data-senlleira">
         <legend>Esta árbore é</legend>
         <div class="senlleira-arbore">
-          <input
-            type="checkbox"
-            v-model="form.senlleira"
-            name="senlleira"
-            id="senlleira"
-          />&nbsp;
+          <input type="checkbox" v-model="form.senlleira" name="senlleira" id="senlleira" />&nbsp;
           <label class="form-label" for="senlleira">Senlleira</label>
-          <input
-            type="checkbox"
-            v-model="form.propuesta_senlleria"
-            name="propSenlleira"
-            id="propSenlleira"
-          />&nbsp;
-          <label class="form-label" for="propSenlleira"
-            >Proposta de senlleira</label
-          >
+          <input type="checkbox" v-model="form.propuesta_senlleria" name="propSenlleira" id="propSenlleira" />&nbsp;
+          <label class="form-label" for="propSenlleira">Proposta de senlleira</label>
         </div>
       </fieldset>
       <fieldset>
         <legend>Imaxe</legend>
         <div class="data-senlleira">
           <theUploader @emitirFichero="gestionFoto"></theUploader>
-          <div v-if="error.error" class="error">
-            {{ error.message }}
-          </div>
+          <div style="color:white;background-color: red; font-weight: bold; font-size: large" v-if="error.error" class="error">
+            {{ error.message }} </div>
         </div>
         <div v-if="spinner" class="spinner">Cargando....</div>
       </fieldset>
@@ -227,6 +116,10 @@ import { reactive, ref } from "vue";
 import "@/assets/css/formularioSenlleira.css";
 
 const emits = defineEmits(["cerrarForm"]);
+
+const cerrarForm = () => {
+  emits("cerrarForm");
+};
 
 const form = reactive({
   genero: "",
@@ -294,7 +187,6 @@ const gestionFoto = async (imagenes) => {
   try {
     error.value = { error: false, message: "" };
     tmpImagenes = imagenes;
-    //await store.subirFoto(imagen);
   } catch (e) {
     error.value.error = true;
     error.value.message = e.message;
@@ -308,20 +200,23 @@ const handleSelect = (e) => {
     const especie = storeEspecies.especies.find(
       (item) => item.idDoc == e.target.value
     );
-    // console.log(especie)
     form.genero = especie?.genero;
     form.especie = especie?.especie;
     form.nombre_comun = especie?.nombre_comun;
     form.nombre_comun_gal = especie?.nombre_comun_gal;
   }
-  //const datosEspecies = e.target.value)
 };
 
 const handleSubmit = async () => {
-  //Se comprueban errores antes de enviar nada
-  //Enviar
+  const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
   if (storeEspecies.especies.length) {
-    const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
+    try {
+      if (tmpImagenes === null || !tmpImagenes.length)
+        throw new Error("Falta imagen");
+    } catch (e) {
+      error.value.error = true;
+      error.value.message = e.message;
+    }
     if (tmpImagenes !== null && data.id) {
       try {
         error.value = { error: false, message: "" };
@@ -343,15 +238,9 @@ const handleSubmit = async () => {
       }
     }
   }
+  if (data) emits("cerrarForm");
 };
 
-const cerrarForm = () => {
-  emits("cerrarForm");
-};
-
-storeEspecies
-  .setEspecies()
-  .then()
-  .catch((e) => alert(e));
+storeEspecies.setEspecies().then().catch((e) => alert(e));
 </script>
 

@@ -9,7 +9,6 @@ export const subirFicheros = async (file,ruta='carpeta/imagen.ext') => {
     const snapshot = await uploadBytes(storageRef, file);  
 }
 
-
 /**para borrar fotos del storage
  * 
  * @param {string} ruta codigo de la foto
@@ -22,11 +21,10 @@ export const deleteFile = async (ruta='carpeta/imagen.ext') =>{
   
 }
 
-
 /**para listar las imagenes del storage
  * 
  * @param {string} uid Referencia donde estan guardadas las fotos
- * @returns devuelve las imagenes que se encuentran en el storage
+ * @returns devuelve la url de las imagenes que se encuentran en el storage
  */
 export const listAllUrls = async (uid) => {
     // create  a reference under which you want to list
@@ -40,7 +38,22 @@ export const listAllUrls = async (uid) => {
     
     }
 
-/**para listar las imagenes del storage
+    /**para buscar las imagenes y luego eliminarlas
+ * 
+ * @param {string} uid Referencia donde estan guardadas las fotos
+ * @returns devuelve las imagenes del storage
+ */
+export const listAllRef = async (uid) => {
+    // create  a reference under which you want to list
+        const listRef = ref(storage, uid);
+    // Find all the prefixes and items.
+        const res = await listAll(listRef);
+        const {items} = res;
+        return items.map((item)=>item._location.path_);
+    
+    }
+
+/**para listar las imagenes del storage(url)
  * 
  * @param {string} uid Referencia donde estan guardadas las fotos
  */

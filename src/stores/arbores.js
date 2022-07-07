@@ -1,9 +1,10 @@
 // importar libreria de pinia. sirve para centralizar toda la información
 import { defineStore } from 'pinia';
 // importacion de la función del firebase para subir las fotos
-import { subirFicheros, listAllUrls,getDownURL, deleteFile} from '@/hook/storage.hook';
+import { subirFicheros, listAllUrls,getDownURL, deleteFile,listAllRef} from '@/hook/storage.hook';
 
 import { addDocument, getDocuments, deleteDocument, updateDocument} from '@/hook/firestore.hook';
+import { connectStorageEmulator } from 'firebase/storage';
 
 
 // useStore could be anything like useUser, useCart
@@ -26,7 +27,7 @@ export const useStoreArbores = defineStore('arbores', {
             await subirFicheros(file, `${ref}/${file.name}`)
         },
 
-        // borrar fotos del storage
+        //borrar una foto del storage
          async borrarFoto(ref){
            await deleteFile(ref);
          },
@@ -39,14 +40,27 @@ export const useStoreArbores = defineStore('arbores', {
          */
         async insertarArbore(datos,fileName) {
             const data = await addDocument("Arbores", datos);
+            const docRef = {idDoc: data.id, ...datos};
+            this.arbores.push(docRef)
             if (data.id && fileName.length) {
                 const storage_ref = `Arbores/${data.id}/${fileName}`;
                 await updateDocument(data.id, "Arbores", {'storage_ref': storage_ref });//creado la referencia
             }  
             return data;
+            
         },
+
+        // funcion para eliminar el árbol(fotos e información)
         async borrarArbore(ID){
+            // borra las fotos del storage
+            const refs = await listAllRef(`Arbores/${ID}`);
+            refs.forEach(async (ref) => {
+                await deleteFile(ref);
+            });
+            // borra la informacción del firestore
             await deleteDocument("Arbores", ID);
+            const indice = this.arbores.findIndex(arbore => (arbore.idDoc === ID));
+            this.arbores.splice(indice,1);
         },
         
         /**
