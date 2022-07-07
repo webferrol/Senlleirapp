@@ -181,7 +181,7 @@ const cambiarDatos = async (id) => {
   } finally {
     loading.value = false;
   }
-
+ parque.value=null;
 };
 </script>
 

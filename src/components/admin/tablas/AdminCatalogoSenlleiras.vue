@@ -228,5 +228,6 @@ const cambiarDatos = async (id) => {
   } finally {
     loading.value = false;
   }
+  arbore.value = null;
 };
 </script>
