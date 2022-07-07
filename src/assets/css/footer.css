@@ -8,7 +8,8 @@
   z-index: 2;
 }
 .menu-principal {
-  background-color: var(--colorprincipal);
+  background: rgb(97,214,142);
+background: linear-gradient(97deg, rgba(97,214,142,1) 0%, rgba(43,187,154,1) 0%, rgba(14,173,159,1) 100%);
   width: 100%;
   transition: all ease-in-out 0.3s;
 }

@@ -4,7 +4,9 @@
 }
 
 :root{
-    --colorprincipal: black;
+    --colorprincipal: rgba(97,214,142);
+    --colorprincipal2: rgba(43,187,154);
+    --colorprincipal3: rgba(14,173,159);
     --colorsecundario: green;
     --colorterciario: rgb(50,50,50);
     --colorclaro: rgba(255,255,255, 1);
