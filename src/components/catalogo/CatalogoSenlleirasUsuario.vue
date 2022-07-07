@@ -4,7 +4,7 @@
             v-for="(senlleira, index) in storeArbores.arbores" :key="index" identificador=senlleira.id
             @click="cargarDatosFicha(senlleira)">
             <div class="content-img">
-                <img alt="imagen del arbol senlleiro" :src="senlleira.imagenes">
+                <img alt="imagen del arbol senlleiro" :src="senlleira.google_url">
             </div>
             <div class="arbol-info">
                 <span class="arbol">
@@ -82,8 +82,14 @@ import "@/assets/css/catalogo/catalogo.css";
 
 const storeArbores = useStoreArbores();
 const storeEspecies = useStoreEspecies();
-storeArbores.setArbores();
-storeEspecies.setEspecies();
+
+(async ()=>{
+    await storeArbores.setArbores();
+    await storeArbores.getDownloadURL();
+})()
+
+console.log(storeArbores.arbores)
+//storeEspecies.setEspecies();
 
 
 
@@ -114,6 +120,6 @@ const cargarDatosFicha = async (objeto) => {
     for (let i = 0; i < storeArbores.imagenes.length; i++) {
         imagenesFichaTecnica.value.push(storeArbores.imagenes[i])
     }
-    await storeEspecies.setEspecies()
+    //await storeEspecies.setEspecies()
 }
 </script>
