@@ -92,12 +92,12 @@
           <legend>Descripción</legend>
           <label for="descripcion"> Descrición</label>
           <textarea type="text" v-model="arbore.descripcion" id="descripcion" placeholder="Descripción"></textarea>
-
           <div class="images" v-for="image of images" :key="image.ref">
-          <img class="image" :src="image.src" alt="">
+            <img class="image" :src="image.src" alt="">
             <button class="btn-eliminar" @click="deleteImage(image.ref)">Eliminar</button>
           </div>
         </fieldset>
+        <theUploader @emitirFichero="gestionFoto"></theUploader>
         <input type="submit" value="Editar Senlleira" :disabled="arbore === null" />
         <div v-if="loading">Guardando...</div>
       </fieldset>
@@ -109,6 +109,7 @@
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import "@/assets/css/admin-css/cargarEspecies.css";
+import TheUploader from '@/components/theUploader.vue';
 import { useStoreArbores } from "../../../stores/arbores";
 import { updateDocument } from "../../../hook/firestore.hook";
 import { listAllRef, getDownURL } from "../../../hook/storage.hook";
@@ -136,24 +137,18 @@ const borrarArbore = async () => {
   }
 };
 
+const deleteImage = ref => {
+  const texto = prompt(`para eliminar la foto comnfirme la referencia:${ref}`);
+  if (texto === ref) {
+    storeArbores.borrarFoto(ref);
+  }
+};
+
+
 const images = ref([]);
 
 //Editar Senlleira
 const arbore = ref(null);
-
-const deleteImage = ref => {
-  const texto = prompt(`para eliminar la foto comnfirme la referencia:${ref}`);
-  // console.log(texto)
-  // alert(texto)
-  if(texto === ref) {
-    storeArbores.borrarFoto(ref);
-    console.log(ref)
-    }
-
-  
- 
-}
-
 const editar = async (sen) => {
   const refs = await listAllRef(`Arbores/${sen.idDoc}`);
   images.value = [];
@@ -163,9 +158,9 @@ const editar = async (sen) => {
       src: await getDownURL(ref)
     });
   });
-  // console.log(images.value);
   arbore.value = sen;
 };
+
 const cambiarDatos = async (id) => {
   try {
     loading.value = true;
@@ -177,17 +172,53 @@ const cambiarDatos = async (id) => {
   }
   arbore.value = null;
 };
-</script>
-<style scoped>
-.images{
-  display: grid;
-  
+
+
+const error = ref(false);
+
+const gestionFoto = async (file) => {
+
+  if(file){
+    const imagen = file[0];
+     try {
+        error.value = '';
+        await storeArbores.subirFoto({ref:`Arbores/${arbore.value.idDoc}`,file:imagen});
+    } catch (e) {
+      console.log(e)
+        error.value = e.mensage;
+    }
+  }
+   
 }
+
+const cargarFotos = async () => {
+    try {
+        error.value = '';
+        images.value = await setImagenes('Arbores');
+    } catch (e) {
+        error.value = e;
+    }
+}
+
+cargarFotos();
+
+
+
+
+</script>
+
+<style scoped>
+.images {
+  display: grid;
+
+}
+
 .image {
   width: 10vw;
 
 }
-.btn-eliminar{
+
+.btn-eliminar {
   width: 70px;
   height: 20px;
 }
