@@ -21,11 +21,18 @@ const coordsParques = ref([]);
   try {
     await useParques.setParques();
     for (let i = 0; i < useParques.parques.length; i++) {
-      coordsParques.value.push({
-        lat: Number(useParques.parques[i].lat),
-        lng: Number(useParques.parques[i].lng),
-      });
+      coordsParques.value.push(
+        {
+          id: `parques/id=${useParques.parques[i].idDoc}`,
+          coords: {
+            lat: Number(useParques.parques[i].lat),
+            lng: Number(useParques.parques[i].lng),
+          }
+        }
+      );
     }
+
+   
     loader.value = true;
   } catch (error) {
     //console.log(error);

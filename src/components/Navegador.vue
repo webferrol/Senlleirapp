@@ -1,38 +1,66 @@
 <template>
   <!-- Header -->
   <header class="main-header">
-    <nav class="header-nav-app" :class="{'rojo':userStore.user}">
-      <router-link to="/" class="header-logo"
-        ><img src="../assets/img/logotipo-app.png" alt="logo senlleirap"
-      /></router-link>
-      <ul class="ulbasura" v-if="userStore.user">
-        <router-link to="/catalogo-senlleira">cat-senlleira</router-link>
-        |
-        <router-link to="/catalogo-especies">cat-especies</router-link>
-        |
-        <router-link to="/catalogo-parque">cat-parques</router-link>
-        |
-        <router-link to="/admin">admin</router-link>
+    <nav class="header-nav-app" :class="{ 'administrador-active': userStore.user }">
+      <!-- Boton inicio - LOGO app -->
+      <router-link to="/" v-if="$route.name !== 'catalogo'" class="header-logo"><img
+          src="../assets/img/logos/LOGO2_forma.png" alt="logo senlleirap" /></router-link>
+      <!-- Botones area administrativa -->
+      <ul class="nav-admin" v-if="userStore.user">
+        <li>
+          <router-link to="/catalogo-senlleira">cat-senlleira</router-link>
+        </li>
+        <li>
+          <router-link to="/catalogo-especies">cat-especies</router-link>
+        </li>
+        <li>
+          <router-link to="/catalogo-parque">cat-parques</router-link>
+        </li>
+        <li>
+          <router-link to="/admin">admin</router-link>
+        </li>
       </ul>
       <ul class="header-nav-buttons">
-      <li class="header-upload" v-if="$route.name == 'inicio'">
+        <!-- Botón usuario subir arbol - INICIO -->
+        <li class="header-upload" v-if="$route.name == 'inicio'">
           <router-link to="/nova-arbore">
             <icono :icon="['fa', 'upload']"></icono>
           </router-link>
         </li>
-        <li class="buscador"  v-if="$route.name == 'catalogo'">
-        <icono :icon="['fa', 'magnifying-glass']" @click="filtrar()"></icono>
-            <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()" v-model.trim="storeGeneral.buscador">
-            <select v-model="storeGeneral.categoria" name="especies" id="especies">
-            <option value="especie">Especie</option>
-            <option value="genero">Genero</option>
-            <option value="nombre_arbol">Nombre arbol</option>
-            <option value="nombre_comun">Nombre común</option>
-            <option value="nombre_comun_gal">Nombre común Galego</option>
-            <option value="ubicacion_parque">Ubicación<nav></nav></option>
-        </select>
+        <!-- Boton de búsqueda - CATALOGO -->
+        <li class="buscador" v-if="$route.name == 'catalogo'">
+          <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()"
+            @focus="animacionBuscar = true" @focusout="animacionBuscar = false">
+          <label for="buscar" :class="{ animacion: animacionBuscar }">
+            <icono :icon="['fa', 'magnifying-glass']" @click="filtrar()"></icono>
+          </label>
         </li>
-        
+        <!-- Filtro búsqueda usuario - CATALOGO -->
+        <li class="filtro" v-if="$route.name == 'catalogo'">
+          <div class="icon-filter-busqueda">
+            <icono :icon="['fa', 'sliders']" @click="filtrarDatos"></icono>
+            <ul class="elementos-filtro" :class="{ filtroOculto: !mostrarFiltro }">
+              <li>
+                <icono :icon="['fa', 'tree-city']"></icono>
+                <p>Parques</p>
+              </li>
+              <li>
+              <icono :icon="['fa', 'leaf']"></icono>
+                <p>Especies</p>
+              </li>
+              <li>
+              <icono :icon="['fab', 'pagelines']"></icono>
+                <p>Senlleiras</p>
+              </li>
+              <li>
+              <icono :icon="['fa', 'tree']"></icono>
+                <p>Árbores</p>
+              </li>
+            </ul>
+          </div>
+
+        </li>
+
       </ul>
     </nav>
   </header>
@@ -42,12 +70,18 @@
 
 <script setup>
 //Dependencias
-
+import { ref } from 'vue'
 
 import "@/assets/css/navegador.css";
-
 import { useStoreUsers } from "../stores/users";
 import { useStoreGeneral } from "../stores/general";
+const animacionBuscar = ref(false)
+
+// Funcion para mostrar - ocultar filtro de busqueda
+const mostrarFiltro = ref(false)
+const filtrarDatos = () => {
+  mostrarFiltro.value = !mostrarFiltro.value
+}
 
 const storeGeneral = useStoreGeneral();
 const userStore = useStoreUsers();
@@ -57,15 +91,15 @@ storeGeneral.buscador = '';
 const filtrar = () => {
   // console.log(enviarLetra.text,categoria.value)
   // buscador(enviarLetra.text,categoria.value);
+  // console.log('funciona')
   storeGeneral.filtrar();
 };
 </script>
 
 <style>
-.header-nav-app.rojo{
+.header-nav-app.rojo {
   display: grid;
   grid-template-columns: auto 1fr auto;
   background-color: red;
 }
-
 </style>

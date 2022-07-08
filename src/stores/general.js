@@ -18,6 +18,7 @@ export const useStoreGeneral = defineStore('busqueda', {
             this.tmp = storeArbores.arbores.filter((arbor) => {
                 return arbor.genero.toLowerCase().includes(this.buscador.toLowerCase()) || arbor.especie.toLowerCase().includes(this.buscador.toLowerCase()) || arbor.nombre_comun.toLowerCase().includes(this.buscador.toLowerCase()) || arbor.nombre_arbol.toLowerCase().includes(this.buscador.toLowerCase())
             })
+            console.log(this.tmp)
         }
     }
 })

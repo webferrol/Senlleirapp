@@ -6,17 +6,21 @@
 }
 
 .main-header .header-nav-app {
-  background-color: var(--colorprincipal);
   position: fixed;
   top: 0;
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
+  gap: 0.5rem;
   align-items: center;
   width: 100%;
   height: 48px;
   padding: 0.25rem 0.5rem;
-  /* background: rgb(11,115,31);
-    background: linear-gradient(170deg, rgba(11,115,31,1) 30%, rgba(31,122,91,1) 73%); */
+  background: rgb(14, 173, 159);
+  background: linear-gradient(
+    37deg,
+    rgba(14, 173, 159, 1) 20%,
+    rgba(43, 187, 154, 1) 39%,
+    rgba(97, 214, 142, 1) 98%
+  );
   transition: all ease-in-out 0.3s;
 }
 .header-nav-app .header-logo {
@@ -30,43 +34,136 @@
 }
 
 /* Botones */
-.header-nav-buttons{
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    height: 100%;
-    align-items: center;
+.header-nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  align-items: center;
 }
 
-/* Filtro de busqueda */
+/* -- BUSCADOR CATALOGO -- */
 .buscador {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.25rem;
   width: fit-content;
   height: 100%;
-}
-.buscador svg{
-    color: white;
-}
-.menu-busqueda svg {
-  font-size: 1.2rem;
-  color: white;
-}
-#buscar {
-  width: 150px;
-  border: none;
-  font-size: 1rem;
-  padding: 0.25rem;
-  border-radius: 3px;
-  height: fit-content;
+  width: 100%;
+  max-width: 225px;
+  transition: all 0.3s linear;
 }
 
-/* Boton formulario subir especie */
+#buscar {
+  position: relative;
+  width: 100%;
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.25rem;
+  border-radius: 3px;
+  height: 30px;
+  padding-left: 25px;
+  color: var(--colorterciario);
+}
+::placeholder {
+  color: var(--colorterciario);
+}
+.buscador label {
+  position: absolute;
+  left: 3px;
+  font-size: 1.2rem;
+  color: var(--colorterciario);
+  transition: all 0.1s linear;
+}
+#buscar:focus {
+  outline-color: var(--colorsecundario);
+}
+
+.buscador .animacion {
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-2px);
+  }
+  60% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Filtro busqueda catalogo */
+.icon-filter-busqueda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: white;
+  font-size: 1.5rem;
+  width: 30px;
+  height: 30px;
+}
+.icon-filter-busqueda svg{
+  width: inherit;
+  height: inherit;
+}
+.elementos-filtro{
+  position: absolute;
+  top: calc(100% + .56rem);
+  right: -.5rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem;
+  height: 110px;
+  transition: all .2s linear;
+  background: rgb(14, 173, 159);
+  overflow: hidden;
+  background: linear-gradient(
+    37deg,
+    rgba(14, 173, 159, 1) 20%,
+    rgba(43, 187, 154, 1) 39%,
+    rgba(97, 214, 142, 1) 98%
+  );
+}
+  .elementos-filtro li{
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    padding: .25rem;
+    border-bottom: 2px solid white;
+    transition: background-color .3s linear;
+  }
+  .elementos-filtro li:nth-child(1){
+    border-top: 2px solid white;
+  }
+  .elementos-filtro li:hover{
+    background-color: lightgray;
+  }
+    .elementos-filtro li svg{
+      width: 18px;
+      height: 18px;
+      font-size: 1rem;
+      overflow: hidden;
+    }
+    
+
+.filtroOculto{
+  height: 0px;
+}
+
+
+/* -- SUBIR ESPECIE BOTON -- */
 .main-header .header-nav-app .header-upload {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   width: 100%;
   height: 100%;
 }
@@ -75,9 +172,37 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.5rem;
+  width: 30px;
+  height: 30px;
 }
 .main-header .header-nav-buttons .header-upload a svg {
   font-size: 1.5rem;
   color: white;
+}
+
+/* DISEÑO ADMINISTRATIVO */
+
+.main-header .administrador-active{
+  background: burlywood;
+}
+
+.nav-admin{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+  .nav-admin li a{
+    font-size: 1rem;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  text-transform: uppercase;
+  }
+
+@media screen and (min-width: 500px) {
+  .buscador{
+    max-width: 400px;
+  }
 }

@@ -1,31 +1,37 @@
 <template>
-   <div class="formsenlleira" v-if="loaded"> Cargando... </div>
+    <div class="formsenlleira" v-if="loaded"> Cargando... </div>
 
     <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
-        <span class="h2-background"> <h2>Nova árbore </h2> <icono :icon="['fa', 'leaf']"></icono></span>
-        
+        <span class="h2-background">
+            <h2>Nova árbore </h2>
+            <icono :icon="['fa', 'leaf']"></icono>
+        </span>
+
         <fieldset class="data-senlleira --localizacion">
             <legend> Datos da árbore </legend>
             <div class="senlleira-nombre-cientifico">
-                 <label for="arbore" class="form-label" required> Nome da árbore <span data-set="Campo obligatorio">*</span></label>
-                <input v-model="form.nombre_arbol" type="text" required name="arbore" id="arbore"
-                 placeholder="indica o nome da arbore" />
-            
-                <label for="especie" class="form-label">Nome científico <span data-set="Campo obligatorio">*</span></label>
+                <label for="arbore" class="form-label"> Nome da árbore <span
+                        data-set="Campo obligatorio">*</span></label>
+                <input v-model="form.nombre_arbol" type="text"  name="arbore" id="arbore"
+                    placeholder="indica o nome da arbore" required />
+
+                <label for="especie" class="form-label">Nome científico <span
+                        data-set="Campo obligatorio">*</span></label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="especie" id="especie" required>
-                    <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
+                    <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.idDoc"
+                        :value="valor.idDoc">
                         {{ valor.genero }} {{ valor.especie }}</option>
                 </select>
 
                 <label for="nome" class="form-label"> Nome en galego</label>
-                <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-gallego" required>
+                <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-gallego" >
                     <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre_comun_gal }}
                     </option>
                 </select>
 
                 <label for="nome" class="form-label"> Nome en castelán</label>
-                <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano" required>
+                <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano" >
                     <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre_comun }} </option>
                 </select>
@@ -35,26 +41,27 @@
             <legend>Ubicación</legend>
 
             <div class="senlleira-localizacion">
-                <label for="zona" class="form-label" required> Zona xeográfica <span data-set="Campo obligatorio">*</span></label>
-                <input v-model="form.zona_geografica" type="text" required name="zona" id="zona"
-                    placeholder="Zona geográfica" />       
+                <label for="zona" class="form-label"> Zona xeográfica <span
+                        data-set="Campo obligatorio">*</span></label>
+                <input v-model="form.zona_geografica" type="text"  name="zona" id="zona"
+                    placeholder="Zona geográfica" required/>
 
-                <label for="localizacion" class="form-label"> Ubicación parque <span data-set="Campo obligatorio">*</span></label>
-                <select
-                @change="form.ubicacion_parque= $event.target.options[$event.target.selectedIndex].text"
-                 v-model="form.idParque" name="localizacion" id="localizacion" required>
+                <label for="localizacion" class="form-label"> Ubicación parque <span
+                        data-set="Campo obligatorio">*</span></label>
+                <select @change="form.ubicacion_parque = $event.target.options[$event.target.selectedIndex].text"
+                    v-model="form.idParque" name="localizacion" id="localizacion" required>
                     <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
                         {{ valor.nombre }} </option>
                 </select>
                 <input type="hidden" v-model="form.ubicacion_parque">
 
                 <label for="latitud" class="form-label">Latitude <span data-set="Campo obligatorio">*</span></label>
-                <input v-model.number="form.lat" type="number" required  name="latitud" id="latitud" step="any"
-                    placeholder="indicar latitude" />     
+                <input v-model.number="form.lat" type="number" name="latitud" id="latitud" step="any"
+                    placeholder="indicar latitude" required/>
 
                 <label for="longitud" class="form-label">Lonxitude <span data-set="Campo obligatorio">*</span></label>
-                <input v-model.number="form.lng" type="number" required  name="longitud" id="longitud" step="any"
-                    placeholder="indicar lonxitude" />  
+                <input v-model.number="form.lng" type="number" name="longitud" id="longitud" step="any"
+                    placeholder="indicar lonxitude" required/>
             </div>
         </fieldset>
         <fieldset>
@@ -66,16 +73,16 @@
             </div>
             <div v-if="spinner" class="spinner"> Cargando.... </div>
         </fieldset>
-        <button class="btn-form">Publicar Arbore</button>   
+        <button class="btn-form">Publicar Arbore</button>
     </form>
 </template>
 
 <script setup>
 import TheUploader from '@/components/theUploader.vue';
-import {useStoreArbores} from '@/stores/arbores';
-import {useStoreEspecies} from '@/stores/especies';
-import {useStoreParques} from '@/stores/parques';
-import { reactive,ref } from 'vue';
+import { useStoreArbores } from '@/stores/arbores';
+import { useStoreEspecies } from '@/stores/especies';
+import { useStoreParques } from '@/stores/parques';
+import { reactive, ref } from 'vue';
 import "@/assets/css/formularioSenlleira.css";
 
 // llamada del store
@@ -95,15 +102,16 @@ const form = reactive({
     zona_geografica: '', //Conxo por exemplo, onde está situado
     senlleira: false,
     propuesta_senlleria: false, //Si no es Senlleira ni propuesta es un árbol común
-    nombre_arbol:'',
+    nombre_arbol: '',
     nombre_comun: '',//Nombre castellano
     nombre_comun_gal: '',
-    storage_ref:'', //es el identificador donde se guarda un fichero en el Storage Cloud
-    google_url:'',
-    lng:'',//longitud
-    lat:'',//latitud
+    storage_ref: '', //es el identificador donde se guarda un fichero en el Storage Cloud
+    google_url: '',
+    lng: '',//longitud
+    lat: '',//latitud
     diametro: 0,
     altura: 0,
+    descripcion: '',
 
 })
 
@@ -112,7 +120,7 @@ const error = ref({
     error: false,
     message: '',
 });
-let tmpImagenes = null; 
+let tmpImagenes = null;
 const spinner = ref(false);
 const loaded = ref(false);
 
@@ -130,8 +138,9 @@ const reset = () => {
     // form.google_url='',
     // form.lat ='';
     // form.lng ='';
-     // form.altura =0;
+    // form.altura =0;
     // form.diametro =0;
+    // form.descripcion = '';
     // form.senlleira= false;
     // form.propuesta_senlleria= false; //Si no es Senlleira ni propuesta es un árbol común
 }
@@ -160,18 +169,25 @@ const gestionFoto = async (imagenes) => {
 const handleSubmit = async () => {
     //Se comprueban errores antes de enviar nada
     //Enviar
-    if (storeEspecies.especies.length) {     
-          const data = await storeArbores.insertarArbore(form,tmpImagenes[0].name);
+    if (storeEspecies.especies.length) {
+        const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
+        try {
+            if (tmpImagenes === null || !tmpImagenes.length)
+                throw new Error("Falta imagen");
+        } catch (e) {
+            error.value.error = true;
+            error.value.message = e.message;
+        }
         if (tmpImagenes !== null && data.id) {
             try {
                 error.value = { error: false, message: '', }
                 spinner.value = true;
                 loaded.value = true;
-                for(let i =0,tam=tmpImagenes.length; i<tam; i++){
-                await storeArbores.subirFoto({
-                    ref: `Arbores/${data.id}`,
-                    file: tmpImagenes[i],
-                });
+                for (let i = 0, tam = tmpImagenes.length; i < tam; i++) {
+                    await storeArbores.subirFoto({
+                        ref: `Arbores/${data.id}`,
+                        file: tmpImagenes[i],
+                    });
                 }
                 spinner.value = false;
                 reset();

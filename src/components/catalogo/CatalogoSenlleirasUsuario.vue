@@ -14,7 +14,7 @@
                 <span class="lugar">
                     <icono :icon="['fa', 'location-dot']"></icono>
                 </span>
-                <h4 class="arbol-lugar">{{ senlleira.localizacion }}</h4>
+                <h4 class="arbol-lugar">{{ senlleira.ubicacion_parque }}</h4>
             </div>
         </div>
     </div>
@@ -92,7 +92,7 @@ const storeGeneral = useStoreGeneral();
 //     await storeArbores.getDownloadURL();
 //     // datos(storeArbores.arbores);
 // })()
-const temPo = ref([]);
+// const temPo = ref([]);
 const loadPage = async () => {
     await storeArbores.setArbores();
     await storeArbores.getDownloadURL();
@@ -105,11 +105,11 @@ loadPage();
 // console.log(storeArbores.arbores)
 //storeEspecies.setEspecies();
 
-const filtrar = () => {
-    console.log("jeje")
-    temPo.value = storeGeneral.filtrar()
-    console.log(temPo);
-};
+// const filtrar = () => {
+//     console.log("jeje")
+//     temPo.value = storeGeneral.filtrar()
+//     console.log(temPo);
+// };
 
 const mostrarFicha = ref(false)
 const fichaDatos = ref(null);

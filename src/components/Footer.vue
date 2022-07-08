@@ -1,6 +1,6 @@
 <template>
    <footer class="main-footer">
-        <nav class="menu-principal" :class="{'red':userStore.user}">
+        <nav class="menu-principal" :class="{'administrador-active':userStore.user}">
             <ul class="menu-elements">
                 <li>
                     <router-link class="menu-catalogo" to="/catalogo">
@@ -32,7 +32,3 @@ import { useStoreUsers } from '../stores/users'
 const userStore = useStoreUsers();
 </script>
 
-<style>
-.menu-principal.red{
-  background-color: red;
-}</style>
