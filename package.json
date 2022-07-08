@@ -21,7 +21,8 @@
     "pinia": "^2.0.14",
     "sass": "^1.52.3",
     "vue": "^3.2.36",
-    "vue-router": "^4.0.15"
+    "vue-router": "^4.0.15",
+    "vue3-carousel": "^0.1.40"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",

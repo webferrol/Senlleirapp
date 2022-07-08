@@ -49,10 +49,6 @@
                 <p>Especies</p>
               </li>
               <li>
-              <icono :icon="['fab', 'pagelines']"></icono>
-                <p>Senlleiras</p>
-              </li>
-              <li>
               <icono :icon="['fa', 'tree']"></icono>
                 <p>Árbores</p>
               </li>

@@ -1,20 +1,19 @@
 <template>
+<h1 class="tittle-section"> Catalogo Senlleiras</h1>
     <div class="catalogo-section-component">
         <div class="arbol-catalogo-element" data-titulo="Mostrar" title="Máis info"
             v-for="(senlleira, index) in storeArbores.arbores" :key="index" identificador=senlleira.id
             @click="cargarDatosFicha(senlleira)">
-            <div class="content-img">
-                <img alt="imagen del arbol senlleiro" :src="senlleira.google_url">
-            </div>
+            <img class="imagen-catalogo" alt="imagen del arbol senlleiro" :src="senlleira.google_url">
             <div class="arbol-info">
                 <span class="arbol">
                     <icono :icon="['fa', 'leaf']"></icono>
+                    <h3 class="arbol-nombre">{{ senlleira.nombre_arbol }}</h3>
                 </span>
-                <h3 class="arbol-nombre">{{ senlleira.nombre_arbol }}</h3>
                 <span class="lugar">
                     <icono :icon="['fa', 'location-dot']"></icono>
-                </span>
-                <h4 class="arbol-lugar">{{ senlleira.ubicacion_parque }}</h4>
+                    <h4 class="arbol-lugar">{{ senlleira.ubicacion_parque }}</h4>
+                </span>       
             </div>
         </div>
     </div>
