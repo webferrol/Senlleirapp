@@ -5,7 +5,7 @@
       <input
         class="input-senlleira"
         type="number"
-        v-model.number="location.latitude"
+        v-model.number="coords.lat"
         name="lat"
         id="lat"
         step="any"
@@ -15,7 +15,7 @@
       <input
         class="input-senlleira"
         type="number"
-        v-model.number="location.longitude"
+        v-model.number="coords.lng"
         name="lng"
         id="lng"
         step="any"
@@ -45,7 +45,7 @@ let loader = ref(false);
 
 
 const props = defineProps({
-  location: {
+  coords: {
     type: Object,
     default: () => ({ lat: null, lng: null }),
   },
@@ -79,8 +79,8 @@ const onClickGetCoords = async () => {
     // -> Coordenadas actuales <- //
     let { lat, lng } = await getCoords();
     // -> Cargamos los valores del formulario <- //
-    props.location.latitude = lat;
-    props.location.longitude = lng;
+    props.coords.lat = lat;
+    props.coords.lng = lng;
 
     // console.log(lat, lng)
 
