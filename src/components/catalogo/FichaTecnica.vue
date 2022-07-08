@@ -1,11 +1,11 @@
 <template>
     <div class="container-ficha-tecnica">
         <article class="ficha-tecnica">
-        <CarruselImagenesVue :images="images"></CarruselImagenesVue>
             <span class="head-ficha-tecnica">
                 <icono class="cerrar-ficha-tecnica" :icon="['fa', 'xmark']" @click="$emit('cerrarFicha')"></icono>
                 <slot name="titulo"></slot>
             </span>
+            <CarruselImagenesVue :images="images"></CarruselImagenesVue>
             
             <slot name="content">
 

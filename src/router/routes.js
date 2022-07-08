@@ -78,4 +78,10 @@ export const routes = [
     name: "CatalogoDeParques",
     component: () => import("@/views/parques/CatalogoParques.vue"),
   },
+  {
+    path: "/prueba",
+    name: "prueba",
+    component: () => import("@/components/TheGeolocation.vue"),
+  },
+
 ];

@@ -2,7 +2,7 @@
   <div>
     <TheGoogleMaps
       v-if="loader"
-      icon="src/assets/arbol.png"
+      icon="src/assets/arbolito.png"
       :coords="coordsArbol"
     ></TheGoogleMaps>
   </div>

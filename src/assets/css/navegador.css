@@ -1,7 +1,7 @@
 /* HEADER */
 .main-header {
   width: 100%;
-  height: 48px;
+  height: 40px;
   z-index: 1;
 }
 
@@ -12,7 +12,7 @@
   gap: 0.5rem;
   align-items: center;
   width: 100%;
-  height: 48px;
+  height: 40px;
   padding: 0.25rem 0.5rem;
   background: rgb(14, 173, 159);
   background: linear-gradient(
@@ -65,6 +65,7 @@
   height: 30px;
   padding-left: 25px;
   color: var(--colorterciario);
+  box-shadow: 0px 0px 4px 1px white;
 }
 ::placeholder {
   color: var(--colorterciario);
@@ -116,12 +117,12 @@
 }
 .elementos-filtro{
   position: absolute;
-  top: calc(100% + .56rem);
+  top: calc(100% + .29rem);
   right: -.5rem;
   display: flex;
   flex-direction: column;
   font-size: 1.1rem;
-  height: 110px;
+  height: 86px;
   transition: all .2s linear;
   background: rgb(14, 173, 159);
   overflow: hidden;
@@ -136,7 +137,7 @@
     display: flex;
     align-items: center;
     gap: .25rem;
-    padding: .25rem;
+    padding: .25rem .5rem;
     border-bottom: 2px solid white;
     transition: background-color .3s linear;
   }
