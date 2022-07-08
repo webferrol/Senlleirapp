@@ -29,7 +29,7 @@
         </li>
         <!-- Boton de búsqueda - CATALOGO -->
         <li class="buscador" v-if="$route.name == 'catalogo'">
-          <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()"
+          <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()" v-model.trim="storeGeneral.buscador"
             @focus="animacionBuscar = true" @focusout="animacionBuscar = false">
           <label for="buscar" :class="{ animacion: animacionBuscar }">
             <icono :icon="['fa', 'magnifying-glass']" @click="filtrar()"></icono>
@@ -41,20 +41,22 @@
             <icono :icon="['fa', 'sliders']" @click="filtrarDatos"></icono>
             <ul class="elementos-filtro" :class="{ filtroOculto: !mostrarFiltro }">
               <li>
+                <router-link to="/catalogo-de-parques">
                 <icono :icon="['fa', 'tree-city']"></icono>
                 <p>Parques</p>
+                </router-link>
               </li>
               <li>
+                <router-link to="/catalogo-de-especies">
               <icono :icon="['fa', 'leaf']"></icono>
                 <p>Especies</p>
+                </router-link>
               </li>
               <li>
-              <icono :icon="['fab', 'pagelines']"></icono>
-                <p>Senlleiras</p>
-              </li>
-              <li>
+                <router-link to="/catalogo">
               <icono :icon="['fa', 'tree']"></icono>
                 <p>Árbores</p>
+                </router-link>
               </li>
             </ul>
           </div>
@@ -85,14 +87,8 @@ const filtrarDatos = () => {
 
 const storeGeneral = useStoreGeneral();
 const userStore = useStoreUsers();
-storeGeneral.categoria = 'nombre_arbol';
-storeGeneral.buscador = '';
-
 const filtrar = () => {
-  // console.log(enviarLetra.text,categoria.value)
-  // buscador(enviarLetra.text,categoria.value);
-  // console.log('funciona')
-  storeGeneral.filtrar();
+  storeGeneral.filtrarArbores();
 };
 </script>
 

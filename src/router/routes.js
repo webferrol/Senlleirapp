@@ -73,4 +73,9 @@ export const routes = [
     name: "Busqueda",
     component: () => import("@/components/busqueda/Busqueda.vue"),
   },
+  {
+    path: "/catalogo-de-parques",
+    name: "CatalogoDeParques",
+    component: () => import("@/views/parques/CatalogoParques.vue"),
+  },
 ];
