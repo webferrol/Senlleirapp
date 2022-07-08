@@ -50,10 +50,10 @@
             Zona xeográfica <span data-set="Campo obligatorio">*</span></label>
           <input v-model="form.zona_geografica" type="text" name="zona" id="zona" placeholder="lugar de situacion" />
 
-          <label for="lat" class="form-label">Latitud</label>
+          <label for="lat" class="form-label">Latitude</label>
           <input class="input-senlleira" v-model.number="form.lat" type="number" name="lat" id="lat" step="any"
             placeholder="Latitud" />
-          <label for="lng" class="form-label">Longitud</label>
+          <label for="lng" class="form-label">Longitude</label>
           <input class="input-senlleira" v-model.number="form.lng" type="number" name="lng" id="lng" step="any"
             placeholder="Longitud" />
         </div>

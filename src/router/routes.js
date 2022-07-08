@@ -73,4 +73,10 @@ export const routes = [
     name: "Busqueda",
     component: () => import("@/components/busqueda/Busqueda.vue"),
   },
+  {
+    path: "/prueba",
+    name: "prueba",
+    component: () => import("@/components/TheGeolocation.vue"),
+  },
+
 ];
