@@ -18,8 +18,12 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
+// ficha
 import { faTree } from "@fortawesome/free-solid-svg-icons";
 import { faTreeCity } from "@fortawesome/free-solid-svg-icons";
+import { faSignature } from "@fortawesome/free-solid-svg-icons";
+import { faUpLong } from "@fortawesome/free-solid-svg-icons";
+import { faArrowsLeftRight } from "@fortawesome/free-solid-svg-icons";
 
 export const iconsLibrary = () => {
     library.add(
@@ -42,6 +46,9 @@ export const iconsLibrary = () => {
         faSliders,
         faTree,
         faTreeCity,
+        faSignature,
+        faUpLong,
+        faArrowsLeftRight,
         
     )
 }

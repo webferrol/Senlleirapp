@@ -13,27 +13,27 @@
 }
 
 .container-ficha-tecnica .ficha-tecnica{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: repeat(3, auto);
     margin: auto;
     height: 100vh;
     width: 100%;
     overflow-x: hidden;
     background-color: white;
-    border-radius: 5px;
 }
-
-.ficha-tecnica .head-ficha-tecnica{
+/* CABECERA*/
+.cabecera-ficha-tecnica{
     position: sticky;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: .25rem;
-    top: 0;
-    background-color: var(--colorsecundario);
+    top: 0px;
+    height: 40px;
+    background-color: var(--colorprincipal);
     z-index: 2;
 }
 .ficha-tecnica .cerrar-ficha-tecnica{
-    position: absolute;
-    right: .25rem;
-    top: .25rem;
     font-size: 1.3rem;
     width: 20px;
     height: 20px;
@@ -43,40 +43,40 @@
 }
 .ficha-tecnica h2{
     font-size: 1.3rem;
-    margin-bottom: .25rem;
     text-align: center;
     font-weight: 600;
     text-transform: uppercase;
     width: calc(100% - 25px);
     color: white;
 }
-.ficha-tecnica p{
-    padding: .5rem;
-    font-size: 1rem;
-    line-height: 1rem;
-    text-align: justify;
+
+.line-ficha-tecnica{
+    margin: .25rem auto;
+    width: 90%;
+    height: .2rem;
+    border: none;
+    background-color: var(--colorprincipal2);
 }
+
+.ficha-tecnica .h2-ficha-tecnica{
+    color: black;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
 /* Caracteristicas tecnicas */
 
-.datos-especie{
+.caracteristicas-ficha-tecnica{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    border: 1px solid black;
+    grid-template-columns: 1fr;
+    gap: .5rem;
 }
-    .datos-especie span{
-        border:1px solid black;
+    .caracteristicas-ficha-tecnica div{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
-    .datos-especie h3, .descripcion h3{
-        width: 100%;
-        background-color: var(--colorsecundario);
-        color: white;
-        text-align: center;
-        font-size: 1.2rem;
-    }
-    .datos-especie p{
-        text-align: center;
-    }
-    /* Footer */
-    .descripcion p{
-        text-align: justify;
+    .subtitle-caracteristica{
+        display: flex;
+        align-items: center;
+        gap: .25rem;
     }

@@ -28,31 +28,47 @@
         <h2 class="ficha-tittle">{{fichaDatos.nombre_arbol}}</h2>
      </template>
      <template #content>
-        <div class="datos-especie">
-            <span>
-                <h3>Especie</h3>
+     <!-- Caracteristicas -->
+        <div class="caracteristicas-ficha-tecnica">
+            <div>
+                <span class="subtitle-caracteristica">
+                <icono :icon="['fa', 'leaf']"></icono>
+                    <h3>Especie</h3>
+                </span>
                 <p>{{fichaDatos.genero}} {{fichaDatos.especie}}</p>
-            </span>
-            <span>
-                <h3>Localizacion</h3>
-                <p>{{fichaDatos.localizacion}}</p>
-            </span>
-            <span>
-                <h3>Nombre</h3>
+            </div>
+
+            <div>
+                <span class="subtitle-caracteristica">
+                <icono :icon="['fa', 'signature']"></icono>
+                    <h3>Nombre</h3>
+                </span>
                 <p>{{fichaDatos.nombre_comun}}</p>
-            </span>
-            <span>
-                <h3>Nome</h3>
+            </div>
+
+            <div>
+                <span class="subtitle-caracteristica">
+                <icono :icon="['fa', 'signature']"></icono>
+                    <h3>Nome</h3>
+                </span>
                 <p>{{fichaDatos.nombre_comun_gal}}</p>
-            </span>
-            <span>
-                <h3>Altura</h3>
+            </div>
+
+            <div>
+                <span class="subtitle-caracteristica">
+                    <icono :icon="['fa', 'up-long']"></icono>
+                    <h3>Altura</h3>
+                </span>
                 <p>{{fichaDatos.altura}} metros</p>
-            </span>
-            <span>
-                <h3>Diametro</h3>
+            </div>
+
+            <div>
+                <span class="subtitle-caracteristica">
+                <icono :icon="['fa', 'arrows-left-right']"></icono>
+                    <h3>Diametro</h3>
+                </span>
                 <p>{{fichaDatos.diametroTronco}} metros</p>
-            </span>
+            </div>
         
         </div>
      </template>
