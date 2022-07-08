@@ -21,8 +21,16 @@
           </router-link>
         </li>
         <li class="buscador"  v-if="$route.name == 'catalogo'">
-        <icono :icon="['fa', 'magnifying-glass']"></icono>
-            <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup="filtrar">
+        <icono :icon="['fa', 'magnifying-glass']" @click="filtrar()"></icono>
+            <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()" v-model.trim="storeGeneral.buscador">
+            <select v-model="storeGeneral.categoria" name="especies" id="especies">
+            <option value="especie">Especie</option>
+            <option value="genero">Genero</option>
+            <option value="nombre_arbol">Nombre arbol</option>
+            <option value="nombre_comun">Nombre común</option>
+            <option value="nombre_comun_gal">Nombre común Galego</option>
+            <option value="ubicacion_parque">Ubicación<nav></nav></option>
+        </select>
         </li>
         
       </ul>
@@ -39,8 +47,18 @@
 import "@/assets/css/navegador.css";
 
 import { useStoreUsers } from "../stores/users";
+import { useStoreGeneral } from "../stores/general";
 
+const storeGeneral = useStoreGeneral();
 const userStore = useStoreUsers();
+storeGeneral.categoria = 'nombre_arbol';
+storeGeneral.buscador = '';
+
+const filtrar = () => {
+  // console.log(enviarLetra.text,categoria.value)
+  // buscador(enviarLetra.text,categoria.value);
+  storeGeneral.filtrar();
+};
 </script>
 
 <style>

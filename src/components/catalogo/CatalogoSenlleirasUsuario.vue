@@ -1,7 +1,7 @@
 <template>
     <div class="catalogo-section-component">
         <div class="arbol-catalogo-element" data-titulo="Mostrar" title="Máis info"
-            v-for="(senlleira, index) in storeArbores.arbores" :key="index" identificador=senlleira.id
+            v-for="(senlleira, index) in storeGeneral.tmp" :key="index" identificador=senlleira.id
             @click="cargarDatosFicha(senlleira)">
             <div class="content-img">
                 <img alt="imagen del arbol senlleiro" :src="senlleira.google_url">
@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-     
+     <!-- <pre>{{temPo}}</pre> -->
 
     <FichaTecnicaVue 
     
@@ -54,8 +54,8 @@
                 <h3>Diametro</h3>
                 <p>{{fichaDatos.diametroTronco}} metros</p>
             </span>
-        
         </div>
+        
      </template>
 
      <template #footer>
@@ -77,21 +77,39 @@ import { ref } from "vue";
 import { useStoreArbores } from "@/stores/arbores.js";
 import { useStoreEspecies } from "../../stores/especies";
 import FichaTecnicaVue from "./FichaTecnica.vue";
+import { datos, tmp } from "../../hook/busqueda/busqueda";
+import { useStoreGeneral } from "../../stores/general";
 
 import "@/assets/css/catalogo/catalogo.css";
 
 const storeArbores = useStoreArbores();
 const storeEspecies = useStoreEspecies();
+const storeGeneral = useStoreGeneral();
 
-(async ()=>{
+
+// (async ()=>{
+//     await storeArbores.setArbores()
+//     await storeArbores.getDownloadURL();
+//     // datos(storeArbores.arbores);
+// })()
+const temPo = ref([]);
+const loadPage = async () => {
     await storeArbores.setArbores();
     await storeArbores.getDownloadURL();
-})()
-
-console.log(storeArbores.arbores)
+    storeGeneral.filtrar();
+    // console.log(temPo.value);
+}
+loadPage();
+// datos(temPo.value);
+// temPo = tmp;
+// console.log(storeArbores.arbores)
 //storeEspecies.setEspecies();
 
-
+const filtrar = () => {
+    console.log("jeje")
+    temPo.value = storeGeneral.filtrar()
+    console.log(temPo);
+};
 
 const mostrarFicha = ref(false)
 const fichaDatos = ref(null);
@@ -103,6 +121,7 @@ const imagenesFichaTecnicaVaciar = () => {
     imagenesFichaTecnica.value.pop()
 }
 
+    // datos(storeArbores.arbores);
 // Funcion para cargar datos de la ficha y sus respectivas imágenes
 const cargarDatosFicha = async (objeto) => {
     //console.log(objeto)
@@ -112,10 +131,11 @@ const cargarDatosFicha = async (objeto) => {
     fichaDatos.value = null;
     //fichaDatos.value= {...objeto,...especie};
     fichaDatos.value = objeto;
+    // enviamos para filtrar
     //console.log(fichaDatos)
     // Limpiamos y cargamos las imagenes de la ficha
     imagenesFichaTecnicaVaciar()
-    console.log(fichaDatos)
+    console.log(fichaDatos.value)
     await storeArbores.setImagenes('Arbores/' + objeto.idDoc)
     for (let i = 0; i < storeArbores.imagenes.length; i++) {
         imagenesFichaTecnica.value.push(storeArbores.imagenes[i])
