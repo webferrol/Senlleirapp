@@ -6,7 +6,7 @@
   <div
     :data-set="data"
     ref="mapDiv"
-    style="width: 100%; height: calc(100vh - 90px); top: 0"
+    style="width: 100%; height: calc(100vh - 82px); top: 0"
   ></div>
 </template>
 
