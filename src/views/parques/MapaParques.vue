@@ -1,6 +1,6 @@
 <template>
   <div >
-  <TheGoogleMaps v-if="loader" icon="src/assets/bosque.png" :coords="coordsParques"></TheGoogleMaps>
+  <TheGoogleMaps v-if="loader" icon="src/assets/parques.png" :coords="coordsParques"></TheGoogleMaps>
   </div>
   
 </template>

@@ -1,22 +1,32 @@
-.background-color {
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: -1;
-    background-color: white;
-  }
+
+.tittle-section{
+  position: sticky;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 25px;
+  width: 100%;
+  height: 60px;
+  text-align: center;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  text-transform: uppercase;
+  font-weight: 600;
+  color: black;
+}
+/* Estructura del catalogo */
   .catalogo-section-component {
     display: grid;
-    grid-template-columns: repeat(2, auto);
-    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    width: fit-content;
     justify-content: center;
-    margin: 1rem 0;
-    padding: .25rem;
-    gap: 0.25rem;
+    align-items: center;
+    padding: .5rem .25rem;
+    gap:  .5rem .25rem;
+    background-color: white;
   }
+  /* ficha */
   .arbol-catalogo-element {
+    max-width: 250px;
     width: 100%;
     display: grid;
     overflow: hidden;
@@ -26,40 +36,42 @@
   }
   
   .arbol-catalogo-element:active {
-    border: 2px solid green;
+    border: 2px solid var(--colorprincipal);
   }
-  
-  .content-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .content-img img {
+  /* imagen ficha */
+ 
+  .arbol-catalogo-element .imagen-catalogo {
     display: flex;
     min-width: 170px;
     width: 100%;
     max-width: 300px;
     height: 200px;
     object-fit: cover;
+    background-color: lightgray;
   }
   
   .arbol-catalogo-element .arbol-info {
     display: grid;
-    grid-template-columns: 15px 1fr;
-    overflow: hidden;
     padding: 0.2rem;
-    background-color: white;
-    border-top: none;
-    gap: 0 .5rem;
   }
   .arbol-catalogo-element .arbol-info span {
-    display: flex;
+    display: grid;
+    grid-template-columns: 20px 1fr;
+    gap: .5rem .25rem;
     justify-content: center;
     align-items: center;
     font-size: 1.1rem;
   }
+  .arbol-catalogo-element .arbol-info span svg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+
   .arbol-info .arbol {
-    color: green;
+    color: var(--colorprincipal);
     font-size: 1.1rem;
   }
   .arbol-info .lugar {
@@ -88,4 +100,19 @@
     text-overflow: ellipsis;
     color: black;
     font-weight: 500;
+  }
+
+  @media screen and (min-width: 700px ) {
+    .catalogo-section-component{
+      width: 90vw;
+      max-width: 900px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .arbol-catalogo-element{
+      max-width: 300px;
+    }
+      .arbol-catalogo-element .imagen-catalogo{
+        height: 250px;
+      }
+    
   }
