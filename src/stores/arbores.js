@@ -24,6 +24,7 @@ export const useStoreArbores = defineStore('arbores', {
          * @param {*} file referencia al nombre de cada senlleira
          */
         async subirFoto({ ref, file }) {
+            //console.log(`${ref}/${file.name}`)
             await subirFicheros(file, `${ref}/${file.name}`)
         },
 

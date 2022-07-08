@@ -29,10 +29,10 @@
         </li>
         <!-- Boton de búsqueda - CATALOGO -->
         <li class="buscador" v-if="$route.name == 'catalogo'">
-          <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup="filtrar"
+          <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()" v-model.trim="storeGeneral.buscador"
             @focus="animacionBuscar = true" @focusout="animacionBuscar = false">
           <label for="buscar" :class="{ animacion: animacionBuscar }">
-            <icono :icon="['fa', 'magnifying-glass']"></icono>
+            <icono :icon="['fa', 'magnifying-glass']" @click="filtrar()"></icono>
           </label>
         </li>
         <!-- Filtro búsqueda usuario - CATALOGO -->
@@ -41,16 +41,22 @@
             <icono :icon="['fa', 'sliders']" @click="filtrarDatos"></icono>
             <ul class="elementos-filtro" :class="{ filtroOculto: !mostrarFiltro }">
               <li>
+                <router-link to="/catalogo-de-parques">
                 <icono :icon="['fa', 'tree-city']"></icono>
                 <p>Parques</p>
+                </router-link>
               </li>
               <li>
+                <router-link to="/catalogo-de-especies">
               <icono :icon="['fa', 'leaf']"></icono>
                 <p>Especies</p>
+                </router-link>
               </li>
               <li>
+                <router-link to="/catalogo">
               <icono :icon="['fa', 'tree']"></icono>
                 <p>Árbores</p>
+                </router-link>
               </li>
             </ul>
           </div>
@@ -70,6 +76,7 @@ import { ref } from 'vue'
 
 import "@/assets/css/navegador.css";
 import { useStoreUsers } from "../stores/users";
+import { useStoreGeneral } from "../stores/general";
 const animacionBuscar = ref(false)
 
 // Funcion para mostrar - ocultar filtro de busqueda
@@ -78,7 +85,11 @@ const filtrarDatos = () => {
   mostrarFiltro.value = !mostrarFiltro.value
 }
 
+const storeGeneral = useStoreGeneral();
 const userStore = useStoreUsers();
+const filtrar = () => {
+  storeGeneral.filtrarArbores();
+};
 </script>
 
 <style>

@@ -19,7 +19,7 @@ const props = defineProps({
   /**
    * {Number} zoom - Zoom que tendrá por defecto el mapa de google
    */
-  zoom: {
+    zoom: {
     type: Number,
     default: 16,
   },
@@ -69,23 +69,22 @@ const loader = new Loader({ apiKey: props.apikey });
     map = new google.maps.Map(mapDiv.value, {
       center: props.currPos,
       zoom: props.zoom,
+
     });
     // -> Bucle para recorrer y pintar los parques <- //
     props.coords.forEach((item) => {
-      console.log('coords--->',item.coords)
+      console.log("coords--->", item.coords);
       const marca = new google.maps.Marker({
         map,
         position: item.coords,
         icon: props.icon,
         animation: google.maps.Animation.DROP,
-      }
-      );
-      marca.addListener("click", (e) => {
-      console.log(item.id);
+        
       });
-      
+      marca.addListener("click", (e) => {
+        console.log(item.id);
+      });
     });
-    
   } catch (error) {
     //console.log(error);
   }
