@@ -62,6 +62,7 @@
 
   <!-- Modulo para editar senlleira -->
   <div class="form-container" v-if="arbore">
+    <img v-for="image of images" :key="image.ref" :src="image.src" alt="">
     <form
       id="senlleiras"
       @submit.prevent="cambiarDatos(`${arbore.idDoc}`)"
@@ -189,6 +190,8 @@ import "@/assets/css/admin-css/catalogoAdmin.css";
 import "@/assets/css/admin-css/cargarEspecies.css";
 import { useStoreArbores } from "../../../stores/arbores";
 import { updateDocument } from "../../../hook/firestore.hook";
+import { listAllRef, getDownURL } from "../../../hook/storage.hook";
+
 
 const storeArbores = useStoreArbores();
 storeArbores.setArbores().catch((error) => console.log(error));
@@ -212,16 +215,29 @@ const borrarArbore = async () => {
   }
 };
 
+const images = ref([]);
+
 //Editar Senlleira
 const arbore = ref(null);
-const editar = (sen) => {
-  //console.log(par);
-  arbore.value = sen;
+
+
+
+const editar = async (sen) => {
+  const refs = await listAllRef(`Arbores/${sen.idDoc}`);
+  images.value = [];
+  refs.forEach(async ref=>{
+    images.value.push({
+      ref,
+      src:await getDownURL(ref)});
+  });
+    console.log(images.value);
+    arbore.value = sen;
 };
 const cambiarDatos = async (id) => {
   //console.log("uid",id);
   try {
     loading.value = true;
+    
     await updateDocument(id, "Arbores", arbore.value);
   } catch (error) {
     console.log("aaaaah", error);
