@@ -36,3 +36,9 @@ background: linear-gradient(97deg, rgba(97,214,142,1) 0%, rgba(43,187,154,1) 0%,
 .menu-principal .menu-elements li a svg {
   font-size: 1.3rem;
 }
+
+/* ADMIN */
+
+.administrador-active{
+  background: burlywood;
+}

@@ -18,6 +18,9 @@ import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { faSliders } from "@fortawesome/free-solid-svg-icons";
+import { faTree } from "@fortawesome/free-solid-svg-icons";
+import { faTreeCity } from "@fortawesome/free-solid-svg-icons";
+import { faPagelines } from "@fortawesome/free-brands-svg-icons";
 
 
 export const iconsLibrary = () => {
@@ -38,6 +41,10 @@ export const iconsLibrary = () => {
         faLocationDot,
         faMagnifyingGlass,
         faXmark,
-        faSliders
+        faSliders,
+        faTree,
+        faTreeCity,
+        faPagelines
+        
     )
 }

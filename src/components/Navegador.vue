@@ -1,19 +1,24 @@
 <template>
   <!-- Header -->
   <header class="main-header">
-    <nav class="header-nav-app" :class="{ 'rojo': userStore.user }">
+    <nav class="header-nav-app" :class="{ 'administrador-active': userStore.user }">
       <!-- Boton inicio - LOGO app -->
       <router-link to="/" v-if="$route.name !== 'catalogo'" class="header-logo"><img
           src="../assets/img/logos/LOGO2_forma.png" alt="logo senlleirap" /></router-link>
       <!-- Botones area administrativa -->
-      <ul class="ulbasura" v-if="userStore.user">
-        <router-link to="/catalogo-senlleira">cat-senlleira</router-link>
-        |
-        <router-link to="/catalogo-especies">cat-especies</router-link>
-        |
-        <router-link to="/catalogo-parque">cat-parques</router-link>
-        |
-        <router-link to="/admin">admin</router-link>
+      <ul class="nav-admin" v-if="userStore.user">
+        <li>
+          <router-link to="/catalogo-senlleira">cat-senlleira</router-link>
+        </li>
+        <li>
+          <router-link to="/catalogo-especies">cat-especies</router-link>
+        </li>
+        <li>
+          <router-link to="/catalogo-parque">cat-parques</router-link>
+        </li>
+        <li>
+          <router-link to="/admin">admin</router-link>
+        </li>
       </ul>
       <ul class="header-nav-buttons">
         <!-- Botón usuario subir arbol - INICIO -->
@@ -32,16 +37,28 @@
         </li>
         <!-- Filtro búsqueda usuario - CATALOGO -->
         <li class="filtro" v-if="$route.name == 'catalogo'">
-        <div class="icon-filter-busqueda" >
-          <icono  :icon="['fa', 'sliders']" @click="filtrarDatos"></icono>
-          <div class="elementos-filtro" :class="{filtroOculto: !mostrarFiltro}">
-            <p>Arbores</p>
-            <p>Parques</p>
-            <p>Senlleiras</p>
-            <p>Especies</p>
+          <div class="icon-filter-busqueda">
+            <icono :icon="['fa', 'sliders']" @click="filtrarDatos"></icono>
+            <ul class="elementos-filtro" :class="{ filtroOculto: !mostrarFiltro }">
+              <li>
+                <icono :icon="['fa', 'tree-city']"></icono>
+                <p>Parques</p>
+              </li>
+              <li>
+              <icono :icon="['fa', 'leaf']"></icono>
+                <p>Especies</p>
+              </li>
+              <li>
+              <icono :icon="['fab', 'pagelines']"></icono>
+                <p>Senlleiras</p>
+              </li>
+              <li>
+              <icono :icon="['fa', 'tree']"></icono>
+                <p>Árbores</p>
+              </li>
+            </ul>
           </div>
-        </div>
-       
+
         </li>
 
       </ul>
@@ -63,7 +80,6 @@ const animacionBuscar = ref(false)
 const mostrarFiltro = ref(false)
 const filtrarDatos = () => {
   mostrarFiltro.value = !mostrarFiltro.value
-  console.log(mostrarFiltro.value)
 }
 
 const userStore = useStoreUsers();
