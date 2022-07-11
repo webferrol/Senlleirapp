@@ -69,7 +69,6 @@ import { ref } from "vue";
 import FichaTecnicaVue from "./FichaTecnica.vue";
 import { useStoreParques } from "../../stores/parques";
 import { useStoreGeneral } from "../../stores/general";
-
 import "@/assets/css/catalogo/catalogo.css";
 
 const storeParques = useStoreParques();
