@@ -83,5 +83,10 @@ export const routes = [
     name: "prueba",
     component: () => import("@/components/TheGeolocation.vue"),
   },
+  {
+    path: "/prueba2",
+    name: "prueba2",
+    component: () => import("@/views/Vista1.vue"),
+  },
 
 ];

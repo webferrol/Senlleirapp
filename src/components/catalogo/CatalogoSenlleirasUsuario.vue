@@ -79,7 +79,7 @@
         </template>
         <!-- Mapa ?? -->
         <template #mapa>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2923.632510160748!2d-8.546829884295173!3d42.880600110061145!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2efe4326414707%3A0xa18e63b9d0a316c5!2sCatedral%20de%20Santiago%20de%20Compostela!5e0!3m2!1ses!2ses!4v1657316820095!5m2!1ses!2ses" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <TheGeolocation/>
         </template>
 
     </FichaTecnicaVue>
@@ -97,6 +97,7 @@ import FichaTecnicaVue from "./FichaTecnica.vue";
 import { useStoreGeneral } from "../../stores/general";
 
 import "@/assets/css/catalogo/catalogo.css";
+import TheGeolocation from "../TheGeolocation.vue";
 
 const storeArbores = useStoreArbores();
 const storeEspecies = useStoreEspecies();

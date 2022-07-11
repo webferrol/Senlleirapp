@@ -14,7 +14,6 @@
 //Dependendencias
 import { Loader } from "@googlemaps/js-api-loader";
 import { ref } from "vue";
-import "../assets/css/mapa/google-maps.css";
 const props = defineProps({
   /**
    * {Number} zoom - Zoom que tendrá por defecto el mapa de google
