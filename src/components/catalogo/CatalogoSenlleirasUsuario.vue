@@ -149,7 +149,6 @@ const imagenesFichaTecnicaVaciar = () => {
 // datos(storeArbores.arbores);
 // Funcion para cargar datos de la ficha y sus respectivas imágenes
 const cargarDatosFicha = async (objeto) => {
-<<<<<<< HEAD
   //console.log(objeto)
   mostrarFicha.value = true;
   // Limpiamos y cargamos los datos tecnicos de la ficha
@@ -168,24 +167,4 @@ const cargarDatosFicha = async (objeto) => {
   }
   //await storeEspecies.setEspecies()
 };
-=======
-    //console.log(objeto)
-    mostrarFicha.value = true;
-    // Limpiamos y cargamos los datos tecnicos de la ficha
-    //const especie = storeEspecies.especies.find(el=>el.idDoc===objeto.idEspecie);
-    fichaDatos.value = null;
-    //fichaDatos.value= {...objeto,...especie};
-    fichaDatos.value = objeto;
-    // enviamos para filtrar
-    //console.log(fichaDatos)
-    // Limpiamos y cargamos las imagenes de la ficha
-    imagenesFichaTecnicaVaciar()
-    // console.log(fichaDatos.value)
-    await storeArbores.setImagenes('Arbores/' + objeto.idDoc)
-    for (let i = 0; i < storeArbores.imagenes.length; i++) {
-        imagenesFichaTecnica.value.push(storeArbores.imagenes[i])
-    }
-    //await storeEspecies.setEspecies()
-}
->>>>>>> 283938b4b10ee8f18bd2f666ce2e52d991a9b077
 </script>
