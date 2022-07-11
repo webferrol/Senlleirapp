@@ -8,13 +8,13 @@
       <!-- Botones area administrativa -->
       <ul class="nav-admin" v-if="userStore.user">
         <li>
-          <router-link to="/catalogo-senlleira">cat-senlleira</router-link>
+          <router-link to="/admin-senlleira">cat-senlleira</router-link>
         </li>
         <li>
-          <router-link to="/catalogo-especies">cat-especies</router-link>
+          <router-link to="/admin-especies">cat-especies</router-link>
         </li>
         <li>
-          <router-link to="/catalogo-parque">cat-parques</router-link>
+          <router-link to="/admin-parque">cat-parques</router-link>
         </li>
         <li>
           <router-link to="/admin">admin</router-link>
@@ -41,6 +41,12 @@
             <icono :icon="['fa', 'sliders']" @click="filtrarDatos"></icono>
             <ul class="elementos-filtro" :class="{ filtroOculto: !mostrarFiltro }">
               <li>
+                <router-link to="/catalogo">
+              <icono :icon="['fa', 'tree']"></icono>
+                <p>Árbores</p>
+                </router-link>
+              </li>
+              <li>
                 <router-link to="/catalogo-de-parques">
                 <icono :icon="['fa', 'tree-city']"></icono>
                 <p>Parques</p>
@@ -52,12 +58,7 @@
                 <p>Especies</p>
                 </router-link>
               </li>
-              <li>
-                <router-link to="/catalogo">
-              <icono :icon="['fa', 'tree']"></icono>
-                <p>Árbores</p>
-                </router-link>
-              </li>
+              
             </ul>
           </div>
 
@@ -92,10 +93,3 @@ const filtrar = () => {
 };
 </script>
 
-<style>
-.header-nav-app.rojo {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  background-color: red;
-}
-</style>
