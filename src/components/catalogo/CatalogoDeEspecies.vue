@@ -9,12 +9,12 @@
             <div class="arbol-info">
                 <span class="arbol">
                     <icono :icon="['fa', 'leaf']"></icono>
+                    <h3 class="arbol-nombre">{{ senlleira.nombre_comun }}</h3>
                 </span>
-                <h3 class="arbol-nombre">{{ senlleira.nombre_comun }}</h3>
                 <span class="lugar">
                     <icono :icon="['fa', 'location-dot']"></icono>
+                    <h4 class="arbol-lugar">{{ senlleira.genero }}</h4>
                 </span>
-                <h4 class="arbol-lugar">{{ senlleira.genero }}</h4>
             </div>
         </div>
     </div>
