@@ -47,7 +47,7 @@ defineProps({
     },
     imagenesFichaTecnica:{
         type: Array
-    }, 
+    },
     mostrarFicha: {
         type: Boolean,
         default: false,
