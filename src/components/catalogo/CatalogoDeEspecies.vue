@@ -78,61 +78,32 @@ import "@/assets/css/catalogo/catalogo.css";
 
 const storeEspecies = useStoreEspecies();
 const storeGeneral = useStoreGeneral();
-
-// (async ()=>{
-//     await storeArbores.setArbores()
-//     await storeArbores.getDownloadURL();
-//     // datos(storeArbores.arbores);
-// })()
-// const temPo = ref([]);
-const loadPage = async () => {
-  await storeEspecies.setEspecies();
-  // await storeEspecies.getDownloadURL();
-  storeGeneral.filtrarArbores();
-  // console.log(storeGeneral.tmp)
-  // console.log(temPo.value);
-};
-loadPage();
-// datos(temPo.value);
-// temPo = tmp;
-// console.log(storeArbores.arbores)
-//storeEspecies.setEspecies();
-
-// const filtrar = () => {
-//     console.log("jeje")
-//     temPo.value = storeGeneral.filtrar()
-//     console.log(temPo);
-// };
-
 const mostrarFicha = ref(false);
 const fichaDatos = ref(null);
 const imagenesFichaTecnica = ref([]);
 
+
 // Función que sirve para limpiar el array de imagenes
 const imagenesFichaTecnicaVaciar = () => {
-  while (imagenesFichaTecnica.value.length > 0)
+    while (imagenesFichaTecnica.value.length > 0)
     imagenesFichaTecnica.value.pop();
 };
 
-// datos(storeArbores.arbores);
 // Funcion para cargar datos de la ficha y sus respectivas imágenes
 const cargarDatosFicha = async (objeto) => {
-  //console.log(objeto)
   mostrarFicha.value = true;
   // Limpiamos y cargamos los datos tecnicos de la ficha
-  //const especie = storeEspecies.especies.find(el=>el.idDoc===objeto.idEspecie);
   fichaDatos.value = null;
   //fichaDatos.value= {...objeto,...especie};
   fichaDatos.value = objeto;
   // enviamos para filtrar
-  //console.log(fichaDatos)
   // Limpiamos y cargamos las imagenes de la ficha
   imagenesFichaTecnicaVaciar();
-  // console.log(fichaDatos.value);
-  // await storeEspecies.setImagenes('Arbores/' + objeto.idDoc)
-  // for (let i = 0; i < storeEspecies.imagenes.length; i++) {
-  //     imagenesFichaTecnica.value.push(storeEspecies.imagenes[i])
-  // }
-  //await storeEspecies.setEspecies()
 };
+// Cargamos los datos de especies y llamamos al buscador
+const loadPage = async () => {
+    await storeEspecies.setEspecies();
+    storeGeneral.filtrarArbores();
+};
+loadPage();
 </script>

@@ -110,60 +110,40 @@ import TheGeolocation from "../TheGeolocation.vue";
 const storeArbores = useStoreArbores();
 const storeEspecies = useStoreEspecies();
 const storeGeneral = useStoreGeneral();
-
-// (async ()=>{
-//     await storeArbores.setArbores()
-//     await storeArbores.getDownloadURL();
-//     // datos(storeArbores.arbores);
-// })()
-// const temPo = ref([]);
-const loadPage = async () => {
-  await storeArbores.setArbores();
-  await storeArbores.getDownloadURL();
-  storeGeneral.filtrarArbores();
-  // console.log(storeGeneral.tmp)
-  // console.log(temPo.value);
-};
-loadPage();
-// datos(temPo.value);
-// temPo = tmp;
-// console.log(storeArbores.arbores)
-//storeEspecies.setEspecies();
-
-// const filtrar = () => {
-//     console.log("jeje")
-//     temPo.value = storeGeneral.filtrar()
-//     console.log(temPo);
-// };
-
 const mostrarFicha = ref(false);
 const fichaDatos = ref(null);
 const imagenesFichaTecnica = ref([]);
 
-// Función que sirve para limpiar el array de imagenes
-const imagenesFichaTecnicaVaciar = () => {
-  while (imagenesFichaTecnica.value.length > 0)
-    imagenesFichaTecnica.value.pop();
-};
-
-// datos(storeArbores.arbores);
-// Funcion para cargar datos de la ficha y sus respectivas imágenes
-const cargarDatosFicha = async (objeto) => {
-    //console.log(objeto)
-    mostrarFicha.value = true;
-    // Limpiamos y cargamos los datos tecnicos de la ficha
-    //const especie = storeEspecies.especies.find(el=>el.idDoc===objeto.idEspecie);
-    fichaDatos.value = null;
-    //fichaDatos.value= {...objeto,...especie};
-    fichaDatos.value = objeto;
-    // enviamos para filtrar
-    //console.log(fichaDatos)
-    // Limpiamos y cargamos las imagenes de la ficha
-    imagenesFichaTecnicaVaciar()
-    await storeArbores.setImagenes('Arbores/' + objeto.idDoc)
-    for (let i = 0; i < storeArbores.imagenes.length; i++) {
-        imagenesFichaTecnica.value.push(storeArbores.imagenes[i])
+    // Función que sirve para limpiar el array de imagenes
+    const imagenesFichaTecnicaVaciar = () => {
+      while (imagenesFichaTecnica.value.length > 0)
+        imagenesFichaTecnica.value.pop();
+    };
+    
+    // Funcion para cargar datos de la ficha y sus respectivas imágenes
+    const cargarDatosFicha = async (objeto) => {
+        mostrarFicha.value = true;
+        // Limpiamos y cargamos los datos tecnicos de la ficha
+        fichaDatos.value = null;
+        //fichaDatos.value= {...objeto,...especie};
+        fichaDatos.value = objeto;
+        // enviamos para filtrar
+        // Limpiamos y cargamos las imagenes de la ficha
+        imagenesFichaTecnicaVaciar()
+        await storeArbores.setImagenes('Arbores/' + objeto.idDoc)
+        for (let i = 0; i < storeArbores.imagenes.length; i++) {
+            imagenesFichaTecnica.value.push(storeArbores.imagenes[i])
+        }
     }
-    //await storeEspecies.setEspecies()
-}
+
+// Cargamos los datos y llamamos al buscador    
+const loadPage = async () => {
+  await storeArbores.setArbores();
+  await storeArbores.getDownloadURL();
+  storeGeneral.filtrarArbores();
+};
+loadPage();
+
+
+
 </script>
