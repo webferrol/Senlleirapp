@@ -125,12 +125,14 @@
           placeholder="Descripción"
         ></textarea>
 
-        <div class="images" v-for="image of images" :key="image.ref">
-          <img class="image" :src="image.src" alt="" />
-          <button class="btn-eliminar" @click="deleteImage(image.ref)">
-            Eliminar
-          </button>
-        </div>
+        <fieldset class="editar-images">
+          <div class="images" v-for="image of images" :key="image.ref">
+            <img class="image" :src="image.src" alt="" />
+            <button class="btn-eliminar" @click="deleteImage(image.ref)">
+              Eliminar
+            </button>
+          </div>
+        </fieldset>
 
         <theUploader @emitirFichero="gestionFoto"></theUploader>
 
@@ -162,7 +164,6 @@ const loading = ref(false);
 let itemDelete = null;
 
 const mostrar = ref(false);
-const images =ref([]);
 
 // FUNCION PARA ELIMINAR PARQUE
 const handleDelete = ({ id, name }) => {
@@ -248,8 +249,14 @@ cargarFotos();
 
 
 <style scoped>
-.images {
+
+.editar-images{
   display: grid;
+  grid-template-columns: auto auto auto;
+}
+.images {
+  display: flex;
+  flex-direction: column;
 }
 
 .image {
@@ -259,6 +266,7 @@ cargarFotos();
 .btn-eliminar {
   width: 70px;
   height: 20px;
+  margin-top: .2em;
 }
 </style> >
 
