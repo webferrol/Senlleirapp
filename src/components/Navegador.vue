@@ -98,5 +98,17 @@ const filtrar = () => {
     storeGeneral.filtrarParques();
   }
 };
+
+window.addEventListener(
+  "click",
+  (e)=> {
+    
+    if(!document.querySelector(".icon-filter-busqueda").contains(e.target)){
+      mostrarFiltro.value = false
+    } 
+  }
+);
+
+
 </script>
 

@@ -1,4 +1,5 @@
 <template>
+<h1 class="tittle-section">Catalogo especies</h1>
   <div class="catalogo-section-component">
     <div
       class="arbol-catalogo-element"
