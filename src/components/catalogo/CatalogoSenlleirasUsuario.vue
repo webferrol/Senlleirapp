@@ -79,7 +79,7 @@
         </template>
         <!-- Mapa ?? -->
         <template #mapa>
-            <TheGeolocation/>
+            <TheGeolocation :lat="fichaDatos.lat" :lng="fichaDatos.lng"/>
         </template>
 
     </FichaTecnicaVue>
