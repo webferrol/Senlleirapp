@@ -1,100 +1,93 @@
 <template>
   <div class="formsenlleira" v-if="loaded">Cargando...</div>
 
-    <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
-        <span class="h2-background">
-            <h2>Engadir nova árbore </h2>
-            
-            <router-link to="/"><icono :icon="['fa', 'xmark']"></icono></router-link>
-        </span>
-
-        <fieldset class="data-senlleira --localizacion">
-            <legend> Datos da árbore </legend>
-            <div class="senlleira-nombre-cientifico">
-                <label for="arbore" class="form-label"> Nome da árbore <span class="required-user"
-                        data-set="Campo obligatorio">*</span></label>
-                <input v-model="form.nombre_arbol" type="text"  name="arbore" id="arbore"
-                    placeholder="indica o nome da arbore" required />
-
-                <label for="especie" class="form-label">Nome científico <span
-                        data-set="Campo obligatorio" class="required-user">*</span></label>
-                <select @change="handleSelect" v-model="form.idEspecie" name="especie" id="especie" required>
-                    <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.idDoc"
-                        :value="valor.idDoc">
-                        {{ valor.genero }} {{ valor.especie }}</option>
-                </select>
-
-        <label for="nome" class="form-label"> Nome en galego</label>
-        <select
-          @change="handleSelect"
-          v-model="form.idEspecie"
-          name="nome"
-          id="nombre-gallego"
-        >
-          <option
-            v-for="valor in storeEspecies.especies"
-            :key="valor.idDoc"
-            :value="valor.idDoc"
-          >
-            {{ valor.nombre_comun_gal }}
-          </option>
-        </select>
-
-        <label for="nome" class="form-label"> Nome en castelán</label>
-        <select
-          @change="handleSelect"
-          v-model="form.idEspecie"
-          name="nome"
-          id="nombre-castellano"
-        >
-          <option
-            v-for="valor in storeEspecies.especies"
-            :key="valor.idDoc"
-            :value="valor.idDoc"
-          >
-            {{ valor.nombre_comun }}
-          </option>
-        </select>
-      </div>
-    </fieldset>
-    <fieldset class="data-senlleira">
-      <legend>Ubicación</legend>
-
-            <div class="senlleira-localizacion">
-                <label for="zona" class="form-label"> Zona xeográfica <span
-                        data-set="Campo obligatorio" class="required-user">*</span></label>
-                <input v-model="form.zona_geografica" type="text"  name="zona" id="zona"
-                    placeholder="Zona geográfica"/>
-
-                <label for="localizacion" class="form-label"> Ubicación parque <span
-                        data-set="Campo obligatorio" class="required-user">*</span></label>
-                <select @change="form.ubicacion_parque = $event.target.options[$event.target.selectedIndex].text"
-                    v-model="form.idParque" name="localizacion" id="localizacion" required>
-                    <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
-                        {{ valor.nombre }} </option>
-                </select>
-                <input type="hidden" v-model="form.ubicacion_parque">
-
-                <label for="latitud" class="form-label">Latitude <span data-set="Campo obligatorio" class="required-user">*</span></label>
-                <input v-model.number="form.lat" type="number" name="latitud" id="latitud" step="any"
-                    placeholder="indicar latitude" required/>
-
-                <label for="longitud" class="form-label">Lonxitude <span data-set="Campo obligatorio" class="required-user">*</span></label>
-                <input v-model.number="form.lng" type="number" name="longitud" id="longitud" step="any"
-                    placeholder="indicar lonxitude" required/>
-            </div>
+    <div class="form-container">
+        <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
+            <span class="h2-background">
+                <h2>Engadir nova árbore </h2>
+        
+                <router-link to="/"><icono :icon="['fa', 'xmark']"></icono></router-link>
+            </span>
+            <fieldset class="data-senlleira --localizacion">
+                <legend> Datos da árbore </legend>
+                <div class="senlleira-nombre-cientifico">
+                    <label for="arbore" class="form-label"> Nome da árbore <span class="required-user"
+                            data-set="Campo obligatorio">*</span></label>
+                    <input v-model="form.nombre_arbol" type="text"  name="arbore" id="arbore"
+                        placeholder="indica o nome da arbore" required />
+                    <label for="especie" class="form-label">Nome científico <span
+                            data-set="Campo obligatorio" class="required-user">*</span></label>
+                    <select @change="handleSelect" v-model="form.idEspecie" name="especie" id="especie" required>
+                        <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.idDoc"
+                            :value="valor.idDoc">
+                            {{ valor.genero }} {{ valor.especie }}</option>
+                    </select>
+            <label for="nome" class="form-label"> Nome en galego</label>
+            <select
+              @change="handleSelect"
+              v-model="form.idEspecie"
+              name="nome"
+              id="nombre-gallego"
+            >
+              <option
+                v-for="valor in storeEspecies.especies"
+                :key="valor.idDoc"
+                :value="valor.idDoc"
+              >
+                {{ valor.nombre_comun_gal }}
+              </option>
+            </select>
+            <label for="nome" class="form-label"> Nome en castelán</label>
+            <select
+              @change="handleSelect"
+              v-model="form.idEspecie"
+              name="nome"
+              id="nombre-castellano"
+            >
+              <option
+                v-for="valor in storeEspecies.especies"
+                :key="valor.idDoc"
+                :value="valor.idDoc"
+              >
+                {{ valor.nombre_comun }}
+              </option>
+            </select>
+          </div>
         </fieldset>
-        <fieldset>
-
-            <legend> Imaxe </legend>
-            <div class="data-senlleira">
-                <theUploader @emitirFichero="gestionFoto"></theUploader>
-                <div v-if="error.error" class="error"> {{ error.message }} </div>
-            </div>
-            <div v-if="spinner" class="spinner"> Cargando.... </div>
-        </fieldset>
-        <button class="btn-form">Publicar Arbore</button>
-    </form>
+        <fieldset class="data-senlleira">
+          <legend>Ubicación</legend>
+                <div class="senlleira-localizacion">
+                    <label for="zona" class="form-label"> Zona xeográfica <span
+                            data-set="Campo obligatorio" class="required-user">*</span></label>
+                    <input v-model="form.zona_geografica" type="text"  name="zona" id="zona"
+                        placeholder="Zona geográfica"/>
+                    <label for="localizacion" class="form-label"> Ubicación parque <span
+                            data-set="Campo obligatorio" class="required-user">*</span></label>
+                    <select @change="form.ubicacion_parque = $event.target.options[$event.target.selectedIndex].text"
+                        v-model="form.idParque" name="localizacion" id="localizacion" required>
+                        <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
+                            {{ valor.nombre }} </option>
+                    </select>
+                    <input type="hidden" v-model="form.ubicacion_parque">
+                    <label for="latitud" class="form-label">Latitude <span data-set="Campo obligatorio" class="required-user">*</span></label>
+                    <input v-model.number="form.lat" type="number" name="latitud" id="latitud" step="any"
+                        placeholder="indicar latitude" required/>
+                    <label for="longitud" class="form-label">Lonxitude <span data-set="Campo obligatorio" class="required-user">*</span></label>
+                    <input v-model.number="form.lng" type="number" name="longitud" id="longitud" step="any"
+                        placeholder="indicar lonxitude" required/>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend> Imaxe </legend>
+                <div class="data-senlleira">
+                    <theUploader @emitirFichero="gestionFoto"></theUploader>
+                    <div v-if="error.error" class="error"> {{ error.message }} </div>
+                </div>
+                <div v-if="spinner" class="spinner"> Cargando.... </div>
+            </fieldset>
+            <button class="btn-form">Publicar Arbore</button>
+        </form>
+    </div>
 </template>
 
 <script setup>

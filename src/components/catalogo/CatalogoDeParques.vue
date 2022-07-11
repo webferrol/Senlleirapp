@@ -1,11 +1,10 @@
 <template>
+<h1 class="tittle-section">Catalogo Parques</h1>
     <div class="catalogo-section-component">
         <div class="arbol-catalogo-element" data-titulo="Mostrar" title="Máis info"
             v-for="(parque, index) in storeGeneral.tmp" :key="index" identificador=senlleira.id
             @click="cargarDatosFicha(parque)">
-            <div class="imagen-catalogo">
-                <img alt="imagen del arbol senlleiro" :src="parque.url_google">
-            </div>
+                <img  class="imagen-catalogo" alt="imagen del arbol senlleiro" :src="parque.url_google">
             <div class="arbol-info">
                 <span class="arbol">
                     <icono :icon="['fa', 'leaf']"></icono>
@@ -19,6 +18,7 @@
         </div>
     </div>
      <!-- <pre>{{temPo}}</pre> -->
+
 
     <FichaTecnicaVue 
     

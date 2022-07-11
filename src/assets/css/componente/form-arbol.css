@@ -1,14 +1,27 @@
-#senlleiras{
+.form-container{
     position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    top: 0;
+    height: calc(100vh - 43px);
+    background-color: rgba(200,200,200, .5);
+    backdrop-filter: blur(5px);
+    z-index: 2;
+}
+
+#senlleiras{
+    position: relative;
     width: 100%;
     top: 0;
     max-width: 600px;
-    height: calc(100vh - 43px);
+    height: fit-content;
+    max-height: calc(100vh - 43px);
     margin: auto;
     z-index: 999;
     /* border: 2px solid rgba(205,205,205, .4); */
     background-color: white;
-    padding: .5rem;
     display: grid;
     grid-template-columns: auto;
     gap: 1rem;
@@ -17,13 +30,12 @@
 }
 /* Cabecera */
 .h2-background{
-    position: absolute;
+    position: sticky;
     background-color: var(--colorprincipal2);
     width: 100%;
+    max-width: 600px;
     top: 0;
-    right: 0;
     height: 40px;
-    position: fixed;
     z-index: 1;
 }
 #senlleiras .h2-background h2{
@@ -61,6 +73,7 @@
 
 /* Diseño estructura formulario */
 fieldset{
+    margin: 0 .5rem;
     padding: .5rem;
     border-radius: 5px;
     background-color: rgba(200,200,200, 1);
@@ -86,10 +99,6 @@ textarea{
     resize: none;
 }
 
-.--localizacion{
-    margin-top: 40px;
-}
-
 .senlleira-nombre-cientifico, .senlleira-localizacion{
     display: grid;
     grid-template-columns: auto;
@@ -111,6 +120,7 @@ input[type="text"], select, input[type="number"]{
 /* Boton submit */
 .btn-form{
     width: fit-content;
+    height: fit-content;
     margin: .5rem auto;
     background-color: var(--colorprincipal2);
     color: var(--colorclaro);
@@ -122,21 +132,17 @@ input[type="text"], select, input[type="number"]{
 
 @keyframes aparicionForm {
     0%{
-        height: 0;
+        width: 0;
         opacity: 0;
     }
     100%{
-        height: 100%;
+        width: 100%;
         opacity: 1;
     }
 }
-@keyframes desaparicionForm {
-    0%{
-        height: 100%;
-        opacity: 1;
-    }
-    100%{
-        height: 0;
-        opacity: 0;
+
+@media screen and (min-width:600px) {
+    #senlleiras{
+        border-radius: 5px;
     }
 }
