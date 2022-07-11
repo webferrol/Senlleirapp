@@ -1,20 +1,20 @@
 <template>
     <div class="catalogo-section-component">
         <div class="arbol-catalogo-element" data-titulo="Mostrar" title="Máis info"
-            v-for="(senlleira, index) in storeParques.parques" :key="index" identificador=senlleira.id
-            @click="cargarDatosFicha(senlleira)">
+            v-for="(parque, index) in storeGeneral.tmp" :key="index" identificador=senlleira.id
+            @click="cargarDatosFicha(parque)">
             <div class="content-img">
-                <img alt="imagen del arbol senlleiro" :src="senlleira.google_url">
+                <img alt="imagen del arbol senlleiro" :src="parque.url_google">
             </div>
             <div class="arbol-info">
                 <span class="arbol">
                     <icono :icon="['fa', 'leaf']"></icono>
                 </span>
-                <h3 class="arbol-nombre">{{ senlleira.nombre }}</h3>
+                <h3 class="arbol-nombre">{{ parque.nombre }}</h3>
                 <span class="lugar">
                     <icono :icon="['fa', 'location-dot']"></icono>
                 </span>
-                <h4 class="arbol-lugar">{{ senlleira.localizacion }}</h4>
+                <h4 class="arbol-lugar">{{ parque.localizacion }}</h4>
             </div>
         </div>
     </div>
@@ -86,7 +86,7 @@ const storeGeneral = useStoreGeneral();
 const loadPage = async () => {
     await storeParques.setParques();
     // await storeParques.getDownloadURL();
-    storeGeneral.filtrarArbores();
+    storeGeneral.filtrarParques();
     // console.log(storeGeneral.tmp)
     // console.log(temPo.value);
 }
