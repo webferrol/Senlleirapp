@@ -8,7 +8,6 @@
             <div class="caracteristicas-parque">
 
                 <span>
-                    <h3>localización</h3>
                     <p>{{ parque.localizacion }}</p>
                 </span>
                 <span>

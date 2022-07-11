@@ -11,62 +11,31 @@
         </article>
       </div>
     </section>
-   
-    <FichaTecnicaVue v-if="mostrarFicha"
-      @cerrarFicha="mostrarFicha = false"
-      :data="fichaDatos"
-      :images="imagenesFichaTecnica"
-    >
-     <template #titulo>
-        <h2 class="ficha-tittle">{{fichaDatos.nombre}}</h2>
-     </template>
-     <template #content>
-        <div class="datos-especie">
-            <span>
-                <h3>Tipoloxía</h3>
-                <p>{{fichaDatos.tipoloxia}}</p>
-            </span>
-            <span>
-                <h3>Localizacion</h3>
-                <p>{{fichaDatos.localizacion}}</p>
-            </span>
-            <span>
-                <h3>Superficie</h3>
-                <p>{{fichaDatos.superficie}} metros cadrados</p>
-            </span>
-            <span>
-                <h3>Cronoloxía</h3>
-                <p>{{fichaDatos.cronoloxia}}</p>
-            </span>
 
-        </div>
-     </template>
+    <FichaParquePublica 
+    v-if="mostrarFicha"
+    :mostrarFicha="mostrarFicha"
+    :fichaDatos="fichaDatos" 
+    :imagenesFichaTecnica="imagenesFichaTecnica"></FichaParquePublica>
 
-     <template #footer>
-     <div class="descripcion">
-         <h3>Descrición</h3>
-         <p>{{fichaDatos.descripcion}}</p>
-     </div>
-     </template>
-    </FichaTecnicaVue>
-
+    
 </template>
 
 <script setup>
 import "@/assets/css/carruselStories.css"
 import { ref } from "vue";
 import { useStoreParques } from "@/stores/parques"; 
-import FichaTecnicaVue from "../catalogo/FichaTecnica.vue";
+import FichaParquePublica from "./FichaParquePublica.vue";
 
 
 // Imagenes del navegador
 const storeParques = useStoreParques();
 storeParques.setParques();
 
-// Cargar datos al hacer click
-const mostrarFicha = ref(false)
+
 const fichaDatos = ref(null);
 const imagenesFichaTecnica = ref([]);
+const mostrarFicha = ref(false)
 
 // Función que sirve para limpiar el array de imagenes
 const imagenesFichaTecnicaVaciar = () => {
