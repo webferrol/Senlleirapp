@@ -92,6 +92,18 @@
           <legend>Descripción</legend>
           <label for="descripcion"> Descrición</label>
           <textarea type="text" v-model="arbore.descripcion" id="descripcion" placeholder="Descripción"></textarea>
+<<<<<<< HEAD
+=======
+
+
+
+
+          
+          <div class="images" v-for="image of images" :key="image.ref">
+            <img class="image" :src="image.src" alt="">
+            <button class="btn-eliminar" @click="deleteImage(image.ref)">Eliminar</button>
+          </div>
+>>>>>>> 5e775e7f7ac36ceec0712077eb70ceeba5059484
         </fieldset>
          <fieldset class="editar-images">
            <div class="images" v-for="image of images" :key="image.ref">
@@ -100,6 +112,8 @@
             </div>
          </fieldset>
         <theUploader @emitirFichero="gestionFoto"></theUploader>
+
+
         <input type="submit" value="Editar Senlleira" :disabled="arbore === null" />
         <div v-if="loading">Guardando...</div>
       </fieldset>
@@ -200,6 +214,10 @@ const cargarFotos = async () => {
     }
 }
 cargarFotos();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5e775e7f7ac36ceec0712077eb70ceeba5059484
 </script>
 
 <style scoped>
