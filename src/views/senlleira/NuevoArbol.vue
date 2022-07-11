@@ -3,20 +3,21 @@
 
     <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
         <span class="h2-background">
-            <h2>Nova árbore </h2>
-            <icono :icon="['fa', 'leaf']"></icono>
+            <h2>Engadir nova árbore </h2>
+            
+            <router-link to="/"><icono :icon="['fa', 'xmark']"></icono></router-link>
         </span>
 
         <fieldset class="data-senlleira --localizacion">
             <legend> Datos da árbore </legend>
             <div class="senlleira-nombre-cientifico">
-                <label for="arbore" class="form-label"> Nome da árbore <span
+                <label for="arbore" class="form-label"> Nome da árbore <span class="required-user"
                         data-set="Campo obligatorio">*</span></label>
                 <input v-model="form.nombre_arbol" type="text"  name="arbore" id="arbore"
                     placeholder="indica o nome da arbore" required />
 
                 <label for="especie" class="form-label">Nome científico <span
-                        data-set="Campo obligatorio">*</span></label>
+                        data-set="Campo obligatorio" class="required-user">*</span></label>
                 <select @change="handleSelect" v-model="form.idEspecie" name="especie" id="especie" required>
                     <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.idDoc"
                         :value="valor.idDoc">
@@ -42,12 +43,12 @@
 
             <div class="senlleira-localizacion">
                 <label for="zona" class="form-label"> Zona xeográfica <span
-                        data-set="Campo obligatorio">*</span></label>
+                        data-set="Campo obligatorio" class="required-user">*</span></label>
                 <input v-model="form.zona_geografica" type="text"  name="zona" id="zona"
                     placeholder="Zona geográfica" required/>
 
                 <label for="localizacion" class="form-label"> Ubicación parque <span
-                        data-set="Campo obligatorio">*</span></label>
+                        data-set="Campo obligatorio" class="required-user">*</span></label>
                 <select @change="form.ubicacion_parque = $event.target.options[$event.target.selectedIndex].text"
                     v-model="form.idParque" name="localizacion" id="localizacion" required>
                     <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
@@ -55,11 +56,11 @@
                 </select>
                 <input type="hidden" v-model="form.ubicacion_parque">
 
-                <label for="latitud" class="form-label">Latitude <span data-set="Campo obligatorio">*</span></label>
+                <label for="latitud" class="form-label">Latitude <span data-set="Campo obligatorio" class="required-user">*</span></label>
                 <input v-model.number="form.lat" type="number" name="latitud" id="latitud" step="any"
                     placeholder="indicar latitude" required/>
 
-                <label for="longitud" class="form-label">Lonxitude <span data-set="Campo obligatorio">*</span></label>
+                <label for="longitud" class="form-label">Lonxitude <span data-set="Campo obligatorio" class="required-user">*</span></label>
                 <input v-model.number="form.lng" type="number" name="longitud" id="longitud" step="any"
                     placeholder="indicar lonxitude" required/>
             </div>
@@ -83,7 +84,7 @@ import { useStoreArbores } from '@/stores/arbores';
 import { useStoreEspecies } from '@/stores/especies';
 import { useStoreParques } from '@/stores/parques';
 import { reactive, ref } from 'vue';
-import "@/assets/css/formularioSenlleira.css";
+import "@/assets/css/componente/form-arbol.css";
 
 // llamada del store
 const storeEspecies = useStoreEspecies();

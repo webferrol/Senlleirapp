@@ -100,6 +100,17 @@
     font-weight: 500;
   }
 
+  @media screen and (max-width: 480px) {
+    .arbol-catalogo-element .imagen-catalogo{
+      height:  266px;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .arbol-catalogo-element .imagen-catalogo{
+      height:  200px;
+    }
+  }
+
   @media screen and (min-width: 700px ) {
     .catalogo-section-component{
       width: 90vw;
@@ -110,12 +121,11 @@
       max-width: 300px;
     }
       .arbol-catalogo-element .imagen-catalogo{
-        height: 250px;
+        height: 260px;
       }
   }
-
-  @media screen and (max-width: 480px) {
+  @media screen and (min-width: 820px) {
     .arbol-catalogo-element .imagen-catalogo{
-      height:  266px;
+      height: 400px;
     }
   }
