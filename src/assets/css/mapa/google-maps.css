@@ -10,9 +10,9 @@
     margin: .25rem 0;
 }
     .nav-mapa a{
-        background-color: rgba(255,255,255, .7);
+        background-color: var(--colorprincipal3);
         border-radius: 5px;
-        color: black;
+        color: white;
         font-weight: 600;
         text-decoration: none;
         width: 100px;

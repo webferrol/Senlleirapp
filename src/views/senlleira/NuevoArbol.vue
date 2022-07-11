@@ -1,5 +1,5 @@
 <template>
-    <div class="formsenlleira" v-if="loaded"> Cargando... </div>
+  <div class="formsenlleira" v-if="loaded">Cargando...</div>
 
     <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
         <span class="h2-background">
@@ -24,28 +24,47 @@
                         {{ valor.genero }} {{ valor.especie }}</option>
                 </select>
 
-                <label for="nome" class="form-label"> Nome en galego</label>
-                <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-gallego" >
-                    <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
-                        {{ valor.nombre_comun_gal }}
-                    </option>
-                </select>
+        <label for="nome" class="form-label"> Nome en galego</label>
+        <select
+          @change="handleSelect"
+          v-model="form.idEspecie"
+          name="nome"
+          id="nombre-gallego"
+        >
+          <option
+            v-for="valor in storeEspecies.especies"
+            :key="valor.idDoc"
+            :value="valor.idDoc"
+          >
+            {{ valor.nombre_comun_gal }}
+          </option>
+        </select>
 
-                <label for="nome" class="form-label"> Nome en castelán</label>
-                <select @change="handleSelect" v-model="form.idEspecie" name="nome" id="nombre-castellano" >
-                    <option v-for="valor in storeEspecies.especies" :key="valor.idDoc" :value="valor.idDoc">
-                        {{ valor.nombre_comun }} </option>
-                </select>
-            </div>
-        </fieldset>
-        <fieldset class="data-senlleira">
-            <legend>Ubicación</legend>
+        <label for="nome" class="form-label"> Nome en castelán</label>
+        <select
+          @change="handleSelect"
+          v-model="form.idEspecie"
+          name="nome"
+          id="nombre-castellano"
+        >
+          <option
+            v-for="valor in storeEspecies.especies"
+            :key="valor.idDoc"
+            :value="valor.idDoc"
+          >
+            {{ valor.nombre_comun }}
+          </option>
+        </select>
+      </div>
+    </fieldset>
+    <fieldset class="data-senlleira">
+      <legend>Ubicación</legend>
 
             <div class="senlleira-localizacion">
                 <label for="zona" class="form-label"> Zona xeográfica <span
                         data-set="Campo obligatorio" class="required-user">*</span></label>
                 <input v-model="form.zona_geografica" type="text"  name="zona" id="zona"
-                    placeholder="Zona geográfica" required/>
+                    placeholder="Zona geográfica"/>
 
                 <label for="localizacion" class="form-label"> Ubicación parque <span
                         data-set="Campo obligatorio" class="required-user">*</span></label>
@@ -95,114 +114,117 @@ storeParques.setParques();
 storeArbores.setArbores();
 
 const form = reactive({
-    genero: '',
-    especie: '',
-    idEspecie: 0,
-    idParque: 0,
-    ubicacion_parque: '',
-    zona_geografica: '', //Conxo por exemplo, onde está situado
-    senlleira: false,
-    propuesta_senlleria: false, //Si no es Senlleira ni propuesta es un árbol común
-    nombre_arbol: '',
-    nombre_comun: '',//Nombre castellano
-    nombre_comun_gal: '',
-    storage_ref: '', //es el identificador donde se guarda un fichero en el Storage Cloud
-    google_url: '',
-    lng: '',//longitud
-    lat: '',//latitud
-    diametro: 0,
-    altura: 0,
-    descripcion: '',
-
-})
+  genero: "",
+  especie: "",
+  idEspecie: 0,
+  idParque: 0,
+  ubicacion_parque: "",
+  zona_geografica: "", //Conxo por exemplo, onde está situado
+  senlleira: false,
+  propuesta_senlleria: false, //Si no es Senlleira ni propuesta es un árbol común
+  nombre_arbol: "",
+  nombre_comun: "", //Nombre castellano
+  nombre_comun_gal: "",
+  storage_ref: "", //es el identificador donde se guarda un fichero en el Storage Cloud
+  google_url: "",
+  lng: "", //longitud
+  lat: "", //latitud
+  diametro: 0,
+  altura: 0,
+  descripcion: "",
+});
 
 // indica todos los errores que se presenten
 const error = ref({
-    error: false,
-    message: '',
+  error: false,
+  message: "",
 });
 let tmpImagenes = null;
 const spinner = ref(false);
 const loaded = ref(false);
 
 const reset = () => {
-    // form.genero = '';
-    // form.especie = '';
-    // form.idEspecie = 0;
-    // form.idParque= 0,
-    // form.zona_geografica = '';
-    // form.ubicacion_parque = '';
-    // form.nombre_arbol='',
-    // form.nombre_comun = '';
-    // form.nombre_comun_gal = '';
-    // form.storage_ref='';
-    // form.google_url='',
-    // form.lat ='';
-    // form.lng ='';
-    // form.altura =0;
-    // form.diametro =0;
-    // form.descripcion = '';
-    // form.senlleira= false;
-    // form.propuesta_senlleria= false; //Si no es Senlleira ni propuesta es un árbol común
-}
+  // form.genero = '';
+  // form.especie = '';
+  // form.idEspecie = 0;
+  // form.idParque= 0,
+  // form.zona_geografica = '';
+  // form.ubicacion_parque = '';
+  // form.nombre_arbol='',
+  // form.nombre_comun = '';
+  // form.nombre_comun_gal = '';
+  // form.storage_ref='';
+  // form.google_url='',
+  // form.lat ='';
+  // form.lng ='';
+  // form.altura =0;
+  // form.diametro =0;
+  // form.descripcion = '';
+  // form.senlleira= false;
+  // form.propuesta_senlleria= false; //Si no es Senlleira ni propuesta es un árbol común
+};
 
-// esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito 
+// esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito
 const handleSelect = (e) => {
-    if (storeEspecies.especies.length) {
-        const especie = storeEspecies.especies.find(item => item.idDoc == e.target.value);
-        // console.log('-->',especie)
-        form.genero = especie?.genero;
-        form.especie = especie?.especie;
-        form.nombre_comun = especie?.nombre_comun;
-        form.nombre_comun_gal = especie?.nombre_comun_gal;
-    }
-}
+  if (storeEspecies.especies.length) {
+    const especie = storeEspecies.especies.find(
+      (item) => item.idDoc == e.target.value
+    );
+    // console.log('-->',especie)
+    form.genero = especie?.genero;
+    form.especie = especie?.especie;
+    form.nombre_comun = especie?.nombre_comun;
+    form.nombre_comun_gal = especie?.nombre_comun_gal;
+  }
+};
 
 const gestionFoto = async (imagenes) => {
-    try {
-        error.value = { error: false, message: '', }
-        tmpImagenes = imagenes;
-    } catch (e) {
-        error.value.error = true;
-        error.value.message = e.message;
-    }
+  try {
+    error.value = { error: false, message: "" };
+    tmpImagenes = imagenes;
+  } catch (e) {
+    error.value.error = true;
+    error.value.message = e.message;
+  }
 };
 const handleSubmit = async () => {
-    //Se comprueban errores antes de enviar nada
-    //Enviar
-    if (storeEspecies.especies.length) {
-        const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
-        try {
-            if (tmpImagenes === null || !tmpImagenes.length)
-                throw new Error("Falta imagen");
-        } catch (e) {
-            error.value.error = true;
-            error.value.message = e.message;
-        }
-        if (tmpImagenes !== null && data.id) {
-            try {
-                error.value = { error: false, message: '', }
-                spinner.value = true;
-                loaded.value = true;
-                for (let i = 0, tam = tmpImagenes.length; i < tam; i++) {
-                    await storeArbores.subirFoto({
-                        ref: `Arbores/${data.id}`,
-                        file: tmpImagenes[i],
-                    });
-                }
-                spinner.value = false;
-                reset();
-            } catch (e) {
-                error.value.error = true;
-                error.value.message = e.message;
-            } finally {
-                loaded.value = false;
-            }
-        }
+  //Se comprueban errores antes de enviar nada
+  //Enviar
+  if (storeEspecies.especies.length) {
+    const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
+    try {
+      if (tmpImagenes === null || !tmpImagenes.length)
+        throw new Error("Falta imagen");
+    } catch (e) {
+      error.value.error = true;
+      error.value.message = e.message;
     }
+    if (tmpImagenes !== null && data.id) {
+      try {
+        error.value = { error: false, message: "" };
+        spinner.value = true;
+        loaded.value = true;
+        for (let i = 0, tam = tmpImagenes.length; i < tam; i++) {
+          await storeArbores.subirFoto({
+            ref: `Arbores/${data.id}`,
+            file: tmpImagenes[i],
+          });
+        }
+        spinner.value = false;
+        reset();
+      } catch (e) {
+        error.value.error = true;
+        error.value.message = e.message;
+      } finally {
+        loaded.value = false;
+      }
+    }
+  }
 };
 
-storeEspecies.setEspecies().then().catch(e => alert(e));
-
+storeEspecies
+  .setEspecies()
+  .then()
+  .catch((e) => alert(e));
 </script>
 

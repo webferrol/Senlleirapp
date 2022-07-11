@@ -2,7 +2,6 @@
   <div class="especies_alert" v-if="loaded">Cargando...</div>
   <div class="form-container">
     <form id="alta-parque" @submit.prevent="handleSubmit">
-
       <icono
         class="close-form"
         :icon="['fa', 'xmark']"
@@ -11,7 +10,7 @@
       <fieldset class="data-parque">
         <h2>Formulario Alta Parque</h2>
 
-        <label for="nombre" class="form-label" >Nome</label>
+        <label for="nombre" class="form-label">Nome</label>
         <input
           class="input-parque"
           v-model.trim="form.nombre"
@@ -26,7 +25,6 @@
           class="input-parque"
           v-model.trim="form.tipoloxia"
           type="text"
-          required
           name="tipoloxia"
           id="tipoloxia"
           placeholder="Tipoloxia"
@@ -36,7 +34,6 @@
           class="input-parque"
           v-model.trim="form.localizacion"
           type="text"
-          required
           name="localización"
           id="localización"
           placeholder="Localización"
@@ -71,7 +68,6 @@
           class="input-parque"
           v-model.trim="form.cronoloxia"
           type="text"
-          required
           name="cronoloxía"
           id="cronoloxía"
           placeholder="Cronoloxía"
@@ -81,7 +77,6 @@
           class="input-parque"
           v-model.number="form.superficie"
           type="number"
-          
           name="superficie"
           id="superficie"
           placeholder="Superficie"
@@ -94,7 +89,6 @@
           cols="30"
           rows="10"
           type="textarea"
-          
           name="descripcion"
           id="descripcion"
           placeholder="Descripcion"
@@ -157,7 +151,7 @@ const reset = () => {
 
   form.lng = "";
 
-  form.lng="";
+  form.lng = "";
 
   form.lng = "";
 
@@ -184,7 +178,7 @@ const fotosParques = async (imagenes) => {
 //Funcion para cargar mapa del parque
 
 const fotoMapa = async (imagen) => {
-  try {  
+  try {
     error.value = { error: false, message: "" };
     tmpMapa = imagen;
     //await store.subirFoto(imagen);
@@ -194,28 +188,28 @@ const fotoMapa = async (imagen) => {
   }
 };
 
-const subidaImagen = async (imagenes,id,name=false) => {
+const subidaImagen = async (imagenes, id, name = false) => {
   //Subida al Store
-    try {
-      error.value = { error: false, message: "" };
-      spinner.value = true;
-      loaded.value = true;
-      for (let i = 0, tam = imagenes.length; i < tam; i++) {
-        await store.subirParque({
-          ref: `parques/${id}`,
-          file: imagenes[i],
-          name: name,
-        });
-      }
-      spinner.value = false;
-      reset();
-    } catch (e) {
-      error.value.error = true;
-      error.value.message = e.message;
-    } finally {
-      loaded.value = false;
+  try {
+    error.value = { error: false, message: "" };
+    spinner.value = true;
+    loaded.value = true;
+    for (let i = 0, tam = imagenes.length; i < tam; i++) {
+      await store.subirParque({
+        ref: `parques/${id}`,
+        file: imagenes[i],
+        name: name,
+      });
     }
-}
+    spinner.value = false;
+    reset();
+  } catch (e) {
+    error.value.error = true;
+    error.value.message = e.message;
+  } finally {
+    loaded.value = false;
+  }
+};
 
 const handleSubmit = async () => {
   const docRef = await store.insertarParque(form);
@@ -223,17 +217,18 @@ const handleSubmit = async () => {
   if (tmpImagenes !== null && docRef.id) {
     //Firestore
     const urlficha = `parques/${docRef.id}/${tmpImagenes[0].name}`;
-    console.log(urlficha)
+    console.log(urlficha);
     await updateDocument(docRef.id, "Parques", { urlficha: urlficha });
-    await subidaImagen(tmpImagenes,docRef.id);    
+    await subidaImagen(tmpImagenes, docRef.id);
   }
 
   if (tmpMapa !== null && docRef.id) {
     //Firestore
     const urlMapa = `parques/${docRef.id}/ficha`;
-    await updateDocument(docRef.id, "Parques", { urlmapa: urlMapa }); 
-    await subidaImagen(tmpMapa,docRef.id,'ficha');  
-  // }
-  if (docRef) emits("cerrarForm");
-}};
+    await updateDocument(docRef.id, "Parques", { urlmapa: urlMapa });
+    await subidaImagen(tmpMapa, docRef.id, "ficha");
+    // }
+    if (docRef) emits("cerrarForm");
+  }
+};
 </script>

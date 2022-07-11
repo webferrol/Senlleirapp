@@ -13,13 +13,13 @@
           <label for="arbore" class="form-label">
             Nome da árbore <span data-set="Campo obligatorio">*</span></label>
           <input v-model="form.nombre_arbol" type="text" name="arbore" id="arbore"
-            placeholder="indica o nome da arbore" />
+            placeholder="indica o nome da arbore" required />
 
           <label for="especie" class="form-label">Nome científico <span data-set="Campo obligatorio">*</span></label>
 
           <select @change="handleSelect" v-model="form.idEspecie" name="especie" id="especie">
             <option class="especie-option" v-for="valor in storeEspecies.especies" :key="valor.idDoc"
-              :value="valor.idDoc">
+              :value="valor.idDoc" required >
               {{ valor.genero }} {{ valor.especie }}
             </option>
           </select>
@@ -47,22 +47,22 @@
         <legend>Ubicación</legend>
         <div class="senlleira-localizacion">
           <label for="zona" class="form-label">
-            Zona xeográfica <span data-set="Campo obligatorio">*</span></label>
+            Zona xeográfica </label>
           <input v-model="form.zona_geografica" type="text" name="zona" id="zona" placeholder="lugar de situacion" />
 
           <label for="lat" class="form-label">Latitude</label>
           <input class="input-senlleira" v-model.number="form.lat" type="number" name="lat" id="lat" step="any"
-            placeholder="Latitud" />
+            placeholder="Latitud" required />
           <label for="lng" class="form-label">Longitude</label>
           <input class="input-senlleira" v-model.number="form.lng" type="number" name="lng" id="lng" step="any"
-            placeholder="Longitud" />
+            placeholder="Longitud" required />
         </div>
       </fieldset>
       <fieldset class="data-senlleira">
         <div class="senlleira-localizacion">
           <legend>Parque</legend>
           <label for="localizacion" class="form-label">
-            Ubicación parque <span data-set="Campo obligatorio">*</span></label>
+            Ubicación parque</label>
           <select @change="
             form.ubicacion_parque =
             $event.target.options[$event.target.selectedIndex].text
