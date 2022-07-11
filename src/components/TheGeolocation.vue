@@ -28,6 +28,10 @@ const props = defineProps({
     type: Number,
     default: 150.644,
   },
+  icon: {
+    type: String,
+    default: "./src/assets/arbolito.png"
+  }
 });
 
 //Lanzamiento asíncrona
@@ -70,7 +74,7 @@ const loader = new Loader({ apiKey: props.google_maps_api_key });
         lat: props.lat,
         lng: props.lng,
       },
-      icon: "src/assets/arbolito.png",
+      icon: props.icon,
     });
 
     // infoWindow = new google.maps.InfoWindow();

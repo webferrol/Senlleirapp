@@ -56,6 +56,10 @@
          <p>{{fichaDatos.descripcion}}</p>
      </div>
      </template>
+     <!-- Mapa ?? -->
+    <template #mapa>
+    <TheGeolocation :icon="'./src/assets/parques.png'" :lat="fichaDatos.lat" :lng="fichaDatos.lng"/>
+     </template>
      
      
     </FichaTecnicaVue>
@@ -70,6 +74,7 @@ import { ref } from "vue";
 import FichaTecnicaVue from "./FichaTecnica.vue";
 import { useStoreParques } from "../../stores/parques";
 import { useStoreGeneral } from "../../stores/general";
+import TheGeolocation from "@/components/TheGeolocation.vue"
 
 import "@/assets/css/catalogo/catalogo.css";
 
