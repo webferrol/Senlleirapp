@@ -36,7 +36,7 @@
         </div>
       </template>
       <template #mapa>
-        <TheGeolocation :icon="'./src/assets/parques.png'" :lat="fichaDatos.lat" :lng="fichaDatos.lng" />
+        <TheGeolocation :icon="'../src/assets/parques.png'" :lat="fichaDatos.lat" :lng="fichaDatos.lng" />
       </template>
     </FichaTecnicaVue>
   </div>

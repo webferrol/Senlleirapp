@@ -30,7 +30,7 @@ const props = defineProps({
   },
   icon: {
     type: String,
-    default: "./src/assets/arbolito.png"
+    default: "@/src/assets/arbolito.png"
   }
 });
 
