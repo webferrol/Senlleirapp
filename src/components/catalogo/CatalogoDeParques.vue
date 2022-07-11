@@ -85,7 +85,7 @@ const storeGeneral = useStoreGeneral();
 const loadPage = async () => {
     await storeParques.setParques();
     // await storeParques.getDownloadURL();
-    storeGeneral.filtrar();
+    storeGeneral.filtrarArbores();
     // console.log(storeGeneral.tmp)
     // console.log(temPo.value);
 }

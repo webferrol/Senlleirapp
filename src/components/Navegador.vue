@@ -28,7 +28,7 @@
           </router-link>
         </li>
         <!-- Boton de búsqueda - CATALOGO -->
-        <li class="buscador" v-if="$route.name == 'catalogo'">
+        <li class="buscador" v-if="$route.name == 'catalogo' || $route.name == 'catalogo-de-parques' || $route.name == 'catalogo-de-especies'">
           <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()" v-model.trim="storeGeneral.buscador"
             @focus="animacionBuscar = true" @focusout="animacionBuscar = false">
           <label for="buscar" :class="{ animacion: animacionBuscar }">
