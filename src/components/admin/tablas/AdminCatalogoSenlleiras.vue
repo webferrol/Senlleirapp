@@ -92,11 +92,13 @@
           <legend>Descripción</legend>
           <label for="descripcion"> Descrición</label>
           <textarea type="text" v-model="arbore.descripcion" id="descripcion" placeholder="Descripción"></textarea>
-          <div class="images" v-for="image of images" :key="image.ref">
-            <img class="image" :src="image.src" alt="">
-            <button class="btn-eliminar" @click="deleteImage(image.ref)">Eliminar</button>
-          </div>
         </fieldset>
+         <fieldset class="editar-images">
+           <div class="images" v-for="image of images" :key="image.ref">
+              <img class="image" :src="image.src" alt="">
+              <button class="btn-eliminar" @click="deleteImage(image.ref)">Eliminar</button>
+            </div>
+         </fieldset>
         <theUploader @emitirFichero="gestionFoto"></theUploader>
         <input type="submit" value="Editar Senlleira" :disabled="arbore === null" />
         <div v-if="loading">Guardando...</div>
@@ -123,6 +125,7 @@ const loading = ref(false);
 let itemDelete = null;
 
 const mostrar = ref(false);
+const images = ref([]);
 
 const handleDelete = ({ id, name }) => {
   itemDelete = id;
@@ -143,9 +146,6 @@ const deleteImage = ref => {
     storeArbores.borrarFoto(ref);
   }
 };
-
-
-const images = ref([]);
 
 //Editar Senlleira
 const arbore = ref(null);
@@ -173,7 +173,7 @@ const cambiarDatos = async (id) => {
   arbore.value = null;
 };
 
-
+// subir fotos en la edicion
 const error = ref(false);
 
 const gestionFoto = async (file) => {
@@ -199,27 +199,25 @@ const cargarFotos = async () => {
         error.value = e;
     }
 }
-
 cargarFotos();
-
-
-
-
 </script>
 
 <style scoped>
-.images {
+.editar-images{
   display: grid;
-
+  grid-template-columns: auto auto auto;
 }
-
+.images{
+  display: flex;
+  flex-direction: column;
+}
 .image {
   width: 10vw;
-
 }
 
 .btn-eliminar {
   width: 70px;
   height: 20px;
+  margin-top: .2em;
 }
 </style>

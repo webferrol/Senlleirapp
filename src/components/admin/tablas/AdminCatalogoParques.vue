@@ -150,6 +150,7 @@ const loading = ref(false);
 let itemDelete = null;
 
 const mostrar = ref(false);
+const images =ref([]);
 
 // FUNCION PARA ELIMINAR PARQUE
 const handleDelete = ({ id, name }) => {

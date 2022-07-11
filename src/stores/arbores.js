@@ -33,8 +33,7 @@ export const useStoreArbores = defineStore('arbores', {
            await deleteFile(ref);
          },
 
-        //subir formulario al firestore de firebase 
-        /**
+        /**subir formulario al firestore de firebase 
          * 
          * @param {object} datos datos de la senlleira
          * @returns los datos de la senlleira que se meten y el catalogo al que se suben
