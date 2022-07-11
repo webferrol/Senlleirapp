@@ -128,7 +128,7 @@ const cargarDatosFicha = async (objeto) => {
   //console.log(fichaDatos)
   // Limpiamos y cargamos las imagenes de la ficha
   imagenesFichaTecnicaVaciar();
-  console.log(fichaDatos.value);
+  // console.log(fichaDatos.value);
   // await storeEspecies.setImagenes('Arbores/' + objeto.idDoc)
   // for (let i = 0; i < storeEspecies.imagenes.length; i++) {
   //     imagenesFichaTecnica.value.push(storeEspecies.imagenes[i])

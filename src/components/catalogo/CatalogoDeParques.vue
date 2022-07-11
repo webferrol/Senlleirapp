@@ -1,7 +1,7 @@
 <template>
     <div class="catalogo-section-component">
         <div class="arbol-catalogo-element" data-titulo="Mostrar" title="Máis info"
-            v-for="(parque, index) in storeParques.parques" :key="index" identificador=senlleira.id
+            v-for="(parque, index) in storeGeneral.tmp" :key="index" identificador=senlleira.id
             @click="cargarDatosFicha(parque)">
             <div class="content-img">
                 <img alt="imagen del arbol senlleiro" :src="parque.url_google">
@@ -57,6 +57,7 @@
      </div>
      </template>
      
+     
     </FichaTecnicaVue>
 
      
@@ -84,7 +85,7 @@ const storeGeneral = useStoreGeneral();
 const loadPage = async () => {
     await storeParques.setParques();
     // await storeParques.getDownloadURL();
-    storeGeneral.filtrarArbores();
+    storeGeneral.filtrarParques();
     // console.log(storeGeneral.tmp)
     // console.log(temPo.value);
 }
