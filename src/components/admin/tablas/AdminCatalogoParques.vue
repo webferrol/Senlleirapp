@@ -124,6 +124,18 @@
           id="descripcion"
           placeholder="Descripción"
         ></textarea>
+
+        <fieldset class="editar-images">
+          <div class="images" v-for="image of images" :key="image.ref">
+            <img class="image" :src="image.src" alt="" />
+            <button class="btn-eliminar" @click="deleteImage(image.ref)">
+              Eliminar
+            </button>
+          </div>
+        </fieldset>
+
+        <theUploader @emitirFichero="gestionFoto"></theUploader>
+
         <input
           type="submit"
           value="Editar Parque"
@@ -139,8 +151,10 @@
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import "@/assets/css/admin-css/cargarEspecies.css";
+import TheUploader from "@/components/theUploader.vue";
 import { useStoreParques } from "../../../stores/parques";
 import { updateDocument } from "../../../hook/firestore.hook";
+import { listAllRef, getDownURL } from "../../../hook/storage.hook";
 
 const storeParques = useStoreParques();
 storeParques.setParques().catch((error) => console.log(error));
@@ -168,7 +182,15 @@ const borrarParque = async () => {
 // FUNCION PARA EDITAR PARQUE
 
 const parque = ref(null);
-const editar = (par) => {
+const editar = async (par) => {
+  const refs = await listAllRef(`parques/${par.idDoc}`);
+  images.value = [];
+  refs.forEach(async (ref) => {
+    images.value.push({
+      ref,
+      src: await getDownURL(ref),
+    });
+  });
   parque.value = par;
 };
 const cambiarDatos = async (id) => {
@@ -181,9 +203,70 @@ const cambiarDatos = async (id) => {
   } finally {
     loading.value = false;
   }
- parque.value=null;
+  parque.value = null;
 };
+
+const error = ref(false);
+
+const gestionFoto = async (file) => {
+  if (file) {
+    const imagen = file[0];
+    try {
+      error.value = "";
+      await storeParques.subirParque({
+        ref: `parques/${parque.value.idDoc}`,
+        file: imagen,
+      });
+    } catch (e) {
+      console.log(e);
+      error.value = e.mensage;
+    }
+  }
+};
+
+//Eliminar la imagen en el modulo de editar
+
+const deleteImage = (ref) => {
+  const texto = prompt(`para eliminar la foto comnfirme la referencia:${ref}`);
+  if (texto === ref) {
+    storeParques.borrarFoto(ref);
+  }
+};
+
+const images = ref([]);
+
+const cargarFotos = async () => {
+  try {
+    error.value = "";
+    images.value = await setImagenes("parques");
+  } catch (e) {
+    error.value = e;
+  }
+};
+
+cargarFotos();
 </script>
 
 
+<style scoped>
+
+.editar-images{
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.images {
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  width: 10vw;
+}
+
+.btn-eliminar {
+  width: 70px;
+  height: 20px;
+  margin-top: .2em;
+}
+</style> >
 

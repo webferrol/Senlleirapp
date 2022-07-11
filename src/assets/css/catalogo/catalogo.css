@@ -19,6 +19,7 @@
     grid-template-columns: repeat(2, 1fr);
     width: fit-content;
     justify-content: center;
+    margin: auto;
     align-items: center;
     padding: .5rem .25rem;
     gap:  .5rem .25rem;
@@ -41,11 +42,12 @@
   /* imagen ficha */
  
   .arbol-catalogo-element .imagen-catalogo {
-    display: flex;
-    min-width: 170px;
+    
+    min-width: 150px;
     width: 100%;
     max-width: 300px;
-    height: 200px;
+    height: 300px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     background-color: lightgray;
   }
@@ -78,9 +80,7 @@
     color: rgba(49, 49, 49, 1);
     font-size: 0.8rem;
   }
-  .arbol-catalogo-element .arbol-info .arbol-nombre {
-    display: flex;
-    align-items: center;
+  .arbol-catalogo-element .arbol-info h3 {
     font-size: 0.9rem;
     line-height: 0.9rem;
     font-weight: 700;
@@ -90,8 +90,6 @@
     color: var(--colorprincipal);
   }
   .arbol-catalogo-element .arbol-info h4 {
-    display: flex;
-    align-items: center;
     font-size: 0.9rem;
     font-weight: 0.9rem;
     text-align: left;
@@ -114,5 +112,10 @@
       .arbol-catalogo-element .imagen-catalogo{
         height: 250px;
       }
-    
+  }
+
+  @media screen and (max-width: 480px) {
+    .arbol-catalogo-element .imagen-catalogo{
+      height:  266px;
+    }
   }

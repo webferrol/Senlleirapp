@@ -122,10 +122,11 @@
   display: flex;
   flex-direction: column;
   font-size: 1.1rem;
-  height: 86px;
+  height: 95px;
   transition: all .2s linear;
   background: rgb(14, 173, 159);
   overflow: hidden;
+  border-radius: 5px;
   background: linear-gradient(
     37deg,
     rgba(14, 173, 159, 1) 20%,
@@ -133,13 +134,19 @@
     rgba(97, 214, 142, 1) 98%
   );
 }
-  .elementos-filtro li{
+  .elementos-filtro li a{
     display: flex;
     align-items: center;
-    gap: .25rem;
+    gap: .5rem;
     padding: .25rem .5rem;
     border-bottom: 2px solid white;
     transition: background-color .3s linear;
+    color: white;
+    text-decoration: none;
+    border-radius: 2px;
+  }
+  .elementos-filtro li .router-link-exact-active{
+    background-color: black;
   }
   .elementos-filtro li:nth-child(1){
     border-top: 2px solid white;
@@ -147,10 +154,9 @@
   .elementos-filtro li:hover{
     background-color: lightgray;
   }
-    .elementos-filtro li svg{
-      width: 18px;
-      height: 18px;
-      font-size: 1rem;
+    .elementos-filtro li  a svg{
+      width: 21px;
+      height: 21px;
       overflow: hidden;
     }
     

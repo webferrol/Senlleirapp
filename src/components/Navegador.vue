@@ -3,18 +3,18 @@
   <header class="main-header">
     <nav class="header-nav-app" :class="{ 'administrador-active': userStore.user }">
       <!-- Boton inicio - LOGO app -->
-      <router-link to="/" v-if="$route.name !== 'catalogo'" class="header-logo"><img
+      <router-link to="/" v-if="!$route.path.includes('catalogo')" class="header-logo"><img
           src="../assets/img/logos/LOGO2_forma.png" alt="logo senlleirap" /></router-link>
       <!-- Botones area administrativa -->
       <ul class="nav-admin" v-if="userStore.user">
         <li>
-          <router-link to="/catalogo-senlleira">cat-senlleira</router-link>
+          <router-link to="/admin-senlleira">cat-senlleira</router-link>
         </li>
         <li>
-          <router-link to="/catalogo-especies">cat-especies</router-link>
+          <router-link to="/admin-especies">cat-especies</router-link>
         </li>
         <li>
-          <router-link to="/catalogo-parque">cat-parques</router-link>
+          <router-link to="/admin-parque">cat-parques</router-link>
         </li>
         <li>
           <router-link to="/admin">admin</router-link>
@@ -28,7 +28,7 @@
           </router-link>
         </li>
         <!-- Boton de búsqueda - CATALOGO -->
-        <li class="buscador" v-if="$route.name == 'catalogo'">
+        <li class="buscador" v-if="$route.path.includes('catalogo')">
           <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()" v-model.trim="storeGeneral.buscador"
             @focus="animacionBuscar = true" @focusout="animacionBuscar = false">
           <label for="buscar" :class="{ animacion: animacionBuscar }">
@@ -36,10 +36,16 @@
           </label>
         </li>
         <!-- Filtro búsqueda usuario - CATALOGO -->
-        <li class="filtro" v-if="$route.name == 'catalogo'">
+        <li class="filtro" v-if="$route.path.includes('catalogo')">
           <div class="icon-filter-busqueda">
             <icono :icon="['fa', 'sliders']" @click="filtrarDatos"></icono>
             <ul class="elementos-filtro" :class="{ filtroOculto: !mostrarFiltro }">
+              <li>
+                <router-link to="/catalogo">
+              <icono :icon="['fa', 'tree']"></icono>
+                <p>Árbores</p>
+                </router-link>
+              </li>
               <li>
                 <router-link to="/catalogo-de-parques">
                 <icono :icon="['fa', 'tree-city']"></icono>
@@ -52,12 +58,7 @@
                 <p>Especies</p>
                 </router-link>
               </li>
-              <li>
-                <router-link to="/catalogo">
-              <icono :icon="['fa', 'tree']"></icono>
-                <p>Árbores</p>
-                </router-link>
-              </li>
+              
             </ul>
           </div>
 
@@ -92,10 +93,3 @@ const filtrar = () => {
 };
 </script>
 
-<style>
-.header-nav-app.rojo {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  background-color: red;
-}
-</style>
