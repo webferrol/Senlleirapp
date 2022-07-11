@@ -223,6 +223,7 @@ const handleSubmit = async () => {
   if (tmpImagenes !== null && docRef.id) {
     //Firestore
     const urlficha = `parques/${docRef.id}/${tmpImagenes[0].name}`;
+    console.log(urlficha)
     await updateDocument(docRef.id, "Parques", { urlficha: urlficha });
     await subidaImagen(tmpImagenes,docRef.id);    
   }

@@ -5,8 +5,8 @@
         <h2>Parques</h2>
       </span>
       <div class="stories-navigator">
-        <article class="component-arbol" @click="cargarDatosFicha(parque)" v-for="(parque, index) in storeParques.parques" >
-          <img :src="parque.url_google" :alt="parque.url_google">
+        <article class="component-arbol" @click="cargarDatosFicha(parque)" v-for="(parque, index) in storeParques.parques" :key="index">
+          <img :src="parque.url_google" :alt="parque.url_google" :title="parque.url_google">
           <p class="arbol-name"> {{parque.nombre}}</p>
         </article>
       </div>
@@ -57,6 +57,8 @@ import "@/assets/css/carruselStories.css"
 import { ref } from "vue";
 import { useStoreParques } from "@/stores/parques"; 
 import FichaTecnicaVue from "../catalogo/FichaTecnica.vue";
+
+
 // Imagenes del navegador
 const storeParques = useStoreParques();
 storeParques.setParques();
