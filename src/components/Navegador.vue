@@ -78,6 +78,7 @@ import { ref } from 'vue'
 import "@/assets/css/navegador.css";
 import { useStoreUsers } from "../stores/users";
 import { useStoreGeneral } from "../stores/general";
+import router from '../router';
 const animacionBuscar = ref(false)
 
 // Funcion para mostrar - ocultar filtro de busqueda
@@ -89,7 +90,13 @@ const filtrarDatos = () => {
 const storeGeneral = useStoreGeneral();
 const userStore = useStoreUsers();
 const filtrar = () => {
-  storeGeneral.filtrarArbores();
+  if(router.currentRoute.value.fullPath === '/catalogo') {
+    storeGeneral.filtrarArbores();
+  } else if (router.currentRoute.value.fullPath === '/catalogo-de-especies') {
+    storeGeneral.filtrarEspecies();
+  } else {
+    storeGeneral.filtrarParques();
+  }
 };
 </script>
 
