@@ -149,22 +149,21 @@ const imagenesFichaTecnicaVaciar = () => {
 // datos(storeArbores.arbores);
 // Funcion para cargar datos de la ficha y sus respectivas imágenes
 const cargarDatosFicha = async (objeto) => {
-  //console.log(objeto)
-  mostrarFicha.value = true;
-  // Limpiamos y cargamos los datos tecnicos de la ficha
-  //const especie = storeEspecies.especies.find(el=>el.idDoc===objeto.idEspecie);
-  fichaDatos.value = null;
-  //fichaDatos.value= {...objeto,...especie};
-  fichaDatos.value = objeto;
-  // enviamos para filtrar
-  //console.log(fichaDatos)
-  // Limpiamos y cargamos las imagenes de la ficha
-  imagenesFichaTecnicaVaciar();
-  console.log(fichaDatos.value);
-  await storeArbores.setImagenes("Arbores/" + objeto.idDoc);
-  for (let i = 0; i < storeArbores.imagenes.length; i++) {
-    imagenesFichaTecnica.value.push(storeArbores.imagenes[i]);
-  }
-  //await storeEspecies.setEspecies()
-};
+    //console.log(objeto)
+    mostrarFicha.value = true;
+    // Limpiamos y cargamos los datos tecnicos de la ficha
+    //const especie = storeEspecies.especies.find(el=>el.idDoc===objeto.idEspecie);
+    fichaDatos.value = null;
+    //fichaDatos.value= {...objeto,...especie};
+    fichaDatos.value = objeto;
+    // enviamos para filtrar
+    //console.log(fichaDatos)
+    // Limpiamos y cargamos las imagenes de la ficha
+    imagenesFichaTecnicaVaciar()
+    await storeArbores.setImagenes('Arbores/' + objeto.idDoc)
+    for (let i = 0; i < storeArbores.imagenes.length; i++) {
+        imagenesFichaTecnica.value.push(storeArbores.imagenes[i])
+    }
+    //await storeEspecies.setEspecies()
+}
 </script>

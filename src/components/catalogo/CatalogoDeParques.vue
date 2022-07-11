@@ -3,18 +3,18 @@
         <div class="arbol-catalogo-element" data-titulo="Mostrar" title="Máis info"
             v-for="(parque, index) in storeGeneral.tmp" :key="index" identificador=senlleira.id
             @click="cargarDatosFicha(parque)">
-            <div class="content-img">
+            <div class="imagen-catalogo">
                 <img alt="imagen del arbol senlleiro" :src="parque.url_google">
             </div>
             <div class="arbol-info">
                 <span class="arbol">
                     <icono :icon="['fa', 'leaf']"></icono>
+                    <h3 class="arbol-nombre">{{ parque.nombre }}</h3>
                 </span>
-                <h3 class="arbol-nombre">{{ parque.nombre }}</h3>
                 <span class="lugar">
                     <icono :icon="['fa', 'location-dot']"></icono>
+                    <h4 class="arbol-lugar">{{ parque.localizacion }}</h4>
                 </span>
-                <h4 class="arbol-lugar">{{ parque.localizacion }}</h4>
             </div>
         </div>
     </div>
