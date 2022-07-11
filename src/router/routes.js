@@ -41,23 +41,23 @@ export const routes = [
     component: () => import("@/components/admin/LoginAdmin.vue"),
   },
   {
-    path: "/catalogo-especies",
-    name: "catalogo-especies",
+    path: "/admin-especies",
+    name: "admin-especies",
     meta: {
       requiereAuth: true,
     },
     component: () => import("@/views/admin/CatalogoEspecies.vue"),
   },
   {
-    path: "/catalogo-senlleira",
-    name: "catalogosenlleira",
+    path: "/admin-senlleira",
+    name: "admin-senlleira",
     meta: {
       requiereAuth: true,
     },
     component: () => import("@/views/admin/CatalogoSenlleiras.vue"),
   },
   {
-    path: "/catalogo-parque",
+    path: "/admin-parque",
     name: "admin-parque",
     component: () => import("@/views/admin/CatalogoParques.vue"),
   },
