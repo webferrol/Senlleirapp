@@ -1,19 +1,9 @@
 <template>
   <div>
-    {{ $route.params.idDoc }}
-
     <div class="erro" v-if="error.errorBool">
       ({{ error.code }}) {{ error.message }}
     </div>
-    <div v-else>
-      <pre>{{ parque }}</pre>
-      <FichaParquePublica
-        :mostrarFicha="true"
-        :fichaDatos="parque"
-        :imagenesFichaTecnica="imagenesFichaTecnica"
-      >
-      </FichaParquePublica>
-    </div>
+    <FichaParqueComponent :parque="parque" :images="imagenesFichaTecnica"></FichaParqueComponent>    
   </div>
 </template>
 
@@ -21,8 +11,8 @@
 import { useRoute } from "vue-router";
 import { ref } from "vue";
 import { listAllUrls } from "../../hook/storage.hook";
-import { getDocument, busquedaDatos } from "../../hook/firestore.hook";
-import FichaParquePublica from "@/components/parques/FichaParquePublica.vue";
+import { getDocument } from "../../hook/firestore.hook";
+import FichaParqueComponent from "../../components/parques/FichaParqueComponent.vue"
 const route = useRoute();
 const parque = ref({});
 const error = ref({
@@ -49,6 +39,7 @@ const imagenesFichaTecnica = ref([]);
     imagenesFichaTecnica.value = await listAllUrls(
       "parques/" + route.params.idDoc
     );
+    //console.log(imagenesFichaTecnica.value)
   } catch (err) {
     error.value.errorBool = true;
     error.value.code = err.code;
