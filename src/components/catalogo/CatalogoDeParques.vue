@@ -27,6 +27,8 @@
     </FichaParquePublica>
     
 
+
+
      
 </template>
 
@@ -43,6 +45,7 @@ import "@/assets/css/catalogo/catalogo.css";
 const mostrarFicha = ref(false)
 const fichaDatos = ref(null);
 const imagenesFichaTecnica = ref([]);
+
 
 const storeParques = useStoreParques();
 const storeGeneral = useStoreGeneral();
