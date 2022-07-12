@@ -63,6 +63,16 @@
           placeholder="Longitud"
         />
 
+        <label for="carballeira" class="form-label">Carballeira</label>
+        <input
+          class="input-parque"
+          v-model="form.carballeira"
+          type="checkbox"
+          name="carballeira"
+          id="carballeira"
+          
+        />
+
         <label for="cronoloxía" class="form-label">Cronoloxía</label>
         <input
           class="input-parque"
@@ -129,6 +139,7 @@ const form = reactive({
   lat: "",
   lng: "",
   cronoloxia: "",
+  carballeira: false,
   superficie: "",
   descripcion: "",
   urlficha: "", //La ruta de la primera foto del parque
@@ -156,6 +167,7 @@ const reset = () => {
   form.lng = "";
 
   form.cronoloxia = "";
+  form.carballeira = false;
   form.superficie = "";
   form.nombre = "";
   form.descripcion = "";
