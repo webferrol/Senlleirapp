@@ -54,14 +54,12 @@ const mapDiv = ref(null);
 const data = null;
 
 const router = useRouter();
-const showRoute = id => {
-  if (id) {
+const showRoute = ({routeName,routeParams}) => {
+   console.log(routeName,routeParams)
+  if (routeName ) {
     router.push({
-      path: "/ficha-parque/:idDoc",
-      name: "FichaParque",
-      param:{
-        id: parque.idDoc
-      }
+      name: routeName,
+      params: routeParams,            
       
     })
   }
@@ -81,7 +79,7 @@ const loader = new Loader({ apiKey: props.apikey });
       zoom: props.zoom,
     });
     // -> Bucle para recorrer y pintar los parques <- //
-    props.coords.forEach((item,parques) => {
+    props.coords.forEach((item) => {
       // console.log("coords--->", item.coords);
       const marca = new google.maps.Marker({
         map,
@@ -90,9 +88,8 @@ const loader = new Loader({ apiKey: props.apikey });
         animation: google.maps.Animation.DROP,
       });
       marca.addListener("click", (e) => {
-        showRoute(parques.idDoc);
-        // console.log(item.id)
-        // console.log(showRoute())
+        showRoute(item);
+       
       });
     });
   } catch (error) {

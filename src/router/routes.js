@@ -24,11 +24,7 @@ export const routes = [
     name: "MapaParques",
     component: () => import("@/views/parques/MapaParques.vue"),
   },
-  // {
-  //   path:"/parque-:id",
-  //   name:"Parque",
-  //   component: () => import("@/views/parques/InfoParqueView.vue"),
-  // },
+  
   {
     path: "/mapaSenlleiras",
     name: "MapaSenlleiras",
@@ -88,14 +84,14 @@ export const routes = [
     component: () => import("@/views/parques/FichaParqueView.vue"),
   },
   {
+    path: "/ficha-tecnica/:idDoc",
+    name: "FichaSenlleira",
+    component: () => import("@/components/catalogo/FichaTecnica.vue"),
+  },
+  {
     path: "/prueba",
     name: "prueba",
     component: () => import("@/components/TheGeolocation.vue"),
-  },
-  // {
-  //   path: "/prueba2",
-  //   name: "prueba2",
-  //   component: () => import("@/views/Vista1.vue"),
-  // },
+  }
 
 ];

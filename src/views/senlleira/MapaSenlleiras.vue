@@ -24,15 +24,15 @@ const coordsArbol = ref([]);
   try {
     await useArbol.setArbores();
     for (let i = 0; i < useArbol.arbores.length; i++) {
-      coordsArbol.value.push(
-        {
-          id: `arboles/id=${useArbol.arbores[i].idDoc}`,
-          coords: {
-           lat: Number(useArbol.arbores[i].lat),
-            lng: Number(useArbol.arbores[i].lng),
-          }
-      }
-      );
+      
+      coordsArbol.value.push({
+        routeParams: { idDoc: useArbol.arbores[i].idDoc },
+        routeName: "FichaSenlleira",
+        coords: {
+          lat: Number(useArbol.arbores[i].lat),
+          lng: Number(useArbol.arbores[i].lng),
+        },
+      });
     }
     loader.value = true;
   } catch (error) {

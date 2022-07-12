@@ -14,7 +14,6 @@ import { ref } from "vue";
 import { useStoreParques } from "../../stores/parques";
 import TheGoogleMaps from "../../components/TheGoogleMaps.vue";
 
-
 // -> Constantes / Variables <- //
 const loader = ref(false);
 const useParques = useStoreParques();
@@ -25,9 +24,9 @@ const coordsParques = ref([]);
   try {
     await useParques.setParques();
     for (let i = 0; i < useParques.parques.length; i++) {
-     
       coordsParques.value.push({
-        id: `parques/id=${useParques.parques[i].idDoc}`,
+        routeParams: { idDoc: useParques.parques[i].idDoc },
+        routeName: "FichaParque",
         coords: {
           lat: Number(useParques.parques[i].lat),
           lng: Number(useParques.parques[i].lng),
