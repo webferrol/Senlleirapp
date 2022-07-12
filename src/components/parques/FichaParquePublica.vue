@@ -1,8 +1,12 @@
 <template>
-    <div v-if="mostrarFicha">
-        <h1>Ficha Técnica</h1>
-        <FichaTecnicaVue @cerrarFicha="mostrarFicha = false" :data="fichaDatos" :images="imagenesFichaTecnica">
-            <template #titulo>
+  <div v-if="mostrarFicha">
+    <h1>Ficha Técnica</h1>
+    <FichaTecnicaVue
+      @cerrarFicha="mostrarFicha = false"
+      :data="fichaDatos"
+      :images="imagenesFichaTecnica"
+    >
+       <template #titulo>
                 <h2 class="ficha-tittle">{{ fichaDatos.nombre }}</h2>
             </template>
             <template #content>
@@ -42,23 +46,26 @@
                     <p>{{ fichaDatos.descripcion }}</p>
                 </div>
             </template>
-        </FichaTecnicaVue>
-    </div>
+      <template #mapa>
+        <TheGeolocation :icon="'../src/assets/parques.png'" :lat="fichaDatos.lat" :lng="fichaDatos.lng" />
+      </template>
+    </FichaTecnicaVue>
+  </div>
 </template>
 
 <script setup>
 import FichaTecnicaVue from "@/components/catalogo/FichaTecnica.vue";
+import TheGeolocation from "@/components/TheGeolocation.vue"
 defineProps({
-    fichaDatos: {
-        type: Object
-    },
-    imagenesFichaTecnica: {
-        type: Array
-    },
-    mostrarFicha: {
-        type: Boolean,
-        default: false,
-    }
-
+  fichaDatos: {
+    type: Object,
+  },
+  imagenesFichaTecnica: {
+    type: Array,
+  },
+  mostrarFicha: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
