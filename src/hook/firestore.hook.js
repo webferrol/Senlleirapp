@@ -48,7 +48,7 @@ export const deleteDocument = async (collection, uid) => {
 
 /**
  * 
- * @param {string} selecColec 
+ * @param {string} selecColec recibe la colección en dónde va a realizar la búsqueda (Arbores, Especies, Parques)
  * @param {string} selecDoc 
  * @param {string} buscar 
  * @returns 
@@ -61,7 +61,7 @@ export const deleteDocument = async (collection, uid) => {
   const tmp = [];
   querySnapshot.forEach((doc) => {
     tmp.push({
-      idCollection: doc.id,
+      idDoc: doc.id,
       ...doc.data(),
     });
     // console.log(doc.id, " => ", doc.data());
