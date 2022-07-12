@@ -24,11 +24,11 @@ export const routes = [
     name: "MapaParques",
     component: () => import("@/views/parques/MapaParques.vue"),
   },
-  {
-    path:"/parque-:id",
-    name:"Parque",
-    component: () => import("@/views/parques/InfoParqueView.vue"),
-  },
+  // {
+  //   path:"/parque-:id",
+  //   name:"Parque",
+  //   component: () => import("@/views/parques/InfoParqueView.vue"),
+  // },
   {
     path: "/mapaSenlleiras",
     name: "MapaSenlleiras",
