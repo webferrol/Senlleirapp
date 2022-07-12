@@ -65,7 +65,7 @@ export const deleteDocument = async (collection, uid) => {
 
 /**
  * 
- * @param {string} selecColec 
+ * @param {string} selecColec recibe la colección en dónde va a realizar la búsqueda (Arbores, Especies, Parques)
  * @param {string} selecDoc 
  * @param {string} buscar 
  * @returns 

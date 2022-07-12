@@ -22,7 +22,7 @@ export const useStoreGeneral = defineStore('busqueda', {
             })
         },
         filtrarEspecies(){
-            // this.tmp = []
+            // this.tmp = [] 
             const storeEspecies = useStoreEspecies();
             this.tmp = storeEspecies.especies.filter((especie) => {
                 return especie.genero.toLowerCase().includes(this.buscador.toLowerCase()) || especie.especie.toLowerCase().includes(this.buscador.toLowerCase()) || especie.nombre_comun.toLowerCase().includes(this.buscador.toLowerCase()) || especie.nombre_comun_gal.toLowerCase().includes(this.buscador.toLowerCase())

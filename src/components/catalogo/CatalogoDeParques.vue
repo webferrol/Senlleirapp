@@ -69,7 +69,7 @@ const cargarDatosFicha = async (objeto) => {
     console.log(fichaDatos.value)
     // Limpiamos y cargamos las imagenes de la ficha
     imagenesFichaTecnicaVaciar()
-    await storeParques.listarImagenes('parques/' + fichaDatos.value.idDoc)
+    await storeParques.listarImagenes('Parques/' + fichaDatos.value.idDoc)
     for (let i = 0; i < storeParques.imagenes.length; i++) {
         imagenesFichaTecnica.value.push(storeParques.imagenes[i])
     }
@@ -78,6 +78,7 @@ const cargarDatosFicha = async (objeto) => {
 
 const loadPage = async () => {
     await storeParques.setParques();
+    // await storeParques.getDownloadURL();
     storeGeneral.filtrarParques();
 }
 loadPage();
