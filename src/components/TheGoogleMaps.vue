@@ -75,7 +75,7 @@ const loader = new Loader({ apiKey: props.apikey });
     });
     // -> Bucle para recorrer y pintar los parques <- //
     props.coords.forEach((item) => {
-      console.log("coords--->", item.coords);
+      // console.log("coords--->", item.coords);
       const marca = new google.maps.Marker({
         map,
         position: item.coords,

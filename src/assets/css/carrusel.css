@@ -110,6 +110,18 @@
   transition: all ease-in-out 0.2s;
 }
 
+
+@media screen and (min-width: 450px) {
+  .carrusel{
+    height: 550px;
+  }
+  }
+@media screen and (min-width: 520px) {
+  .carrusel{
+    height: 800px;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .carrusel__button--prev:active {
     background: rgb(186, 186, 186);
