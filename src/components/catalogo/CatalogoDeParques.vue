@@ -23,7 +23,8 @@
     v-if="mostrarFicha"
     :mostrarFicha="mostrarFicha"
     :fichaDatos="fichaDatos" 
-    :imagenesFichaTecnica="imagenesFichaTecnica"></FichaParquePublica>
+    :imagenesFichaTecnica="imagenesFichaTecnica">
+    </FichaParquePublica>
     
 
      
