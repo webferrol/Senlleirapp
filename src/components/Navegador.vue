@@ -99,15 +99,15 @@ const filtrar = () => {
   }
 };
 
-window.addEventListener(
-  "click",
-  (e)=> {
+// window.addEventListener(
+//   "click",
+//   (e)=> {
     
-    if(!document.querySelector(".icon-filter-busqueda").contains(e.target)){
-      mostrarFiltro.value = false
-    } 
-  }
-);
+//     if(!document.querySelector(".icon-filter-busqueda").contains(e.target)){
+//       mostrarFiltro.value = false
+//     } 
+//   }
+// );
 
 
 </script>

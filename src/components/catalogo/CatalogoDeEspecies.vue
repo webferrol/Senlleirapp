@@ -136,4 +136,5 @@ const cargarDatosFicha = async (objeto) => {
   // }
   //await storeEspecies.setEspecies()
 };
+
 </script>
