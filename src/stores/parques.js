@@ -40,8 +40,11 @@ export const useStoreParques = defineStore('parques', {
         async borrarParque(ID) {
             //Borrar fotos del storage
             const refs = await listAllRef(`parques/${ID}`);
+            const list = await listAllRef ( `parquesficha/${ID}`   );
             refs.forEach(async(ref)=>{
-                console.log(ref)
+                await deleteFile(ref);
+            });
+            list.forEach(async(ref)=>{
                 await deleteFile(ref);
             });
 

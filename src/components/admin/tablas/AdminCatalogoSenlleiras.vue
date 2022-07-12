@@ -116,6 +116,7 @@
         <label for="diametroTronco"> Diámetro do tronco</label>
         <input
           type="number"
+          step="any"
           v-model="arbore.diametro"
           id="diametroTronco"
           placeholder="Diámetro do tronco (metros)"
