@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, setDoc, query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc, query, where } from "firebase/firestore";
 
 /**
  *
@@ -25,6 +25,23 @@ export const getDocuments = async (uid) => {
   });
   return tmp;
 };
+
+/**
+     * @param {String} collectionName Nombre de la colección
+     * @param {String} reference Referencia del documento a recuperar
+     * @returns {Object} Objeto con las columnas del documento o null si no lo encuentra
+     */
+export const getDocument = async (collectionName,reference) => {
+  const docRef = doc(db, collectionName, reference);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+          return {
+              idDoc: docSnap.id,
+              ...docSnap.data(),
+          }
+      } else
+        return null;
+}
 
 /**
  * 
@@ -61,7 +78,7 @@ export const deleteDocument = async (collection, uid) => {
   const tmp = [];
   querySnapshot.forEach((doc) => {
     tmp.push({
-      idCollection: doc.id,
+      idDoc: doc.id,
       ...doc.data(),
     });
     // console.log(doc.id, " => ", doc.data());

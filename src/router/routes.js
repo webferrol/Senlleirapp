@@ -4,11 +4,11 @@ export const routes = [
     name: "inicio",
     component: () => import("../views/Inicio.vue"),
   },
-  {
-    path: "/catalogo-arbore",
-    name: "catalogoArbol",
-    component: () => import("@/views/senlleira/CatalogoNuevoArbol.vue"),
-  },
+  // {
+  //   path: "/catalogo-arbore",
+  //   name: "catalogoArbol",
+  //   component: () => import("@/views/senlleira/CatalogoNuevoArbol.vue"),
+  // },
   {
     path: "/nova-arbore",
     name: "NuevoArbol",
@@ -23,6 +23,11 @@ export const routes = [
     path: "/mapaParques",
     name: "MapaParques",
     component: () => import("@/views/parques/MapaParques.vue"),
+  },
+  {
+    path:"/parque-:id",
+    name:"Parque",
+    component: () => import("@/views/parques/InfoParqueView.vue"),
   },
   {
     path: "/mapaSenlleiras",
@@ -61,7 +66,6 @@ export const routes = [
     name: "admin-parque",
     component: () => import("@/views/admin/CatalogoParques.vue"),
   },
-
   // test
   {
     path: "/catalogo-de-especies",
@@ -77,6 +81,11 @@ export const routes = [
     path: "/catalogo-de-parques",
     name: "CatalogoDeParques",
     component: () => import("@/views/parques/CatalogoParques.vue"),
+  },
+  {
+    path: "/ficha-parque/:idDoc",
+    name: "FichaParque",
+    component: () => import("@/views/parques/FichaParqueView.vue"),
   },
   {
     path: "/prueba",

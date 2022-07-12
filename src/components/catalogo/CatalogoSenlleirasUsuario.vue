@@ -53,7 +53,7 @@
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'signature']"></icono>
-            <h3>Nombre</h3>
+            <h3>Nome castelán</h3>
           </span>
           <p>{{ fichaDatos.nombre_comun }}</p>
         </div>
@@ -61,7 +61,7 @@
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'signature']"></icono>
-            <h3>Nome</h3>
+            <h3>Nome galego</h3>
           </span>
           <p>{{ fichaDatos.nombre_comun_gal }}</p>
         </div>

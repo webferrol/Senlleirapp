@@ -61,16 +61,24 @@
       <fieldset class="data-senlleira">
         <div class="senlleira-localizacion">
           <legend>Parque</legend>
+
+
+
           <label for="localizacion" class="form-label">
             Ubicación parque</label>
           <select @change="
             form.ubicacion_parque =
             $event.target.options[$event.target.selectedIndex].text
           " v-model="form.idParque" name="localizacion" id="localizacion">
+            <option value=""></option>
             <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
               {{ valor.nombre }}
             </option>
           </select>
+
+
+
+
           <label class="form-label" for="numero-mapa">Número en el mapa</label>
           <input name="numero-mapa" id="numero-mapa" type="number" v-model.number="form.numero_mapa" />
           <input type="hidden" v-model="form.ubicacion_parque" />
@@ -95,7 +103,7 @@
       <fieldset>
         <legend>Imaxe</legend>
         <div class="data-senlleira">
-          <theUploader @emitirFichero="gestionFoto"></theUploader>
+          <theUploader :required="true"  @emitirFichero="gestionFoto"></theUploader>
           <div style="color:white;background-color: red; font-weight: bold; font-size: large" v-if="error.error" class="error">
             {{ error.message }} </div>
         </div>

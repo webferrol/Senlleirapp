@@ -5,7 +5,7 @@
       class="arbol-catalogo-element"
       data-titulo="Mostrar"
       title="Máis info"
-      v-for="(especie, index) in storeEspecies.especies"
+      v-for="(especie, index) in storeGeneral.tmp"
       :key="index"
       identificador="senlleira.id"
       @click="cargarDatosFicha(especie)"
