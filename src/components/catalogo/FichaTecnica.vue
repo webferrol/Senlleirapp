@@ -8,21 +8,17 @@
                 </slot>
                 <icono class="cerrar-ficha-tecnica" :icon="['fa', 'xmark']" @click="$emit('cerrarFicha')"></icono>
             </div>
-            <CarruselImagenesVue :images="images"></CarruselImagenesVue>
+            <CarruselImagenesVue v-if="images.length >=1" :images="images"></CarruselImagenesVue>
             <!-- CARACTERISTICAS -->
             <div>
                 <hr class="line-ficha-tecnica">
-                <h2 class="h2-ficha-tecnica">Características</h2>
-                
             </div>
             <slot name="content">
                 <!-- Contenido -->
             </slot>
             <!-- DESCRIPCION -->
             <div>
-                <hr class="line-ficha-tecnica">
-                <h2 class="h2-ficha-tecnica">Descripción</h2>
-                
+                <hr class="line-ficha-tecnica">         
             </div>
             <slot name="footer">
                 <!-- contenido -->
@@ -30,9 +26,9 @@
             <!-- MAPA -->
             <div>
                 <hr class="line-ficha-tecnica">
-                <h2 class="h2-ficha-tecnica">Localización</h2>
             </div>
             <slot name="mapa"></slot>
+            <slot name="usos"></slot>
 
         </article>
     </div>
