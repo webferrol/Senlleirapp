@@ -78,7 +78,7 @@ export const deleteDocument = async (collection, uid) => {
   const tmp = [];
   querySnapshot.forEach((doc) => {
     tmp.push({
-      idCollection: doc.id,
+      idDoc: doc.id,
       ...doc.data(),
     });
     // console.log(doc.id, " => ", doc.data());
