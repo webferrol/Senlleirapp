@@ -14,31 +14,25 @@
 //Dependendencias
 import { Loader } from "@googlemaps/js-api-loader";
 import { ref } from "vue";
-
+import { useRouter } from "vue-router";
 import "@/assets/css/mapa/google-maps.css";
 
 const props = defineProps({
   /**
    * {Number} zoom - Zoom que tendrá por defecto el mapa de google
    */
-    zoom: {
+  zoom: {
     type: Number,
     default: 16,
   },
   /**
-   [{
-    id:'xeR33434SrSXdrR',
-    coords:[{ lat: 42.8775066, lng: -8.5489188 },{ lat: 42.8775066, lng: -8.5489188 }]
-    },
-    ...
-   ]
+   * {Array} - Donde se almacenan las coordenadas de los arboles/parques
    */
   coords: {
     type: Array,
   },
   /**
    * {Object} CurrPos - Punto central  definido por una latitud y una longitud  en la que aparecerán todos los marcadores del mapas
-   * @default {lat: 42.8775066,lng: -8.5489188}
    */
   currPos: {
     type: Object,
@@ -59,6 +53,18 @@ let map = null;
 const mapDiv = ref(null);
 const data = null;
 
+const router = useRouter();
+const showRoute = ({routeName,routeParams}) => {
+   console.log(routeName,routeParams)
+  if (routeName ) {
+    router.push({
+      name: routeName,
+      params: routeParams,            
+      
+    })
+  }
+}
+
 // -> Cargamos el loader para llamara la apiKey <- //
 const loader = new Loader({ apiKey: props.apikey });
 
@@ -71,7 +77,6 @@ const loader = new Loader({ apiKey: props.apikey });
     map = new google.maps.Map(mapDiv.value, {
       center: props.currPos,
       zoom: props.zoom,
-
     });
     // -> Bucle para recorrer y pintar los parques <- //
     props.coords.forEach((item) => {
@@ -81,10 +86,10 @@ const loader = new Loader({ apiKey: props.apikey });
         position: item.coords,
         icon: props.icon,
         animation: google.maps.Animation.DROP,
-        
       });
       marca.addListener("click", (e) => {
-        console.log(item.id);
+        showRoute(item);
+       
       });
     });
   } catch (error) {
