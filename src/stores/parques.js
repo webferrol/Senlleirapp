@@ -16,13 +16,12 @@ export const useStoreParques = defineStore('parques', {
     actions: {
         
         //Esta funcion es para subir la imagen de los parques con ID y su extension.
-        async subirParque({ ref, file, name }) {
+        async subirParque({ ref, file }) {
             // const file1 = file.name;
             // const [ext, ...fileName] = file1.split('.').reverse();
-            if (!name)
+          
                 await subirFicheros(file, `${ref}/${file.name}`)
-            else
-                await subirFicheros(file, `${ref}/${name}`)
+        
             // console.log(ext)
 
         },
@@ -41,8 +40,11 @@ export const useStoreParques = defineStore('parques', {
         async borrarParque(ID) {
             //Borrar fotos del storage
             const refs = await listAllRef(`parques/${ID}`);
+            const list = await listAllRef ( `parquesficha/${ID}`   );
             refs.forEach(async(ref)=>{
-                console.log(ref)
+                await deleteFile(ref);
+            });
+            list.forEach(async(ref)=>{
                 await deleteFile(ref);
             });
 

@@ -94,8 +94,8 @@
           placeholder="Descripcion"
         ></textarea>
 
-        <TheUploader @emitirFichero="fotosParques"></TheUploader>
-        <TheUploader :multiple="false" @emitirFichero="fotoMapa"></TheUploader>
+        <TheUploader :required="true"   @emitirFichero="fotosParques"></TheUploader>
+        <TheUploader :required="true"   @emitirFichero="fotoMapa"></TheUploader>
 
         <div v-if="error.error" class="error">{{ error.message }}</div>
         <div v-if="spinner" class="spinner">Cargando....</div>
@@ -188,7 +188,7 @@ const fotoMapa = async (imagen) => {
   }
 };
 
-const subidaImagen = async (imagenes, id, name = false) => {
+const subidaImagen = async (imagenes, id, collection='parques') => {
   //Subida al Store
   try {
     error.value = { error: false, message: "" };
@@ -196,9 +196,8 @@ const subidaImagen = async (imagenes, id, name = false) => {
     loaded.value = true;
     for (let i = 0, tam = imagenes.length; i < tam; i++) {
       await store.subirParque({
-        ref: `parques/${id}`,
+        ref: `${collection}/${id}`,
         file: imagenes[i],
-        name: name,
       });
     }
     spinner.value = false;
@@ -224,9 +223,10 @@ const handleSubmit = async () => {
 
   if (tmpMapa !== null && docRef.id) {
     //Firestore
-    const urlMapa = `parques/${docRef.id}/ficha`;
-    await updateDocument(docRef.id, "Parques", { urlmapa: urlMapa });
-    await subidaImagen(tmpMapa, docRef.id, "ficha");
+    const urlMapa = `parquesficha/${docRef.id}/${tmpMapa[0].name}`;
+    console.log(urlMapa)
+    //await updateDocument(docRef.id, "Parques", { urlmapa: urlMapa }); Si hace falta una ficha por defecto descomenta esta línea
+    await subidaImagen(tmpMapa, docRef.id,'parquesficha');
     // }
     if (docRef) emits("cerrarForm");
   }

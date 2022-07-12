@@ -31,6 +31,8 @@
                         <icono :icon="['fa', 'arrows-left-right']"></icono>
                             <h4>Superficie</h4>
                         </span>
+
+                        
                         <p>{{ fichaDatos.superficie }} metros cadrados</p>
                     </div>
                     <div>

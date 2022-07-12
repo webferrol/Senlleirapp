@@ -16,61 +16,29 @@
                 </span>
             </div>
         </div>
-    </div>
-     <!-- <pre>{{temPo}}</pre> -->
-
-    <FichaParquePublica 
-    v-if="mostrarFicha"
-    :mostrarFicha="mostrarFicha"
-    :fichaDatos="fichaDatos" 
-    :imagenesFichaTecnica="imagenesFichaTecnica">
-    </FichaParquePublica>
-    
-
-     
+    </div>     
 </template>
 
 <script setup>
-
 //Dependencias
-import { ref } from "vue";
-import FichaParquePublica from "../parques/FichaParquePublica.vue";
 import { useStoreParques } from "../../stores/parques";
 import { useStoreGeneral } from "../../stores/general";
-
 import "@/assets/css/catalogo/catalogo.css";
 
-const mostrarFicha = ref(false)
-const fichaDatos = ref(null);
-const imagenesFichaTecnica = ref([]);
+import { useRouter } from "vue-router";
+const router = useRouter();
+
 
 const storeParques = useStoreParques();
 const storeGeneral = useStoreGeneral();
 
-
-
-
-
-
-// Función que sirve para limpiar el array de imagenes
-const imagenesFichaTecnicaVaciar = () => {
-    while(imagenesFichaTecnica.value.length > 0)
-    imagenesFichaTecnica.value.pop()
-}
-
-const cargarDatosFicha = async (objeto) => {
-    //console.log(objeto)
-    mostrarFicha.value = true;
-    fichaDatos.value = null;
-    fichaDatos.value = objeto;
-    console.log(fichaDatos.value)
-    // Limpiamos y cargamos las imagenes de la ficha
-    imagenesFichaTecnicaVaciar()
-    await storeParques.listarImagenes('parques/' + fichaDatos.value.idDoc)
-    for (let i = 0; i < storeParques.imagenes.length; i++) {
-        imagenesFichaTecnica.value.push(storeParques.imagenes[i])
+const cargarDatosFicha = async (doc) => {
+     router.push({
+    name: 'FichaParque',
+    params:{
+      idDoc:doc.idDoc
     }
-   
+  });   
 }
 
 const loadPage = async () => {

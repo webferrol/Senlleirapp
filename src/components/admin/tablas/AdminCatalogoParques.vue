@@ -184,6 +184,8 @@ const borrarParque = async () => {
 const parque = ref(null);
 const editar = async (par) => {
   const refs = await listAllRef(`parques/${par.idDoc}`);
+  const list = await listAllRef ( `parquesficha/${par.idDoc}`   );
+
   images.value = [];
   refs.forEach(async (ref) => {
     images.value.push({
@@ -191,6 +193,13 @@ const editar = async (par) => {
       src: await getDownURL(ref),
     });
   });
+  list.forEach(async (ref) => {
+    images.value.push({
+      ref,
+      src: await getDownURL(ref),
+    });
+  });
+
   parque.value = par;
 };
 const cambiarDatos = async (id) => {
