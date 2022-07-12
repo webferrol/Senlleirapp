@@ -42,10 +42,11 @@
     <template #content>
       <!-- Caracteristicas -->
       <div class="caracteristicas-ficha-tecnica">
+        <h3>Características</h3>
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'leaf']"></icono>
-            <h3>Especie</h3>
+            <h4>Especie</h4>
           </span>
           <p>{{ fichaDatos.genero }} {{ fichaDatos.especie }}</p>
         </div>
@@ -53,7 +54,7 @@
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'signature']"></icono>
-            <h3>Nome castelán</h3>
+            <h4>Nome castelán</h4>
           </span>
           <p>{{ fichaDatos.nombre_comun }}</p>
         </div>
@@ -61,7 +62,7 @@
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'signature']"></icono>
-            <h3>Nome galego</h3>
+            <h4>Nome galego</h4>
           </span>
           <p>{{ fichaDatos.nombre_comun_gal }}</p>
         </div>
@@ -69,7 +70,7 @@
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'up-long']"></icono>
-            <h3>Altura</h3>
+            <h4>Altura</h4>
           </span>
           <p>{{ fichaDatos.altura }} metros</p>
         </div>
@@ -86,12 +87,17 @@
     <!-- Descripcion -->
     <template #footer>
       <div class="descripcion-ficha-tecnica">
+      <h3>Descripción</h3>
         <p>{{ fichaDatos.descripcion }}</p>
       </div>
     </template>
     <!-- Mapa ?? -->
     <template #mapa>
-      <TheGeolocation :lat="fichaDatos.lat" :lng="fichaDatos.lng" />
+
+    <div class="descripcion-ficha-tecnica">
+      <h3>Localización</h3>
+        <TheGeolocation :lat="fichaDatos.lat" :lng="fichaDatos.lng" />
+    </div>
     </template>
   </FichaTecnicaVue>
 </template>
