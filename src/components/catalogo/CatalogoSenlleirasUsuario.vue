@@ -128,7 +128,7 @@ const storeGeneral = useStoreGeneral();
 // })()
 // const temPo = ref([]);
 
-const loadGaleria = ref(true)
+const loadGaleria = ref(false)
 const loadPage = async () => {
   try {
     await storeArbores.setArbores()

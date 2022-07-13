@@ -89,7 +89,7 @@ const storeGeneral = useStoreGeneral();
 const loadGaleria = ref(false);
 const loadPage = async () => {
   await storeEspecies.setEspecies();
-  // loadGaleria.value = true
+  loadGaleria.value = true
   // await storeEspecies.getDownloadURL();
   storeGeneral.filtrarArbores();
   // console.log(storeGeneral.tmp)
