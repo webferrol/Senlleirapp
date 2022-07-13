@@ -49,6 +49,16 @@ export const useStoreArbores = defineStore('arbores', {
             return data;
             
         },
+          /**
+         * Actualizamos un campo "google_url" del documento de Arbores con una estructura parecida a esta "`Arbores/${data.id}/${fileName}`"
+         * @param {*} storage_ref String 
+         */
+           async google_url_save(id,storage_ref){
+            //console.log(storage_ref)
+            const url = await getDownURL(storage_ref);
+            //console.log(url)
+            await updateDocument(id, "Arbores", {'google_url': url });//creado la referencia
+        },
 
         // funcion para eliminar el árbol(fotos e información)
         async borrarArbore(ID){

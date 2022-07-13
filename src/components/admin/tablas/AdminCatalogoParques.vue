@@ -103,6 +103,23 @@
           id="lng"
           placeholder="Longitud"
         />
+
+         <label for="carballeira" class="form-label">Carballeira</label>
+        <input
+          class="input-parque"
+          v-model="parque.carballeira"
+          type="checkbox"
+          name="carballeira"
+          id="carballeira"
+          
+        />
+
+
+
+
+
+
+
         <label for="cronoloxia" class="form-label">Cronoloxía</label>
         <input
           type="text"

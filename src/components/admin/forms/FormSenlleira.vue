@@ -37,6 +37,7 @@
             name="especie"
             id="especie"
           >
+            <option></option>
             <option
               class="especie-option"
               v-for="valor in storeEspecies.especies"
@@ -112,7 +113,7 @@
             placeholder="lugar de situacion"
           />
 
-          <label for="lat" class="form-label">Latitude</label>
+          <label for="lat" class="form-label">Latitude *</label>
           <input
             class="input-senlleira"
             v-model.number="form.lat"
@@ -123,7 +124,7 @@
             placeholder="Latitud"
             required
           />
-          <label for="lng" class="form-label">Longitude</label>
+          <label for="lng" class="form-label">Longitude *</label>
           <input
             class="input-senlleira"
             v-model.number="form.lng"
@@ -353,6 +354,9 @@ const handleSubmit = async () => {
             file: tmpImagenes[i],
           });
         }
+        //Guardamos url
+        const ref = `Arbores/${data.id}/${tmpImagenes[0].name}`;
+        await storeArbores.google_url_save(data.id,ref);
         spinner.value = false;
         reset();
       } catch (e) {
