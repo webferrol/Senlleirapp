@@ -3,12 +3,12 @@
     <CarruselStoriesVue></CarruselStoriesVue>
     <!-- Carrusel de fotos -->
         <CarruselImagenesVue minHeight="350px" :images="imgs"></CarruselImagenesVue>
-        <ParticipaVue></ParticipaVue>
     <!-- Galeria de contenido -->
-    <pre>
-        <!-- {{senlleiros}} -->
-    </pre>
-    <GaleriaVue></GaleriaVue>
+    <!-- <pre>
+        {{senlleiros}}
+    </pre> -->
+    <ParticipaVue></ParticipaVue>
+    <GaleriaVue v-if="senlleiros.length" :images="senlleiros"></GaleriaVue>
     </div>
 </template>
 
@@ -24,6 +24,7 @@ import ParticipaVue from '../components/componentesGenerales/Participa.vue';
 
 const senlleiros = ref([]);
 
+
 const router = useRouter();
 
 const imgs =[
@@ -36,11 +37,15 @@ const imgs =[
 (async()=>{
     try {
         senlleiros.value = await getDocumenstWhere('Arbores','senlleira',true,'nombre_arbol');
+        senlleiros.value = senlleiros.value.map(sen=>{ //Mapeo para añadir un campo a la senlleira
+            sen.urlFicha = `/ficha-tecnica/${sen.idDoc}`;
+            return sen;
+        })
+
     } catch (error) {
         console.log('------------>',error)
     }
     
 })()
-
 </script>
 
