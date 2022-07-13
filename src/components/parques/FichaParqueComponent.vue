@@ -120,7 +120,7 @@ const handleClose = () => {
   window.history.back();
 };
 
-console.log(props.arbores)
+
 </script>
 
 <style>

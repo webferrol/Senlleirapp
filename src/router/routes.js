@@ -25,11 +25,7 @@ export const routes = [
     name: "MapaSenlleiras",
     component: () => import("@/views/senlleira/MapaSenlleiras.vue"),
   },
-  {
-    path: "/lista-parques",
-    name: "lista-parques",
-    component: () => import("@/views/parques/ListaParques.vue"),
-  },
+  
   // ADMIN
   {
     path: "/admin",
@@ -81,7 +77,7 @@ export const routes = [
   {
     path: "/ficha-tecnica/:idDoc",
     name: "FichaSenlleira",
-    component: () => import("@/components/catalogo/FichaTecnica.vue"),
+    component: () => import("@/views/senlleira/FichaSenlleiraView.vue"),
   },
   {
     path: "/prueba",
