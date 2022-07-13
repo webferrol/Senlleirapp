@@ -4,6 +4,9 @@
     <!-- Carrusel de fotos -->
         <CarruselImagenesVue minHeight="350px" :images="imgs"></CarruselImagenesVue>
     <!-- Galeria de contenido -->
+    <pre>
+        {{senlleiros}}
+    </pre>
     <GaleriaVue></GaleriaVue>
     </div>
 </template>
@@ -11,9 +14,13 @@
 <script setup>
 import CarruselStoriesVue from '@/components/parques/CarruselStories.vue';
 import CarruselImagenesVue from '../components/CarruselImagenes.vue';
-import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import GaleriaVue from '../components/galeria/Galeria.vue';
+import { ref } from 'vue';
+
+import { getDocumenstWhere } from '../hook/firestore.hook';
+
+const senlleiros = ref([]);
 
 const router = useRouter();
 
@@ -23,6 +30,15 @@ const imgs =[
     './senlleiras_5.jpg',
     './senlleiras_10.jpg',
 ];
+
+(async()=>{
+    try {
+        senlleiros.value = await getDocumenstWhere('Arbores','senlleira',true,'nombre_arbol');
+    } catch (error) {
+        console.log('------------>',error)
+    }
+    
+})()
 
 </script>
 
