@@ -79,13 +79,17 @@
       <div class="mapas">
        
         <img v-for="mapa in mapas" :key="mapa" :src="mapa" :alt="mapa">
+        
+        
         <ul>
             <li v-for="arbore in arbores" :key="arbore.idDoc">
-            
+            <router-link class="enlaces"  :to = "{ name: 'FichaSenlleira', params:{idDoc:arbore.idDoc} }">
           {{(arbore?.numero_mapa>0)? arbore?.numero_mapa:''}} {{arbore?.nombre_comun_gal}} (Especie:  {{arbore?.genero}} {{arbore?.especie}} )
+            </router-link>
             </li>
         </ul>
-
+        
+      
       </div>
     </article>
   </div>
@@ -126,14 +130,16 @@ const handleClose = () => {
 <style>
 .mapas{
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
+    /* grid-template-columns: repeat(auto-fit,minmax(400px,1fr)); */
 }
 
 .mapas img{
     width: 100%;
 }
 
-
-
+.enlaces{
+  color: black;
+  text-decoration: none;
+}
 
 </style>
