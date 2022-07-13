@@ -121,37 +121,20 @@ const storeArbores = useStoreArbores();
 const storeEspecies = useStoreEspecies();
 const storeGeneral = useStoreGeneral();
 
-// (async ()=>{
-//     await storeArbores.setArbores()
-//     await storeArbores.getDownloadURL();
-//     // datos(storeArbores.arbores);
-// })()
-// const temPo = ref([]);
 
 const loadGaleria = ref(false)
 const loadPage = async () => {
   try {
     await storeArbores.setArbores()
-    loadGaleria.value = true 
+    storeGeneral.filtrarArbores();
+    setTimeout(()=>{
+      loadGaleria.value = true;
+    },1000);    
   } catch (error) {
-    
-  };
-  await storeArbores.getDownloadURL();
-  storeGeneral.filtrarArbores();
-  // console.log(storeGeneral.tmp)
-  // console.log(temPo.value);
-};
+    console.log("Error en CatalogoSenlleiras.vue",error);
+  }  
+}
 loadPage();
-// datos(temPo.value);
-// temPo = tmp;
-// console.log(storeArbores.arbores)
-//storeEspecies.setEspecies();
-
-// const filtrar = () => {
-//     console.log("jeje")
-//     temPo.value = storeGeneral.filtrar()
-//     console.log(temPo);
-// };
 
 const mostrarFicha = ref(false);
 const fichaDatos = ref(null);
