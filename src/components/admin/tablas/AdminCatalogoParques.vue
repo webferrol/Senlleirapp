@@ -113,13 +113,6 @@
           id="carballeira"
           
         />
-
-
-
-
-
-
-
         <label for="cronoloxia" class="form-label">Cronoloxía</label>
         <input
           type="text"
@@ -258,7 +251,7 @@ const gestionFoto = async (file) => {
 //Eliminar la imagen en el modulo de editar
 
 const deleteImage = (ref) => {
-  const texto = prompt(`para eliminar la foto comnfirme la referencia:${ref}`);
+  const texto = prompt(`para eliminar la foto comnfirme la referencia:\n${ref}`);
   if (texto === ref) {
     storeParques.borrarFoto(ref);
   }
