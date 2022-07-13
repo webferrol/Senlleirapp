@@ -196,7 +196,7 @@
           <label class="form-label" for="senlleira">Senlleira</label>
           <input
             type="checkbox"
-            v-model="form.propuesta_senlleria"
+            v-model="form.propuesta_senlleira"
             name="propSenlleira"
             id="propSenlleira"
           />&nbsp;
@@ -266,7 +266,7 @@ const form = reactive({
   altura: 0,
   descripcion: "",
   senlleira: false,
-  propuesta_senlleria: false, //Si no es Senlleira ni propuesta es un árbol común
+  propuesta_senlleira: false, //Si no es Senlleira ni propuesta es un árbol común
 });
 
 // llamada del store
@@ -306,7 +306,7 @@ const reset = () => {
   form.diametro = "";
   form.descripcion = "";
   form.senlleira = false;
-  form.propuesta_senlleria = false;
+  form.propuesta_senlleira = false;
 };
 
 const gestionFoto = async (imagenes) => {

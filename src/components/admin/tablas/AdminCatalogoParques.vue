@@ -141,12 +141,14 @@
             <button class="btn-eliminar" @click="deleteImage(image.ref)">
               Eliminar
             </button>
-            Portada{{portada}}
+           
             <input v-model="portada" name="portada" :value="image.ref" type="radio"> Portada
           </div>
         </fieldset>
-
+        <div>Fotos del parque</div>
         <theUploader @emitirFichero="gestionFoto"></theUploader>
+        <div>Mapa del parque</div>
+        <TheUploader @emitirFichero="gestionMapa"></TheUploader>
 
         <input
           type="submit"
@@ -248,10 +250,28 @@ const gestionFoto = async (file) => {
   }
 };
 
+const gestionMapa = async (file) =>{
+  if (file){
+    const imagen = file [0];
+    try{
+      error.value = "";
+      await storeParques.subirParque({
+        ref: `parquesficha/${parque.value.idDoc}`,
+        file: imagen,
+      });
+
+    }catch (e){
+      console.log(e);
+      error.value = e.mensage;
+    }
+  }
+}
+
+
 //Eliminar la imagen en el modulo de editar
 
 const deleteImage = (ref) => {
-  const texto = prompt(`para eliminar la foto comnfirme la referencia:\n${ref}`);
+  const texto = prompt(`para eliminar a foto confirme a referencia:\n ${ref}`);
   if (texto === ref) {
     storeParques.borrarFoto(ref);
   }
