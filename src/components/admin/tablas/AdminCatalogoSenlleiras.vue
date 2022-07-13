@@ -175,6 +175,27 @@
             placeholder="Descripción"
           ></textarea>
         </fieldset>
+        <fieldset class="data-senlleira">
+        <legend>Esta árbore é</legend>
+        <div class="senlleira-arbore">
+          <input
+            type="checkbox"
+            v-model="arbore.senlleira"
+            name="senlleira"
+            id="senlleira"
+          />&nbsp;
+          <label class="form-label" for="senlleira">Senlleira</label>
+          <input
+            type="checkbox"
+            v-model="arbore.propuesta_senlleira"
+            name="propSenlleira"
+            id="propSenlleira"
+          />&nbsp;
+          <label class="form-label" for="propSenlleira"
+            >Proposta de senlleira</label
+          >
+        </div>
+      </fieldset>
         <fieldset class="editar-images">
           <div class="images" v-for="image of images" :key="image.ref">
             <img class="image" :src="image.src" alt="" />

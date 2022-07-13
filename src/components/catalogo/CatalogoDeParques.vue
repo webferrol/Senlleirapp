@@ -31,6 +31,7 @@ import SkeletonCatalogoVue from "../skeleton/SkeletonCatalogo.vue";
 import "@/assets/css/catalogo/catalogo.css";
 
 import { useRouter } from "vue-router";
+const loadGaleria = ref(false)
 const router = useRouter();
 
 
@@ -46,7 +47,7 @@ const cargarDatosFicha = async (doc) => {
   });   
 }
 
-const loadGaleria = ref(false)
+
 const loadPage = async () => {
     await storeParques.setParques();
     storeGeneral.filtrarParques();

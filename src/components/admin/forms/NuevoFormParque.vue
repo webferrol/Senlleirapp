@@ -103,8 +103,9 @@
           id="descripcion"
           placeholder="Descripcion"
         ></textarea>
-
+        <div>Fotos del parque</div>
         <TheUploader :required="true"   @emitirFichero="fotosParques"></TheUploader>
+        <div>Mapa del parque</div>
         <TheUploader :required="true"   @emitirFichero="fotoMapa"></TheUploader>
 
         <div v-if="error.error" class="error">{{ error.message }}</div>

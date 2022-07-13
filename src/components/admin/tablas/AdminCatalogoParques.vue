@@ -113,13 +113,6 @@
           id="carballeira"
           
         />
-
-
-
-
-
-
-
         <label for="cronoloxia" class="form-label">Cronoloxía</label>
         <input
           type="text"
@@ -148,10 +141,14 @@
             <button class="btn-eliminar" @click="deleteImage(image.ref)">
               Eliminar
             </button>
+           
+            <input v-model="portada" name="portada" :value="image.ref" type="radio"> Portada
           </div>
         </fieldset>
-
+        <div>Fotos del parque</div>
         <theUploader @emitirFichero="gestionFoto"></theUploader>
+        <div>Mapa del parque</div>
+        <TheUploader @emitirFichero="gestionMapa"></TheUploader>
 
         <input
           type="submit"
@@ -178,6 +175,7 @@ storeParques.setParques().catch((error) => console.log(error));
 
 const nombre = ref("");
 const loading = ref(false);
+const portada = ref('');
 let itemDelete = null;
 
 const mostrar = ref(false);
@@ -223,6 +221,8 @@ const cambiarDatos = async (id) => {
   const docRef = await updateDocument(id, "Parques", parque.value);
   try {
     loading.value = true;
+     if(portada.value.length)
+      parque.value.urlficha = portada.value;
     await updateDocument(id, "Parques", parque.value);
   } catch (error) {
     console.log(error);
@@ -250,10 +250,28 @@ const gestionFoto = async (file) => {
   }
 };
 
+const gestionMapa = async (file) =>{
+  if (file){
+    const imagen = file [0];
+    try{
+      error.value = "";
+      await storeParques.subirParque({
+        ref: `parquesficha/${parque.value.idDoc}`,
+        file: imagen,
+      });
+
+    }catch (e){
+      console.log(e);
+      error.value = e.mensage;
+    }
+  }
+}
+
+
 //Eliminar la imagen en el modulo de editar
 
 const deleteImage = (ref) => {
-  const texto = prompt(`para eliminar la foto comnfirme la referencia:${ref}`);
+  const texto = prompt(`para eliminar a foto confirme a referencia:\n ${ref}`);
   if (texto === ref) {
     storeParques.borrarFoto(ref);
   }
