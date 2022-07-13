@@ -8,12 +8,13 @@
       enctype="multipart/form-data"
       @submit.prevent="handleSubmit"
     >
+    
       <span class="h2-background">
         <h2>Formulario senlleira</h2>
         <icono @click="cerrarForm" :icon="['fa', 'xmark']"></icono>
       </span>
       <fieldset class="data-senlleira --localizacion">
-        <legend>Datos senlleira</legend>
+        <legend>Datos senlleirassssssssssssss</legend>
         <div class="senlleira-nombre-cientifico">
           <label for="arbore" class="form-label">
             Nome da árbore <span data-set="Campo obligatorio">*</span></label
@@ -112,35 +113,14 @@
             id="zona"
             placeholder="lugar de situacion"
           />
+          <!-- Geolocation -->
+          <TheGeolocationComponent></TheGeolocationComponent>
 
-          <label for="lat" class="form-label">Latitude *</label>
-          <input
-            class="input-senlleira"
-            v-model.number="form.lat"
-            type="number"
-            name="lat"
-            id="lat"
-            step="any"
-            placeholder="Latitud"
-            required
-          />
-          <label for="lng" class="form-label">Longitude *</label>
-          <input
-            class="input-senlleira"
-            v-model.number="form.lng"
-            type="number"
-            name="lng"
-            id="lng"
-            step="any"
-            placeholder="Longitud"
-            required
-          />
         </div>
       </fieldset>
       <fieldset class="data-senlleira">
         <div class="senlleira-localizacion">
           <legend>Parque</legend>
-
           <label for="localizacion" class="form-label"> Ubicación parque</label>
           <select
             @change="
@@ -230,16 +210,19 @@
       <button class="btn-form">Publicar Arbol</button>
       <!-- {{form.genero}}  {{form.especie}} {{form.nombre_comun}} {{form.nombre_comun_gal}} -->
     </form>
+    
   </div>
 </template>
 
 <script setup>
+import { provide, reactive, ref } from "vue";
 import TheUploader from "@/components/theUploader.vue";
 import { useStoreArbores } from "@/stores/arbores";
 import { useStoreParques } from "@/stores/parques";
 import { useStoreEspecies } from "@/stores/especies";
-import { reactive, ref } from "vue";
+
 import "@/assets/css/formularioSenlleira.css";
+import TheGeolocationComponent from "../../componentesGenerales/TheGeolocationComponent.vue";
 
 const emits = defineEmits(["cerrarForm"]);
 
@@ -268,6 +251,10 @@ const form = reactive({
   senlleira: false,
   propuesta_senlleira: false, //Si no es Senlleira ni propuesta es un árbol común
 });
+
+
+
+provide('form',form)
 
 // llamada del store
 const storeArbores = useStoreArbores();
@@ -308,6 +295,8 @@ const reset = () => {
   form.senlleira = false;
   form.propuesta_senlleira = false;
 };
+
+
 
 const gestionFoto = async (imagenes) => {
   try {
