@@ -3,17 +3,19 @@
     <CarruselStoriesVue></CarruselStoriesVue>
     <!-- Carrusel de fotos -->
         <CarruselImagenesVue minHeight="350px" :images="imgs"></CarruselImagenesVue>
+        <ParticipaVue></ParticipaVue>
     <!-- Galeria de contenido -->
     <GaleriaVue></GaleriaVue>
     </div>
 </template>
 
 <script setup>
-import CarruselStoriesVue from '@/components/parques/CarruselStories.vue';
-import CarruselImagenesVue from '../components/CarruselImagenes.vue';
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import GaleriaVue from '../components/galeria/Galeria.vue';
+import CarruselStoriesVue from '@/components/parques/CarruselStories.vue';
+import CarruselImagenesVue from '../components/CarruselImagenes.vue';
+import ParticipaVue from '../components/componentesGenerales/Participa.vue';
 
 const router = useRouter();
 

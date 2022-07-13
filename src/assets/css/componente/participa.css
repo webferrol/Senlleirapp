@@ -1,0 +1,50 @@
+.container-participa{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    background-image: url(../../gallery/senlleiras_14.jpg);
+    background-position: center;
+    background-size: cover;
+    padding: 1rem;
+    height: calc(100vh - 43.8px);
+}
+
+.call-to-action-senlleira{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem
+}
+/* Texto de llamada */
+    .call-to-action-senlleira{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+    .call-to-action-senlleira h1{
+        text-align: left;
+        font-size: 2rem;
+        text-transform: uppercase;
+        color: white;
+        font-weight: 900;
+    }
+    .call-to-action-senlleira p{
+        text-align: left;
+        font-size: 1.1rem;
+        color: white;
+        font-weight: 400;
+
+    }
+
+    /* Boton */
+    .container-participa a{
+        margin: auto;
+        width: fit-content;
+        height: fit-content;
+        border-radius: 5px;
+        padding: .5rem 1rem;
+        background-color: var(--colorprincipal);
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-decoration: none;
+    }
