@@ -148,6 +148,8 @@
             <button class="btn-eliminar" @click="deleteImage(image.ref)">
               Eliminar
             </button>
+            Portada{{portada}}
+            <input v-model="portada" name="portada" :value="image.ref" type="radio"> Portada
           </div>
         </fieldset>
 
@@ -178,6 +180,7 @@ storeParques.setParques().catch((error) => console.log(error));
 
 const nombre = ref("");
 const loading = ref(false);
+const portada = ref('');
 let itemDelete = null;
 
 const mostrar = ref(false);
@@ -223,6 +226,8 @@ const cambiarDatos = async (id) => {
   const docRef = await updateDocument(id, "Parques", parque.value);
   try {
     loading.value = true;
+     if(portada.value.length)
+      parque.value.urlficha = portada.value;
     await updateDocument(id, "Parques", parque.value);
   } catch (error) {
     console.log(error);
