@@ -6,7 +6,7 @@
         <ParticipaVue></ParticipaVue>
     <!-- Galeria de contenido -->
     <pre>
-        {{senlleiros}}
+        <!-- {{senlleiros}} -->
     </pre>
     <GaleriaVue></GaleriaVue>
     </div>
