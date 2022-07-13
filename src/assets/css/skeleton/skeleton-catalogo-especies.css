@@ -1,0 +1,26 @@
+.container-galeria{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: .5rem;
+    width: 90%;
+    margin: auto;
+}
+
+.skeleton-especie{
+    width: 100%;
+    animation: backgroundAnimation 2s infinite alternate;
+    border-radius: 5px;
+    padding: .5rem;
+    max-width: 200px
+    
+}
+
+@keyframes backgroundAnimation {
+    0%{
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100%{
+        background-color: hsl(200, 20%, 95%);
+    }
+}

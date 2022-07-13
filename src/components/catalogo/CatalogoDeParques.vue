@@ -1,6 +1,6 @@
 <template>
 <h1 class="tittle-section">Catalogo Parques</h1>
-    <div class="catalogo-section-component">
+    <div class="catalogo-section-component" v-if="loadGaleria">
         <div class="arbol-catalogo-element" data-titulo="Mostrar" title="Máis info"
             v-for="(parque, index) in storeGeneral.tmp" :key="index" identificador=senlleira.id
             @click="cargarDatosFicha(parque)">
@@ -16,13 +16,18 @@
                 </span>
             </div>
         </div>
-    </div>     
+    </div>  
+    <SkeletonCatalogoVue v-else="loadGaleria"></SkeletonCatalogoVue>   
 </template>
 
 <script setup>
 //Dependencias
+import {ref} from 'vue';
 import { useStoreParques } from "../../stores/parques";
 import { useStoreGeneral } from "../../stores/general";
+import SkeletonCatalogoVue from "../skeleton/SkeletonCatalogo.vue";
+
+
 import "@/assets/css/catalogo/catalogo.css";
 
 import { useRouter } from "vue-router";
@@ -41,9 +46,11 @@ const cargarDatosFicha = async (doc) => {
   });   
 }
 
+const loadGaleria = ref(false)
 const loadPage = async () => {
     await storeParques.setParques();
     storeGeneral.filtrarParques();
+    loadGaleria.value = true;
 }
 loadPage();
 </script>

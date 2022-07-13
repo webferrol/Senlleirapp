@@ -1,6 +1,6 @@
 <template>
   <h1 class="tittle-section">Catalogo Senlleiras</h1>
-  <div class="catalogo-section-component">
+  <div class="catalogo-section-component" v-if="loadGaleria">
     <div
       class="arbol-catalogo-element"
       data-titulo="Mostrar"
@@ -10,7 +10,7 @@
       identificador="senlleira.id"
       @click="cargarDatosFicha(senlleira)"
     >
-      <img
+      <img v-if="imagenesFichaTecnica"
         class="imagen-catalogo"
         alt="imagen del arbol senlleiro"
         :src="senlleira.google_url"
@@ -27,6 +27,7 @@
       </div>
     </div>
   </div>
+  <SkeletonCatalogoVue v-else="loadGaleria"></SkeletonCatalogoVue>
   <!-- <pre>{{temPo}}</pre> -->
 
   <FichaTecnicaVue
@@ -112,6 +113,9 @@ import { useStoreGeneral } from "../../stores/general";
 
 import "@/assets/css/catalogo/catalogo.css";
 import TheGeolocation from "../TheGeolocation.vue";
+// Skeleton
+import SkeletonCatalogoVue from "../skeleton/SkeletonCatalogo.vue";
+
 
 const storeArbores = useStoreArbores();
 const storeEspecies = useStoreEspecies();
@@ -123,8 +127,15 @@ const storeGeneral = useStoreGeneral();
 //     // datos(storeArbores.arbores);
 // })()
 // const temPo = ref([]);
+
+const loadGaleria = ref(true)
 const loadPage = async () => {
-  await storeArbores.setArbores();
+  try {
+    await storeArbores.setArbores()
+    loadGaleria.value = true 
+  } catch (error) {
+    
+  };
   await storeArbores.getDownloadURL();
   storeGeneral.filtrarArbores();
   // console.log(storeGeneral.tmp)
@@ -146,11 +157,13 @@ const mostrarFicha = ref(false);
 const fichaDatos = ref(null);
 const imagenesFichaTecnica = ref([]);
 
+
 // Función que sirve para limpiar el array de imagenes
 const imagenesFichaTecnicaVaciar = () => {
   while (imagenesFichaTecnica.value.length > 0)
     imagenesFichaTecnica.value.pop();
 };
+
 
 // datos(storeArbores.arbores);
 // Funcion para cargar datos de la ficha y sus respectivas imágenes
@@ -170,8 +183,7 @@ const cargarDatosFicha = async (objeto) => {
     for (let i = 0; i < storeArbores.imagenes.length; i++) {
         imagenesFichaTecnica.value.push(storeArbores.imagenes[i])
     }
+
     //await storeEspecies.setEspecies()
 }
-
-
 </script>

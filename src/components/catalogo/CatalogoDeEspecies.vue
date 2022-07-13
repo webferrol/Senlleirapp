@@ -1,6 +1,7 @@
 <template>
   <h1 class="tittle-section">Catalogo especies</h1>
-  <div class="catalogo-especies-component">
+  <div class="catalogo-especies-component" v-if="loadGaleria">
+
     <div class="especie-catalogo-element" data-titulo="Mostrar" title="Máis info"
       v-for="(especie, index) in storeEspecies.especies" :key="index" identificador="senlleira.id"
       @click="cargarDatosFicha(especie)">
@@ -10,6 +11,7 @@
       </div>
     </div>
   </div>
+  <SkeletonCatalogoEspeciesVue v-else="loadGaleria"></SkeletonCatalogoEspeciesVue>
   <!-- <pre>{{temPo}}</pre> -->
 
   <FichaTecnicaVue v-if="mostrarFicha" @cerrarFicha="mostrarFicha = false" :data="fichaDatos"
@@ -70,9 +72,10 @@ import { ref } from "vue";
 import { useStoreEspecies } from "../../stores/especies";
 import FichaTecnicaVue from "./FichaTecnica.vue";
 import { useStoreGeneral } from "../../stores/general";
-
-// import "@/assets/css/catalogo/catalogo.css";
 import "@/assets/css/catalogo/catalogo-especies.css";
+
+// Skeleton
+import SkeletonCatalogoEspeciesVue from "../skeleton/SkeletonCatalogoEspecies.vue";
 
 const storeEspecies = useStoreEspecies();
 const storeGeneral = useStoreGeneral();
@@ -83,8 +86,10 @@ const storeGeneral = useStoreGeneral();
 //     // datos(storeArbores.arbores);
 // })()
 // const temPo = ref([]);
+const loadGaleria = ref(false);
 const loadPage = async () => {
   await storeEspecies.setEspecies();
+  // loadGaleria.value = true
   // await storeEspecies.getDownloadURL();
   storeGeneral.filtrarArbores();
   // console.log(storeGeneral.tmp)
