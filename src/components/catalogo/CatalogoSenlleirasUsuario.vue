@@ -126,14 +126,10 @@ const loadGaleria = ref(false)
 const loadPage = async () => {
   try {
     await storeArbores.setArbores()
-<<<<<<< HEAD
     storeGeneral.filtrarArbores();
     setTimeout(()=>{
       loadGaleria.value = true;
     },1000);    
-=======
-    // loadGaleria.value = true 
->>>>>>> 1d4e8c1b25b50b1f752ccd852fe9abb2bbc7bffb
   } catch (error) {
     console.log("Error en CatalogoSenlleiras.vue",error);
   }  
