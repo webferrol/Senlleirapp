@@ -132,7 +132,7 @@ const loadGaleria = ref(false)
 const loadPage = async () => {
   try {
     await storeArbores.setArbores()
-    loadGaleria.value = true 
+    // loadGaleria.value = true 
   } catch (error) {
     
   };
