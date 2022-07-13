@@ -57,5 +57,13 @@ export const listAllRef = async (uid) => {
  * 
  * @param {string} uid Referencia donde estan guardadas las fotos
  */
-export const getDownURL = async (uid) => await getDownloadURL(ref(storage, uid))
+export const getDownURL = async (uid) => {
+    let url = '';
+    try{
+        url = await getDownloadURL(ref(storage, uid))
+    }catch{
+        return '';
+    }
+    return url;    
+}
         
