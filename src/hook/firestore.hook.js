@@ -49,7 +49,7 @@ export const getDocument = async (collectionName,reference) => {
  * @param {any} $value Valor buscado en la consulta
  * @returns {Array} Array de objetos con los documentos encontrados o array vacío si no encuentra nada
  */
- export const getDocumenstWhere = async ($collectionName,$field,$value) => {
+ export const getDocumentsWhere = async ($collectionName,$field,$value) => {
   
   const tmp = [];
   const q = query(collection(db, $collectionName), where($field, "==", $value));

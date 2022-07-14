@@ -11,7 +11,7 @@
 <script setup>
 // -> Importaciones <- //
 import { ref } from "vue";
-import { getDocumenstWhere } from "../../hook/firestore.hook";
+import { getDocumentsWhere } from "../../hook/firestore.hook";
 import TheGoogleMaps from "../../components/TheGoogleMaps.vue";
 
 // -> Constantes / Variables <- //
@@ -23,7 +23,7 @@ const coordsArbol = ref([]);
 // -> Funcion asincrona que recorre el array para calcular las coordenadas de cada arbol y las pinta en el mapa <- //
 (async () => {
   try {
-     arbores.value =  await getDocumenstWhere('Arbores', 'senlleira',true);
+     arbores.value =  await getDocumentsWhere('Arbores', 'senlleira',true);
     for (let i = 0; i < arbores.value.length; i++) {
       //console.log(arbores.value[i])
       coordsArbol.value.push({

@@ -1,5 +1,5 @@
 <template>
-  <h1 class="tittle-section">Catalogo de árbores</h1>
+  <h1 class="tittle-section">Catalogo de Senlleiras</h1>
   <div class="catalogo-section-component" v-if="loadGaleria">
     <div
       class="arbol-catalogo-element"
@@ -36,8 +36,8 @@
 //Dependencias
 import { ref } from "vue";
 import { useStoreArbores } from "@/stores/arbores.js";
-import { useStoreGeneral } from "../../stores/general";
-import SkeletonCatalogoVue from "../skeleton/SkeletonCatalogo.vue";
+import { useStoreGeneral } from "@/stores/general";
+import SkeletonCatalogoVue from "@/components/skeleton/SkeletonCatalogo.vue";
 import "@/assets/css/catalogo/catalogo.css";
 import { useRouter } from "vue-router";
 const loadGaleria = ref(false)
@@ -57,7 +57,7 @@ const cargarDatosFicha = async (doc) => {
 
 
 const loadPage = async () => {
-    await storeArbores.setArbores();
+    await storeArbores.setSenlleiras();
     storeGeneral.filtrarArbores();
     loadGaleria.value = true;
 }

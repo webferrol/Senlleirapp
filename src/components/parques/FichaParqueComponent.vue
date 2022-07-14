@@ -65,31 +65,34 @@
         <hr class="line-ficha-tecnica" />
         <h2 class="h2-ficha-tecnica">Localización</h2>
       </div>
-      <TheGeolocation
-        v-if="parque.lat"
-        :icon="'../src/assets/parques.png'"        
-        :lat="parque.lat"
-        :lng="parque.lng"
+      <TheLeafletComponent 
+      v-if="parque.lat"
+      icon-url="../parques.png"
+      :location="location"
+      :centrado="[parque.lat,parque.lng]"
       />
-
       <!-- IMAGEN DEL MAPA DEL PARQUE -->
 
     
 
       <!-- LISTADO DE ÁRBOLES -->
+      
+      <div class="component-container">
+            <router-link 
+            v-for="arbore in arbores" 
+            :key="arbore.idDoc"
+            class="component-element"  
+            :to="{ name: 'FichaSenlleira', params:{idDoc:arbore.idDoc} }">
+              {{(arbore?.numero_mapa>0)? arbore?.numero_mapa:''}} {{arbore?.nombre_comun_gal}} (Especie:  {{arbore?.genero}} {{arbore?.especie}} )
+            </router-link>
+        </div>
 
       <div class="mapas">
        
         <img v-for="mapa in mapas" :key="mapa" :src="mapa" :alt="mapa">
         
         
-        <ul>
-            <li v-for="arbore in arbores" :key="arbore.idDoc">
-            <router-link class="enlaces"  :to = "{ name: 'FichaSenlleira', params:{idDoc:arbore.idDoc} }">
-          {{(arbore?.numero_mapa>0)? arbore?.numero_mapa:''}} {{arbore?.nombre_comun_gal}} (Especie:  {{arbore?.genero}} {{arbore?.especie}} )
-            </router-link>
-            </li>
-        </ul>
+        
         
       
       </div>
@@ -98,8 +101,9 @@
 </template>
 <script setup>
 //import CarruselImagenesVue from '../CarruselImagenes.vue';
-import TheGeolocation from "@/components/TheGeolocation.vue";
+import TheLeafletComponent from "../admin/TheLeafletComponent.vue";
 import CarruselImagenesVue from "@/components/CarruselImagenes.vue";
+import { computed } from "vue";
 import "@/assets/css/catalogo/ficha-tecnica.css";
 
 const props = defineProps({
@@ -122,6 +126,14 @@ const props = defineProps({
   },
 });
 
+const location = computed(()=>[
+            {
+                tooltip: props.parque.nombre,
+                route:false,
+                latLong:[props.parque.lat, props.parque.lng],
+            }
+        ]);
+
 const handleClose = () => {
   window.history.back();
 };
@@ -129,7 +141,7 @@ const handleClose = () => {
 
 </script>
 
-<style>
+<style scoped lang="scss">
 .mapas{
     display: grid;
     /* grid-template-columns: repeat(auto-fit,minmax(400px,1fr)); */
@@ -139,9 +151,13 @@ const handleClose = () => {
     width: 100%;
 }
 
-.enlaces{
-  color: black;
-  text-decoration: none;
+.component-container{
+  padding: .5rem;
+  background-color: bisque;
+  a{
+    text-decoration: none;
+    font-weight: bold;
+  }
 }
 
 </style>

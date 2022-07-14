@@ -68,7 +68,16 @@ const props = defineProps({
      */
     location: {
         type: Array,
-        default: () => [{idDoc:1,latLong:[42.877702, -8.5508146],url:'',tooltip:'Tooltip'}]
+        default: () => [
+            {
+                tooltip: 'Texto en tooltip',
+                route:{
+                    name:'FichaParque',
+                    params:{ idDoc: 1}
+                },
+                latLong:[42.877702, -8.5508146],
+            }
+        ]
     },
     /**
      * {Array} Centrado del mapa

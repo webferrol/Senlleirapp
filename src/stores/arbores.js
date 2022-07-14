@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 // importacion de la función del firebase para subir las fotos
 import { subirFicheros, listAllUrls,getDownURL, deleteFile,listAllRef} from '@/hook/storage.hook';
 
-import { addDocument, getDocuments, deleteDocument, updateDocument} from '@/hook/firestore.hook';
+import { addDocument, getDocuments,getDocumentsWhere,deleteDocument, updateDocument} from '@/hook/firestore.hook';
 
 
 
@@ -75,12 +75,22 @@ export const useStoreArbores = defineStore('arbores', {
         
         /**
          * 
-         * @returns array que contiene objetos con la informacion de las arboles senlleiras
+         * @returns array que contiene objetos con la informacion de las arboles en general
          */
         async setArbores(){
             if (this.arbores.length > 0) //Por si el array ya está cargado
                 return
             this.arbores = await getDocuments("Arbores") 
+           
+        },
+        /**
+         * 
+         * @returns array que contiene objetos con la informacion de las arboles senlleiras
+         */
+         async setSenlleiras(){
+            if (this.arbores.length > 0) //Por si el array ya está cargado
+                return
+            this.arbores = await getDocumentsWhere("Arbores","senlleira",true);
            
         },
         async setImagenes(uid) {

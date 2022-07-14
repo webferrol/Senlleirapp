@@ -7,7 +7,7 @@
             descubrirán o fascinantes que son.
         </p>
         <div class="container-explora">
-            <router-link to="/catalogo" class="explora-senlleira">
+            <router-link to="/catalogo-senlleiras" class="explora-senlleira">
                 <img src="../../assets/gallery/senlleiras_16.jpg" alt="imagen-explora-senlleiras">
                 <h3>Senlleiras</h3>
             </router-link>

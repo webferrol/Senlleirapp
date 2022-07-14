@@ -12,7 +12,12 @@ export const routes = [
   {
     path: "/catalogo",
     name: "catalogo",
-    component: () => import("@/views/senlleira/Catalogo.vue"),
+    component: () => import("@/views/senlleira/CatalogoArboresView.vue"),
+  },
+  {
+    path: "/catalogo-senlleiras",
+    name: "CatalogoSenlleiras",
+    component: () => import("@/views/senlleira/CatalogoSenlleirasView.vue"),
   },
   {
     path: "/mapaParques",
