@@ -3,7 +3,7 @@
     grid-template-columns: 1fr;
     align-items: center;
     padding: 1rem 0;
-    min-height: calc(100vh - 83px);
+    height: fit-content;
 }
 
 .explora-titulo {
