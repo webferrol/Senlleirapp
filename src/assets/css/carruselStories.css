@@ -73,7 +73,7 @@
   
   .stories-navigator .arbol-name {
     position: absolute;
-    top: 80%;
+    bottom: 0;
     width: inherit;
     padding: .25rem;
     font-size: .9rem;
@@ -83,7 +83,13 @@
     /* white-space: nowrap; */
     text-overflow: ellipsis;
     color: white;
+    background-color: rgba(48, 46, 46,.5);
+    font-size: .6rem;
     font-weight: 900;
+
+    white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
   }
 
   .borde-final{
