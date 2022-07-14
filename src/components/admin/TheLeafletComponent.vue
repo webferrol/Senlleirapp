@@ -103,14 +103,10 @@ const tileProviders = reactive([
         },
       ]);
 
-const handleRoute = ({routeName,routeParams}) => {
+const handleRoute = ({route}) => {
    
-  if (routeName ) {
-    router.push({
-      name: routeName,
-      params: routeParams,
-      
-    })
+  if (route) {
+    router.push(route)
   }
 }
 
