@@ -1,5 +1,6 @@
 <template>
     <div class="home">
+    <ExploraVue></ExploraVue>
     <CarruselStoriesVue></CarruselStoriesVue>
     <!-- Carrusel de fotos -->
         <CarruselImagenesVue minHeight="350px" :images="imgs"></CarruselImagenesVue>
@@ -21,6 +22,7 @@ import { ref } from 'vue';
 
 import { getDocumenstWhere } from '../hook/firestore.hook';
 import ParticipaVue from '../components/componentesGenerales/Participa.vue';
+import ExploraVue from '../components/componentesGenerales/Explora.vue';
 
 const senlleiros = ref([]);
 

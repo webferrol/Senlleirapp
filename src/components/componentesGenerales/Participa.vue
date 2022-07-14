@@ -4,7 +4,7 @@
                 <img class="logo-santiago" src="@/assets/img/Logo_ConcelloSTGO_Blanco.png"
                     alt="logotipo de santiago">
                 <h1>Involúcrate</h1>
-                <p>¿Queres publicar a túa árbore favorita de Santiago?</p>
+                <p>Anímate, explora e propón as túas árbores senlleiras para facer un Catálogo participativo.</p>
                 <router-link to="/nova-arbore">Subir árbore</router-link>
             </div>  
     </div>
