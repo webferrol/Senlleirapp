@@ -1,4 +1,5 @@
 <template>
+
   <div class="container-ficha-tecnica">
     <article class="ficha-tecnica">
       <div class="cabecera-ficha-tecnica">
@@ -65,7 +66,8 @@
         <h2 class="h2-ficha-tecnica">Localización</h2>
       </div>
       <TheGeolocation
-        :icon="'../src/assets/parques.png'"
+        v-if="parque.lat"
+        :icon="'../src/assets/parques.png'"        
         :lat="parque.lat"
         :lng="parque.lng"
       />

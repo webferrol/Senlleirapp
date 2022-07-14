@@ -1,7 +1,8 @@
 <template>
 
     <div class="field">
-       <label for="lat" class="form-label">Latitude *</label>
+       <label for="lat" class="form-label">Latitude<span data-set="Campo obligatorio"
+              class="required-user">*</span> </label>
         <input class="input-senlleira" id="latitud" required name="latitud" v-model.number="form.lat" type="number" step="any"
             placeholder="43.5060736" />
         <strong v-if="!form.lat" class="alert alert-danger" role="alert">Debe escoller unha
@@ -10,7 +11,8 @@
 
 
     <div class="field">
-        <label for="lng" class="form-label">Longitude *</label>
+        <label for="lng" class="form-label">Lonxitude <span data-set="Campo obligatorio"
+              class="required-user">*</span></label>
         <input id="longitude" required name="longitude" v-model.number="form.lng" step="any" type="number"
             placeholder="-8.2051072" class="input-senlleira" />
         <strong v-if="!form.lng" class="alert alert-danger" role="alert">Debe escoller unha lonxitude
@@ -38,6 +40,7 @@ import { ref, inject} from "vue";
  * @description Objeto con las propiedades de latitud y longitud para geolocalizar un elemento. Tiene que tener el formato descrito en el @type
  */
 const form = inject('form');
+
 
 
 //Mensajes para información de errores y tiempo de espera

@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-//Dependencies
+//Dependencias
 import { ref } from "vue";
 import { Loader } from "@googlemaps/js-api-loader";
 //Props
@@ -21,20 +21,20 @@ const props = defineProps({
     default: "AIzaSyDJUNfgGrajFUqtFZBX6WoX3gTRVavpzpE",
   },
   lat: {
+
     type: Number,
-    default: -34.397,
   },
   lng: {
     type: Number,
-    default: 150.644,
   },
+  
   icon: {
     type: String,
-    default: "./src/assets/arbolito.png"
-  }
+    default: "./src/assets/arbolito.png",
+  },
 });
 
-//Lanzamiento asíncrona
+//Lanzamiento asíncrono
 /**
  * Función asíncrona que lanza el lodader
  */
@@ -48,7 +48,6 @@ const mapDiv = ref(null);
 let map, marker;
 const data = null;
 
-
 const loader = new Loader({ apiKey: props.google_maps_api_key });
 
 //Función callback anónima y lanzada automáticamente
@@ -56,7 +55,7 @@ const loader = new Loader({ apiKey: props.google_maps_api_key });
   try {
     // Inciamos loader de Google
     if (!loader.loading) await loader.load();
-    
+
     //Cargamos mapa y colocamos valores
     map = new google.maps.Map(mapDiv.value, {
       center: {
@@ -82,7 +81,7 @@ const loader = new Loader({ apiKey: props.google_maps_api_key });
     // infoWindow.setContent(`Latitude: ${lat}|Lonxitude: ${lng}.<br> Despraze o marcador para un mellor axuste.`);
     // infoWindow.open(map);
   } catch (err) {
-    console.log('---->',err);
+    console.log("---->", err);
     error.value.error = true;
     error.value.code = err.code;
     error.value.message = err.message;

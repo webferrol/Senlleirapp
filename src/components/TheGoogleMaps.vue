@@ -55,7 +55,7 @@ const data = null;
 
 const router = useRouter();
 const showRoute = ({routeName,routeParams}) => {
-   console.log(routeName,routeParams)
+   
   if (routeName ) {
     router.push({
       name: routeName,

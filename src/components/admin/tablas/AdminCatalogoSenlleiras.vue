@@ -253,7 +253,7 @@ const borrarArbore = async () => {
 };
 
 const deleteImage = (ref) => {
-  const texto = prompt(`para eliminar la foto comnfirme la referencia:${ref}`);
+  const texto = prompt(`para eliminar la foto comnfirme la referencia: \n ${ref}`);
   if (texto === ref) {
     storeArbores.borrarFoto(ref);
   }
