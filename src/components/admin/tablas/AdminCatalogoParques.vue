@@ -2,11 +2,8 @@
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
       <td>Nome</td>
-      <td>Tipoloxía</td>
       <td>Localización</td>
-      <td>Cronoloxía</td>
       <td>Superficie</td>
-      <td>Descrición</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono :icon="['fa', 'gears']"></icono>
@@ -20,11 +17,8 @@
       :key="index"
     >
       <td>{{ parque.nombre }}</td>
-      <td>{{ parque.tipoloxia }}</td>
       <td>{{ parque.localizacion }}</td>
-      <td>{{ parque.cronoloxia }}</td>
       <td>{{ parque.superficie }}</td>
-      <td>{{ parque.descripcion }}</td>
 
       <td class="tabla_administrativo_options">
         <span>

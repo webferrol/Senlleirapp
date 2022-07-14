@@ -1,10 +1,8 @@
 <template>
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
-      <td>Nome científico</td>
-      <td>Nome en Galego</td>
-      <td>Nome en Castelán</td>
-      <td>Zona xeográfica</td>
+      <td>Nomes (científico,galego,castelán)</td>
+      <td>Nome da árbore</td>
       <td>Ubicación parque</td>
       <td class="tabla_administrativo_options">
         <span>
@@ -17,10 +15,8 @@
       v-for="(arbore, index) in storeArbores.arbores"
       :key="index"
     >
-      <td>{{ arbore.genero }} {{ arbore.especie }}</td>
-      <td>{{ arbore.nombre_comun }}</td>
-      <td>{{ arbore.nombre_comun_gal }}</td>
-      <td>{{ arbore.zona_geografica }}</td>
+      <td>{{ arbore.genero }} {{ arbore.especie }},{{ arbore.nombre_comun }},{{ arbore.nombre_comun_gal }}</td>
+      <td>{{arbore.nombre_arbol}}</td>
       <td>{{ arbore.ubicacion_parque }}</td>
       <td class="tabla_administrativo_options">
         <span>
@@ -316,6 +312,9 @@ cargarFotos();
 </script>
 
 <style scoped>
+.catalogo_administrativo{
+  font-size: .8rem
+}
 .editar-images {
   display: grid;
   grid-template-columns: auto auto auto;
