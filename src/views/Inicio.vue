@@ -1,14 +1,12 @@
 <template>
     <div class="home">
     <ExploraVue></ExploraVue>
+    <ParticipaVue></ParticipaVue>
     <CarruselStoriesVue></CarruselStoriesVue>
+    
     <!-- Carrusel de fotos -->
         <CarruselImagenesVue minHeight="350px" :images="imgs"></CarruselImagenesVue>
     <!-- Galeria de contenido -->
-    <!-- <pre>
-        {{senlleiros}}
-    </pre> -->
-    <ParticipaVue></ParticipaVue>
     <GaleriaVue v-if="senlleiros.length" :images="senlleiros"></GaleriaVue>
     </div>
 </template>
