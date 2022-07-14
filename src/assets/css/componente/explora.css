@@ -1,3 +1,10 @@
+.component-explora{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
 .explora-titulo {
   text-align: center;
   font-size: 2rem;
@@ -11,11 +18,12 @@ padding: .5rem 1rem;
   width: fit-content;
   text-align: left;
   margin: auto;
-  font-size: .9rem;
+  font-size: 1rem;
   line-height: 1.2rem;
   letter-spacing: 1.5px;
   color: black;
   font-weight: 500;
+  max-width: 1080px;
 }
 
 .container-explora {
@@ -75,12 +83,22 @@ padding: .5rem 1rem;
 }
 
 @media screen and (min-width: 650px) {
-  .container-explora a {
+  .explora-descripcion{
+    font-size: 1.2rem;
+  }
+    .container-explora a {
     height: 322px;
   }
+
 }
 @media screen and (min-width: 850px) {
   .container-explora a {
     height: 423px;
   }
+}
+
+@media screen and (min-width: 1250px) {
+    .explora-descripcion{
+        padding: .5rem .25rem;
+    }
 }
