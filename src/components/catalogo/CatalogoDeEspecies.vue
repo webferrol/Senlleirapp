@@ -80,31 +80,19 @@ import SkeletonCatalogoEspeciesVue from "../skeleton/SkeletonCatalogoEspecies.vu
 const storeEspecies = useStoreEspecies();
 const storeGeneral = useStoreGeneral();
 
-// (async ()=>{
-//     await storeArbores.setArbores()
-//     await storeArbores.getDownloadURL();
-//     // datos(storeArbores.arbores);
-// })()
-// const temPo = ref([]);
+
 const loadGaleria = ref(false);
 const loadPage = async () => {
-  await storeEspecies.setEspecies();
-  loadGaleria.value = true
-  // await storeEspecies.getDownloadURL();
-  storeGeneral.filtrarArbores();
-  // console.log(storeGeneral.tmp)
-  // console.log(temPo.value);
+  try {
+    await storeEspecies.setEspecies();
+    loadGaleria.value = true
+    storeGeneral.filtrarEspecies();
+  } catch (error) {
+    console.log("error--->",error);
+  }
+  
 };
 loadPage();
-// datos(temPo.value);
-// temPo = tmp;
-// console.log(storeArbores.arbores)
-//storeEspecies.setEspecies();
-
-// const filtrar = () => {
-//     temPo.value = storeGeneral.filtrar()
-//     console.log(temPo);
-// };
 
 const mostrarFicha = ref(false);
 const fichaDatos = ref(null);
@@ -126,16 +114,6 @@ const cargarDatosFicha = async (objeto) => {
   fichaDatos.value = null;
   //fichaDatos.value= {...objeto,...especie};
   fichaDatos.value = objeto;
-  // enviamos para filtrar
-  //console.log(fichaDatos)
-  // Limpiamos y cargamos las imagenes de la ficha
-  imagenesFichaTecnicaVaciar();
-  // console.log(fichaDatos.value);
-  // await storeEspecies.setImagenes('Arbores/' + objeto.idDoc)
-  // for (let i = 0; i < storeEspecies.imagenes.length; i++) {
-  //     imagenesFichaTecnica.value.push(storeEspecies.imagenes[i])
-  // }
-  //await storeEspecies.setEspecies()
 };
 
 </script>
