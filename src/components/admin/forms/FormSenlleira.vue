@@ -14,10 +14,10 @@
         <icono @click="cerrarForm" :icon="['fa', 'xmark']"></icono>
       </span>
       <fieldset class="data-senlleira --localizacion">
-        <legend>Datos senlleirassssssssssssss</legend>
+        <legend>Datos senlleira</legend>
         <div class="senlleira-nombre-cientifico">
           <label for="arbore" class="form-label">
-            Nome da árbore <span data-set="Campo obligatorio">*</span></label
+            Nome da árbore <span data-set="Campo obligatorio"  class="required-user">*</span></label
           >
           <input
             v-model="form.nombre_arbol"
@@ -29,7 +29,7 @@
           />
 
           <label for="especie" class="form-label"
-            >Nome científico <span data-set="Campo obligatorio">*</span></label
+            >Nome científico <span data-set="Campo obligatorio"  class="required-user">*</span></label
           >
 
           <select
@@ -208,7 +208,6 @@
         <div v-if="spinner" class="spinner">Cargando....</div>
       </fieldset>
       <button class="btn-form">Publicar Arbol</button>
-      <!-- {{form.genero}}  {{form.especie}} {{form.nombre_comun}} {{form.nombre_comun_gal}} -->
     </form>
     
   </div>
@@ -251,8 +250,6 @@ const form = reactive({
   senlleira: false,
   propuesta_senlleira: false, //Si no es Senlleira ni propuesta es un árbol común
 });
-
-
 
 provide('form',form)
 

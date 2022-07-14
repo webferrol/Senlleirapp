@@ -53,15 +53,8 @@
             <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
               {{ valor.nombre }} </option>
           </select>
-          <input type="hidden" v-model="form.ubicacion_parque">
-          <label for="latitud" class="form-label">Latitude <span data-set="Campo obligatorio"
-              class="required-user">*</span></label>
-          <input v-model.number="form.lat" type="number" name="latitud" id="latitud" step="any"
-            placeholder="indicar latitude" required />
-          <label for="longitud" class="form-label">Lonxitude <span data-set="Campo obligatorio"
-              class="required-user">*</span></label>
-          <input v-model.number="form.lng" type="number" name="longitud" id="longitud" step="any"
-            placeholder="indicar lonxitude" required />
+            <!-- geolocalizacion -->
+            <TheGeolocationComponent></TheGeolocationComponent>  
         </div>
       </fieldset>
       <fieldset>
@@ -82,8 +75,9 @@ import TheUploader from '@/components/theUploader.vue';
 import { useStoreArbores } from '@/stores/arbores';
 import { useStoreEspecies } from '@/stores/especies';
 import { useStoreParques } from '@/stores/parques';
-import { reactive, ref } from 'vue';
+import { reactive, ref,provide } from 'vue';
 import "@/assets/css/componente/form-arbol.css";
+import TheGeolocationComponent from '../../components/componentesGenerales/TheGeolocationComponent.vue';
 
 // llamada del store
 const storeEspecies = useStoreEspecies();
@@ -114,6 +108,8 @@ const form = reactive({
   descripcion: "",
 });
 
+provide('form',form)
+
 // indica todos los errores que se presenten
 const error = ref({
   error: false,
@@ -123,26 +119,6 @@ let tmpImagenes = null;
 const spinner = ref(false);
 const loaded = ref(false);
 
-const reset = () => {
-  // form.genero = '';
-  // form.especie = '';
-  // form.idEspecie = 0;
-  // form.idParque= 0,
-  // form.zona_geografica = '';
-  // form.ubicacion_parque = '';
-  // form.nombre_arbol='',
-  // form.nombre_comun = '';
-  // form.nombre_comun_gal = '';
-  // form.storage_ref='';
-  // form.google_url='',
-  // form.lat ='';
-  // form.lng ='';
-  // form.altura =0;
-  // form.diametro =0;
-  // form.descripcion = '';
-  // form.senlleira= false;
-  // form.propuesta_senlleria= false; //Si no es Senlleira ni propuesta es un árbol común
-};
 
 // esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito
 const handleSelect = (e) => {
@@ -190,7 +166,6 @@ const handleSubmit = async () => {
           });
         }
         spinner.value = false;
-        reset();
       } catch (e) {
         error.value.error = true;
         error.value.message = e.message;
