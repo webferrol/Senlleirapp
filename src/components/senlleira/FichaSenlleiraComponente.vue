@@ -70,6 +70,7 @@
         <h2 class="h2-ficha-tecnica">Localización</h2>
       </div>
       <TheGeolocation
+      v-if="senlleira.lat"
         :icon="'../src/assets/arbolito.png'"
         :lat="senlleira.lat"
         :lng="senlleira.lng"
