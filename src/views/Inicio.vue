@@ -47,5 +47,6 @@ const imgs =[
     }
     
 })()
+
 </script>
 

@@ -5,9 +5,9 @@
     justify-content: center;
     align-items: center;
     gap: .5rem;
-    background-image: url(../../gallery/senlleiras_14.jpg);
+    background-image: url(../../gallery/senlleiras_16.jpg);
     background-position: center;
-    background-size: cover;
+    background-size: fill;
     padding:  .5rem 1rem;
     min-height: fit-content;
     height: calc(100vh - 80px);
@@ -60,9 +60,10 @@
     /* Boton */
     .container-participa a{
         margin: 2rem auto auto auto;
-        width: fit-content;
+        width: 250px;
+        text-align: center;
         height: fit-content;
-        border-radius: 5px;
+        border-radius: 2px;
         padding: .5rem 1rem;
         background-color: var(--colorprincipal);
         color: white;
@@ -71,18 +72,30 @@
         text-decoration: none;
     }
 
-    .slide-enter-from,
-    .slider-leave-to{
-        opacity: 0;
-    }
-    .slide-enter-to{
-        transform: translateX(0);
-    }
-
-
-    .slide-enter-active,
-    .slide-leave-active{
-        transition: all .3s linear;
+    @media screen and (min-width: 900px) {
+        .container-participa{
+            grid-template-columns: 1fr 1fr;
+            max-width: 1080px;
+            padding: 2rem 4rem;
+            margin: auto;
+        }
+            .container-participa::before{
+                display: none;
+            }
+        .call-to-action-senlleira{
+            padding: 2rem 1rem;
+            border-radius: 5px;
+            background-color: rgba(200,200,200, .6);
+            backdrop-filter: blur(2px);
+            max-width: 400px;
+            box-shadow: 5px 5px 10px white;
+        }
+        .call-to-action-senlleira h1{
+            font-size: 2.6rem;
+        }
+        .call-to-action-senlleira p{
+            text-align: center;
+        }
     }
     
     

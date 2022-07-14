@@ -3,7 +3,7 @@
   <div class="catalogo-especies-component" v-if="loadGaleria">
 
     <div class="especie-catalogo-element" data-titulo="Mostrar" title="Máis info"
-      v-for="(especie, index) in storeEspecies.especies" :key="index" identificador="senlleira.id"
+      v-for="(especie, index) in storeGeneral.tmp" :key="index" identificador="senlleira.id"
       @click="cargarDatosFicha(especie)">
       <div class="especie-info">
         <h4 class="arbol-lugar">{{ especie.genero }} {{ especie.especie }}</h4>
