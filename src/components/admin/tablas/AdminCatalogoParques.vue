@@ -125,6 +125,8 @@
         <textarea
           type="text"
           v-model="parque.descripcion"
+          cols="50"
+          rows="20"
           id="descripcion"
           placeholder="Descripción"
         ></textarea>

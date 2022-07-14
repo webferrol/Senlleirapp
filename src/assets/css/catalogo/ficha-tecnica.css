@@ -83,12 +83,15 @@
   display: grid;
   grid-template-columns: 130px 1fr;
   align-items: center;
+  gap: 1rem;
 }
 .subtitle-caracteristica {
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  
 }
+
 .subtitle-caracteristica svg {
   display: flex;
   justify-content: center;
@@ -116,6 +119,9 @@
   padding: 0.5rem 1rem;
   text-align: justify;
   font-size: 1.1rem;
+  line-height:1.5;
+  white-space: pre-line;
+  text-indent: 10px;
 }
 
 @media screen and (min-width: 700px) {

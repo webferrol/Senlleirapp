@@ -64,8 +64,8 @@
         <label for="superficie" class="form-label">Superficie</label>
         <input
           class="input-parque"
-          v-model.number="form.superficie"
-          type="number"
+          v-model.trim="form.superficie"
+          type="text"
           name="superficie"
           id="superficie"
           placeholder="Superficie"
