@@ -1,13 +1,8 @@
 <template>
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
-      <td class="genero">Xénero</td>
-      <td class="especie">Especie</td>
-      <td class="nombre_comun">Nome Común (Castelan)</td>
-      <td class="nombre_comun_gal">Nome común (Galego)</td>
-      <td class="origen_descripcion">Orixe - Descrición</td>
-      <td class="usos">Usos</td>
-      <td class="curiosidades">Curiosidades</td>
+      <td class="genero">Especie</td>
+      <td class="nombre_comun">Nome Común (castelan/galego)</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono :icon="['fa', 'gears']"></icono>
@@ -20,13 +15,8 @@
       v-for="(especie, index) in storeSpecies.especies"
       :key="index"
     >
-      <td class="genero">{{ especie.genero }}</td>
-      <td class="especie">{{ especie.especie }}</td>
-      <td class="nombre_comun">{{ especie.nombre_comun }}</td>
-      <td class="nombre_comun_gal">{{ especie.nombre_comun_gal }}</td>
-      <td class="origen_descripcion">{{ especie.origen_descripcion }}</td>
-      <td class="usos">{{ especie.usos }}</td>
-      <td class="curiosidades">{{ especie.curiosidades }}</td>
+      <td class="genero">{{ especie.genero }} {{ especie.especie }}</td>
+      <td class="nombre_comun">{{ especie.nombre_comun }}/{{ especie.nombre_comun_gal }}</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono
