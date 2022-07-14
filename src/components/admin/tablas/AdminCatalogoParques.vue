@@ -3,7 +3,7 @@
     <tr class="header_administrativo">
       <td>Nome</td>
       <td>Localización</td>
-      <td>Superficie</td>
+      <td>Geolocalización</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono :icon="['fa', 'gears']"></icono>
@@ -18,7 +18,7 @@
     >
       <td>{{ parque.nombre }}</td>
       <td>{{ parque.localizacion }}</td>
-      <td>{{ parque.superficie }}</td>
+      <td>{{ parque.lat }},{{ parque.lng }}</td>
 
       <td class="tabla_administrativo_options">
         <span>
