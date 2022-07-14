@@ -10,7 +10,7 @@
       <fieldset class="data-parque">
         <h2>Formulario Alta Parque</h2>
 
-        <label for="nombre" class="form-label">Nome</label>
+        <label for="nombre" class="form-label">Nome<span data-set="Campo obligatorio"  class="required-user">*</span></label>
         <input
           class="input-parque"
           v-model.trim="form.nombre"
@@ -39,29 +39,8 @@
           placeholder="Localización"
         />
 
-        <label for="lat" class="form-label">Latitud</label>
-        <input
-          class="input-parque"
-          v-model.number="form.lat"
-          step="any"
-          type="number"
-          required
-          name="lat"
-          id="lat"
-          placeholder="Latitud"
-        />
 
-        <label for="lng" class="form-label">Longitud</label>
-        <input
-          class="input-parque"
-          v-model.number="form.lng"
-          step="any"
-          type="number"
-          required
-          name="lng"
-          id="lng"
-          placeholder="Longitud"
-        />
+        <TheGeolocationComponent></TheGeolocationComponent>
 
         <label for="carballeira" class="form-label">Carballeira</label>
         <input
@@ -117,10 +96,13 @@
 </template>
 <script setup>
 import TheUploader from "@/components/theUploader.vue";
-import { reactive, ref } from "vue";
+import { provide, reactive, ref } from "vue";
 import { updateDocument } from "../../../hook/firestore.hook";
 import { useStoreParques } from "@/stores/parques";
+
+import TheGeolocationComponent from "../../componentesGenerales/TheGeolocationComponent.vue";
 import "@/assets/css/admin-css/cargarEspecies.css";
+
 //
 const emits = defineEmits(["cerrarForm"]);
 
@@ -146,6 +128,8 @@ const form = reactive({
   urlficha: "", //La ruta de la primera foto del parque
   urlmapa: "", //La ruta de la foto del mapa
 });
+
+provide ('form', form)
 
 const error = ref({
   error: false,
