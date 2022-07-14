@@ -14,7 +14,7 @@
       <CarruselImagenesVue :images="images"></CarruselImagenesVue>
       <!-- CARACTERISTICAS -->
       <div>
-        <hr class="line-ficha-tecnica" />
+   
         <h2 class="h2-ficha-tecnica">Características</h2>
       </div>
 

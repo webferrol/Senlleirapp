@@ -11,7 +11,7 @@
             <CarruselImagenesVue v-if="images.length >=1" :images="images"></CarruselImagenesVue>
             <!-- CARACTERISTICAS -->
             <div>
-                <hr class="line-ficha-tecnica">
+                
             </div>
             <slot name="content">
                 <!-- Contenido -->

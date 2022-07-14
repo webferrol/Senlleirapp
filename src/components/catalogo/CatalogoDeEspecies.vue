@@ -23,7 +23,7 @@
 
     <template #content>
       <div class="caracteristicas-ficha-tecnica">
-      <h3>Características</h3>
+      <h3>CARACTERÍSTICAS</h3>
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'leaf']"></icono>
@@ -52,14 +52,14 @@
 
     <template #footer>
       <div class="descripcion-ficha-tecnica">
-        <h3>Usos</h3>
+        <h3>USOS</h3>
         <p>{{ fichaDatos.usos }}</p>
       </div>
     </template>
 
     <template #usos>
       <div class="descripcion-ficha-tecnica">
-        <h3>Origen</h3>
+        <h3>ORIXE</h3>
         <p>{{ fichaDatos.origen_descripcion }} metros</p>
       </div>
     </template>

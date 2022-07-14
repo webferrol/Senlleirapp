@@ -13,7 +13,7 @@
       <CarruselImagenesVue v-if="images.length >= 1" :images="images">
       </CarruselImagenesVue>
       <div>
-        <hr class="line-ficha-tecnica" />
+       
         <h2 class="h2-ficha-tecnica">Características</h2>
       </div>
       <!-- CARACTERISTICAS -->

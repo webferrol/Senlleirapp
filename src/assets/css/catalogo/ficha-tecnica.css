@@ -58,7 +58,7 @@
 
 /* titulo caracteristicas */
 .line-ficha-tecnica {
-  margin: 0.25rem auto;
+  margin: 15px auto;
   width: 90%;
   height: 0.2rem;
   border: none;
@@ -69,6 +69,9 @@
   color: black;
   text-align: center;
   font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-top: 10px;
+
 }
 
 /* Caracteristicas tecnicas */
@@ -78,10 +81,12 @@
   grid-template-columns: 1fr;
   gap: 0.5rem;
   padding: 0 1rem;
+  line-height: 1.5rem;
+  margin-top: 10px;
 }
 .caracteristicas-ficha-tecnica div {
   display: grid;
-  grid-template-columns: 130px 1fr;
+  grid-template-columns: 150px 1fr;
   align-items: center;
   gap: 1rem;
 }
