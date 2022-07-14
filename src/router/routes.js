@@ -82,7 +82,7 @@ export const routes = [
   {
     path: "/prueba",
     name: "prueba",
-    component: () => import("@/components/TheGeolocation.vue"),
+    component: () => import("@/views/PruebasView.vue"),
   }
 
 ];
