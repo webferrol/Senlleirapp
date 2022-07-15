@@ -41,7 +41,7 @@ import("@/assets/css/skeleton/skeleton-elements.css")
 .message{
     position: absolute;
     left: 50%;
-    top: 8rem;
+    top: 10rem;
     z-index: 999;
     width: 80vw;
     padding: .7rem;

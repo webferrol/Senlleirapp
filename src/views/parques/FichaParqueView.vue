@@ -1,8 +1,6 @@
 <template>
   <div>
-      <div class="erro" v-if="error.errorBool">
-        ({{ error.code }}) {{ error.message }}
-      </div>
+     <SkeletonCatalogoVue v-if="error.errorBool" message="Error na carga de datos. Póñase en contacto co administrador"></SkeletonCatalogoVue>
     <FichaParqueComponent v-else 
     :parque="parque" 
     :images="imagenesFichaTecnica"
@@ -16,7 +14,8 @@ import { useRoute } from "vue-router";
 import { ref } from "vue";
 import { listAllUrls } from "../../hook/storage.hook";
 import { getDocument,busquedaDatos } from "../../hook/firestore.hook";
-import FichaParqueComponent from "../../components/parques/FichaParqueComponent.vue"
+import FichaParqueComponent from "../../components/parques/FichaParqueComponent.vue";
+import SkeletonCatalogoVue from "../../components/skeleton/SkeletonCatalogo.vue";
 const route = useRoute();
 const parque = ref({});
 const arbores = ref([]);
