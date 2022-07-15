@@ -65,7 +65,7 @@
         </div>
         <div v-if="spinner" class="spinner"> Cargando.... </div>
       </fieldset>
-      <button class="btn-form">Publicar Arbore</button>
+      <button :disabled="disabled" class="btn-form">Publicar Arbore</button>
     </form>
   </div>
 </template>
@@ -84,7 +84,7 @@ const storeEspecies = useStoreEspecies();
 const storeParques = useStoreParques();
 const storeArbores = useStoreArbores();
 
-
+const disabled = ref(false);
 storeParques.setParques();
 storeArbores.setArbores();
 
@@ -107,6 +107,7 @@ const form = reactive({
   diametro: 0,
   altura: 0,
   descripcion: "",
+  publicado: false,
 });
 
 provide('form',form)
@@ -144,6 +145,7 @@ const gestionFoto = async (imagenes) => {
   }
 };
 const handleSubmit = async () => {
+disabled.value = true;
 const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
   if (storeEspecies.especies.length) {
     try {
@@ -173,6 +175,7 @@ const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
         error.value.message = e.message;
       } finally {
         loaded.value = false;
+        disabled.value=false;
       }
     }
   }

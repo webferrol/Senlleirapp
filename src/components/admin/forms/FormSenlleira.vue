@@ -185,6 +185,15 @@
           >
         </div>
       </fieldset>
+      <div class="senlleira-arbore">
+        <input
+              type="checkbox"
+              v-model="form.publicado"
+              name="pubicado"
+              id="publicado"
+            />&nbsp;
+            <label class="form-label" for="publicado">Publicado</label>
+      </div>
       <fieldset>
         <legend>Imaxe</legend>
         <div class="data-senlleira">
@@ -197,17 +206,14 @@
               color: white;
               background-color: red;
               font-weight: bold;
-              font-size: large;
-            "
-            v-if="error.error"
-            class="error"
-          >
+              font-size: large;"
+            v-if="error.error" class="error">
             {{ error.message }}
           </div>
         </div>
         <div v-if="spinner" class="spinner">Cargando....</div>
       </fieldset>
-      <button class="btn-form">Publicar Arbol</button>
+      <button :disabled="disabled" class="btn-form" >Publicar Arbol</button>
     </form>
     
   </div>
@@ -224,6 +230,8 @@ import "@/assets/css/formularioSenlleira.css";
 import TheGeolocationComponent from "../../componentesGenerales/TheGeolocationComponent.vue";
 
 const emits = defineEmits(["cerrarForm"]);
+
+const disabled = ref(false);
 
 const cerrarForm = () => {
   emits("cerrarForm");
@@ -249,6 +257,7 @@ const form = reactive({
   descripcion: "",
   senlleira: false,
   propuesta_senlleira: false, //Si no es Senlleira ni propuesta es un árbol común
+  publicado:true,
 });
 
 provide('form',form)
@@ -291,6 +300,7 @@ const reset = () => {
   form.descripcion = "";
   form.senlleira = false;
   form.propuesta_senlleira = false;
+  form.publicado = true;
 };
 
 
@@ -320,6 +330,7 @@ const handleSelect = (e) => {
 };
 
 const handleSubmit = async () => {
+  disabled.value = true;
   const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
   if (storeEspecies.especies.length) {
     try {
@@ -350,6 +361,7 @@ const handleSubmit = async () => {
         error.value.message = e.message;
       } finally {
         loaded.value = false;
+        disabled.value=false;
       }
     }
   }

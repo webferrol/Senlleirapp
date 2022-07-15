@@ -192,6 +192,15 @@
           >
         </div>
       </fieldset>
+       <div class="senlleira-arbore">
+        <input
+              type="checkbox"
+              v-model="arbore.publicado"
+              name="pubicado"
+              id="publicado"
+            />&nbsp;
+            <label class="form-label" for="publicado">Publicado</label>
+      </div>
         <fieldset class="editar-images">
           <div class="images" v-for="image of images" :key="image.ref">
             <img class="image" :src="image.src" alt="" />
