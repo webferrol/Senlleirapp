@@ -1,6 +1,6 @@
 <template>
 
-  <div v-if="images.lenght" class="container-ficha-tecnica">
+  <div v-if="images.length" class="container-ficha-tecnica">
     <article class="ficha-tecnica">
       <div class="cabecera-ficha-tecnica">
         <!-- TITULO -->
@@ -66,10 +66,10 @@
         <h2 class="h2-ficha-tecnica">Localización</h2>
       </div>
       <TheLeafletComponent 
-      v-if="parque.lat"
+      v-if="parque.lat && parque.lng"
       icon-url="../parques.png"
       :location="location"
-      :centrado="[parque.lat,parque.lng]"
+      :centrado="[Number(parque.lat),Number(parque.lng)]"
       />
       <!-- IMAGEN DEL MAPA DEL PARQUE -->
       

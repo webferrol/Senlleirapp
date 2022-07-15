@@ -19,16 +19,26 @@ export const routes = [
     name: "CatalogoSenlleiras",
     component: () => import("@/views/senlleira/CatalogoSenlleirasView.vue"),
   },
-  {
-    path: "/mapaParques",
-    name: "MapaParques",
-    component: () => import("@/views/parques/MapaParques.vue"),
-  },
+  // {
+  //   path: "/mapaParques",
+  //   name: "MapaParques",
+  //   component: () => import("@/views/parques/MapaParques.vue"),
+  // },
   
+  // {
+  //   path: "/mapaSenlleiras",
+  //   name: "MapaSenlleiras",
+  //   component: () => import("@/views/senlleira/MapaSenlleiras.vue"),
+  // },
   {
-    path: "/mapaSenlleiras",
+    path: "/mapa-parques",
+    name: "MapaParques",
+    component: () => import("@/views/parques/ParkMapView.vue"),
+  },
+  {
+    path: "/mapa-senlleiras",
     name: "MapaSenlleiras",
-    component: () => import("@/views/senlleira/MapaSenlleiras.vue"),
+    component: () => import("@/views/senlleira/SenlleiraMapView.vue"),
   },
   
   // ADMIN
