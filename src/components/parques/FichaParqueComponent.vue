@@ -1,10 +1,6 @@
 <template>
-<<<<<<< HEAD
-  <div class="container-ficha-tecnica">
-=======
 
   <div v-if="images.lenght" class="container-ficha-tecnica">
->>>>>>> dcdfedc643122f6f5b390e8041b72de3f7e260da
     <article class="ficha-tecnica">
       <div class="cabecera-ficha-tecnica">
         <!-- TITULO -->
