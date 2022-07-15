@@ -1,68 +1,66 @@
 <template>
-<h1 class="tittle-section">Catalogo especies</h1>
-  <div class="catalogo-section-component">
-    <div
-      class="arbol-catalogo-element"
-      data-titulo="Mostrar"
-      title="Máis info"
-      v-for="(especie, index) in storeGeneral.tmp"
-      :key="index"
-      identificador="senlleira.id"
-      @click="cargarDatosFicha(especie)"
-    >
-      <!-- <div class="content-img">
-                <img alt="imagen del arbol senlleiro" :src="senlleira.google_url">
-            </div> -->
-      <div class="arbol-info">
-        <span class="arbol">
-          <icono :icon="['fa', 'leaf']"></icono>
-          <h3 class="arbol-nombre">{{ especie.nombre_comun_gal }}</h3>
-          <icono :icon="['fa', 'leaf']"></icono>
-          <h3 class="arbol-nombre">{{ especie.nombre_comun }}</h3>
-        </span>
+  <h1 class="tittle-section">Catalogo especies</h1>
+  <div class="catalogo-especies-component" v-if="loadGaleria">
 
-        <h4 class="arbol-lugar">{{ especie.genero }}</h4>
-        <h4 class="arbol-lugar">{{ especie.especie }}</h4>
+    <div class="especie-catalogo-element" data-titulo="Mostrar" title="Máis info"
+      v-for="(especie, index) in storeGeneral.tmp" :key="index" identificador="senlleira.id"
+      @click="cargarDatosFicha(especie)">
+      <div class="especie-info">
+        <h4 class="arbol-lugar">{{ especie.genero }} {{ especie.especie }}</h4>
+        <h5> {{ especie.nombre_comun_gal }}</h5>
       </div>
     </div>
   </div>
+  <SkeletonCatalogoEspeciesVue v-else="loadGaleria"></SkeletonCatalogoEspeciesVue>
   <!-- <pre>{{temPo}}</pre> -->
 
-  <FichaTecnicaVue
-    v-if="mostrarFicha"
-    @cerrarFicha="mostrarFicha = false"
-    :data="fichaDatos"
-    :images="imagenesFichaTecnica"
-  >
+  <FichaTecnicaVue v-if="mostrarFicha" @cerrarFicha="mostrarFicha = false" :data="fichaDatos"
+    :images="imagenesFichaTecnica">
     <!-- Template de los datos que se van a cargar en el componente hijo -->
     <template #titulo>
       <h2 class="ficha-tittle">{{ fichaDatos.nombre_comun }}</h2>
     </template>
+
     <template #content>
-      <div class="datos-especie">
-        <span>
-          <h3>Especie</h3>
+      <div class="caracteristicas-ficha-tecnica">
+      <h3>CARACTERÍSTICAS</h3>
+        <div>
+          <span class="subtitle-caracteristica">
+            <icono :icon="['fa', 'leaf']"></icono>
+            <h4>Especie</h4>
+          </span>
           <p>{{ fichaDatos.genero }} {{ fichaDatos.especie }}</p>
-        </span>
-        <span>
-          <h3>Nombre</h3>
+        </div>
+
+        <div>
+          <span class="subtitle-caracteristica">
+            <icono :icon="['fa', 'leaf']"></icono>
+            <h4>Nombre</h4>
+          </span>
           <p>{{ fichaDatos.nombre_comun }}</p>
-        </span>
-        <span>
-          <h3>Nome Comun</h3>
+        </div>
+
+        <div>
+          <span class="subtitle-caracteristica">
+            <icono :icon="['fa', 'leaf']"></icono>
+            <h4>Nome Comun</h4>
+          </span>
           <p>{{ fichaDatos.nombre_comun_gal }}</p>
-        </span>
-        <span>
-          <h3>Origen</h3>
-          <p>{{ fichaDatos.origen_descripcion }} metros</p>
-        </span>
+        </div>
       </div>
     </template>
 
     <template #footer>
-      <div class="descripcion">
-        <h3>Descrición</h3>
+      <div class="descripcion-ficha-tecnica">
+        <h3>USOS</h3>
         <p>{{ fichaDatos.usos }}</p>
+      </div>
+    </template>
+
+    <template #usos>
+      <div class="descripcion-ficha-tecnica">
+        <h3>ORIXE</h3>
+        <p>{{ fichaDatos.origen_descripcion }} metros</p>
       </div>
     </template>
   </FichaTecnicaVue>
@@ -74,11 +72,28 @@ import { ref } from "vue";
 import { useStoreEspecies } from "../../stores/especies";
 import FichaTecnicaVue from "./FichaTecnica.vue";
 import { useStoreGeneral } from "../../stores/general";
+import "@/assets/css/catalogo/catalogo-especies.css";
 
-import "@/assets/css/catalogo/catalogo.css";
+// Skeleton
+import SkeletonCatalogoEspeciesVue from "../skeleton/SkeletonCatalogoEspecies.vue";
 
 const storeEspecies = useStoreEspecies();
 const storeGeneral = useStoreGeneral();
+
+
+const loadGaleria = ref(false);
+const loadPage = async () => {
+  try {
+    await storeEspecies.setEspecies();
+    loadGaleria.value = true
+    storeGeneral.filtrarEspecies();
+  } catch (error) {
+    console.log("error--->",error);
+  }
+  
+};
+loadPage();
+
 const mostrarFicha = ref(false);
 const fichaDatos = ref(null);
 const imagenesFichaTecnica = ref([]);
@@ -97,14 +112,11 @@ const cargarDatosFicha = async (objeto) => {
   fichaDatos.value = null;
   //fichaDatos.value= {...objeto,...especie};
   fichaDatos.value = objeto;
-  // enviamos para filtrar
-  // Limpiamos y cargamos las imagenes de la ficha
-  imagenesFichaTecnicaVaciar();
 };
 // Cargamos los datos de especies y llamamos al buscador
-const loadPage = async () => {
-    await storeEspecies.setEspecies();
-    storeGeneral.filtrarArbores();
-};
-loadPage();
+// const loadPage = async () => {
+//     await storeEspecies.setEspecies();
+//     storeGeneral.filtrarArbores();
+// };
+// loadPage();
 </script>

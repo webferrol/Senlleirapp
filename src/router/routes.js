@@ -4,11 +4,6 @@ export const routes = [
     name: "inicio",
     component: () => import("../views/Inicio.vue"),
   },
-  // {
-  //   path: "/catalogo-arbore",
-  //   name: "catalogoArbol",
-  //   component: () => import("@/views/senlleira/CatalogoNuevoArbol.vue"),
-  // },
   {
     path: "/nova-arbore",
     name: "NuevoArbol",
@@ -17,28 +12,25 @@ export const routes = [
   {
     path: "/catalogo",
     name: "catalogo",
-    component: () => import("@/views/senlleira/Catalogo.vue"),
+    component: () => import("@/views/senlleira/CatalogoArboresView.vue"),
+  },
+  {
+    path: "/catalogo-senlleiras",
+    name: "CatalogoSenlleiras",
+    component: () => import("@/views/senlleira/CatalogoSenlleirasView.vue"),
   },
   {
     path: "/mapaParques",
     name: "MapaParques",
     component: () => import("@/views/parques/MapaParques.vue"),
   },
-  {
-    path:"/parque-:id",
-    name:"Parque",
-    component: () => import("@/views/parques/InfoParqueView.vue"),
-  },
+  
   {
     path: "/mapaSenlleiras",
     name: "MapaSenlleiras",
     component: () => import("@/views/senlleira/MapaSenlleiras.vue"),
   },
-  {
-    path: "/lista-parques",
-    name: "lista-parques",
-    component: () => import("@/views/parques/ListaParques.vue"),
-  },
+  
   // ADMIN
   {
     path: "/admin",
@@ -88,14 +80,14 @@ export const routes = [
     component: () => import("@/views/parques/FichaParqueView.vue"),
   },
   {
+    path: "/ficha-tecnica/:idDoc",
+    name: "FichaSenlleira",
+    component: () => import("@/views/senlleira/FichaSenlleiraView.vue"),
+  },
+  {
     path: "/prueba",
     name: "prueba",
-    component: () => import("@/components/TheGeolocation.vue"),
-  },
-  // {
-  //   path: "/prueba2",
-  //   name: "prueba2",
-  //   component: () => import("@/views/Vista1.vue"),
-  // },
+    component: () => import("@/views/PruebasView.vue"),
+  }
 
 ];

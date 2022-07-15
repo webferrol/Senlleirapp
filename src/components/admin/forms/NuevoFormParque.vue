@@ -10,7 +10,7 @@
       <fieldset class="data-parque">
         <h2>Formulario Alta Parque</h2>
 
-        <label for="nombre" class="form-label">Nome</label>
+        <label for="nombre" class="form-label">Nome<span data-set="Campo obligatorio"  class="required-user">*</span></label>
         <input
           class="input-parque"
           v-model.trim="form.nombre"
@@ -39,28 +39,17 @@
           placeholder="Localización"
         />
 
-        <label for="lat" class="form-label">Latitud</label>
-        <input
-          class="input-parque"
-          v-model.number="form.lat"
-          step="any"
-          type="number"
-          required
-          name="lat"
-          id="lat"
-          placeholder="Latitud"
-        />
 
-        <label for="lng" class="form-label">Longitud</label>
+        <TheGeolocationComponent></TheGeolocationComponent>
+
+        <label for="carballeira" class="form-label">Carballeira</label>
         <input
           class="input-parque"
-          v-model.number="form.lng"
-          step="any"
-          type="number"
-          required
-          name="lng"
-          id="lng"
-          placeholder="Longitud"
+          v-model="form.carballeira"
+          type="checkbox"
+          name="carballeira"
+          id="carballeira"
+          
         />
 
         <label for="cronoloxía" class="form-label">Cronoloxía</label>
@@ -75,8 +64,8 @@
         <label for="superficie" class="form-label">Superficie</label>
         <input
           class="input-parque"
-          v-model.number="form.superficie"
-          type="number"
+          v-model.trim="form.superficie"
+          type="text"
           name="superficie"
           id="superficie"
           placeholder="Superficie"
@@ -93,8 +82,9 @@
           id="descripcion"
           placeholder="Descripcion"
         ></textarea>
-
+        <div>Fotos del parque</div>
         <TheUploader :required="true"   @emitirFichero="fotosParques"></TheUploader>
+        <div>Mapa del parque</div>
         <TheUploader :required="true"   @emitirFichero="fotoMapa"></TheUploader>
 
         <div v-if="error.error" class="error">{{ error.message }}</div>
@@ -106,10 +96,13 @@
 </template>
 <script setup>
 import TheUploader from "@/components/theUploader.vue";
-import { reactive, ref } from "vue";
+import { provide, reactive, ref } from "vue";
 import { updateDocument } from "../../../hook/firestore.hook";
 import { useStoreParques } from "@/stores/parques";
+
+import TheGeolocationComponent from "../../componentesGenerales/TheGeolocationComponent.vue";
 import "@/assets/css/admin-css/cargarEspecies.css";
+
 //
 const emits = defineEmits(["cerrarForm"]);
 
@@ -129,11 +122,14 @@ const form = reactive({
   lat: "",
   lng: "",
   cronoloxia: "",
+  carballeira: false,
   superficie: "",
   descripcion: "",
   urlficha: "", //La ruta de la primera foto del parque
   urlmapa: "", //La ruta de la foto del mapa
 });
+
+provide ('form', form)
 
 const error = ref({
   error: false,
@@ -156,6 +152,7 @@ const reset = () => {
   form.lng = "";
 
   form.cronoloxia = "";
+  form.carballeira = false;
   form.superficie = "";
   form.nombre = "";
   form.descripcion = "";

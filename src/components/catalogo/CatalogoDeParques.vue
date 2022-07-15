@@ -1,6 +1,6 @@
 <template>
 <h1 class="tittle-section">Catalogo Parques</h1>
-    <div class="catalogo-section-component">
+    <div class="catalogo-section-component" v-if="loadGaleria">
         <div class="arbol-catalogo-element" data-titulo="Mostrar" title="Máis info"
             v-for="(parque, index) in storeGeneral.tmp" :key="index" identificador=senlleira.id
             @click="cargarDatosFicha(parque)">
@@ -16,70 +16,43 @@
                 </span>
             </div>
         </div>
-    </div>
-     <!-- <pre>{{temPo}}</pre> -->
-
-    <FichaParquePublica 
-    v-if="mostrarFicha"
-    :mostrarFicha="mostrarFicha"
-    :fichaDatos="fichaDatos" 
-    :imagenesFichaTecnica="imagenesFichaTecnica">
-    </FichaParquePublica>
-    
-
-
-
-     
+    </div>  
+    <SkeletonCatalogoVue v-else="loadGaleria"></SkeletonCatalogoVue>   
 </template>
 
 <script setup>
-
 //Dependencias
-import { ref } from "vue";
-import FichaParquePublica from "../parques/FichaParquePublica.vue";
+import {ref} from 'vue';
 import { useStoreParques } from "../../stores/parques";
 import { useStoreGeneral } from "../../stores/general";
+import SkeletonCatalogoVue from "../skeleton/SkeletonCatalogo.vue";
+
 
 import "@/assets/css/catalogo/catalogo.css";
 
-const mostrarFicha = ref(false)
-const fichaDatos = ref(null);
-const imagenesFichaTecnica = ref([]);
+import { useRouter } from "vue-router";
+const loadGaleria = ref(false)
+const router = useRouter();
 
 
 const storeParques = useStoreParques();
 const storeGeneral = useStoreGeneral();
 
-
-
-
-
-
-// Función que sirve para limpiar el array de imagenes
-const imagenesFichaTecnicaVaciar = () => {
-    while(imagenesFichaTecnica.value.length > 0)
-    imagenesFichaTecnica.value.pop()
-}
-
-const cargarDatosFicha = async (objeto) => {
-    //console.log(objeto)
-    mostrarFicha.value = true;
-    fichaDatos.value = null;
-    fichaDatos.value = objeto;
-    console.log(fichaDatos.value)
-    // Limpiamos y cargamos las imagenes de la ficha
-    imagenesFichaTecnicaVaciar()
-    await storeParques.listarImagenes('Parques/' + fichaDatos.value.idDoc)
-    for (let i = 0; i < storeParques.imagenes.length; i++) {
-        imagenesFichaTecnica.value.push(storeParques.imagenes[i])
+const cargarDatosFicha = async (doc) => {
+     router.push({
+    name: 'FichaParque',
+    params:{
+      idDoc:doc.idDoc
     }
-   
+  });   
 }
+
 
 const loadPage = async () => {
     await storeParques.setParques();
     // await storeParques.getDownloadURL();
     storeGeneral.filtrarParques();
+    loadGaleria.value = true;
 }
 loadPage();
 </script>

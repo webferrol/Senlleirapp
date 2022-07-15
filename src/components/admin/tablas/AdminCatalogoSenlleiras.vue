@@ -1,10 +1,8 @@
 <template>
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
-      <td>Nome científico</td>
-      <td>Nome en Galego</td>
-      <td>Nome en Castelán</td>
-      <td>Zona xeográfica</td>
+      <td>Nomes (científico,galego,castelán)</td>
+      <td>Nome da árbore</td>
       <td>Ubicación parque</td>
       <td class="tabla_administrativo_options">
         <span>
@@ -17,10 +15,8 @@
       v-for="(arbore, index) in storeArbores.arbores"
       :key="index"
     >
-      <td>{{ arbore.genero }} {{ arbore.especie }}</td>
-      <td>{{ arbore.nombre_comun }}</td>
-      <td>{{ arbore.nombre_comun_gal }}</td>
-      <td>{{ arbore.zona_geografica }}</td>
+      <td>{{ arbore.genero }} {{ arbore.especie }},{{ arbore.nombre_comun }},{{ arbore.nombre_comun_gal }}</td>
+      <td>{{arbore.nombre_arbol}}</td>
       <td>{{ arbore.ubicacion_parque }}</td>
       <td class="tabla_administrativo_options">
         <span>
@@ -116,6 +112,7 @@
         <label for="diametroTronco"> Diámetro do tronco</label>
         <input
           type="number"
+          step="any"
           v-model="arbore.diametro"
           id="diametroTronco"
           placeholder="Diámetro do tronco (metros)"
@@ -174,6 +171,27 @@
             placeholder="Descripción"
           ></textarea>
         </fieldset>
+        <fieldset class="data-senlleira">
+        <legend>Esta árbore é</legend>
+        <div class="senlleira-arbore">
+          <input
+            type="checkbox"
+            v-model="arbore.senlleira"
+            name="senlleira"
+            id="senlleira"
+          />&nbsp;
+          <label class="form-label" for="senlleira">Senlleira</label>
+          <input
+            type="checkbox"
+            v-model="arbore.propuesta_senlleira"
+            name="propSenlleira"
+            id="propSenlleira"
+          />&nbsp;
+          <label class="form-label" for="propSenlleira"
+            >Proposta de senlleira</label
+          >
+        </div>
+      </fieldset>
         <fieldset class="editar-images">
           <div class="images" v-for="image of images" :key="image.ref">
             <img class="image" :src="image.src" alt="" />
@@ -231,7 +249,7 @@ const borrarArbore = async () => {
 };
 
 const deleteImage = (ref) => {
-  const texto = prompt(`para eliminar la foto comnfirme la referencia:${ref}`);
+  const texto = prompt(`para eliminar la foto comnfirme la referencia: \n ${ref}`);
   if (texto === ref) {
     storeArbores.borrarFoto(ref);
   }
@@ -294,6 +312,9 @@ cargarFotos();
 </script>
 
 <style scoped>
+.catalogo_administrativo{
+  font-size: .8rem
+}
 .editar-images {
   display: grid;
   grid-template-columns: auto auto auto;

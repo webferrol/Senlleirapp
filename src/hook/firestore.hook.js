@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc, query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc, query, where,orderBy } from "firebase/firestore";
 
 /**
  *
@@ -41,6 +41,26 @@ export const getDocument = async (collectionName,reference) => {
           }
       } else
         return null;
+}
+
+/**
+ * @param {String} $collectionName Nombre de la colección
+ * @param {String} $field Busqueda del campo que se desea buscar
+ * @param {any} $value Valor buscado en la consulta
+ * @returns {Array} Array de objetos con los documentos encontrados o array vacío si no encuentra nada
+ */
+ export const getDocumentsWhere = async ($collectionName,$field,$value) => {
+  
+  const tmp = [];
+  const q = query(collection(db, $collectionName), where($field, "==", $value));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    tmp.push({
+      idDoc: doc.id,
+      ...doc.data(), //DESTRUCTURING
+    });
+  });
+  return tmp;       
 }
 
 /**

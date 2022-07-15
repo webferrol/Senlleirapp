@@ -14,9 +14,9 @@
 
 .container-ficha-tecnica .ficha-tecnica {
   display: grid;
-  grid-template-rows: repeat(8, auto);
+  grid-template-rows: repeat(auto-fit, minmax(auto, 1fr));
   margin: auto;
-  height: 100vh;
+  max-height: 100vh;
   width: 100%;
   max-width: 600px;
   overflow-x: hidden;
@@ -58,7 +58,7 @@
 
 /* titulo caracteristicas */
 .line-ficha-tecnica {
-  margin: 0.25rem auto;
+  margin: 15px auto;
   width: 90%;
   height: 0.2rem;
   border: none;
@@ -69,6 +69,9 @@
   color: black;
   text-align: center;
   font-size: 1.1rem;
+  text-transform: uppercase;
+  margin-top: 10px;
+
 }
 
 /* Caracteristicas tecnicas */
@@ -77,18 +80,23 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 0 1rem;
+  line-height: 1.5rem;
+  margin-top: 10px;
 }
 .caracteristicas-ficha-tecnica div {
   display: grid;
-  grid-template-columns: 130px 1fr;
+  grid-template-columns: 150px 1fr;
   align-items: center;
+  gap: 1rem;
 }
 .subtitle-caracteristica {
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  
 }
+
 .subtitle-caracteristica svg {
   display: flex;
   justify-content: center;
@@ -96,7 +104,7 @@
   width: 20px;
   height: 20px;
 }
-.subtitle-caracteristica h3 {
+.subtitle-caracteristica h4 {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -104,18 +112,27 @@
   font-size: 1rem;
   line-height: .9rem;
 }
+
 /* Descripcion */
+.descripcion-ficha-tecnica h3, .caracteristicas-ficha-tecnica h3{
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
 
 .descripcion-ficha-tecnica p {
   padding: 0.5rem 1rem;
   text-align: justify;
   font-size: 1.1rem;
+  line-height:1.5;
+  white-space: pre-line;
+  text-indent: 10px;
 }
 
 @media screen and (min-width: 700px) {
     .container-ficha-tecnica .ficha-tecnica{
         width: 90%;
-        height: 90vh;
+        max-height: 90vh;
         border-radius: 5px;
         box-shadow: 3px 2px 7px lightgray;
     }
