@@ -1,0 +1,45 @@
+.noticia-component{
+display: grid;
+grid-template-rows: 1fr auto auto;
+width: 100%;
+max-width: 1080px;
+height: calc(100vh - 83px);
+margin: auto;
+background-image: url(../../img/imagenes-portada/RAMAS.jpg);
+background-size: cover;
+background-position: center;
+padding: 1rem 0;
+}
+.noticia-component h1{
+    color: white;
+    font-size: clamp(2rem, 3vw, 4rem);
+    line-height: clamp(1.8rem, 3vw, 3.8rem);
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.noticia-component h3{
+    color: white;
+    font-size: clamp(1.4rem, 3vw, 3rem);
+    line-height: clamp(1.3rem, 3vw, 2.9rem);
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.noticia-component a{
+    margin: .5rem auto;
+    width: 250px;
+    text-align: center;
+    height: fit-content;
+    border-radius: 2px;
+    padding: .5rem 1rem;
+    background-color: var(--colorprincipal);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+

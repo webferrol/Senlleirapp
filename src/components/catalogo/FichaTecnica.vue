@@ -39,7 +39,6 @@
 <script setup>
 import CarruselImagenesVue from '../CarruselImagenes.vue';
 import "@/assets/css/catalogo/ficha-tecnica.css";
-import CarruselTemplate from '../CarruselTemplate.vue';
 
 const props = defineProps({
 
@@ -53,7 +52,5 @@ const props = defineProps({
     }
 
 });
-
-//props.title
 
 </script>
