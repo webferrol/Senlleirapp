@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc, query, where } from "firebase/firestore";
+import { collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc, query, where, orderBy, limit, startAfter } from "firebase/firestore";
 
 /**
  *
@@ -66,8 +66,8 @@ export const deleteDocument = async (collection, uid) => {
 /**
  * 
  * @param {string} selecColec recibe la colección en dónde va a realizar la búsqueda (Arbores, Especies, Parques)
- * @param {string} selecDoc 
- * @param {string} buscar 
+ * @param {string} selecDoc recibe el documento/campo donde vamos a buscar
+ * @param {string} buscar recibe aquello que vamos a buscar
  * @returns 
  */
  export const busquedaDatos = async (selecColec, selecDoc, buscar) => {
@@ -84,4 +84,24 @@ export const deleteDocument = async (collection, uid) => {
     // console.log(doc.id, " => ", doc.data());
   })
   return tmp;
+}
+
+// const querySnapshot = await getDocs(collection(db, "Especies"));
+export const paginarDatos = ($colection="especies", $orderby="genero",$limit=3) => {
+
+  const getFirstPage = async () =>{
+    const tmp = [];
+    const first = query(collection(db, $colection), orderBy($orderby), limit($limit));
+    const querySnapshot = await getDocs(first);
+    querySnapshot.forEach((doc) => {
+      tmp.push({
+        idDoc: doc.id,
+        ...doc.data(),
+      });
+      return tmp;
+    })
+  }
+  return {
+    getFirstPage
+  }
 }

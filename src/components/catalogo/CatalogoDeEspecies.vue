@@ -104,7 +104,7 @@ const cargarDatosFicha = async (objeto) => {
 // Cargamos los datos de especies y llamamos al buscador
 const loadPage = async () => {
     await storeEspecies.setEspecies();
-    storeGeneral.filtrarArbores();
+    storeGeneral.filtrarEspecies();
 };
 loadPage();
 </script>
