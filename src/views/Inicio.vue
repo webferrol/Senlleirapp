@@ -1,5 +1,6 @@
 <template>
     <div class="home">
+    <NoticiaCarballoVue></NoticiaCarballoVue>
     <ExploraVue></ExploraVue>
     <ParticipaVue></ParticipaVue>
     <CarruselStoriesVue></CarruselStoriesVue>
@@ -21,6 +22,7 @@ import { ref } from 'vue';
 import { getDocumentsWhere } from '../hook/firestore.hook';
 import ParticipaVue from '../components/componentesGenerales/Participa.vue';
 import ExploraVue from '../components/componentesGenerales/Explora.vue';
+import NoticiaCarballoVue from '../components/componentesGenerales/NoticiaCarballo.vue';
 
 const senlleiros = ref([]);
 

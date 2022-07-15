@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container-ficha-tecnica">
+  <div v-if="images.lenght" class="container-ficha-tecnica">
     <article class="ficha-tecnica">
       <div class="cabecera-ficha-tecnica">
         <!-- TITULO -->
@@ -98,13 +98,16 @@
       </div>
     </article>
   </div>
+  <SkeletonFichaTecnicaVue v-else="images.lenght"></SkeletonFichaTecnicaVue>
+
+
 </template>
 <script setup>
-//import CarruselImagenesVue from '../CarruselImagenes.vue';
 import TheLeafletComponent from "../admin/TheLeafletComponent.vue";
 import CarruselImagenesVue from "@/components/CarruselImagenes.vue";
 import { computed } from "vue";
 import "@/assets/css/catalogo/ficha-tecnica.css";
+import SkeletonFichaTecnicaVue from '../skeleton/SkeletonFichaTecnica.vue';
 
 const props = defineProps({
   images: {

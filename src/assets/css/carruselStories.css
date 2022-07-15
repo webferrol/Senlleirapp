@@ -130,5 +130,11 @@
     .component-arbol:last-child{
       margin-right: 0;
     }
+
+    /* Mozilla scrollbar */
+    .stories-navigator{
+      scrollbar-width: auto;
+      scrollbar-color: var(--colorprincipal);
+    }
   }
 

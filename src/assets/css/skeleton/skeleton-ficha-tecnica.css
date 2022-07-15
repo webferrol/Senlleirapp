@@ -1,0 +1,51 @@
+.skeleton-container{
+    width: 100%;
+    height: 100vh;
+    z-index: 999;
+}
+.skeleton-ficha-tecnica{
+    animation: backgroundAnimation 2s infinite alternate;
+    padding: .5rem;
+}
+.titulo-ficha{
+    display: flex;
+    justify-content: space-between;
+}
+
+.skeleton-ficha-tecnica .skeleton-square{
+    width: 100%;
+    height: 400px;
+}
+
+/* ficha */
+.caracteristicas-ficha .skeleton-h1{
+    margin: 1rem auto;
+}
+.skeleton-caracteristicas{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+    margin-bottom: .5rem;
+}
+    .skeleton-caracteristicas .caracteristicas-titulo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .25rem
+    }
+    .skeleton-caracteristicas .caracteristicas-txt{
+        flex-direction: column;
+        justify-content: left;
+        height: fit-content;
+    }
+
+
+    @keyframes backgroundAnimation {
+        0%{
+            background-color: hsl(200, 20%, 70%);
+        }
+    
+        100%{
+            background-color: hsl(200, 20%, 95%);
+        }
+    }
