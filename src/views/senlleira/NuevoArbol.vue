@@ -84,6 +84,7 @@ const storeEspecies = useStoreEspecies();
 const storeParques = useStoreParques();
 const storeArbores = useStoreArbores();
 
+
 storeParques.setParques();
 storeArbores.setArbores();
 
@@ -143,10 +144,8 @@ const gestionFoto = async (imagenes) => {
   }
 };
 const handleSubmit = async () => {
-  //Se comprueban errores antes de enviar nada
-  //Enviar
+const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
   if (storeEspecies.especies.length) {
-    const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
     try {
       if (tmpImagenes === null || !tmpImagenes.length)
         throw new Error("Falta imagen");
@@ -165,6 +164,9 @@ const handleSubmit = async () => {
             file: tmpImagenes[i],
           });
         }
+        // guardamos url
+        const ref = `Arbores/${data.id}/${tmpImagenes[0].name}`;
+        await storeArbores.google_url_save(data.id,ref);
         spinner.value = false;
       } catch (e) {
         error.value.error = true;
