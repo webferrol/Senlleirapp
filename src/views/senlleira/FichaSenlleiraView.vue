@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="error" v-if="error.errorBool">
-      ({{ error.code }}) {{ error.message }}
-    </div>
+    
+
+    <SkeletonCatalogoVue v-if="error.errorBool" message="Erro na carga de datos. Póñase en contacto co administrador"></SkeletonCatalogoVue>
     
     <FichaSenlleiraComponente v-else
     :senlleira="senlleira"
@@ -14,6 +14,7 @@
 
 <script setup>
 import FichaSenlleiraComponente from "../../components/senlleira/FichaSenlleiraComponente.vue";
+import SkeletonCatalogoVue from "../../components/skeleton/SkeletonCatalogo.vue";
 import { useRoute } from "vue-router";
 import { ref } from "vue";
 import { listAllUrls } from "../../hook/storage.hook";
@@ -50,6 +51,7 @@ const error = ref({
     error.value.errorBool = true;
     error.value.code = err.code;
     error.value.message = err.message;
+    console.log(err);
   }
 })();
 </script>

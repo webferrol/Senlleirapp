@@ -77,10 +77,13 @@ export const useStoreArbores = defineStore('arbores', {
          * 
          * @returns array que contiene objetos con la informacion de las arboles en general
          */
-        async setArbores(){
+        async setArbores(publicado=false){
             if (this.arbores.length > 0) //Por si el array ya está cargado
                 return
-            this.arbores = await getDocuments("Arbores") 
+            if(publicado)
+                this.arbores = await getDocumentsWhere("Arbores","publicado",true); 
+            else    
+                this.arbores = await getDocuments("Arbores");
            
         },
         /**
