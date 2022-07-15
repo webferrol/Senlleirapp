@@ -1,14 +1,23 @@
 .noticia-component{
 display: grid;
-grid-template-rows: 1fr auto auto;
 width: 100%;
 max-width: 1080px;
 height: calc(100vh - 83px);
 margin: auto;
-background-image: url(../../img/imagenes-portada/RAMAS.jpg);
-background-size: cover;
-background-position: center;
-padding: 1rem 0;
+}
+.noticia-component img{
+    display: none;
+}
+
+.noticia-component .noticia-block-txt{
+    width: inherit;
+    height: inherit;
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    padding: 1rem 0;
+    background-image: url(../../img/imagenes-portada/RAMAS.jpg);
+        background-size: cover;
+        background-position: center;
 }
 .noticia-component h1{
     color: white;
@@ -42,4 +51,39 @@ padding: 1rem 0;
     text-decoration: none;
 }
 
+
+@media screen and (min-width:700px) {
+    .noticia-component{
+        margin: 2rem auto;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        height: 600px;
+        gap: .5rem;
+    }
+    .noticia-component img{
+        display: initial;
+        width: inherit;
+        height: inherit;
+        object-fit: cover;
+    }
+    .noticia-component .noticia-block-txt{
+        
+        width: 400px;
+        height: 100%;
+    }
+    .noticia-block-txt h1{
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+    .noticia-block-txt h3{
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+    }
+}
+
+@media screen and (min-width:900px) {
+    .noticia-component img{
+        object-fit: initial;
+    }
+}
 

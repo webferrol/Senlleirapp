@@ -6,6 +6,8 @@
 .skeleton-ficha-tecnica{
     animation: backgroundAnimation 2s infinite alternate;
     padding: .5rem;
+    max-width: 600px;
+    margin: auto;
 }
 .titulo-ficha{
     display: flex;

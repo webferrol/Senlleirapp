@@ -72,9 +72,7 @@
       :centrado="[parque.lat,parque.lng]"
       />
       <!-- IMAGEN DEL MAPA DEL PARQUE -->
-
-    
-
+      
       <!-- LISTADO DE ÁRBOLES -->
       
       <div class="component-container">
@@ -87,14 +85,8 @@
             </router-link>
         </div>
 
-      <div class="mapas">
-       
+      <div class="mapas">   
         <img v-for="mapa in mapas" :key="mapa" :src="mapa" :alt="mapa">
-        
-        
-        
-        
-      
       </div>
     </article>
   </div>
