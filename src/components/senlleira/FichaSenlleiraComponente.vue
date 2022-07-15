@@ -72,8 +72,8 @@
       <TheGeolocation
       v-if="senlleira.lat"
         :icon="'../src/assets/arbolito.png'"
-        :lat="senlleira.lat"
-        :lng="senlleira.lng"
+        :lat="Number(senlleira.lat)"
+        :lng="Number(senlleira.lng)"
       />
     </article>
   </div>

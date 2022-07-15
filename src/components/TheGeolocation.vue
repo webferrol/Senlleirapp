@@ -59,8 +59,8 @@ const loader = new Loader({ apiKey: props.google_maps_api_key });
     //Cargamos mapa y colocamos valores
     map = new google.maps.Map(mapDiv.value, {
       center: {
-        lat: props.lat,
-        lng: props.lng,
+        lat: Number(props.lat),
+        lng: Number(props.lng),
       },
       zoom: 16,
     });
@@ -70,8 +70,8 @@ const loader = new Loader({ apiKey: props.google_maps_api_key });
       // draggable: true,
       animation: google.maps.Animation.DROP,
       position: {
-        lat: props.lat,
-        lng: props.lng,
+        lat: Number(props.lat),
+        lng: Number(props.lng),
       },
       icon: props.icon,
     });
