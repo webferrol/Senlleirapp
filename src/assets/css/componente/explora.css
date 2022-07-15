@@ -96,6 +96,9 @@ padding: .5rem 1rem;
   .component-explora{
     min-height: 1080px;
   }
+  .explora-titulo{
+    font-size: 4rem;
+  }
   .container-explora a {
     height: 423px;
   }

@@ -85,7 +85,7 @@ const loadGaleria = ref(false);
 const loadPage = async () => {
   try {
     await storeEspecies.setEspecies();
-    loadGaleria.value = true
+    loadGaleria.value = true;
     storeGeneral.filtrarEspecies();
   } catch (error) {
     console.log("error--->",error);

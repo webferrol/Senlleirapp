@@ -42,8 +42,13 @@
     }
 }
 @media screen and (min-width: 500px) {
+    .container-galeria{
+        justify-content: center;
+    }
     .skeleton-ficha-tecnica{
-        max-width: 250px;
+        min-width: 230px;
+        width: 100%;
+        max-width: 280px;
     }
     .skeleton-ficha-tecnica .skeleton-square{
         height: 300px;
@@ -53,6 +58,11 @@
 @media screen and (min-width: 700px) {
     .container-galeria{
         grid-template-columns: repeat(3, minmax(150px, 1fr));
+    }
+    .skeleton-ficha-tecnica{
+        min-width: 200px;
+        width: 100%;
+        max-width: 280px;
     }
 }
 @media screen and (min-width: 820px) {
