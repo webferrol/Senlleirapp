@@ -5,19 +5,13 @@
       <div class="cabecera-ficha-tecnica">
         <!-- TITULO -->
         <h2 class="ficha-tittle">{{ parque.nombre }}</h2>
-        <icono
-          class="cerrar-ficha-tecnica"
-          :icon="['fa', 'xmark']"
-          @click="handleClose"
-        ></icono>
+        <icono class="cerrar-ficha-tecnica" :icon="['fa', 'xmark']" @click="handleClose"></icono>
       </div>
       <CarruselImagenesVue :images="images"></CarruselImagenesVue>
       <!-- CARACTERISTICAS -->
       <div>
-   
         <h2 class="h2-ficha-tecnica">Características</h2>
       </div>
-
       <div class="caracteristicas-ficha-tecnica">
         <div>
           <span class="subtitle-caracteristica">
@@ -65,27 +59,21 @@
         <hr class="line-ficha-tecnica" />
         <h2 class="h2-ficha-tecnica">Localización</h2>
       </div>
-      <TheLeafletComponent 
-      v-if="parque.lat && parque.lng"
-      icon-url="../parques.png"
-      :location="location"
-      :centrado="[Number(parque.lat),Number(parque.lng)]"
-      />
+      <TheLeafletComponent v-if="parque.lat && parque.lng" icon-url="../parques.png" :location="location"
+        :centrado="[Number(parque.lat), Number(parque.lng)]" />
       <!-- IMAGEN DEL MAPA DEL PARQUE -->
-      
-      <!-- LISTADO DE ÁRBOLES -->
-      
-      <div class="component-container">
-            <router-link 
-            v-for="arbore in arbores" 
-            :key="arbore.idDoc"
-            class="component-element"  
-            :to="{ name: 'FichaSenlleira', params:{idDoc:arbore.idDoc} }">
-              {{(arbore?.numero_mapa>0)? arbore?.numero_mapa:''}} {{arbore?.nombre_comun_gal}} (Especie:  {{arbore?.genero}} {{arbore?.especie}} )
-            </router-link>
-        </div>
 
-      <div class="mapas">   
+      <!-- LISTADO DE ÁRBOLES -->
+
+      <div class="component-container">
+        <router-link v-for="arbore in arbores" :key="arbore.idDoc" class="component-element"
+          :to="{ name: 'FichaSenlleira', params: { idDoc: arbore.idDoc } }">
+          {{ (arbore?.numero_mapa > 0) ? arbore?.numero_mapa : '' }} {{ arbore?.nombre_comun_gal }} (Especie: {{ arbore?.genero }}
+          {{ arbore?.especie }} )
+        </router-link>
+      </div>
+
+      <div class="mapas">
         <img v-for="mapa in mapas" :key="mapa" :src="mapa" :alt="mapa">
       </div>
     </article>
@@ -95,9 +83,9 @@
 
 </template>
 <script setup>
+import { computed } from "vue";
 import TheLeafletComponent from "../admin/TheLeafletComponent.vue";
 import CarruselImagenesVue from "@/components/CarruselImagenes.vue";
-import { computed } from "vue";
 import "@/assets/css/catalogo/ficha-tecnica.css";
 import SkeletonFichaTecnicaVue from '../skeleton/SkeletonFichaTecnica.vue';
 
@@ -121,13 +109,13 @@ const props = defineProps({
   },
 });
 
-const location = computed(()=>[
-            {
-                tooltip: props.parque.nombre,
-                route:false,
-                latLong:[props.parque.lat, props.parque.lng],
-            }
-        ]);
+const location = computed(() => [
+  {
+    tooltip: props.parque.nombre,
+    route: false,
+    latLong: [props.parque.lat, props.parque.lng],
+  }
+]);
 
 const handleClose = () => {
   window.history.back();
@@ -137,22 +125,22 @@ const handleClose = () => {
 </script>
 
 <style scoped lang="scss">
-.mapas{
-    display: grid;
-    /* grid-template-columns: repeat(auto-fit,minmax(400px,1fr)); */
+.mapas {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit,minmax(400px,1fr)); */
 }
 
-.mapas img{
-    width: 100%;
+.mapas img {
+  width: 100%;
 }
 
-.component-container{
+.component-container {
   padding: .5rem;
   background-color: bisque;
-  a{
+
+  a {
     text-decoration: none;
     font-weight: bold;
   }
 }
-
 </style>

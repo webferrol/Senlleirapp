@@ -4,16 +4,12 @@
       <div class="cabecera-ficha-tecnica">
         <!-- TITULO -->
         <h2 class="ficha-tittle">{{ senlleira.nombre_arbol }}</h2>
-        <icono
-          class="cerrar-ficha-tecnica"
-          :icon="['fa', 'xmark']"
-          @click="handleClose"
-        ></icono>
+        <icono class="cerrar-ficha-tecnica" :icon="['fa', 'xmark']" @click="handleClose"></icono>
       </div>
       <CarruselImagenesVue v-if="images.length >= 1" :images="images">
       </CarruselImagenesVue>
       <div>
-       
+
         <h2 class="h2-ficha-tecnica">Características</h2>
       </div>
       <!-- CARACTERISTICAS -->
@@ -69,18 +65,18 @@
         <hr class="line-ficha-tecnica" />
         <h2 class="h2-ficha-tecnica">Localización</h2>
       </div>
-      <TheGeolocation
-      v-if="senlleira.lat"
-        :icon="'../src/assets/arbolito.png'"
-        :lat="Number(senlleira.lat)"
-        :lng="Number(senlleira.lng)"
-      />
+      <TheLeafletComponent 
+      v-if="senlleira?.lat && senlleira?.lng" 
+      icon-url="../arbolito.png" 
+      :location="location"
+      :centrado="[Number(senlleira?.lat), Number(senlleira?.lng)]" />
     </article>
   </div>
 </template>
 
 <script setup>
-import TheGeolocation from "@/components/TheGeolocation.vue";
+import { computed } from "vue";
+import TheLeafletComponent from "../admin/TheLeafletComponent.vue";
 import CarruselImagenesVue from "../CarruselImagenes.vue";
 import "@/assets/css/catalogo/ficha-tecnica.css";
 
@@ -93,6 +89,16 @@ const props = defineProps({
     type: Object,
   },
 });
+
+const location = computed(() => [
+  {
+    tooltip: props.senlleira.nombre_comun,
+    route: false,
+    latLong: [Number(props.senlleira.lat), Number(props.senlleira.lng)],
+  }
+]);
+
+
 
 const handleClose = () => {
   window.history.back();

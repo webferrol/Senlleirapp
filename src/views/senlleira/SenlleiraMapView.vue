@@ -1,11 +1,12 @@
 <template>
-  <div>
-    <the-leaflet-component lMapHeight="88vh" v-if="loading" :location="arbores"></the-leaflet-component>
+  <div  v-if="loading && arbores.length">
+    <the-leaflet-component lMapHeight="88vh" :location="arbores"></the-leaflet-component>
     <nav class="nav-mapa">
       <router-link to="/mapa-senlleiras">Senlleiras</router-link>
       <router-link to="/mapa-parques">Parques</router-link>
     </nav>
   </div>
+  <skeleton-mapa v-else></skeleton-mapa>
 </template>
 
 <script setup>
@@ -13,6 +14,7 @@
 import { ref } from "vue";
 import { getDocumentsWhere } from "../../hook/firestore.hook";
 import TheLeafletComponent from "../../components/admin/TheLeafletComponent.vue";
+import SkeletonMapa from "../../components/skeleton/SkeletonMapa.vue";
 import "@/assets/css/mapa/google-maps.css";
 
 

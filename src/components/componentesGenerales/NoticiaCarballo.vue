@@ -4,7 +4,7 @@
     <div class="noticia-block-txt">
         <h1>Carballo banquete de conxo</h1>
         <h3>Gañador árbore nacional 2021</h3>
-        <router-link to="/ficha-tecnica/8OvmLn4WF1HjzXoyRIzd">Ver árbore</router-link>
+        <router-link to="#">Ver árbore</router-link>
     </div>
 </div>
 </template>
