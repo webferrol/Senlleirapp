@@ -148,15 +148,17 @@
           />
           <label for="lat" class="form-label">Latitud</label>
           <input
-            type="text"
-            v-model="arbore.lat"
+            type="number"
+            v-model.number="arbore.lat"
+            step="any"
             id="latitud"
             placeholder="Latitud"
           />
           <label for="lng" class="form-label">Longitud</label>
           <input
-            type="text"
-            v-model="arbore.lng"
+            type="number"
+            step="any"
+            v-model.number="arbore.lng"
             id="lng"
             placeholder="Longitud"
           />
@@ -165,7 +167,7 @@
           <legend>Descripción</legend>
           <label for="descripcion"> Descrición</label>
           <textarea
-            type="text"
+            rows="10"
             v-model="arbore.descripcion"
             id="descripcion"
             placeholder="Descripción"

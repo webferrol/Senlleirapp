@@ -27,7 +27,9 @@ const arbores = ref([]);
 (async () => {
   loading.value = false;
   try {
-    arbores.value = await getDocumentsWhere('Arbores', 'senlleira', true);
+    const senlleiras = await getDocumentsWhere('Arbores', 'senlleira', true);
+    const propuestas = await getDocumentsWhere('Arbores','propuesta_senlleira',true);
+    arbores.value = [...senlleiras,...propuestas];
 
     arbores.value = arbores.value.map(arbore => ({
       tooltip: arbore?.nombre_comun ?? '',

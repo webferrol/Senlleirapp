@@ -225,9 +225,9 @@ import TheUploader from "@/components/theUploader.vue";
 import { useStoreArbores } from "@/stores/arbores";
 import { useStoreParques } from "@/stores/parques";
 import { useStoreEspecies } from "@/stores/especies";
+import TheGeolocationComponent from "../../componentesGenerales/TheGeolocationComponent.vue";
 
 import "@/assets/css/formularioSenlleira.css";
-import TheGeolocationComponent from "../../componentesGenerales/TheGeolocationComponent.vue";
 
 const emits = defineEmits(["cerrarForm"]);
 
