@@ -25,6 +25,7 @@ margin: auto;
     line-height: clamp(1.8rem, 3vw, 3.8rem);
     text-align: center;
     font-weight: 900;
+    text-shadow: .5rem .5rem 2rem black, 0 0 5px #0000FF;
     text-transform: uppercase;
 }
 
