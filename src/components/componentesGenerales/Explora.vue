@@ -21,7 +21,7 @@
             </router-link>
             <router-link to="/catalogo" class="explora-arbores">
                 <img src="../../assets/gallery/senlleiras_1.jpg" alt="imagen-explora-senlleiras">
-                <h3>Árbores</h3>
+                <h3>Catálogo</h3>
             </router-link>
         </div>
     </div>
