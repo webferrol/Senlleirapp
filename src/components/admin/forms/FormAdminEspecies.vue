@@ -27,7 +27,7 @@
         <span class="label_nombre">
           <theUploader
             :required="true"
-            @emitirFichero="fotoEspecie"
+            @emitirFichero="especieFoto"
           ></theUploader>
           <div
             style="
@@ -60,7 +60,7 @@ const cerrarForm = () => {
   emits("cerrarFormulario");
 };
 
-const store = useStoreEspecies();
+const storeEspecies = useStoreEspecies();
 
 const form = reactive({
   genero: "",
