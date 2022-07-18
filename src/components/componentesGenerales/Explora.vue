@@ -22,7 +22,7 @@
             </router-link>
             <router-link to="/catalogo" class="explora-arbores">
                 <img src="../../assets/gallery/senlleiras_4.jpg" alt="imagen-explora-senlleiras">
-                <h3>Catálogo</h3>
+                <h3>Propostas cidadás</h3>
             </router-link>
         </div>
     </div>

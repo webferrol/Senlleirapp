@@ -1,5 +1,5 @@
 <template>
-  <h1 class="tittle-section">Catalogo de árbores</h1>
+  <h1 class="tittle-section">Propostas da cidadanía</h1>
   <div class="catalogo-section-component" v-if="loadGaleria">
     <div
       class="arbol-catalogo-element"
@@ -57,7 +57,7 @@ const cargarDatosFicha = async (doc) => {
 
 
 const loadPage = async () => {
-    await storeArbores.setArbores(true);
+    await storeArbores.setPropostasCidadas();
     storeGeneral.filtrarArbores();
     loadGaleria.value = true;
 }

@@ -4,6 +4,7 @@ import { defineStore } from 'pinia';
 import { subirFicheros, listAllUrls,getDownURL, deleteFile,listAllRef} from '@/hook/storage.hook';
 
 import { addDocument, getDocuments,getDocumentsWhere,deleteDocument, updateDocument} from '@/hook/firestore.hook';
+import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 
 
 
@@ -78,8 +79,8 @@ export const useStoreArbores = defineStore('arbores', {
          * @returns array que contiene objetos con la informacion de las arboles en general
          */
         async setArbores(publicado=false){
-            if (this.arbores.length > 0) //Por si el array ya está cargado
-                return
+            // if (this.arbores.length > 0) //Por si el array ya está cargado
+            //     return
             if(publicado)
                 this.arbores = await getDocumentsWhere("Arbores","publicado",true); 
             else    
@@ -91,10 +92,29 @@ export const useStoreArbores = defineStore('arbores', {
          * @returns array que contiene objetos con la informacion de las arboles senlleiras
          */
          async setSenlleiras(){
-            if (this.arbores.length > 0) //Por si el array ya está cargado
-                return
+            // if (this.arbores.length > 0) //Por si el array ya está cargado
+            //     return
             this.arbores = await getDocumentsWhere("Arbores","senlleira",true);
            
+        },
+         /**
+         * 
+         * @returns array que contiene objetos con la informacion de las arboles senlleiras
+         */
+          async setSenlleirasyPropuestas(){
+            this.arbores = await getDocumentsWhere('Arbores','propuesta_senlleira',true);
+        },
+        async setImagenes(uid) {
+            this.imagenes = await listAllUrls(uid)
+             
+        },
+         /**
+         * 
+         * @returns array que contiene objetos con la informacion de las arboles senlleiras
+         */
+          async setPropostasCidadas(){
+            //const senlleiras = await getDocumentsWhere('Arbores', 'senlleira', false);
+            this.arbores = await getDocumentsWhere('Arbores','propuesta_senlleira',false);
         },
         async setImagenes(uid) {
             this.imagenes = await listAllUrls(uid)

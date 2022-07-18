@@ -22,7 +22,7 @@
         </span>
         <span class="lugar">
           <icono :icon="['fa', 'location-dot']"></icono>
-          <h4 class="arbol-lugar">{{ senlleira.ubicacion_parque }}</h4>
+          <h4 class="arbol-lugar">{{ senlleira.ubicacion_parque }} <span v-if="senlleira.senlleira">PERTENECE AL CATALOGO</span></h4>
         </span>
       </div>
     </div>
@@ -57,7 +57,7 @@ const cargarDatosFicha = async (doc) => {
 
 
 const loadPage = async () => {
-    await storeArbores.setSenlleiras();
+    await storeArbores.setSenlleirasyPropuestas();
     storeGeneral.filtrarArbores();
     loadGaleria.value = true;
 }
