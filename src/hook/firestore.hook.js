@@ -125,3 +125,21 @@ export const deleteDocument = async (collection, uid) => {
   })
   return tmp;
 }
+
+/**
+ * @param {Boolean} $propuesta_senlleira true propuesta senlleria | false propuesta ciudadana
+ * @returns {Array} Array de objetos con los documentos encontrados o array vacío si no encuentra nada
+ */
+ export const getPropuestaSenlleiras = async ($propuesta_senlleira=true) => {
+  
+  const tmp = [];
+  const q = query(collection(db, 'Arbores'), where('propuesta_senlleira', "==", $propuesta_senlleira),where('publicado','==',true));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    tmp.push({
+      idDoc: doc.id,
+      ...doc.data(), //DESTRUCTURING
+    });
+  });
+  return tmp;       
+}

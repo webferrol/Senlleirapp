@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 // importacion de la función del firebase para subir las fotos
 import { subirFicheros, listAllUrls,getDownURL, deleteFile,listAllRef} from '@/hook/storage.hook';
 
-import { addDocument, getDocuments,getDocumentsWhere,deleteDocument, updateDocument} from '@/hook/firestore.hook';
+import { addDocument, getDocuments,getDocumentsWhere,getPropuestaSenlleiras,deleteDocument, updateDocument} from '@/hook/firestore.hook';
 import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 
 
@@ -106,7 +106,7 @@ export const useStoreArbores = defineStore('arbores', {
           async setSenlleirasPropostas(){
             if(this.arboresSenlleirasPropostas.length)
                 return;
-            this.arboresSenlleirasPropostas = await getDocumentsWhere('Arbores','propuesta_senlleira',true);
+            this.arboresSenlleirasPropostas = await getPropuestaSenlleiras();
         },
          /**
          * 
@@ -115,7 +115,7 @@ export const useStoreArbores = defineStore('arbores', {
           async setArboresParticipacionCidada(){
             if(this.arboresParticipacionCidada.length)
                 return;
-            this.arboresParticipacionCidada = await getDocumentsWhere('Arbores','propuesta_senlleira',false);
+            this.arboresParticipacionCidada = await getPropuestaSenlleiras(false);
         },
         async setImagenes(uid) {
             this.imagenes = await listAllUrls(uid)

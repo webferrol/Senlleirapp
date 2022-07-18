@@ -38,7 +38,7 @@ const imgs =[
 
 (async()=>{
     try {
-        senlleiros.value = await getDocumentsWhere('Arbores','senlleira',true,'nombre_arbol');
+        senlleiros.value = await getDocumentsWhere('Arbores','propuesta_senlleira',true,'nombre_arbol');
 
         // LINEAS TEMPORALES QUE SE BORRARÁN DESPUÉS DE LA PRESENTACIÓN
         const tam = senlleiros.value.length;
