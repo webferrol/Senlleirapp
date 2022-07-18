@@ -60,7 +60,7 @@ defineProps({
      */
     lMapHeight: {
         type: String,
-        default: "400px",
+        default: 'calc(100vh - 83px)',
     },
     /**
      * {Array} Datos que almacena arrays donde almacena [latitiud,longitud]
@@ -133,7 +133,6 @@ const handleRoute = ({route}) => {
     border-radius: 0.2rem;
 }
 .width {
-    height: 100%;
     width: 100%;
     min-width: 18rem;
     min-height: 18rem;

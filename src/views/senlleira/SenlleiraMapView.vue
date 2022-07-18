@@ -1,6 +1,6 @@
 <template>
   <div  v-if="loading && arbores.length">
-    <the-leaflet-component lMapHeight="88vh" :location="arbores"></the-leaflet-component>
+    <the-leaflet-component lMapHeight="calc(100vh - 70px)" :location="arbores"></the-leaflet-component>
     <nav class="nav-mapa">
       <router-link to="/mapa-senlleiras">Senlleiras</router-link>
       <router-link to="/mapa-parques">Parques</router-link>
