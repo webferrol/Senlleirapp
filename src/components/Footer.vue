@@ -3,7 +3,7 @@
         <nav class="menu-principal" :class="{'administrador-active':userStore.user}">
             <ul class="menu-elements">
                 <li>
-                    <router-link class="menu-catalogo" to="/catalogo">
+                    <router-link class="menu-catalogo" to="/catalogo-senlleiras">
                         <icono :icon="['fa', 'images']"></icono>
                         <p>Catálogo</p>
                     </router-link>

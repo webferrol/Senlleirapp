@@ -1,5 +1,6 @@
 .noticia-component{
 display: grid;
+justify-items: center;
 width: 100%;
 max-width: 1080px;
 height: calc(100vh - 83px);

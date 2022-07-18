@@ -57,8 +57,8 @@ const cargarDatosFicha = async (doc) => {
 
 
 const loadPage = async () => {
-    await storeArbores.setPropostasCidadas();
-    storeGeneral.filtrarArbores();
+    await storeArbores.setArboresParticipacionCidada();
+    storeGeneral.filtraArboresParticipacionCidada();
     loadGaleria.value = true;
 }
 loadPage();

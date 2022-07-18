@@ -27,9 +27,9 @@ const store = useStoreArbores();
 (async () => {
   loading.value = false;
   try {
-    await store.setSenlleirasyPropuestas();
+    await store.setSenlleirasPropostas();
 
-    store.arbores = store.arbores.map(arbore => ({
+    store.arbores = store.arboresSenlleirasPropostas.map(arbore => ({
       tooltip: arbore?.nombre_comun ?? '',
       route: { name: 'FichaSenlleira', params: { idDoc: arbore.idDoc } },
       latLong: [Number(arbore?.lat), Number(arbore?.lng)],

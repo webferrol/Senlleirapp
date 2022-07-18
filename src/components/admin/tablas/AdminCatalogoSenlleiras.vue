@@ -1,8 +1,12 @@
 <template>
+  <div><span class="lenda">P: Proposta para senlleira</span>. Coloca o árbore na Ficha senlleiras</div>
+  <div><span class="lenda">S: Senlleira</span>. Indica que a árbore está no catálogo oficial de senlleiras</div>
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
       <td>Nomes (científico,galego,castelán)</td>
       <td>Nome da árbore</td>
+      <td title="Propuesta senlleira"><span class="lenda">P</span></td>
+      <td title="Senlleira"><span class="lenda">S</span></td>
       <td>Ubicación parque</td>
       <td class="tabla_administrativo_options">
         <span>
@@ -17,6 +21,8 @@
     >
       <td>{{ arbore.genero }} {{ arbore.especie }},{{ arbore.nombre_comun }},{{ arbore.nombre_comun_gal }}</td>
       <td>{{arbore.nombre_arbol}}</td>
+      <td>{{arbore?.propuesta_senlleira}}</td>
+      <td>{{arbore?.senlleira}}</td>
       <td>{{ arbore.ubicacion_parque }}</td>
       <td class="tabla_administrativo_options">
         <span>
@@ -323,6 +329,11 @@ cargarFotos();
 </script>
 
 <style scoped>
+.lenda{
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
 .catalogo_administrativo{
   font-size: .8rem
 }

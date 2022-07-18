@@ -1,1 +1,8 @@
-1. Cuando se busca con el buscador al cambiar de pestañas pueden desaparecer árboles al estar filtrado
+1. Cambio de peso de las fotos fijas de la home para ganar velocidad
+2. Cuidar peso de las fotos subidas al servidor
+
+
+//Cambios
+En el store arbores.js cree dos arrays más que sólo afecta a la zona pública y no a la administración:
+1. arboresSenlleirasPropostas  (propuestas como senlleiras NO CONFUDIR CON EL CAMPO  senlleiras que son as propuestas como senlleiras pero del catálogo de la xunta)
+2. arboresParticipacionCidada  (Todos lo árboles que QUE NO SON PROPUESTAS COMO SENLLEIRAS )

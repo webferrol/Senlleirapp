@@ -20,7 +20,7 @@
                 <img src="../../assets/gallery/senlleiras_1.jpg" alt="imagen-explora-senlleiras">
                 <h3>Especies</h3>
             </router-link>
-            <router-link to="/catalogo" class="explora-arbores">
+            <router-link to="/catalogo-propostas" class="explora-arbores">
                 <img src="../../assets/gallery/senlleiras_4.jpg" alt="imagen-explora-senlleiras">
                 <h3>Propostas cidadás</h3>
             </router-link>

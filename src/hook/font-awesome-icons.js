@@ -17,6 +17,7 @@ import {faAngleRight} from "@fortawesome/free-solid-svg-icons";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {faPen} from "@fortawesome/free-solid-svg-icons";
 import {faGears} from "@fortawesome/free-solid-svg-icons";
+import {faRegistered} from "@fortawesome/free-solid-svg-icons";
 import {faCircleExclamation} from "@fortawesome/free-solid-svg-icons";
 // ficha
 import { faLeaf } from "@fortawesome/free-solid-svg-icons";
@@ -52,7 +53,8 @@ export const iconsLibrary = () => {
         faSignature,
         faUpLong,
         faArrowsLeftRight,
-        faCalendarDays
+        faCalendarDays,
+        faRegistered,
         
     )
 }

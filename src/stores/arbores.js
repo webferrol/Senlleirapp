@@ -14,7 +14,9 @@ export const useStoreArbores = defineStore('arbores', {
     // other options...
     state: () => {
         return {
-            arbores: [],
+            arbores: [],//Todas as árbores. Senllerias, propostas_senlleiras, y cidadás
+            arboresSenlleirasPropostas: [], //Arbores que teñen a propiedade propuestas_senlleiras como true
+            arboresParticipacionCidada: [], //Arbores que teñen a propiedade propuestas_senlleiras como false
             imagenes: []
         }
     },
@@ -99,23 +101,27 @@ export const useStoreArbores = defineStore('arbores', {
         },
          /**
          * 
-         * @returns array que contiene objetos con la informacion de las arboles senlleiras
+         * @returns {Array} Árbores propuestas como senlleiras
          */
-          async setSenlleirasyPropuestas(){
-            this.arbores = await getDocumentsWhere('Arbores','propuesta_senlleira',true);
+          async setSenlleirasPropostas(){
+            if(this.arboresSenlleirasPropostas.length)
+                return;
+            this.arboresSenlleirasPropostas = await getDocumentsWhere('Arbores','propuesta_senlleira',true);
+        },
+         /**
+         * 
+         * @returns {Array} Árbores que a súa propiedade propuesta_senlleira e false. Es decir las que sube un usuario ordinario o el administrador lo pone como false
+         */
+          async setArboresParticipacionCidada(){
+            if(this.arboresParticipacionCidada.length)
+                return;
+            this.arboresParticipacionCidada = await getDocumentsWhere('Arbores','propuesta_senlleira',false);
         },
         async setImagenes(uid) {
             this.imagenes = await listAllUrls(uid)
              
         },
-         /**
-         * 
-         * @returns array que contiene objetos con la informacion de las arboles senlleiras
-         */
-          async setPropostasCidadas(){
-            //const senlleiras = await getDocumentsWhere('Arbores', 'senlleira', false);
-            this.arbores = await getDocumentsWhere('Arbores','propuesta_senlleira',false);
-        },
+        
         async setImagenes(uid) {
             this.imagenes = await listAllUrls(uid)
              
