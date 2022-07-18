@@ -1,13 +1,13 @@
 <template>
   <div>
-      <div class="erro" v-if="error.errorBool">
-        ({{ error.code }}) {{ error.message }}
-      </div>
-    <FichaParqueComponent v-else 
+    <strong v-if="error.errorBool">{{error.message}}</strong> 
+    <FichaParqueComponent
+    v-else
     :parque="parque" 
     :images="imagenesFichaTecnica"
     :arbores="arbores" 
-    :mapas="mapas" ></FichaParqueComponent>    
+    :mapas="mapas" ></FichaParqueComponent>
+      
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import { useRoute } from "vue-router";
 import { ref } from "vue";
 import { listAllUrls } from "../../hook/storage.hook";
 import { getDocument,busquedaDatos } from "../../hook/firestore.hook";
-import FichaParqueComponent from "../../components/parques/FichaParqueComponent.vue"
+import FichaParqueComponent from "../../components/parques/FichaParqueComponent.vue";
 const route = useRoute();
 const parque = ref({});
 const arbores = ref([]);
@@ -36,7 +36,9 @@ const mapas = ref([]);
   try {
     error.value.errorBool = false;
     parque.value = await getDocument("Parques", route.params.idDoc);
+    //console.log(parque.value)
     arbores.value = await busquedaDatos("Arbores","idParque",route.params.idDoc);
+    //console.log(arbores.value)
     if (!parque.value)
       throw new Error(
         `El parque con código ${route.params.idDoc} no existe. Fichero FichaParqueView.vue`
@@ -50,6 +52,7 @@ const mapas = ref([]);
     error.value.errorBool = true;
     error.value.code = err.code;
     error.value.message = err.message;
+    console.log("FichaParqueView--->",err)
   }
 })();
 </script>

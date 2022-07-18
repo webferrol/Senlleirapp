@@ -39,6 +39,17 @@ const imgs =[
 (async()=>{
     try {
         senlleiros.value = await getDocumentsWhere('Arbores','senlleira',true,'nombre_arbol');
+
+        // LINEAS TEMPORALES QUE SE BORRARÁN DESPUÉS DE LA PRESENTACIÓN
+        const tam = senlleiros.value.length;
+        const tmp = [];
+        for(let i = 0; i<18;i++){
+            tmp.push(senlleiros.value[Math.floor(Math.random()*tam)]);
+        }
+        senlleiros.value = tmp;
+        // FINAL DE LINEAS TEMPORALES QUE SE BORRARÁN DESPUÉS DE LA PRESENTACIÓN
+
+
         senlleiros.value = senlleiros.value.map(sen=>{ //Mapeo para añadir un campo a la senlleira
             sen.urlFicha = `/ficha-tecnica/${sen.idDoc}`;
             return sen;

@@ -2,7 +2,7 @@
   <div>
     
 
-    <SkeletonCatalogoVue v-if="error.errorBool" message="Erro na carga de datos. Póñase en contacto co administrador"></SkeletonCatalogoVue>
+    <SkeletonCatalogoVue v-if="error.errorBool" message="Error na carga de datos. Póñase en contacto co administrador"></SkeletonCatalogoVue>
     
     <FichaSenlleiraComponente v-else
     :senlleira="senlleira"

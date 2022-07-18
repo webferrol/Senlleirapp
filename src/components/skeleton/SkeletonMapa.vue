@@ -2,7 +2,7 @@
 <div class="container-galeria">
     <strong :class="{message:message.length>0}">{{message}}</strong>
 
-<div class="skeleton-ficha-tecnica" v-for="ficha in 9">
+<div class="skeleton-ficha-tecnica" v-for="ficha in fichaNumber">
     
     <div class="skeleton-title"></div>
     <div class="skeleton-square"></div>
@@ -26,7 +26,12 @@ defineProps({
     message:{
         type:String,
         default: '',
+    },
+    fichaNumber:{
+        type:Number,
+        default: 2
     }
+
 })
 
 import("@/assets/css/skeleton/skeleton-catalogo.css");
@@ -37,6 +42,7 @@ import("@/assets/css/skeleton/skeleton-elements.css")
 .container-galeria{
     position: relative;
     height: 100vh;
+    margin-top: .5em;
 }
 strong{
     position: fixed;

@@ -98,7 +98,3 @@ legend{
     background-color: var(--colorsecundario);
     color: var(--colorclaro)
 }
-
-textarea{
-    resize: none;
-}

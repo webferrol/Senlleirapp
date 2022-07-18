@@ -1,22 +1,17 @@
 <template>
 
-  <div v-if="images.lenght" class="container-ficha-tecnica">
+  <div v-if="images.length" class="container-ficha-tecnica">
     <article class="ficha-tecnica">
       <div class="cabecera-ficha-tecnica">
         <!-- TITULO -->
         <h2 class="ficha-tittle">{{ parque.nombre }}</h2>
-        <icono
-          class="cerrar-ficha-tecnica"
-          :icon="['fa', 'xmark']"
-          @click="handleClose"
-        ></icono>
+        <icono class="cerrar-ficha-tecnica" :icon="['fa', 'xmark']" @click="handleClose"></icono>
       </div>
       <CarruselImagenesVue :images="images"></CarruselImagenesVue>
       <!-- CARACTERISTICAS -->
       <div>
         <h2 class="h2-ficha-tecnica">Características</h2>
       </div>
-
       <div class="caracteristicas-ficha-tecnica">
         <div>
           <span class="subtitle-caracteristica">
@@ -93,7 +88,7 @@
       </div>
 
       <div class="mapas">
-        <img v-for="mapa in mapas" :key="mapa" :src="mapa" :alt="mapa" />
+        <img v-for="mapa in mapas" :key="mapa" :src="mapa" :alt="mapa">
       </div>
 
     </article>
@@ -103,9 +98,9 @@
 
 </template>
 <script setup>
+import { computed } from "vue";
 import TheLeafletComponent from "../admin/TheLeafletComponent.vue";
 import CarruselImagenesVue from "@/components/CarruselImagenes.vue";
-import { computed } from "vue";
 import "@/assets/css/catalogo/ficha-tecnica.css";
 import SkeletonFichaTecnicaVue from '../skeleton/SkeletonFichaTecnica.vue';
 
@@ -145,7 +140,7 @@ const handleClose = () => {
 <style scoped lang="scss">
 .mapas {
   display: grid;
-  
+  /* grid-template-columns: repeat(auto-fit,minmax(400px,1fr)); */
 }
 
 .mapas img {

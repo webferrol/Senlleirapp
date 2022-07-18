@@ -1,0 +1,1 @@
+1. Cuando se busca con el buscador al cambiar de pestañas pueden desaparecer árboles al estar filtrado

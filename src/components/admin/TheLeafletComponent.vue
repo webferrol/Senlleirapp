@@ -16,20 +16,19 @@
                 :attribution="tileProvider.attribution"
                 layer-type="base"
             />
-            <l-marker 
-                v-for="(loc,index) in location" 
-                :key="index" 
-                :lat-lng="loc.latLong" 
-                @click="handleRoute(loc)"
-            >
-                <l-icon  
-                    :icon-url="iconUrl" 
-                    :icon-size="iconSize"
-                />
-                <l-tooltip>
-                    {{loc.tooltip}}
-                </l-tooltip>                
-            </l-marker>
+            <div v-if="location.length">
+                <l-marker
+                    v-for="(loc,index) in location"
+                    :key="index"
+                    :lat-lng="loc.latLong"
+                    @click="handleRoute(loc)"
+                >
+                    <l-icon
+                        :icon-url="iconUrl"
+                        :icon-size="iconSize"
+                    />
+                </l-marker>
+            </div>
         </l-map>
     </div>
 </template>
@@ -41,7 +40,7 @@ import { useRouter } from "vue-router";
 import { reactive } from "vue";
 
 const router = useRouter();
-const props = defineProps({
+defineProps({
     /**
      * {Number} Zoom con que arranca la aplicación. Valor máximo 17
      */
@@ -86,10 +85,16 @@ const props = defineProps({
         type: Array,
         default: () => [42.877702, -8.5508146]
     },
+    /**
+     * {String} URL del icono que se presenta como marcador
+     */
     iconUrl: {
         type: String,
         default: "./arbolito.png",
     },
+    /**
+     * {Array} width y height del icono que se presenta como marcador
+     */
     iconSize:{
         type: Array,
         default: [80,80],
@@ -115,8 +120,9 @@ const tileProviders = reactive([
 const handleRoute = ({route}) => {
    
   if (route) {
-    router.push(route)
+    router.push(route);    
   }
+  return;
 }
 
 </script>

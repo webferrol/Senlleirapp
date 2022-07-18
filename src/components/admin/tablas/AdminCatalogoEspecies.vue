@@ -96,21 +96,21 @@
         />
         <label for="descripcion">Descrición</label>
         <textarea
-          type="text"
+          rows="10"
           v-model="especie.origen_descripcion"
           id="descripcion"
           placeholder="Descripción"
         ></textarea>
         <label for="usos">Usos</label>
         <textarea
-          type="text"
+          rows="10"
           v-model="especie.usos"
           id="usos"
           placeholder="Usos"
         ></textarea>
         <label for="curiosidades">Curiosidades</label>
         <textarea
-          type="text"
+          rows="10"
           v-model="especie.curiosidades"
           id="curiosidades"
           placeholder="Curiosidades"

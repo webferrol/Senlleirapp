@@ -64,6 +64,26 @@ export const getDocument = async (collectionName,reference) => {
 }
 
 /**
+ * @param {String} $collectionName Nombre de la colección
+ * @param {String} $orderBy Campo por el que se desea ordenar la búsqueda
+ * @returns {Array} Array de objetos con los documentos encontrados o array vacío si no encuentra nada
+ */
+ export const getDocumentsOrderBy = async ($collectionName,$orderBy) => {
+  
+  const tmp = [];
+  const q = query(collection(db, $collectionName), orderBy($orderBy));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    tmp.push({
+      idDoc: doc.id,
+      ...doc.data(), //DESTRUCTURING
+    });
+  });
+  return tmp;
+}
+
+
+/**
  * 
  * @param {string} collection nombre de la colección en la que se encuentra el archivo que se va a borrar
  * @param {string} uid código del documento que vamos a borrar  
