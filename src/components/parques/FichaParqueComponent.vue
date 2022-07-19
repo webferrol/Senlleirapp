@@ -93,7 +93,7 @@
 
     </article>
   </div>
-  <SkeletonFichaTecnicaVue v-else="images.lenght"></SkeletonFichaTecnicaVue>
+  <SkeletonFichaTecnicaVue v-else></SkeletonFichaTecnicaVue>
 
 
 </template>
