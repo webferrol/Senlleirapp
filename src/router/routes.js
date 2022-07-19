@@ -24,7 +24,7 @@ export const routes = [
   {
     path: "/catalogo-senlleiras",
     name: "CatalogoSenlleiras",
-    meta:{
+    meta: {
       title: 'Catálogo de Senlleiras'
     },
     component: () => import("@/views/senlleira/CatalogoSenlleirasView.vue"),
@@ -32,7 +32,7 @@ export const routes = [
   {
     path: "/mapa-parques",
     name: "MapaParques",
-    meta:{
+    meta: {
       title: 'Mapa dos parques',
     },
     component: () => import("@/views/parques/ParkMapView.vue"),
@@ -40,7 +40,7 @@ export const routes = [
   {
     path: "/mapa-senlleiras",
     name: "MapaSenlleiras",
-    meta:{
+    meta: {
       title: 'Catálogo de Senlleiras',
     },
     component: () => import("@/views/senlleira/SenlleiraMapView.vue"),
@@ -56,7 +56,7 @@ export const routes = [
   {
     path: "/catalogo-de-parques",
     name: "CatalogoDeParques",
-    meta:{
+    meta: {
       title: 'Catálogo de parques',
     },
     component: () => import("@/views/parques/CatalogoParques.vue"),
@@ -64,7 +64,7 @@ export const routes = [
   {
     path: "/ficha-parque/:idDoc",
     name: "FichaParque",
-    meta:{
+    meta: {
       title: 'Ficha do parque',
     },
     component: () => import("@/views/parques/FichaParqueView.vue"),
@@ -72,20 +72,32 @@ export const routes = [
   {
     path: "/ficha-tecnica/:idDoc",
     name: "FichaSenlleira",
-    meta:{
+    meta: {
       title: 'Ficha da senlleira',
     },
     component: () => import("@/views/senlleira/FichaSenlleiraView.vue"),
   },
   {
+    path: "/ficha-especie/:idDoc",
+    name: "FichaEspecie",
+    meta: {
+      title: 'Ficha da especie',
+    },
+    component: () => import("@/views/especies/FichaEspecieView.vue"),
+<<<<<<< HEAD
+  },
+
+  {
+=======
+>>>>>>> 9744e2d25f93301cdf66a750f893f86b3ff6e7b6
     path: "/ajustes",
     name: "ajustes",
-    meta:{
+    meta: {
       title: 'Axustes e infromación',
     },
     component: () => import("@/views/ajustes/Ajustes.vue"),
   },
-  
+
   // ADMIN
   {
     path: "/admin",

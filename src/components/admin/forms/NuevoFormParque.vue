@@ -99,7 +99,6 @@ import TheUploader from "@/components/theUploader.vue";
 import { provide, reactive, ref } from "vue";
 import { updateDocument } from "../../../hook/firestore.hook";
 import { useStoreParques } from "@/stores/parques";
-
 import TheGeolocationComponent from "../../componentesGenerales/TheGeolocationComponent.vue";
 import "@/assets/css/admin-css/cargarEspecies.css";
 
@@ -112,6 +111,12 @@ const cerrarForm = () => {
 
 //Llamada al store
 const store = useStoreParques();
+const loaded = ref(false);
+const spinner = ref(false);
+const error = ref({
+  error: false,
+  message: "",
+});
 let tmpImagenes = null;
 let tmpMapa = null;
 
@@ -129,28 +134,14 @@ const form = reactive({
   urlmapa: "", //La ruta de la foto del mapa
 });
 
+//Importar componente de geolocalizacion
 provide ('form', form)
-
-const error = ref({
-  error: false,
-  message: "",
-});
-
-const spinner = ref(false);
-
-const loaded = ref(false);
 
 const reset = () => {
   form.tipoloxia = "";
   form.localizacion = "";
   form.lat = "";
-
   form.lng = "";
-
-  form.lng = "";
-
-  form.lng = "";
-
   form.cronoloxia = "";
   form.carballeira = false;
   form.superficie = "";
