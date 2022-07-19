@@ -1,12 +1,14 @@
 // importar libreria de pinia. sirve para centralizar toda la información
 import { defineStore } from 'pinia';
-import {addDocument,getDocumentsOrderBy, deleteDocument} from '@/hook/firestore.hook';
+import { subirFicheros, listAllUrls, getDownURL, deleteFile, listAllRef } from '@/hook/storage.hook';
+import {addDocument,getDocumentsOrderBy, deleteDocument, updateDocument} from '@/hook/firestore.hook';
 
 
 export const useStoreEspecies = defineStore('especies', {
     state: () => {
         return {
             especies: [],
+            imagenes: [],
         }
 
     },
@@ -17,38 +19,44 @@ export const useStoreEspecies = defineStore('especies', {
             await subirFicheros(file, `${ref}/${file.name}`)
         },
 
+        async borrarFoto(ref) {
+            await deleteFile(ref);
+        },
+
+
         //funcion para cargar los datos de firestore 
         async setEspecies() {
             if (this.especies.length > 0) //Por si el array ya está cargado
                 return;
             this.especies = await getDocumentsOrderBy('Especies','genero');
+           
         },
         async loadEspecie(form){
-            const data = await addDocument("Especies", form);
-            const docRef = {idDoc: docRef.id, ...form};
-            this.especies.push(docRef)
-            if (data.id && fileName.length) {
-                const storage_ref = `Especies/${data.id}/${fileName}`;
-                await updateDocument(data.id, "Especies", {'storage_ref': storage_ref });//creado la referencia
-            } 
-            return data;
-            //this.especies.push(form);
-            // this.especies = [];
+            const docRef = await addDocument("Especies", form);
+            const data = { idDoc: docRef.id, ...form };
+            this.especies.push(data)
+            return docRef;
 
-        
-        },
+                },
 
-        async google_url_save(id,storage_ref){
-            //console.log(storage_ref)
-            const url = await getDownURL(storage_ref);
-            //console.log(url)
-            await updateDocument(id, "Especies", {'google_url': url });//creado la referencia
-        },
         async borrarEspecie(ID){
+            //Borrar fotos del storage
+            const refs = await listAllRef(`especies/${ID}`);
+            refs.forEach(async(ref)=>{
+                await deleteFile(ref);
+            });
+
             await deleteDocument("Especies", ID);
             const indice = this.especies.findIndex(especie => (especie.idDoc === ID));
             this.especies.splice(indice,1);
-        }
+        },
+
+        async listarImagenes(uid) {
+            this.imagenes = await listAllUrls(uid)
+        },
+        
+
+
     }
 })
 
