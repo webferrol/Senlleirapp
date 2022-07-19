@@ -10,8 +10,8 @@
     font-size: clamp(1.4rem, 4vw, 2rem);
     text-transform: uppercase;
     font-weight: 600;
-    color: black;
-    background-color: white;
+    color: var(--coloroscuro);
+    background-color: var(--colorclaro);
   }
 
 .catalogo-especies-component{
@@ -21,7 +21,7 @@
     width: 95%;
     max-width: 900px;
     margin: auto;
-    background-color: white;
+    background-color: var(--colorclaro);
 }
 
 /* Boton y fondopull */

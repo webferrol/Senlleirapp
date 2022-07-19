@@ -1,4 +1,4 @@
-.container-galeria {
+.container-galeria-especie {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
@@ -35,16 +35,16 @@
 }
 
 @media screen and (min-width: 475px) {
-  .container-galeria {
+  .container-galeria-especie {
     grid-template-columns: repeat(3, auto);
   }
-  .container-galeria .skeleton-especie {
+  .container-galeria-especie .skeleton-especie {
     width: 100%;
   }
 }
 
 @media screen and (min-width: 650px) {
-  .container-galeria {
+  .container-galeria-especie {
     grid-template-columns: repeat(3, auto);
   }
   .container-galeria .skeleton-especie {
@@ -54,10 +54,10 @@
   }
 }
 @media screen and (min-width: 900px) {
-  .container-galeria {
+  .container-galeria-especie {
     grid-template-columns: repeat(4, auto);
   }
-  .container-galeria .skeleton-especie {
+  .container-galeria-espcie .skeleton-especie {
     width: 200px;
     max-width: 200px;
   }

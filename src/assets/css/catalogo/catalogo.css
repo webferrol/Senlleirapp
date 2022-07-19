@@ -10,8 +10,8 @@
   font-size: clamp(1.4rem, 4vw, 2rem);
   text-transform: uppercase;
   font-weight: 600;
-  color: black;
-  background-color: white;
+  color: var(--coloroscuro);
+  background-color: var(--colorclaro);
 }
 /* Estructura del catalogo */
   .catalogo-section-component {
@@ -23,7 +23,7 @@
     align-items: center;
     padding: .5rem .25rem;
     gap:  .5rem .25rem;
-    background-color: white;
+    background-color: var(--colorclaro);
   }
   /* ficha */
   .arbol-catalogo-element {
@@ -57,6 +57,7 @@
     padding: .5rem;
     align-items: flex-start;
     min-height: 4rem;
+    background-color: var(--colorclaro2);
   }
   .arbol-catalogo-element .arbol-info span {
     display: grid;
@@ -79,7 +80,7 @@
     font-size: 1.1rem;
   }
   .arbol-info .lugar {
-    color: rgba(49, 49, 49, 1);
+    color: var(--coloroscuro);
     font-size: 0.8rem;
   }
   .arbol-catalogo-element .arbol-info h3 {
@@ -98,7 +99,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: black;
+    color: var(--coloroscuro);
     font-weight: 500;
   }
 

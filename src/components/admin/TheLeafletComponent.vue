@@ -21,12 +21,15 @@
                     v-for="(loc,index) in location"
                     :key="index"
                     :lat-lng="loc.latLong"
-                    @click="handleRoute(loc)"
+                    @dblclick="handleRoute(loc)"
                 >
                     <l-icon
                         :icon-url="iconUrl"
                         :icon-size="iconSize"
                     />
+                    <l-tooltip>
+                    <div style="font-weight: bold">{{loc.tooltip}}</div><div style="color: red">Doble click para vela ficha</div>
+                </l-tooltip>  
                 </l-marker>
             </div>
         </l-map>

@@ -112,7 +112,5 @@ window.addEventListener(
   }
 );
 
-
-
 </script>
 
