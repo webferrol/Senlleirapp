@@ -48,7 +48,7 @@
             <icono :icon="['fa', 'arrows-left-right']"></icono>
             <h3>Diametro</h3>
           </span>
-          <p>{{ senlleira.diametroTronco }} metros</p>
+          <p>{{ senlleira.diametro }} metros</p>
         </div>
       </div>
       <!-- DESCRIPCION -->

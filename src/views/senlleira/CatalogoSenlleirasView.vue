@@ -20,9 +20,13 @@
           <icono :icon="['fa', 'leaf']"></icono>
           <h3 class="arbol-nombre">{{ senlleira.nombre_arbol }}</h3>
         </span>
-        <span class="lugar">
+        <span class="lugar" v-if="senlleira.ubicacion_parque">
           <icono :icon="['fa', 'location-dot']"></icono>
           <h4 class="arbol-lugar">{{ senlleira.ubicacion_parque }}</h4>
+        </span>
+        <span class="lugar" v-if="senlleira.senlleira">
+          <icono :icon="['fa', 'registered']"></icono>
+          <h4 class="arbol-lugar">Rexistrado no catálogo oficial</h4>
         </span>
       </div>
     </div>
@@ -57,8 +61,8 @@ const cargarDatosFicha = async (doc) => {
 
 
 const loadPage = async () => {
-    await storeArbores.setSenlleiras();
-    storeGeneral.filtrarArbores();
+    await storeArbores.setSenlleirasPropostas();
+    storeGeneral.filtraArboresSenlleirasPropostas();
     loadGaleria.value = true;
 }
 loadPage();

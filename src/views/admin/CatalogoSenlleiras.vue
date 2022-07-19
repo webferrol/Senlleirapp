@@ -1,6 +1,6 @@
 <template>
 <div>
-    <button class="admin-add" @click="añadirSenlleira = true"> Añadir Senlleira</button>
+    <button class="admin-add" @click="añadirSenlleira = true"> Engadir árbore</button>
     <AdminCatalogoSenlleirasVue></AdminCatalogoSenlleirasVue>
     <FormAdminSenlleiraVue v-if="añadirSenlleira" @cerrarForm="añadirSenlleira = false"></FormAdminSenlleiraVue>
 </div>

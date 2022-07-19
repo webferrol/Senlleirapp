@@ -2,7 +2,7 @@
   <div  v-if="loading && coordsParques.length">
     <the-leaflet-component       
         icon-url="../../parques.png"
-        lMapHeight="88vh" :location="coordsParques"></the-leaflet-component>
+        lMapHeight="calc(100vh - 70px)" :location="coordsParques"></the-leaflet-component>
     <nav class="nav-mapa">
       <router-link to="/mapa-senlleiras">Senlleiras</router-link>
       <router-link to="/mapa-parques">Parques</router-link>

@@ -54,7 +54,9 @@
   
   .arbol-catalogo-element .arbol-info {
     display: grid;
-    padding: 0.2rem;
+    padding: .5rem;
+    align-items: flex-start;
+    min-height: 4rem;
   }
   .arbol-catalogo-element .arbol-info span {
     display: grid;
