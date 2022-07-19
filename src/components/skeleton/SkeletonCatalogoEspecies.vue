@@ -1,5 +1,5 @@
 <template>
-    <div class="container-galeria">
+    <div class="container-galeria-especie">
         <div class="skeleton-especie" v-for="especie in 32">
             <div class="skeleton-h2"></div>
             <div class="skeleton-p"></div>

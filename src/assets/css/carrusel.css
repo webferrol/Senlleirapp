@@ -5,7 +5,7 @@
   width: 100%;
   max-width: 1080px;
   height: 400px;
-  background-color: var(--colorsecundario);
+  background-color: var(--colorsprincipal3);
 }
 /*Zona de imágenes*/
 .carrusel-images-galery {
@@ -26,7 +26,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  background-color: var(--colorsecundario);
+  background-color: var(--colorprincipal3);
 }
 
 /* Botones avance/retroceso carrusel  */

@@ -17,10 +17,10 @@
   grid-template-rows: repeat(auto-fit, minmax(auto, 1fr));
   margin: auto;
   max-height: 100vh;
-  width: 90vw;
+  width: 90%;
   max-width: 900px;
   overflow-x: hidden;
-  background-color: white;
+  background-color: var(--colorclaro2);
   animation: aparicionForm .2s linear;
 }
 /* CABECERA*/
@@ -53,7 +53,7 @@
   font-weight: 600;
   width: calc(100% - 25px);
   padding: 0.25rem;
-  color: white;
+  color: var(--colorclaro);
 }
 
 /* titulo caracteristicas */
@@ -66,7 +66,7 @@
 }
 
 .ficha-tecnica .h2-ficha-tecnica {
-  color: black;
+  color: var(--coloroscuro);
   text-align: center;
   font-size: 1.1rem;
   text-transform: uppercase;
@@ -83,6 +83,7 @@
   padding: 0 1rem;
   line-height: 1.5rem;
   margin-top: 10px;
+  color: var(--coloroscuro)
 }
 .caracteristicas-ficha-tecnica div {
   display: grid;
@@ -118,6 +119,7 @@
   text-align: center;
   font-weight: 800;
   font-size: 1.1rem;
+  color: var(--coloroscuro)
 }
 
 .descripcion-ficha-tecnica p {
@@ -127,6 +129,7 @@
   line-height:1.5;
   white-space: pre-line;
   text-indent: 10px;
+  color: var(--coloroscuro)
 }
 
 @media screen and (min-width: 700px) {

@@ -1,4 +1,5 @@
 export const routes = [
+  // Secciones
   {
     path: "/",
     name: "inicio",
@@ -75,6 +76,14 @@ export const routes = [
       title: 'Ficha da senlleira',
     },
     component: () => import("@/views/senlleira/FichaSenlleiraView.vue"),
+  },
+  {
+    path: "/ajustes",
+    name: "ajustes",
+    meta:{
+      title: 'Axustes e infromación',
+    },
+    component: () => import("@/views/ajustes/Ajustes.vue"),
   },
   
   // ADMIN
