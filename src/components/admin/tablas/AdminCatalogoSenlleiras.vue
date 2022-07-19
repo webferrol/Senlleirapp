@@ -184,7 +184,7 @@
         </fieldset>
         <fieldset class="data-senlleira">
         <legend>Esta árbore é</legend>
-        <div class="senlleira-arbore">
+        <div class="senlleira-arbore" style="display: flex;gap: .1rem;">
           <input
             type="checkbox"
             v-model="arbore.senlleira"
@@ -192,6 +192,8 @@
             id="senlleira"
           />&nbsp;
           <label class="form-label" for="senlleira">Senlleira</label>
+        </div>
+        <div class="senlleira-arbore" style="display: flex;gap: .1rem;">
           <input
             type="checkbox"
             v-model="arbore.propuesta_senlleira"
@@ -203,13 +205,13 @@
           >
         </div>
       </fieldset>
-       <div class="senlleira-arbore">
+       <div class="senlleira-arbore" style="display: flex;gap: .1rem;">
         <input
               type="checkbox"
               v-model="arbore.publicado"
               name="pubicado"
               id="publicado"
-            />&nbsp;
+            />
             <label class="form-label" for="publicado">Publicado</label>
       </div>
         <fieldset class="editar-images">
