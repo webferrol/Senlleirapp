@@ -84,9 +84,12 @@ export const routes = [
       title: 'Ficha da especie',
     },
     component: () => import("@/views/especies/FichaEspecieView.vue"),
+<<<<<<< HEAD
   },
 
   {
+=======
+>>>>>>> 9744e2d25f93301cdf66a750f893f86b3ff6e7b6
     path: "/ajustes",
     name: "ajustes",
     meta: {
