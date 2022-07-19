@@ -15,6 +15,7 @@
 }
 /* Estructura del catalogo */
   .catalogo-section-component {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: fit-content;
@@ -56,13 +57,14 @@
     display: grid;
     padding: .5rem;
     align-items: flex-start;
-    min-height: 4rem;
+    min-height: 72px;
+    padding-bottom: 30px;
     background-color: var(--colorclaro2);
   }
   .arbol-catalogo-element .arbol-info span {
     display: grid;
-    grid-template-columns: 20px 1fr;
-    gap: .5rem .25rem;
+    grid-template-columns: 17px 1fr;
+    gap: .5rem .20rem;
     justify-content: center;
     align-items: center;
     font-size: 1.1rem;
@@ -71,8 +73,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
   }
 
   .arbol-info .arbol {
@@ -83,6 +85,7 @@
     color: var(--coloroscuro);
     font-size: 0.8rem;
   }
+
   .arbol-catalogo-element .arbol-info h3 {
     font-size: 0.9rem;
     line-height: 0.9rem;
@@ -102,6 +105,28 @@
     color: var(--coloroscuro);
     font-weight: 500;
   }
+
+  /* categoria */
+  .categoria{
+    position: absolute;
+    bottom:2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem;
+    width: 100%;
+    padding: .2rem;
+    background-color: var(--colorprincipal);
+  }
+  .categoria svg{
+    width: 15px;
+    height: 15px;
+  }
+  .categoria h4{
+    font-size: .8rem;
+    font-weight: 800;
+  }
+
 
   @media screen and (max-width: 480px) {
     .arbol-catalogo-element .imagen-catalogo{

@@ -24,11 +24,11 @@
           <icono :icon="['fa', 'location-dot']"></icono>
           <h4 class="arbol-lugar">{{ senlleira.ubicacion_parque }}</h4>
         </span>
-        <span class="lugar" v-if="senlleira.senlleira">
-          <icono :icon="['fa', 'registered']"></icono>
-          <h4 class="arbol-lugar">Rexistrado no catálogo oficial</h4>
-        </span>
       </div>
+      <span class="categoria" v-if="senlleira.senlleira">
+          <icono :icon="['fa', 'registered']"></icono>
+          <h4 class="arbol-categoria">Rexistrado no catálogo oficial</h4>
+        </span>
     </div>
   </div>
   <SkeletonCatalogoVue v-else="loadGaleria"></SkeletonCatalogoVue>

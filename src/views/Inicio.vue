@@ -24,6 +24,7 @@ import ParticipaVue from '../components/componentesGenerales/Participa.vue';
 import ExploraVue from '../components/componentesGenerales/Explora.vue';
 import NoticiaCarballoVue from '../components/componentesGenerales/NoticiaCarballo.vue';
 
+
 const senlleiros = ref([]);
 
 
