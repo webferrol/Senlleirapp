@@ -78,21 +78,18 @@ export const routes = [
     component: () => import("@/views/senlleira/FichaSenlleiraView.vue"),
   },
   {
-<<<<<<< HEAD
     path: "/ficha-especie/:idDoc",
     name: "FichaEspecie",
     meta:{
       title: 'Ficha da especie',
     },
     component: () => import("@/views/especies/FichaEspecieView.vue"),
-=======
     path: "/ajustes",
     name: "ajustes",
     meta:{
       title: 'Axustes e infromación',
     },
     component: () => import("@/views/ajustes/Ajustes.vue"),
->>>>>>> 71aaa421c0a5d6779cfa06c7194cd19ea82aa9b3
   },
   
   // ADMIN
