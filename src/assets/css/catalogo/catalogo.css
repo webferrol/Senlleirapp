@@ -61,6 +61,10 @@
     padding-bottom: 30px;
     background-color: var(--colorclaro2);
   }
+  .arbol-catalogo-element .parque-info{
+    padding: .5rem;
+    min-height: auto;
+  }
   .arbol-catalogo-element .arbol-info span {
     display: grid;
     grid-template-columns: 17px 1fr;
