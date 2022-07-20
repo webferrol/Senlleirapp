@@ -57,7 +57,7 @@
     display: grid;
     padding: .5rem;
     align-items: flex-start;
-    min-height: 72px;
+    min-height: 75px;
     padding-bottom: 30px;
     background-color: var(--colorclaro2);
   }
@@ -115,7 +115,7 @@
     align-items: center;
     gap: .25rem;
     width: 100%;
-    padding: .2rem;
+    padding: .1rem;
     background-color: var(--colorprincipal);
   }
   .categoria svg{
@@ -123,22 +123,26 @@
     height: 15px;
   }
   .categoria h4{
-    font-size: .8rem;
+    font-size: .7rem;
     font-weight: 800;
   }
 
+  
+  @media screen and (max-width: 400px) {
+    .arbol-catalogo-element .imagen-catalogo{
+      height:  200px;
+    }
+    .arbol-catalogo-element .arbol-info{
+      padding-bottom: 33px;
+    }
 
+  }
   @media screen and (max-width: 480px) {
     .arbol-catalogo-element .imagen-catalogo{
       height:  266px;
     }
   }
-  @media screen and (max-width: 400px) {
-    .arbol-catalogo-element .imagen-catalogo{
-      height:  200px;
-    }
-  }
-
+  
   @media screen and (min-width: 700px ) {
     .catalogo-section-component{
       width: 90vw;
