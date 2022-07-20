@@ -241,7 +241,6 @@ const form = reactive({
   genero: "",
   especie: "",
   idEspecie: 0,
-  idParque: 0,
   ubicacion_parque: "",
   numero_mapa: 0, //Es el número que aparece en el mapa de cada uno de los árboles
   zona_geografica: "", //Conxo por exemplo, onde está situado
@@ -284,7 +283,6 @@ const reset = () => {
   form.genero = "";
   form.especie = "";
   form.idEspecie = 0;
-  form.idParque = 0;
   form.numero_mapa = 0;
   form.ubicacion_parque = "";
   form.zona_geografica = ""; //Conxo por exemplo, onde está situado
