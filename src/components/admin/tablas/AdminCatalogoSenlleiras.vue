@@ -4,6 +4,7 @@
   <div><span class="lenda">Pu: Publicado</span>. Se o árbore aparece en zoa pública</div>
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
+      <td></td>
       <td>Nomes (científico,galego,castelán)</td>
       <td>Nome da árbore</td>
       <td title="Propuesta senlleira"><span class="lenda">P</span></td>
@@ -21,6 +22,7 @@
       v-for="(arbore, index) in storeArbores.arbores"
       :key="index"
     >
+      <td>{{(index+1)}}</td>
       <td>{{ arbore.genero }} {{ arbore.especie }},{{ arbore.nombre_comun }},{{ arbore.nombre_comun_gal }}</td>
       <td>{{arbore.nombre_arbol}}</td>
       <td>{{arbore?.propuesta_senlleira}}</td>

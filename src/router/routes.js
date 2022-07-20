@@ -110,6 +110,14 @@ export const routes = [
     component: () => import("@/views/admin/CatalogoEspecies.vue"),
   },
   {
+    path: "/programadores",
+    name: "Programadores",
+    meta: {
+      requiereAuth: true,
+    },
+    component: () => import("@/views/admin/ProgramadoresView.vue"),
+  },
+  {
     path: "/admin-senlleira",
     name: "admin-senlleira",
     meta: {

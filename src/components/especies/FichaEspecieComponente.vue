@@ -1,16 +1,20 @@
 <template>
-  <div v-if="images.length" class="container-ficha-tecnica">
+  <div v-if="images" class="container-ficha-tecnica">
     <article class="ficha-tecnica">
       <div class="cabecera-ficha-tecnica">
         <!-- TITULO -->
         <h2 class="ficha-tittle">{{ especie.nombre_comun }}</h2>
-        <icono
-          class="cerrar-ficha-tecnica"
-          :icon="['fa', 'xmark']"
-          @click="handleClose"
-        ></icono>
+        <icono class="cerrar-ficha-tecnica" :icon="['fa', 'xmark']" @click="handleClose"></icono>
       </div>
-      <CarruselImagenesVue :images="images"></CarruselImagenesVue>
+      <div v-if="images.length">
+        <section class="componente-stories" style="padding:1rem">
+          <div class="stories-navigator">
+            <article class="component-arbol" v-for="(item, index) in images" :key="index">
+              <img :src="item" alt="">
+            </article>
+          </div>
+        </section>
+      </div>
       <!-- CARACTERISTICAS -->
       <div>
         <h2 class="h2-ficha-tecnica">Características</h2>
@@ -70,23 +74,23 @@
       </div>
     </article>
   </div>
-  <SkeletonFichaTecnicaVue v-else="images.lenght"></SkeletonFichaTecnicaVue>
+  <SkeletonFichaTecnicaVue v-else></SkeletonFichaTecnicaVue>
 </template>
 
-<script setup >
-import CarruselImagenesVue from "@/components/CarruselImagenes.vue";
+<script setup>
 import "@/assets/css/catalogo/ficha-tecnica.css";
+import "@/assets/css/carruselStories.css"
 import SkeletonFichaTecnicaVue from '../skeleton/SkeletonFichaTecnica.vue';
 
 const props = defineProps({
-     images: {
+  images: {
     type: Array,
     default: [],
   },
 
-    especie: {
-        type: Object,
-    }
+  especie: {
+    type: Object,
+  }
 
 });
 
