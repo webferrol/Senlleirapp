@@ -118,6 +118,7 @@
           type="number"
           v-model="arbore.altura"
           id="altura"
+          step="any"
           placeholder="Altura (metros)"
         />
         <label for="diametroTronco"> Diámetro do tronco</label>
@@ -273,7 +274,7 @@ const borrarArbore = async () => {
 };
 
 const deleteImage = (ref) => {
-  const texto = prompt(`para eliminar la foto comnfirme la referencia: \n ${ref}`);
+  const texto = prompt(`para eliminar la foto comnfirme la referencia:  ${ref}`);
   if (texto === ref) {
     storeArbores.borrarFoto(ref);
   }

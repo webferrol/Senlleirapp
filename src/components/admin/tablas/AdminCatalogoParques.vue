@@ -267,7 +267,7 @@ const gestionMapa = async (file) =>{
 //Eliminar la imagen en el modulo de editar
 
 const deleteImage = (ref) => {
-  const texto = prompt(`para eliminar a foto confirme a referencia:\n ${ref}`);
+  const texto = prompt(`para eliminar a foto confirme a referencia:${ref}`);
   if (texto === ref) {
     storeParques.borrarFoto(ref);
   }

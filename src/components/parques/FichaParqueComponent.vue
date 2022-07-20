@@ -59,12 +59,14 @@
         <hr class="line-ficha-tecnica" />
         <h2 class="h2-ficha-tecnica">Localización</h2>
       </div>
-      <TheLeafletComponent
-        v-if="parque.lat"
-        icon-url="../parques.png"
-        :location="location"
-        :centrado="[parque.lat, parque.lng]"
-      />
+      <div class="mapa-global">
+        <TheLeafletComponent
+          v-if="parque.lat"
+          icon-url="../parques.png"
+          :location="location"
+          :centrado="[parque.lat, parque.lng]"
+        />
+      </div>
 
       <!-- LISTADO DE ÁRBOLES -->
       <div>
@@ -138,6 +140,10 @@ const handleClose = () => {
 </script>
 
 <style scoped lang="scss">
+.mapa-global{
+  padding: 15px;
+}
+
 .mapas {
   display: grid;
   /* grid-template-columns: repeat(auto-fit,minmax(400px,1fr)); */
