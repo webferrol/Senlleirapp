@@ -54,7 +54,7 @@
       <!-- DESCRIPCION -->
       <div>
         <hr class="line-ficha-tecnica" />
-        <h2 class="h2-ficha-tecnica">Descripción</h2>
+        <h2 class="h2-ficha-tecnica">Descrición</h2>
       </div>
       <div class="descripcion-ficha-tecnica">
         <p>{{ senlleira.descripcion }}</p>
