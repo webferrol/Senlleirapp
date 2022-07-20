@@ -71,10 +71,10 @@
         ></textarea>
 
         <span class="label_nombre">
-          <theUploader
+          <TheUploader
             :required="true"
             @emitirFichero="especieFoto"
-          ></theUploader>
+          ></TheUploader>
           <div
             style="
               color: white;
@@ -96,7 +96,7 @@
 </template>
 
 <script setup>
-import TheUploader from "@/components/theUploader.vue";
+import TheUploader from "@/components/TheUploader.vue";
 import { reactive, ref } from "vue";
 import { updateDocument } from "../../../hook/firestore.hook";
 import { useStoreEspecies } from "@/stores/especies";

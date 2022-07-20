@@ -161,7 +161,7 @@
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import "@/assets/css/admin-css/cargarEspecies.css";
-import TheUploader from "@/components/theUploader.vue";
+import TheUploader from "@/components/TheUploader.vue";
 import { useStoreParques } from "../../../stores/parques";
 import { updateDocument } from "../../../hook/firestore.hook";
 import { listAllRef, getDownURL } from "../../../hook/storage.hook";

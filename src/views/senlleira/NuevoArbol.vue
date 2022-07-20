@@ -55,7 +55,7 @@
         <div class="senlleira-localizacion">
           <label for="zona" class="form-label"> Zona xeográfica <span data-set="Campo obligatorio"
               class="required-user">*</span></label>
-          <input v-model="form.zona_geografica" type="text" name="zona" id="zona" placeholder="Zona geográfica" />
+          <input v-model="form.zona_geografica" type="text" name="zona" id="zona" placeholder="Lugar onde esta a arbore" />
           <label for="localizacion" class="form-label"> Ubicación <span data-set="Campo obligatorio"
               class="required-user">*</span></label>
           <select @change="form.ubicacion_parque = $event.target.options[$event.target.selectedIndex].text"
@@ -72,7 +72,7 @@
       <fieldset>
         <legend> Imaxe </legend>
         <div class="data-senlleira">
-          <theUploader @emitirFichero="gestionFoto"></theUploader>
+          <TheUploader @emitirFichero="gestionFoto"></TheUploader>
           <div v-if="error.error" class="error"> {{ error.message }} </div>
         </div>
         <div v-if="spinner" class="spinner"> Cargando.... </div>
@@ -83,7 +83,7 @@
 </template>
 
 <script setup>
-import TheUploader from '@/components/theUploader.vue';
+import TheUploader from '@/components/TheUploader.vue';
 import { useStoreArbores } from '@/stores/arbores';
 import { useStoreEspecies } from '@/stores/especies';
 import { useStoreParques } from '@/stores/parques';

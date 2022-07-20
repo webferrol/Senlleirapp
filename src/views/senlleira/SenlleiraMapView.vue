@@ -30,7 +30,7 @@ const store = useStoreArbores();
     await store.setSenlleirasPropostas();
 
     store.arbores = store.arboresSenlleirasPropostas.map(arbore => ({
-      tooltip: arbore?.nombre_comun ?? '',
+      tooltip: arbore?.nombre_comun_gal ?? '',
       route: { name: 'FichaSenlleira', params: { idDoc: arbore.idDoc } },
       latLong: [Number(arbore?.lat), Number(arbore?.lng)],
     }))

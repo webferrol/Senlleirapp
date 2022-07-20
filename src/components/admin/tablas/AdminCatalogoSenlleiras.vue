@@ -225,7 +225,7 @@
             </button>
           </div>
         </fieldset>
-        <theUploader @emitirFichero="gestionFoto"></theUploader>
+        <TheUploader @emitirFichero="gestionFoto"></TheUploader>
 
         <input
           type="submit"
@@ -242,7 +242,7 @@
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import "@/assets/css/admin-css/cargarEspecies.css";
-import TheUploader from "@/components/theUploader.vue";
+import TheUploader from "@/components/TheUploader.vue";
 import { useStoreArbores } from "../../../stores/arbores";
 import { useStoreParques } from "@/stores/parques";
 import { updateDocument } from "../../../hook/firestore.hook";
