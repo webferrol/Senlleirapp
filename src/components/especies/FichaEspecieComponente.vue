@@ -3,7 +3,7 @@
     <article class="ficha-tecnica">
       <div class="cabecera-ficha-tecnica">
         <!-- TITULO -->
-        <h2 class="ficha-tittle">{{ especie.nombre_comun }}</h2>
+        <h2 class="ficha-tittle">{{ especie.nombre_comun_gal}}</h2>
         <icono class="cerrar-ficha-tecnica" :icon="['fa', 'xmark']" @click="handleClose"></icono>
       </div>
       <div v-if="images.length">
@@ -27,20 +27,21 @@
           </span>
           <p>{{ especie.genero }} {{ especie.especie }}</p>
         </div>
-        <div>
+          <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'leaf']"></icono>
-            <h4>Nombre</h4>
-          </span>
-          <p>{{ especie.nombre_comun }}</p>
-        </div>
-        <div>
-          <span class="subtitle-caracteristica">
-            <icono :icon="['fa', 'leaf']"></icono>
-            <h4>Nome Comun</h4>
+            <h4>Nome Galego</h4>
           </span>
           <p>{{ especie.nombre_comun_gal }}</p>
         </div>
+        <div>
+          <span class="subtitle-caracteristica">
+            <icono :icon="['fa', 'leaf']"></icono>
+            <h4>Nome Castelán</h4>
+          </span>
+          <p>{{ especie.nombre_comun }}</p>
+        </div>
+      
       </div>
       <!-- USOS -->
       <div>
