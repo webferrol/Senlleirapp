@@ -71,10 +71,10 @@
         ></textarea>
 
         <span class="label_nombre">
-          <theUploader
+          <TheUploader
             :required="true"
             @emitirFichero="especieFoto"
-          ></theUploader>
+          ></TheUploader>
           <div
             style="
               color: white;

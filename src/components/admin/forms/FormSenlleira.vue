@@ -197,10 +197,10 @@
       <fieldset>
         <legend>Imaxe</legend>
         <div class="data-senlleira">
-          <theUploader
+          <TheUploader
             :required="true"
             @emitirFichero="gestionFoto"
-          ></theUploader>
+          ></TheUploader>
           <div
             style="
               color: white;
