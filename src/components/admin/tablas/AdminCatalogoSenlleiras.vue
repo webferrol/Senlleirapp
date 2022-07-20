@@ -121,7 +121,7 @@
           step="any"
           placeholder="Altura (metros)"
         />
-        <label for="diametroTronco"> Diámetro do tronco</label>
+        <label for="diametroTronco"> Perímetro do tronco</label>
         <input
           type="number"
           step="any"

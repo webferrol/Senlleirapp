@@ -69,6 +69,19 @@
           <TheGeolocationComponent></TheGeolocationComponent>
         </div>
       </fieldset>
+      <fieldset class="data-senlleira">
+        <legend>Descripción</legend>
+        <div class="senlleira-localizacion">
+          <textarea
+            v-model="form.descripcion"
+            name="descripcion"
+            id="descripcion"
+            cols="30"
+            rows="10"
+            placeholder="breve descripción da árbore"
+          ></textarea>
+        </div>
+      </fieldset>
       <fieldset>
         <legend> Imaxe </legend>
         <div class="data-senlleira">

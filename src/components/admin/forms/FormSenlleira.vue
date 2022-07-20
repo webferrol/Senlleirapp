@@ -90,7 +90,7 @@
           />
 
           <label for="perimetroTronco" class="form-label"
-            >Diámetro do tronco (metros)</label
+            >Perímetro do tronco (metros)</label
           >
           <input
             id="perimetroTronco"

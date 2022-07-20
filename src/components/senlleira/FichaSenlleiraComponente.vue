@@ -21,6 +21,13 @@
           </span>
           <p>{{ senlleira.genero }} {{ senlleira.especie }}</p>
         </div>
+         <div>
+          <span class="subtitle-caracteristica">
+            <icono :icon="['fa', 'signature']"></icono>
+            <h4>Nome galego</h4>
+          </span>
+          <p>{{ senlleira.nombre_comun_gal }}</p>
+        </div>
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'signature']"></icono>
@@ -28,13 +35,7 @@
           </span>
           <p>{{ senlleira.nombre_comun }}</p>
         </div>
-        <div>
-          <span class="subtitle-caracteristica">
-            <icono :icon="['fa', 'signature']"></icono>
-            <h4>Nome galego</h4>
-          </span>
-          <p>{{ senlleira.nombre_comun_gal }}</p>
-        </div>
+       
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'up-long']"></icono>
@@ -46,7 +47,7 @@
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'arrows-left-right']"></icono>
-            <h3>Diametro</h3>
+            <h3>Perímetro</h3>
           </span>
           <p>{{ senlleira.diametro }} metros</p>
         </div>
