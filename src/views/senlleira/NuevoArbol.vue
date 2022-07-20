@@ -45,11 +45,12 @@
           <label for="zona" class="form-label"> Zona xeográfica <span data-set="Campo obligatorio"
               class="required-user">*</span></label>
           <input v-model="form.zona_geografica" type="text" name="zona" id="zona" placeholder="Zona geográfica" />
-          <label for="localizacion" class="form-label"> Ubicación parque <span data-set="Campo obligatorio"
+          <label for="localizacion" class="form-label"> Ubicación <span data-set="Campo obligatorio"
               class="required-user">*</span></label>
           <select @change="form.ubicacion_parque = $event.target.options[$event.target.selectedIndex].text"
             v-model="form.idParque" name="localizacion" id="localizacion" required>
             <option value="#"></option>
+            <option value="#">Otros</option>
             <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
               {{ valor.nombre }} </option>
           </select>
