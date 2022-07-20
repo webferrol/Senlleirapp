@@ -24,18 +24,17 @@
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'signature']"></icono>
-            <h4>Nome galego</h4>
-          </span>
-          <p>{{ senlleira.nombre_comun_gal }}</p>
-        </div>
-        <div>
-          <span class="subtitle-caracteristica">
-            <icono :icon="['fa', 'signature']"></icono>
             <h4>Nome castelán</h4>
           </span>
           <p>{{ senlleira.nombre_comun }}</p>
         </div>
-        
+        <div>
+          <span class="subtitle-caracteristica">
+            <icono :icon="['fa', 'signature']"></icono>
+            <h4>Nome galego</h4>
+          </span>
+          <p>{{ senlleira.nombre_comun_gal }}</p>
+        </div>
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'up-long']"></icono>
@@ -47,7 +46,7 @@
         <div>
           <span class="subtitle-caracteristica">
             <icono :icon="['fa', 'arrows-left-right']"></icono>
-            <h3>Perímetro</h3>
+            <h3>Diametro</h3>
           </span>
           <p>{{ senlleira.diametro }} metros</p>
         </div>
@@ -55,7 +54,7 @@
       <!-- DESCRIPCION -->
       <div>
         <hr class="line-ficha-tecnica" />
-        <h2 class="h2-ficha-tecnica">Descripción</h2>
+        <h2 class="h2-ficha-tecnica">Descrición</h2>
       </div>
       <div class="descripcion-ficha-tecnica">
         <p>{{ senlleira.descripcion }}</p>
@@ -66,13 +65,11 @@
         <hr class="line-ficha-tecnica" />
         <h2 class="h2-ficha-tecnica">Localización</h2>
       </div>
-      <div class="mapa-global">
-        <TheLeafletComponent
-        v-if="senlleira?.lat && senlleira?.lng"
-        icon-url="../arbolito.png"
-        :location="location"
-        :centrado="[Number(senlleira?.lat), Number(senlleira?.lng)]" />
-      </div>
+      <TheLeafletComponent 
+      v-if="senlleira?.lat && senlleira?.lng" 
+      icon-url="../arbolito.png" 
+      :location="location"
+      :centrado="[Number(senlleira?.lat), Number(senlleira?.lng)]" />
     </article>
   </div>
 </template>

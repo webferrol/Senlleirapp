@@ -3,6 +3,9 @@ export const routes = [
   {
     path: "/",
     name: "inicio",
+    meta: {
+      title: 'Senlleira'
+    },
     component: () => import("../views/Inicio.vue"),
   },
   {

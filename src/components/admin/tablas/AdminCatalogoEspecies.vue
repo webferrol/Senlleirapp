@@ -126,7 +126,7 @@
           </div>
         </fieldset>
         <div>Fotos de la especie</div>
-        <theUploader @emitirFichero="gestionFoto"></theUploader>
+        <TheUploader @emitirFichero="gestionFoto"></TheUploader>
 
 
         <input type="submit" value="Editar Especies" />
@@ -141,7 +141,7 @@ import { ref } from "vue";
 import { useStoreEspecies } from "@/stores/especies.js";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import { updateDocument } from "../../../hook/firestore.hook";
-import TheUploader from "@/components/theUploader.vue";
+import TheUploader from "@/components/TheUploader.vue";
 import { listAllRef, getDownURL } from "../../../hook/storage.hook";
 
 const storeSpecies = useStoreEspecies();
