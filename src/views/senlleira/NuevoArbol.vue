@@ -1,7 +1,18 @@
 <template>
-  <div class="formsenlleira" v-if="loaded">Cargando...</div>
 
   <div class="form-container">
+    <div class="succes-public" v-if="exito">
+      <div  class="alert-succes">
+        <div v-if="loaded" class="cargando">
+        <p>Cargando...</p>
+        </div>
+        <div class="exito" v-else="loaded">
+          <p class="txt">A árbore foi publicada correctamente</p>
+          <button class="btn-succes" @click="exito = false">Volver ao inicio</button>
+        </div>
+      </div>
+    </div>
+
     <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
       <span class="h2-background">
         <h2>Engadir nova árbore </h2>
@@ -54,8 +65,8 @@
             <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
               {{ valor.nombre }} </option>
           </select>
-            <!-- geolocalizacion -->
-            <TheGeolocationComponent></TheGeolocationComponent>  
+          <!-- geolocalizacion -->
+          <TheGeolocationComponent></TheGeolocationComponent>
         </div>
       </fieldset>
       <fieldset>
@@ -76,7 +87,7 @@ import TheUploader from '@/components/TheUploader.vue';
 import { useStoreArbores } from '@/stores/arbores';
 import { useStoreEspecies } from '@/stores/especies';
 import { useStoreParques } from '@/stores/parques';
-import { reactive, ref,provide } from 'vue';
+import { reactive, ref, provide } from 'vue';
 import "@/assets/css/componente/form-arbol.css";
 import TheGeolocationComponent from '../../components/componentesGenerales/TheGeolocationComponent.vue';
 
@@ -111,7 +122,7 @@ const form = reactive({
   publicado: false,
 });
 
-provide('form',form)
+provide('form', form)
 
 // indica todos los errores que se presenten
 const error = ref({
@@ -120,7 +131,10 @@ const error = ref({
 });
 let tmpImagenes = null;
 const spinner = ref(false);
-const loaded = ref(false);
+
+
+const loaded = ref(true);
+const exito = ref(false)
 
 
 // esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito
@@ -146,8 +160,8 @@ const gestionFoto = async (imagenes) => {
   }
 };
 const handleSubmit = async () => {
-disabled.value = true;
-const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
+  disabled.value = true;
+  const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
   if (storeEspecies.especies.length) {
     try {
       if (tmpImagenes === null || !tmpImagenes.length)
@@ -160,7 +174,7 @@ const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
       try {
         error.value = { error: false, message: "" };
         spinner.value = true;
-        loaded.value = true;
+        exito.value = true;
         for (let i = 0, tam = tmpImagenes.length; i < tam; i++) {
           await storeArbores.subirFoto({
             ref: `Arbores/${data.id}`,
@@ -169,14 +183,15 @@ const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
         }
         // guardamos url
         const ref = `Arbores/${data.id}/${tmpImagenes[0].name}`;
-        await storeArbores.google_url_save(data.id,ref);
+        await storeArbores.google_url_save(data.id, ref);
         spinner.value = false;
       } catch (e) {
         error.value.error = true;
         error.value.message = e.message;
       } finally {
         loaded.value = false;
-        disabled.value=false;
+        disabled.value = false;
+
       }
     }
   }

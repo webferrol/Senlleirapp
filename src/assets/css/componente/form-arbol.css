@@ -1,3 +1,63 @@
+/* Notificacion arbore publicada correctamente */
+.succes-public{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    right: 0;
+    z-index: 6;
+    background-color: rgba(200,200,200, .5);
+    backdrop-filter: blur(3px);
+    width: 100%;
+    height: calc(100vh - 40px);
+}
+.alert-succes{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 600px;
+    height: 80%;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 5px;
+}
+.cargando{
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+.exito{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+    .succes-public .txt{
+        display: flex;
+        font-size: 1.4rem;
+        width: fit-content;
+        height: fit-content;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .btn-succes{
+    margin: .5rem auto;
+    width: 250px;
+    text-align: center;
+    height: fit-content;
+    border-radius: 2px;
+    padding: .5rem 1rem;
+    background-color: var(--colorprincipal);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    }
+
 .form-container{
     position: fixed;
     display: flex;
@@ -19,7 +79,7 @@
     height: fit-content;
     max-height: calc(100vh - 43px);
     margin: auto;
-    z-index: 999;
+    z-index: 5;
     /* border: 2px solid rgba(205,205,205, .4); */
     background-color: white;
     display: grid;
@@ -69,6 +129,7 @@
     #senlleiras .h2-background a svg{
         width: 25px;
         height: 25px;
+        padding: 0;
     }
 
 /* Diseño estructura formulario */
