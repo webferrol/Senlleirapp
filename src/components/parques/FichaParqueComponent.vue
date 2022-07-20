@@ -69,25 +69,7 @@
       </div>
 
       <!-- LISTADO DE ÁRBOLES -->
-      <div>
-        <hr class="line-ficha-tecnica" />
-        <h2 class="h2-ficha-tecnica">Listado de árbores en parques</h2>
-      </div>
-
-      <div class="component-container">
-        <router-link
-          v-for="arbore in arbores"
-          :key="arbore.idDoc"
-          :to="{ name: 'FichaSenlleira', params: { idDoc: arbore.idDoc } }"
-        >
-           <span class="numero-mapa" v-if="arbore?.numero_mapa>0" >
-            {{arbore?.numero_mapa}}</span>
-          <span class="texto-arbol"
-            >{{ arbore?.nombre_comun_gal }} (Especie: {{ arbore?.genero }}
-            {{ arbore?.especie }} )</span
-          >
-        </router-link>
-      </div>
+      <!-- Se elimino router link con el listado de arboles -->
 
       <div class="mapas">
         <img v-for="mapa in mapas" :key="mapa" :src="mapa" :alt="mapa">
