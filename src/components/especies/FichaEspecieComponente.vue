@@ -29,14 +29,14 @@
         </div>
           <div>
           <span class="subtitle-caracteristica">
-            <icono :icon="['fa', 'leaf']"></icono>
+            <icono :icon="['fa', 'signature']"></icono>
             <h4>Nome Galego</h4>
           </span>
           <p>{{ especie.nombre_comun_gal }}</p>
         </div>
         <div>
           <span class="subtitle-caracteristica">
-            <icono :icon="['fa', 'leaf']"></icono>
+            <icono :icon="['fa', 'signature']"></icono>
             <h4>Nome Castelán</h4>
           </span>
           <p>{{ especie.nombre_comun }}</p>
