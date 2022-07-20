@@ -28,10 +28,12 @@ import { faSignature } from "@fortawesome/free-solid-svg-icons";
 import { faUpLong } from "@fortawesome/free-solid-svg-icons";
 import { faArrowsLeftRight } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarDays } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 export const iconsLibrary = () => {
     library.add(
         faHome,
+        faUser,
         faMap,
         faImages,
         faUpload,

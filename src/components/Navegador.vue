@@ -58,6 +58,12 @@
                   <p>Especies</p>
                 </router-link>
               </li>
+              <li>
+                <router-link to="/catalogo-propostas">
+                  <icono :icon="['fa', 'user']"></icono>
+                  <p>Cidadanía</p>
+                </router-link>
+              </li>
 
             </ul>
           </div>
