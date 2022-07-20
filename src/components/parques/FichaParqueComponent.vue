@@ -70,6 +70,19 @@
 
       <!-- LISTADO DE ÁRBOLES -->
       <!-- Se elimino router link con el listado de arboles -->
+      <ul v-if="parque?.especies">
+        <li v-for="especie of parque.especies" :key="especie.idDoc">
+         <router-link :to="{
+          name:'FichaEspecie',
+          params:{
+            idDoc: especie.idDoc,
+          }
+         }">
+          {{especie.numero}}.{{especie.genero}} {{especie.genero}}
+         </router-link>
+          
+        </li>
+      </ul>
 
       <div class="mapas">
         <img v-for="mapa in mapas" :key="mapa" :src="mapa" :alt="mapa">
@@ -96,11 +109,6 @@ const props = defineProps({
 
   parque: {
     type: Object,
-  },
-
-  arbores: {
-    type: Array,
-    default: [],
   },
   mapas: {
     type: Array,

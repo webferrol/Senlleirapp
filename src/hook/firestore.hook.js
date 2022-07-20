@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc, query, where,orderBy } from "firebase/firestore";
+import { collection, addDoc, getDocs, getDoc, deleteDoc, deleteField, doc, updateDoc, query, where,orderBy } from "firebase/firestore";
 
 /**
  *
@@ -102,6 +102,17 @@ export const deleteDocument = async (collection, uid) => {
  */
  export const updateDocument = async(uid = "Qsdfa1fdfdfjdfdj", collection = "especies", data = {}) => await updateDoc(doc(db, collection, uid), data);
 
+ /**
+ * Función que elimina un campo de la bae de datos
+ * 
+ * @param {string} uid optiene la uid del documento
+ * @param {string} collection 
+ * @param {string} field
+ */
+ export const deleteFieldDocument = async(uid = "Qsdfa1fdfdfjdfdj", collection = "especies", field = 'campo') => await updateDoc(
+  doc(db, collection, uid),
+  {especies: deleteField()});
+ 
 
 /**
  * 

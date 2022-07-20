@@ -5,7 +5,6 @@
     v-else
     :parque="parque" 
     :images="imagenesFichaTecnica"
-    :arbores="arbores" 
     :mapas="mapas" ></FichaParqueComponent>
       
   </div>
@@ -19,7 +18,6 @@ import { getDocument,busquedaDatos } from "../../hook/firestore.hook";
 import FichaParqueComponent from "../../components/parques/FichaParqueComponent.vue";
 const route = useRoute();
 const parque = ref({});
-const arbores = ref([]);
 const error = ref({
   errorBool: false,
   code: 0,
@@ -36,8 +34,6 @@ const mapas = ref([]);
   try {
     error.value.errorBool = false;
     parque.value = await getDocument("Parques", route.params.idDoc);
-    //console.log(parque.value)
-    arbores.value = await busquedaDatos("Arbores","idParque",route.params.idDoc);
     //console.log(arbores.value)
     if (!parque.value)
       throw new Error(

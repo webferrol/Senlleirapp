@@ -27,7 +27,14 @@
             @click="handleDelete({ id: parque.idDoc, name: parque.nombre })"
           >
           </icono>
-
+          <router-link :to="{
+            name:'AdminParqueEspecies',
+            params:{
+              idDoc:parque.idDoc,
+            }
+          }">
+            Asignar Especies
+          </router-link>
           <button @click="editar(parque)">
             <icono :icon="['fa', 'pen']" to="/arb-:id"></icono>
           </button>

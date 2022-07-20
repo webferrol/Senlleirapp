@@ -129,6 +129,14 @@ export const routes = [
     component: () => import("@/views/admin/CatalogoSenlleiras.vue"),
   },
   {
+    path: "/admin-parque-especies/:idDoc",
+    name: "AdminParqueEspecies",
+    meta: {
+      requiereAuth: true,
+    },
+    component: () => import("@/views/admin/ParqueEspeciesView.vue"),
+  },
+  {
     path: "/admin-parque",
     name: "admin-parque",
     component: () => import("@/views/admin/CatalogoParques.vue"),
