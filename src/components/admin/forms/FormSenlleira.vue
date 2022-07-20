@@ -221,7 +221,7 @@
 
 <script setup>
 import { provide, reactive, ref } from "vue";
-import TheUploader from "@/components/theUploader.vue";
+import TheUploader from "@/components/TheUploader.vue";
 import { useStoreArbores } from "@/stores/arbores";
 import { useStoreParques } from "@/stores/parques";
 import { useStoreEspecies } from "@/stores/especies";

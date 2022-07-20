@@ -72,7 +72,7 @@
 </template>
 
 <script setup>
-import TheUploader from '@/components/theUploader.vue';
+import TheUploader from '@/components/TheUploader.vue';
 import { useStoreArbores } from '@/stores/arbores';
 import { useStoreEspecies } from '@/stores/especies';
 import { useStoreParques } from '@/stores/parques';
