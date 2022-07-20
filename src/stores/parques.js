@@ -2,6 +2,7 @@
 import { defineStore } from 'pinia';
 import { subirFicheros, listAllUrls, getDownURL, deleteFile, listAllRef } from '@/hook/storage.hook';
 import { addDocument, getDocuments, deleteDocument, updateDocument } from '@/hook/firestore.hook';
+import { useStoreEspecies } from './especies';
 
 
 export const useStoreParques = defineStore('parques', {
@@ -35,8 +36,12 @@ export const useStoreParques = defineStore('parques', {
             this.parques.push(data)
             return docRef;
         },
-
-
+        //Obtenemos todas las especies de la base de datos
+        async getAllEspecies(){
+            const store = useStoreEspecies();
+            await store.setEspecies();
+            return store.especies;
+        },
         async borrarParque(ID) {
             //Borrar fotos del storage
             const refs = await listAllRef(`parques/${ID}`);
