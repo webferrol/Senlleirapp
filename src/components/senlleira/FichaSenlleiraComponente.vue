@@ -66,11 +66,13 @@
         <hr class="line-ficha-tecnica" />
         <h2 class="h2-ficha-tecnica">Localización</h2>
       </div>
-      <TheLeafletComponent 
-      v-if="senlleira?.lat && senlleira?.lng" 
-      icon-url="../arbolito.png" 
-      :location="location"
-      :centrado="[Number(senlleira?.lat), Number(senlleira?.lng)]" />
+      <div class="mapa-global">
+        <TheLeafletComponent
+        v-if="senlleira?.lat && senlleira?.lng"
+        icon-url="../arbolito.png"
+        :location="location"
+        :centrado="[Number(senlleira?.lat), Number(senlleira?.lng)]" />
+      </div>
     </article>
   </div>
 </template>
