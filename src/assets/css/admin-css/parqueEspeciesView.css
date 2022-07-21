@@ -11,10 +11,11 @@ h1 {
     margin-top: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
 }
 .formulario {
   display: grid;
-  grid-template-columns: auto 280px 1fr;
+  grid-template-columns: 20px 280px 40px;
   gap: 5px;
 }
 

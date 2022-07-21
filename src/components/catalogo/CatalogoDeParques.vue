@@ -50,6 +50,7 @@ const cargarDatosFicha = async (doc) => {
 
 const loadPage = async () => {
     await storeParques.setParques();
+    // await storeParques.getDownloadURL();
     storeGeneral.filtrarParques();
     loadGaleria.value = true;
 }
