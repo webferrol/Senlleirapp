@@ -1,5 +1,5 @@
 <template>
-  <div class="parque"  v-if="parque">
+  <div class="parque" v-if="parque">
     <h1 class="title">{{ parque.nombre }}</h1>
 
     <button class="button1" @click="handleUpdate">Asignar especies</button>
@@ -8,9 +8,7 @@
     <div class="listado">
       <ul>
         <li v-for="item of parque.especies" :key="item.idDoc">
-          <span class="item-nombre"
-            >{{ item.genero }} {{ item.especie }}</span
-          >
+          <span class="item-nombre">{{ item.genero }} {{ item.especie }}</span>
           <span class="item-numero">{{ item.numero }}</span>
         </li>
       </ul>
@@ -26,6 +24,7 @@
           />
         </div>
         <div>{{ item.genero }} {{ item.especie }}</div>
+
         <div class="input-number">
           <input type="number" v-model="item.number" class="number" />
         </div>
@@ -40,7 +39,7 @@ import { ref } from "vue";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
 import { useStoreParques } from "../../stores/parques";
-import "@/assets/css/admin-css/parqueEspeciesView.css"
+import "@/assets/css/admin-css/parqueEspeciesView.css";
 
 const route = useRoute();
 const router = useRouter();
