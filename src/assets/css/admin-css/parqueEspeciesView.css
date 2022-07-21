@@ -17,12 +17,10 @@ h1 {
   grid-template-columns: auto 280px 1fr;
   gap: 5px;
 }
-.number {
-  width: 4rem;
-}
+
 
 /* Botones */
-button {
+.button1 {
   background-color: var(--colorprincipal);
   border-radius: 8px;
   color: white;

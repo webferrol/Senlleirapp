@@ -2,8 +2,8 @@
   <div class="parque"  v-if="parque">
     <h1 class="title">{{ parque.nombre }}</h1>
 
-    <button @click="handleUpdate">Asignar especies</button>
-    <button @click="handleDelete">Eliminar especies</button>
+    <button class="button1" @click="handleUpdate">Asignar especies</button>
+    <button class="button1" @click="handleDelete">Eliminar especies</button>
 
     <div class="listado">
       <ul>
