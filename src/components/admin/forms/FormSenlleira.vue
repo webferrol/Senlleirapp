@@ -141,13 +141,6 @@
             </option>
           </select>
 
-          <label class="form-label" for="numero-mapa">Número en el mapa</label>
-          <input
-            name="numero-mapa"
-            id="numero-mapa"
-            type="number"
-            v-model.number="form.numero_mapa"
-          />
           <input type="hidden" v-model="form.ubicacion_parque" />
         </div>
       </fieldset>
@@ -242,8 +235,7 @@ const form = reactive({
   especie: "",
   idEspecie: 0,
   ubicacion_parque: "",
-  numero_mapa: 0, //Es el número que aparece en el mapa de cada uno de los árboles
-  zona_geografica: "", //Conxo por exemplo, onde está situado
+   zona_geografica: "", //Conxo por exemplo, onde está situado
   nombre_arbol: "",
   nombre_comun: "", //Nombre castellano
   nombre_comun_gal: "",
@@ -283,7 +275,6 @@ const reset = () => {
   form.genero = "";
   form.especie = "";
   form.idEspecie = 0;
-  form.numero_mapa = 0;
   form.ubicacion_parque = "";
   form.zona_geografica = ""; //Conxo por exemplo, onde está situado
   form.nombre_arbol = "";

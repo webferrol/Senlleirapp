@@ -151,13 +151,6 @@
             </option>
           </select>
 
-          <label for="numero-mapa">Número en el mapa</label>
-          <input
-            type="number"
-            v-model.number="arbore.numero_mapa"
-            id="numero-mapa"
-            placeholder="Número en el mapa"
-          />
           <label for="lat" class="form-label">Latitud</label>
           <input
             type="number"

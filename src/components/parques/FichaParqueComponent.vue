@@ -71,14 +71,14 @@
       <!-- LISTADO DE ÁRBOLES -->
       <!-- Se elimino router link con el listado de arboles -->
       <ul v-if="parque?.especies">
-        <li v-for="especie of parque.especies" :key="especie.idDoc">
+        <li class="component-container" v-for="especie of parque.especies" :key="especie.idDoc">
          <router-link :to="{
           name:'FichaEspecie',
           params:{
             idDoc: especie.idDoc,
           }
          }">
-          {{especie.numero}}.{{especie.genero}} {{especie.genero}}
+          <span class="numero-mapa">{{especie.numero}}</span>{{especie.genero}} {{especie.especie}}
          </router-link>
           
         </li>
@@ -136,6 +136,7 @@ const handleClose = () => {
 
 .mapas {
   display: grid;
+  margin-top: 20px;
   /* grid-template-columns: repeat(auto-fit,minmax(400px,1fr)); */
 }
 
@@ -144,19 +145,18 @@ const handleClose = () => {
 }
 
 .component-container {
-  padding: 0.5rem;
+  margin: 10px;
+  margin-top: 0;
+  margin-bottom: 0;
   background-color: bisque;
-  margin-top: 10px;
+ 
   a {
     text-decoration: none;
+    color: black;
     display: block;
     display: flex;
     gap: .5em;
   }
-}
-.component-element {
- 
-  margin-bottom: 3px;
 }
 
 .numero-mapa {
@@ -167,8 +167,8 @@ const handleClose = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
 }
 
 .texto-arbol {
