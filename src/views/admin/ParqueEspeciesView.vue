@@ -20,7 +20,7 @@
         <div>
           <input
             type="checkbox"
-            :checked="item.checked"
+            
             v-model="item.checked"
             :value="item.idDoc"
           />
@@ -35,7 +35,6 @@
 </template>
 
 <script setup>
-import { async } from "@firebase/util";
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
@@ -48,6 +47,15 @@ const store = useStoreParques();
 const especies = ref([]);
 const parque = ref(null);
 const form = ref([]);
+
+const handleChecked = idDoc => {
+  if(parque.value.especies){
+    const index = parque.value.especies.find(item=>item.idDoc===idDoc);
+    //console.log(index)
+    if(index) return {checked:true,numero:index.numero};
+  }
+  return {checked:false,numero:0};
+}
 
 const handleDelete = async () => {
   if (
@@ -95,12 +103,13 @@ const handleUpdate = async () => {
     parque.value = await store.getParque(route.params.idDoc);
     especies.value = await store.getAllEspecies();
     especies.value.forEach((item) => {
+      const esp = handleChecked(item.idDoc);
       form.value.push({
-        checked: false,
+        checked: esp.checked,
         idDoc: item.idDoc,
         genero: item.genero,
         especie: item.especie,
-        number: 0,
+        number: esp.numero,
       });
     });
     //console.log(form.value)
