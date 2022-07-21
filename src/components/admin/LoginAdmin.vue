@@ -34,7 +34,7 @@ import { reactive, ref } from "vue";
 const store = useStoreUsers();
 const form = reactive({
   email: "senlleira.app@gmail.com",
-  password: "sansus2022.",
+  password: "$4n$u$2022.?0br4",
 });
 
 const validacionError = ref(false);
