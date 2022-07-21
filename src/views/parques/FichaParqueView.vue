@@ -14,7 +14,7 @@
 import { useRoute } from "vue-router";
 import { ref } from "vue";
 import { listAllUrls } from "../../hook/storage.hook";
-import { getDocument,busquedaDatos } from "../../hook/firestore.hook";
+import { getDocument } from "../../hook/firestore.hook";
 import FichaParqueComponent from "../../components/parques/FichaParqueComponent.vue";
 const route = useRoute();
 const parque = ref({});

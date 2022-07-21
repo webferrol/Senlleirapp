@@ -12,19 +12,21 @@
           <span class="item-numero">{{ item.numero }}</span>
         </li>
       </ul>
+      <div class="fichas" v-if="fichas.length">
+          <img v-for="ficha of fichas" :key="ficha" :src="ficha" alt="">
+      </div>
     </div>
     <div class="container">
       <div class="formulario" v-for="item of form" :key="item.idDoc">
         <div>
           <input
             type="checkbox"
-            
+            class="checkbox"
             v-model="item.checked"
             :value="item.idDoc"
           />
-        </div>
-        <div>{{ item.genero }} {{ item.especie }}</div>
-
+          <span>{{ item.genero }} {{ item.especie }}</span>
+        </div>        
         <div class="input-number">
           <input type="number" v-model="item.number" class="number" />
         </div>
@@ -38,6 +40,7 @@ import { ref } from "vue";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
 import { useStoreParques } from "../../stores/parques";
+import { listAllUrls } from "@/hook/storage.hook";
 import "@/assets/css/admin-css/parqueEspeciesView.css";
 
 const route = useRoute();
@@ -46,6 +49,7 @@ const store = useStoreParques();
 const especies = ref([]);
 const parque = ref(null);
 const form = ref([]);
+const fichas = ref([]);
 
 const handleChecked = idDoc => {
   if(parque.value.especies){
@@ -101,6 +105,7 @@ const handleUpdate = async () => {
   try {
     parque.value = await store.getParque(route.params.idDoc);
     especies.value = await store.getAllEspecies();
+    fichas.value = await listAllUrls(`parquesficha/${route.params.idDoc}`);
     especies.value.forEach((item) => {
       const esp = handleChecked(item.idDoc);
       form.value.push({

@@ -7,16 +7,26 @@ h1 {
   font-weight: 700;
 }
 /* Listado de especies del parque */
-.container {
-    margin-top: 20px;
+.container{
+  margin-top: 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 5px;
+  grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
+  gap: .5em;
 }
 .formulario {
   display: grid;
-  grid-template-columns: 20px 280px 40px;
+  grid-template-columns: auto 1fr;
   gap: 5px;
+}
+
+.number{
+  width: 4rem;
+}
+.checkbox{
+  display: inline-block;
+  margin-right: .5rem;
+  transform: scale(2);
+  padding: 2rem;
 }
 
 
@@ -44,6 +54,10 @@ button:hover {
 
 .listado {
   display: flex;
+}
+.listado img{
+  width: 400px;
+  object-fit: cover;
 }
 ul {
   list-style-type: none;
