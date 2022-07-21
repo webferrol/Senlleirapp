@@ -33,8 +33,8 @@ import { reactive, ref } from "vue";
 // -> Inicializar pinia <- //
 const store = useStoreUsers();
 const form = reactive({
-  email: "senlleira.app@gmail.com",
-  password: "sansus2022.",
+  email: "",
+  password: "",
 });
 
 const validacionError = ref(false);
