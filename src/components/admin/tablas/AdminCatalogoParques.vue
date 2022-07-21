@@ -2,11 +2,8 @@
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
       <td>Nome</td>
-      <td>Tipoloxía</td>
       <td>Localización</td>
-      <td>Cronoloxía</td>
-      <td>Superficie</td>
-      <td>Descrición</td>
+      <td>Geolocalización</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono :icon="['fa', 'gears']"></icono>
@@ -20,11 +17,8 @@
       :key="index"
     >
       <td>{{ parque.nombre }}</td>
-      <td>{{ parque.tipoloxia }}</td>
       <td>{{ parque.localizacion }}</td>
-      <td>{{ parque.cronoloxia }}</td>
-      <td>{{ parque.superficie }}</td>
-      <td>{{ parque.descripcion }}</td>
+      <td>{{ parque.lat }},{{ parque.lng }}</td>
 
       <td class="tabla_administrativo_options">
         <span>
@@ -33,7 +27,14 @@
             @click="handleDelete({ id: parque.idDoc, name: parque.nombre })"
           >
           </icono>
-
+          <router-link :to="{
+            name:'AdminParqueEspecies',
+            params:{
+              idDoc:parque.idDoc,
+            }
+          }">
+            Asignar Especies
+          </router-link>
           <button @click="editar(parque)">
             <icono :icon="['fa', 'pen']" to="/arb-:id"></icono>
           </button>
@@ -103,6 +104,16 @@
           id="lng"
           placeholder="Longitud"
         />
+
+         <label for="carballeira" class="form-label">Carballeira</label>
+        <input
+          class="input-parque"
+          v-model="parque.carballeira"
+          type="checkbox"
+          name="carballeira"
+          id="carballeira"
+          
+        />
         <label for="cronoloxia" class="form-label">Cronoloxía</label>
         <input
           type="text"
@@ -121,6 +132,8 @@
         <textarea
           type="text"
           v-model="parque.descripcion"
+          cols="50"
+          rows="20"
           id="descripcion"
           placeholder="Descripción"
         ></textarea>
@@ -131,10 +144,14 @@
             <button class="btn-eliminar" @click="deleteImage(image.ref)">
               Eliminar
             </button>
+           
+            <input v-model="portada" name="portada" :value="image.ref" type="radio"> Portada
           </div>
         </fieldset>
-
+        <div>Fotos del parque</div>
         <theUploader @emitirFichero="gestionFoto"></theUploader>
+        <div>Mapa del parque</div>
+        <TheUploader @emitirFichero="gestionMapa"></TheUploader>
 
         <input
           type="submit"
@@ -151,7 +168,7 @@
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import "@/assets/css/admin-css/cargarEspecies.css";
-import TheUploader from "@/components/theUploader.vue";
+import TheUploader from "@/components/TheUploader.vue";
 import { useStoreParques } from "../../../stores/parques";
 import { updateDocument } from "../../../hook/firestore.hook";
 import { listAllRef, getDownURL } from "../../../hook/storage.hook";
@@ -161,6 +178,7 @@ storeParques.setParques().catch((error) => console.log(error));
 
 const nombre = ref("");
 const loading = ref(false);
+const portada = ref('');
 let itemDelete = null;
 
 const mostrar = ref(false);
@@ -184,6 +202,8 @@ const borrarParque = async () => {
 const parque = ref(null);
 const editar = async (par) => {
   const refs = await listAllRef(`parques/${par.idDoc}`);
+  const list = await listAllRef ( `parquesficha/${par.idDoc}`   );
+
   images.value = [];
   refs.forEach(async (ref) => {
     images.value.push({
@@ -191,12 +211,21 @@ const editar = async (par) => {
       src: await getDownURL(ref),
     });
   });
+  list.forEach(async (ref) => {
+    images.value.push({
+      ref,
+      src: await getDownURL(ref),
+    });
+  });
+
   parque.value = par;
 };
 const cambiarDatos = async (id) => {
   const docRef = await updateDocument(id, "Parques", parque.value);
   try {
     loading.value = true;
+     if(portada.value.length)
+      parque.value.urlficha = portada.value;
     await updateDocument(id, "Parques", parque.value);
   } catch (error) {
     console.log(error);
@@ -224,10 +253,28 @@ const gestionFoto = async (file) => {
   }
 };
 
+const gestionMapa = async (file) =>{
+  if (file){
+    const imagen = file [0];
+    try{
+      error.value = "";
+      await storeParques.subirParque({
+        ref: `parquesficha/${parque.value.idDoc}`,
+        file: imagen,
+      });
+
+    }catch (e){
+      console.log(e);
+      error.value = e.mensage;
+    }
+  }
+}
+
+
 //Eliminar la imagen en el modulo de editar
 
 const deleteImage = (ref) => {
-  const texto = prompt(`para eliminar la foto comnfirme la referencia:${ref}`);
+  const texto = prompt(`para eliminar a foto confirme a referencia:${ref}`);
   if (texto === ref) {
     storeParques.borrarFoto(ref);
   }

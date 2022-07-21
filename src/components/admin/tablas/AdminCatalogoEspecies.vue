@@ -1,13 +1,8 @@
 <template>
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
-      <td class="genero">Xénero</td>
-      <td class="especie">Especie</td>
-      <td class="nombre_comun">Nome Común (Castelan)</td>
-      <td class="nombre_comun_gal">Nome común (Galego)</td>
-      <td class="origen_descripcion">Orixe - Descrición</td>
-      <td class="usos">Usos</td>
-      <td class="curiosidades">Curiosidades</td>
+      <td class="genero">Especie</td>
+      <td class="nombre_comun">Nome Común (castelan/galego)</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono :icon="['fa', 'gears']"></icono>
@@ -20,13 +15,8 @@
       v-for="(especie, index) in storeSpecies.especies"
       :key="index"
     >
-      <td class="genero">{{ especie.genero }}</td>
-      <td class="especie">{{ especie.especie }}</td>
-      <td class="nombre_comun">{{ especie.nombre_comun }}</td>
-      <td class="nombre_comun_gal">{{ especie.nombre_comun_gal }}</td>
-      <td class="origen_descripcion">{{ especie.origen_descripcion }}</td>
-      <td class="usos">{{ especie.usos }}</td>
-      <td class="curiosidades">{{ especie.curiosidades }}</td>
+      <td class="genero">{{ especie.genero }} {{ especie.especie }}</td>
+      <td class="nombre_comun">{{ especie.nombre_comun }}/{{ especie.nombre_comun_gal }}</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono
@@ -106,25 +96,39 @@
         />
         <label for="descripcion">Descrición</label>
         <textarea
-          type="text"
+          rows="10"
           v-model="especie.origen_descripcion"
           id="descripcion"
           placeholder="Descripción"
         ></textarea>
         <label for="usos">Usos</label>
         <textarea
-          type="text"
+          rows="10"
           v-model="especie.usos"
           id="usos"
           placeholder="Usos"
         ></textarea>
         <label for="curiosidades">Curiosidades</label>
         <textarea
-          type="text"
+          rows="10"
           v-model="especie.curiosidades"
           id="curiosidades"
           placeholder="Curiosidades"
         ></textarea>
+
+        <fieldset class="editar-images">
+          <div class="images" v-for="image of images" :key="image.ref">
+            <img class="image" :src="image.src" alt="" />
+            <button class="btn-eliminar" @click="deleteImage(image.ref)">
+              Eliminar
+            </button>
+           
+          </div>
+        </fieldset>
+        <div>Fotos de la especie</div>
+        <TheUploader @emitirFichero="gestionFoto"></TheUploader>
+
+
         <input type="submit" value="Editar Especies" />
         <div v-if="loading">Gardando...</div>
       </fieldset>
@@ -137,6 +141,8 @@ import { ref } from "vue";
 import { useStoreEspecies } from "@/stores/especies.js";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import { updateDocument } from "../../../hook/firestore.hook";
+import TheUploader from "@/components/TheUploader.vue";
+import { listAllRef, getDownURL } from "../../../hook/storage.hook";
 
 const storeSpecies = useStoreEspecies();
 storeSpecies.setEspecies().catch((error) => console.log(error));
@@ -165,11 +171,21 @@ const borrarEspecie = async () => {
 // FUNCION PARA EDITAR ESPECIE
 
 const especie = ref(null);
-const editar = (esp) => {
-  //console.log(par);
+const editar = async (esp) => {
+ const refs = await listAllRef(`especies/${esp.idDoc}`);
+  images.value = [];
+  refs.forEach(async (ref) => {
+    images.value.push({
+      ref,
+      src: await getDownURL(ref),
+    });
+  });
+  
+ 
   especie.value = esp;
 };
 const cambiarDatos = async (id) => {
+  const docRef = await updateDocument(id, "Especies", especie.value);
   try {
     loading.value = true;
     await updateDocument(id, "Especies", especie.value);
@@ -180,6 +196,68 @@ const cambiarDatos = async (id) => {
   }
   especie.value = null;
 };
+
+const error = ref(false);
+
+const gestionFoto = async (file) => {
+  if (file) {
+    const imagen = file[0];
+    try {
+      error.value = "";
+      await storeSpecies.subirFoto({
+        ref: `especies/${especie.value.idDoc}`,
+        file: imagen,
+      });
+    } catch (e) {
+      console.log(e);
+      error.value = e.mensage;
+    }
+  }
+};
+
+//Eliminar la imagen en el modulo de editar
+
+const deleteImage = (ref) => {
+  const texto = prompt(`para eliminar a foto confirme a referencia: ${ref}`);
+  if (texto === ref) {
+    storeSpecies.borrarFoto(ref);
+  }
+};
+
+const images = ref([]);
+
+const cargarFotos = async () => {
+  try {
+    error.value = "";
+    images.value = await setImagenes("especies");
+  } catch (e) {
+    error.value = e;
+  }
+};
+
+cargarFotos();
+
+
 </script>
 
+<style scoped >
+.editar-images{
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.images {
+  display: flex;
+  flex-direction: column;
+}
 
+.image {
+  width: 10vw;
+}
+
+.btn-eliminar {
+  width: 70px;
+  height: 20px;
+  margin-top: .2em;
+}
+
+</style>

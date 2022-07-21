@@ -1,6 +1,6 @@
-::-webkit-scrollbar {
-    display: none;
-  }
+ .stories-navigator::-webkit-scrollbar{
+  display: none;
+}
 
   .componente-stories{
     margin: .4rem 0;
@@ -8,6 +8,8 @@
     display: grid;
     justify-content: center;
     align-items: center;
+    max-width: 1080px;
+    margin: auto;
 
   }
 
@@ -20,6 +22,7 @@
     line-height: 1rem;
     margin-left: 1rem;
     font-weight: 700;
+    color: var(--coloroscuro)
   }
     .componente-stories .tittle svg{
       color: green;
@@ -34,7 +37,7 @@
     grid-auto-flow: column;
     gap: .5rem;
     padding: .5rem 0;
-    overflow: scroll;
+    overflow-x: scroll;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
@@ -73,16 +76,17 @@
   
   .stories-navigator .arbol-name {
     position: absolute;
-    top: 80%;
+    bottom: 0;
     width: inherit;
     padding: .25rem;
     font-size: .9rem;
     line-height: .9rem;
     text-align: center;
     overflow: hidden;
-    /* white-space: nowrap; */
+    white-space: nowrap;
     text-overflow: ellipsis;
     color: white;
+    background-color: rgba(48, 46, 46,.5);
     font-weight: 900;
   }
 
@@ -91,3 +95,47 @@
    width: 1px;
    height: 180px;
   }
+
+  @media screen and (min-width:400px) {
+    .component-arbol{
+      width: 170px;
+      height: 280px;
+    }
+  }
+  @media screen and (min-width:900px) {
+    /* Diseño scrollbar */
+    .stories-navigator::-webkit-scrollbar{
+      display: initial;
+    }
+    .stories-navigator::-webkit-scrollbar-track{
+     background: rgba(200, 200, 200, .5);
+    }
+    .stories-navigator::-webkit-scrollbar-thumb{
+      background: var(--colorprincipal);
+      border-radius: 5px;
+     }
+    .stories-navigator{
+      gap: 1rem;
+    }
+    .component-arbol{
+      width: 290px;
+      height: 460px;
+    }
+    .stories-navigator .arbol-name{
+      padding: 1rem .5rem;
+      font-size: 1.4rem;
+    }
+    .component-arbol:nth-child(1){
+      margin-left: 0;
+    }
+    .component-arbol:last-child{
+      margin-right: 0;
+    }
+
+    /* Mozilla scrollbar */
+    .stories-navigator{
+      scrollbar-width: auto;
+      scrollbar-color: var(--colorprincipal);
+    }
+  }
+

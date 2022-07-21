@@ -1,6 +1,6 @@
 <template>
 <div>
-    <button class="admin-add" @click="añadirSenlleira = true"> Añadir Senlleira</button>
+    <button class="admin-add" @click="añadirSenlleira = true"> Añadir árbore</button>
     <AdminCatalogoSenlleirasVue></AdminCatalogoSenlleirasVue>
     <FormAdminSenlleiraVue v-if="añadirSenlleira" @cerrarForm="añadirSenlleira = false"></FormAdminSenlleiraVue>
 </div>
@@ -17,7 +17,7 @@ const añadirSenlleira = ref(false)
 </script>
 <style scoped>
 .admin-add{
-    background-color: var(--colorsecundario);
+    background-color: var(--colorprincipal);
     color: white;
     font-size: 1.2rem;
     margin: 1rem;

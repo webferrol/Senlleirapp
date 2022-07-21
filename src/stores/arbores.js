@@ -3,7 +3,8 @@ import { defineStore } from 'pinia';
 // importacion de la función del firebase para subir las fotos
 import { subirFicheros, listAllUrls,getDownURL, deleteFile,listAllRef} from '@/hook/storage.hook';
 
-import { addDocument, getDocuments, deleteDocument, updateDocument} from '@/hook/firestore.hook';
+import { addDocument, getDocumentsOrderBy,getDocumentsWhere,getPropuestaSenlleiras,deleteDocument, updateDocument} from '@/hook/firestore.hook';
+import { faThemeisle } from '@fortawesome/free-brands-svg-icons';
 
 
 
@@ -13,7 +14,9 @@ export const useStoreArbores = defineStore('arbores', {
     // other options...
     state: () => {
         return {
-            arbores: [],
+            arbores: [],//Todas as árbores. Senllerias, propostas_senlleiras, y cidadás
+            arboresSenlleirasPropostas: [], //Arbores que teñen a propiedade propuestas_senlleiras como true
+            arboresParticipacionCidada: [], //Arbores que teñen a propiedade propuestas_senlleiras como false
             imagenes: []
         }
     },
@@ -49,6 +52,16 @@ export const useStoreArbores = defineStore('arbores', {
             return data;
             
         },
+          /**
+         * Actualizamos un campo "google_url" del documento de Arbores con una estructura parecida a esta "`Arbores/${data.id}/${fileName}`"
+         * @param {*} storage_ref String 
+         */
+           async google_url_save(id,storage_ref){
+            //console.log(storage_ref)
+            const url = await getDownURL(storage_ref);
+            //console.log(url)
+            await updateDocument(id, "Arbores", {'google_url': url });//creado la referencia
+        },
 
         // funcion para eliminar el árbol(fotos e información)
         async borrarArbore(ID){
@@ -65,14 +78,47 @@ export const useStoreArbores = defineStore('arbores', {
         
         /**
          * 
-         * @returns array que contiene objetos con la informacion de las arboles senlleiras
+         * @returns array que contiene objetos con la informacion de las arboles en general
          */
         async setArbores(){
-            if (this.arbores.length > 0) //Por si el array ya está cargado
-                return
-            this.arbores = await getDocuments("Arbores") 
+            // if (this.arbores.length > 0) //Por si el array ya está cargado
+            //     return
+            this.arbores = await getDocumentsOrderBy("Arbores","genero");
            
         },
+        /**
+         * 
+         * @returns array que contiene objetos con la informacion de las arboles senlleiras
+         */
+         async setSenlleiras(){
+            // if (this.arbores.length > 0) //Por si el array ya está cargado
+            //     return
+            this.arbores = await getDocumentsWhere("Arbores","senlleira",true);
+           
+        },
+         /**
+         * 
+         * @returns {Array} Árbores propuestas como senlleiras
+         */
+          async setSenlleirasPropostas(){
+            if(this.arboresSenlleirasPropostas.length)
+                return;
+            this.arboresSenlleirasPropostas = await getPropuestaSenlleiras();
+        },
+         /**
+         * 
+         * @returns {Array} Árbores que a súa propiedade propuesta_senlleira e false. Es decir las que sube un usuario ordinario o el administrador lo pone como false
+         */
+          async setArboresParticipacionCidada(){
+            if(this.arboresParticipacionCidada.length)
+                return;
+            this.arboresParticipacionCidada = await getPropuestaSenlleiras(false);
+        },
+        async setImagenes(uid) {
+            this.imagenes = await listAllUrls(uid)
+             
+        },
+        
         async setImagenes(uid) {
             this.imagenes = await listAllUrls(uid)
              

@@ -11,6 +11,7 @@ const router = createRouter({
 
 // -> Antes de que entre a la ruta pasa por aqui con 'beforeEnter' <- //
 router.beforeEach((to,from,next)=>{
+  window.document.title = to.meta.title?to.meta.title:'Selleiras';
   // -> En este caso no se puede usar el store directamente fuera de los componentes, tiene que ser dentro de un metodo como este caso <- //
   const userStore = useStoreUsers();
   //console.log(userStore.user?.uid)

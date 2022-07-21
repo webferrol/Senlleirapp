@@ -8,7 +8,7 @@
       <!-- Botones area administrativa -->
       <ul class="nav-admin" v-if="userStore.user">
         <li>
-          <router-link to="/admin-senlleira">cat-senlleira</router-link>
+          <router-link to="/admin-senlleira">cat-arbores</router-link>
         </li>
         <li>
           <router-link to="/admin-especies">cat-especies</router-link>
@@ -29,8 +29,8 @@
         </li>
         <!-- Boton de búsqueda - CATALOGO -->
         <li class="buscador" v-if="$route.path.includes('catalogo')">
-          <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()" v-model.trim="storeGeneral.buscador"
-            @focus="animacionBuscar = true" @focusout="animacionBuscar = false">
+          <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()"
+            v-model.trim="storeGeneral.buscador" @focus="animacionBuscar = true" @focusout="animacionBuscar = false">
           <label for="buscar" :class="{ animacion: animacionBuscar }">
             <icono :icon="['fa', 'magnifying-glass']" @click="filtrar()"></icono>
           </label>
@@ -41,24 +41,30 @@
             <icono :icon="['fa', 'sliders']" @click="filtrarDatos"></icono>
             <ul class="elementos-filtro" :class="{ filtroOculto: !mostrarFiltro }">
               <li>
-                <router-link to="/catalogo">
-              <icono :icon="['fa', 'tree']"></icono>
-                <p>Árbores</p>
+                <router-link to="/catalogo-senlleiras">
+                  <icono :icon="['fa', 'tree']"></icono>
+                  <p>Árbores</p>
                 </router-link>
               </li>
               <li>
                 <router-link to="/catalogo-de-parques">
-                <icono :icon="['fa', 'tree-city']"></icono>
-                <p>Parques</p>
+                  <icono :icon="['fa', 'tree-city']"></icono>
+                  <p>Parques</p>
                 </router-link>
               </li>
               <li>
                 <router-link to="/catalogo-de-especies">
-              <icono :icon="['fa', 'leaf']"></icono>
-                <p>Especies</p>
+                  <icono :icon="['fa', 'leaf']"></icono>
+                  <p>Especies</p>
                 </router-link>
               </li>
-              
+              <li>
+                <router-link to="/catalogo-propostas">
+                  <icono :icon="['fa', 'user']"></icono>
+                  <p>Cidadanía</p>
+                </router-link>
+              </li>
+
             </ul>
           </div>
 
@@ -90,25 +96,27 @@ const filtrarDatos = () => {
 const storeGeneral = useStoreGeneral();
 const userStore = useStoreUsers();
 const filtrar = () => {
-  if(router.currentRoute.value.fullPath === '/catalogo') {
-    storeGeneral.filtrarArbores();
-  } else if (router.currentRoute.value.fullPath === '/catalogo-de-especies') {
+  if (router.currentRoute.value.fullPath === '/catalogo-propostas') {
+    storeGeneral.filtraArboresParticipacionCidada();
+    
+  } else if(router.currentRoute.value.fullPath === '/catalogo-senlleiras'){
+    storeGeneral.filtraArboresSenlleirasPropostas();
+  }
+  else if (router.currentRoute.value.fullPath === '/catalogo-de-especies') {
     storeGeneral.filtrarEspecies();
   } else {
     storeGeneral.filtrarParques();
   }
 };
 
-// window.addEventListener(
-//   "click",
-//   (e)=> {
-    
-//     if(!document.querySelector(".icon-filter-busqueda").contains(e.target)){
-//       mostrarFiltro.value = false
-//     } 
-//   }
-// );
-
+window.addEventListener(
+  "click",
+  (e) => {
+    if (document.querySelector(".icon-filter-busqueda") && !document.querySelector(".icon-filter-busqueda").contains(e.target)) {
+      mostrarFiltro.value = false
+    }
+  }
+);
 
 </script>
 

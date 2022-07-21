@@ -10,7 +10,7 @@
 
 #senlleiras{
     width: 95%;
-    max-width: 600px;
+    max-width: 800px;
     max-height: 90vh;
     border: 2px solid rgba(205,205,205, .4);
     background-color: rgba(205,205,205, .2);
@@ -52,6 +52,11 @@
         transform: translate(0, -50%);
         font-size: 2.5rem;
         cursor: pointer;
+    }
+
+    #senlleiras input[type=checkbox]{
+        width: 1.2rem;
+        height: 1.2rem;
     }
 
 .--localizacion{
@@ -99,6 +104,3 @@ legend{
     color: var(--colorclaro)
 }
 
-textarea{
-    resize: none;
-}
