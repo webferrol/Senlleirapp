@@ -23,7 +23,7 @@ import {
  * @returns query - Creates a new immutable instance of Query that is extended to also include additional query constraints.
  */
 export const initPage = async (collectionRef, field, pageSize) => {
-  await getDocs(query(
+  return await getDocs(query(
     collection(db,collectionRef),
     orderBy(field),
     limit(pageSize)));
@@ -38,7 +38,7 @@ export const initPage = async (collectionRef, field, pageSize) => {
  * @returns query - Creates a new immutable instance of Query that is extended to also include additional query constraints.
  */
 export const nextPage = async (collectionRef, field, lastDocSnap, pageSize) => {
-    await getDocs(query(
+    return await getDocs(query(
         collection(db,collectionRef),
         orderBy(field),
         startAfter(lastDocSnap),
@@ -54,7 +54,7 @@ export const nextPage = async (collectionRef, field, lastDocSnap, pageSize) => {
  * @returns query - Creates a new immutable instance of Query that is extended to also include additional query constraints.
  */
 export const previousPage = async (collectionRef,field,lastDocSnap,pageSize) => {
-    await getDocs(query(
+    return await getDocs(query(
         collection(db,collectionRef),
         orderBy(field),
         endBefore(lastDocSnap),

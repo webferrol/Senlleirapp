@@ -13,10 +13,10 @@ export const useStoreGeneral = defineStore('busqueda', {
             tmp:[],
             categoria: '',
             tmpPag: [],
-            limit: 6,
+            limit: 3,
             total: 0,
             actualPage: 1,
-            tmpPagQuery: []
+            tmpNext: []
         }
     },
     actions:{
@@ -51,19 +51,47 @@ export const useStoreGeneral = defineStore('busqueda', {
 
         // Paginación, conseguir paginar normal y el resultado de búsqueda
         async setPagination() {
-            const querySnapshot = await initPage("Parques", "idDoc", this.limit);
-            this.tmpPagQuery = querySnapshot.docs[querySnapshot.docs.length-1];
-            console.log(this.tmpPagQuery)
-            this.tmpPag = getDocsArray(querySnapshot);
+            const querySnapshot = await initPage("Arbores", "genero", this.limit);
+            console.log(querySnapshot)
+            this.tmpNext = querySnapshot.docs[querySnapshot.docs.length-1];
+            // console.log(this.tmpPagQuery)
+            // this.tmpPag = getDocsArray(querySnapshot);
+            querySnapshot.forEach((doc) => {
+                this.tmpPag.push({
+                    idDoc: doc.id,
+                    ...doc.data(),
+                })
+            })
         },
 
-        async setNextExperiences() {
-            console.log(lastWorkExperiences)
+        async setNextPagination() {
+            // console.log(lastWorkExperiences)
             this.actualPage++;
-            const lastWorkExperiences = await seekItemPage("Parques", this.tmpPag[this.tmpPag.length-1].ref);
-            const querySnapshot = await nextPage("Parques", "idDoc", lastWorkExperiences, this.limit);
-            this.tmpPag = getDocsArray(querySnapshot)
+            // const next = await seekItemPage("Arbores", this.tmpPag[this.tmpPag.length-1]);
+            // console.log(next)
+            // console.log(this.tmpPag[this.tmpPag.length-1])
+            const querySnapshot = await nextPage("Arbores", "genero", this.tmpNext, this.limit);
+            // console.log(querySnapshot)
+            querySnapshot.forEach((doc) => {
+                this.tmpPag.push({
+                    idDoc: doc.id,
+                    ...doc.data(),
+                })
+            })
+        },
 
-        }
+        // async setPreviousPagination() {
+        //     // this.actualPage--;
+        //     //Obtenemos el primer elemento doc mostrado en la paginación
+        //     // const previous = await seekItemPage("workExperience", this.workExperiences[0].ref);;           
+        //     // Construct a new query starting at this document
+        //     // const querySnapshot = await previousPage("workExperience",'dateEnd',this.tmpPagQuery,this.limit);
+        //     // querySnapshot.forEach((doc) => {
+        //     //     this.tmpPag.push({
+        //     //         idDoc: doc.id,
+        //     //         ...doc.data(),
+        //     //     })
+        //     // })
+        // },
     }
 })

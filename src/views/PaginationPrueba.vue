@@ -2,17 +2,18 @@
     <div>
             <h1>Paginación prueba</h1>
             <br>
-            
             <button @click="handlePaginar">ver</button> 
+            <br>
+            <div v-for="(arbol, index) in storeGeneral.tmpPag"
+      :key="index">
+                <pre>{{arbol}}</pre>
+            </div>
+            <br>
             <button @click="next">next</button>
             <button @click="previous">previous</button>
             <br>
 
-            <!-- <div v-for="(arbol, index) in pages"
-      :key="index">
-                {{arbol}}
-            </div> -->
-            
+          
     </div> 
 </template>
 
@@ -24,12 +25,12 @@ import { db } from "../hook/firebase";
 import { collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc, query, where, orderBy, limit, startAfter } from "firebase/firestore";
 // import { useStoreEspecies } from "../../stores/especies";
 // import FichaTecnicaVue from "./FichaTecnica.vue";
-// import { useStoreGeneral } from "../../stores/general";
+import { useStoreGeneral } from "../stores/general";
 // import { paginarDatos } from "../../hook/firestore.hook"
 
 //const storeArbores = useStoreArbores();
 // const storeEspecies = useStoreEspecies();
-// const storeGeneral = useStoreGeneral();
+const storeGeneral = useStoreGeneral();
 
 
 // Cargamos los datos y llamamos al buscador    
@@ -40,8 +41,20 @@ import { collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc, query, 
 // };
 // loadPage();
 
+const handlePaginar = async () => {
+  await storeGeneral.setPagination();
+  console.log(storeGeneral.tmpPag);
+}
 
+const next = async () => {
+  await storeGeneral.setNextPagination();
+  console.log(storeGeneral.tmpPag);
+}
 
+// const previous = async () => {
+//   await storeGeneral.setPreviousPagination();
+//   console.log(storeGeneral.tmpPag)
+// }
 
 // let pages = null;
 //   const datos = {

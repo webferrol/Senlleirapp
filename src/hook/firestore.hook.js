@@ -1,5 +1,6 @@
 import { db } from "./firebase";
 import { collection, addDoc, getDocs, getDoc, deleteDoc, deleteField, doc, updateDoc, query, where,orderBy } from "firebase/firestore";
+import { reactive } from "vue";
 
 /**
  *
@@ -118,14 +119,20 @@ export const deleteDocument = async (collection, uid) => {
  * Se pretende mapear el resultado de una consulta (query) y almacenarlos en un Array
  * @param {Object} querySnapshot Los resultados de una Promise ¡ya resuelta!!! de tipo QuerySnapshot.
  * @return {Array} Retorna un array con la propiedad id y el método data de un objeto doc de Firestore
+ * querySnapshot.forEach((doc) => {
+//       tmp.push({
+//         idDoc: doc.id,
+//         ...doc.data(),
+//       });
  */
- export const getDocsArray = querySnapshot => 
- querySnapshot.docs.map(doc => {
-     return reactive({
-         ref: doc.id,
-         ...doc.data()
-     })
- });
+ export const getDocsArray = (querySnapshot) => {
+ querySnapshot.forEach(doc => {
+      return reactive({
+          idDoc: doc.id,
+          ...doc.data()
+      });
+  });
+}
  
  export const busquedaDatos = async (selecColec, selecDoc, buscar) => {
   const arbolRef = collection(db, selecColec);
