@@ -1,0 +1,71 @@
+.parque{
+    margin:10px;
+}
+/* Titulo */
+h1 {
+  font-size: large;
+  font-weight: 700;
+}
+/* Listado de especies del parque */
+.container {
+    margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.formulario {
+  display: grid;
+  grid-template-columns: auto 280px 1fr;
+  gap: 5px;
+}
+.number {
+  width: 4rem;
+}
+
+/* Botones */
+button {
+  background-color: var(--colorprincipal);
+  border-radius: 8px;
+  color: white;
+  border: none;
+  padding: 8px 8px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--colorprincipal);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  color: white;
+}
+
+.listado {
+  display: flex;
+}
+ul {
+  list-style-type: none;
+}
+li {
+  margin-bottom: 9px;
+}
+.item-nombre {
+  width: 1.5em;
+  height: 1.5em;
+}
+.item-numero {
+    margin-left: 10px;
+  float: right;
+   color: white;
+  background-color: black;
+  border-radius: 50%;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.4em;
+  height: 1.4em;
+}
