@@ -5,7 +5,7 @@
   width: 100%;
   max-width: 1080px;
   height: 400px;
-  background-color: var(--colorsecundario);
+  background-color: var(--colorsprincipal3);
 }
 /*Zona de imágenes*/
 .carrusel-images-galery {
@@ -26,7 +26,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  background-color: var(--colorsecundario);
+  background-color: var(--colorprincipal3);
 }
 
 /* Botones avance/retroceso carrusel  */
@@ -49,6 +49,9 @@
   height: 100%;
   transition: all 0.3s linear;
 }
+.carrusel__button--prev:active{
+  box-shadow: inset 6px 0 8px -1px var(--colorprincipal);
+}
 
 .carrusel__button--next {
   position: absolute;
@@ -56,8 +59,11 @@
   transform: translateY(-50%);
   right: 0;
   height: 100%;
-  transition: all 0.3s linear;
+  transition: all 0.2s linear;
   overflow: hidden;
+}
+.carrusel__button--next:active{
+  box-shadow: inset -6px 0 8px -1px var(--colorprincipal);
 }
 
 .carrusel__button svg {
@@ -66,7 +72,7 @@
   align-items: center;
   background-color: var(--colorprincipal);
   color: white;
-  padding: .5rem .25rem;
+  padding: .3rem .15rem;
 }
   /* boton atras */
   .carrusel__button--prev svg{

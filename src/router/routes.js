@@ -1,36 +1,103 @@
 export const routes = [
+  // Secciones
   {
     path: "/",
     name: "inicio",
+    meta: {
+      title: 'Senlleira'
+    },
     component: () => import("../views/Inicio.vue"),
   },
   {
     path: "/nova-arbore",
     name: "NuevoArbol",
+    meta: {
+      title: 'Engadir árbore',
+    },
     component: () => import("@/views/senlleira/NuevoArbol.vue"),
   },
   {
-    path: "/catalogo",
-    name: "catalogo",
-    component: () => import("@/views/senlleira/CatalogoArboresView.vue"),
+    path: "/catalogo-propostas",
+    name: "CatalogoPropostas",
+    meta: {
+      title: 'Propostas cidadás',
+    },
+    component: () => import("@/views/senlleira/CatalogoPropostasView.vue"),
   },
   {
     path: "/catalogo-senlleiras",
     name: "CatalogoSenlleiras",
+    meta: {
+      title: 'Catálogo de Senlleiras'
+    },
     component: () => import("@/views/senlleira/CatalogoSenlleirasView.vue"),
   },
   {
-    path: "/mapaParques",
+    path: "/mapa-parques",
     name: "MapaParques",
-    component: () => import("@/views/parques/MapaParques.vue"),
+    meta: {
+      title: 'Mapa dos parques',
+    },
+    component: () => import("@/views/parques/ParkMapView.vue"),
   },
-  
   {
-    path: "/mapaSenlleiras",
+    path: "/mapa-senlleiras",
     name: "MapaSenlleiras",
-    component: () => import("@/views/senlleira/MapaSenlleiras.vue"),
+    meta: {
+      title: 'Catálogo de Senlleiras',
+    },
+    component: () => import("@/views/senlleira/SenlleiraMapView.vue"),
   },
-  
+  {
+    path: "/catalogo-de-especies",
+    name: "CatalogoDeEspecies",
+    meta: {
+      title: 'Especies',
+    },
+    component: () => import("@/views/especies/CatalogoEspecies.vue"),
+  },
+  {
+    path: "/catalogo-de-parques",
+    name: "CatalogoDeParques",
+    meta: {
+      title: 'Catálogo de parques',
+    },
+    component: () => import("@/views/parques/CatalogoParques.vue"),
+  },
+  {
+    path: "/ficha-parque/:idDoc",
+    name: "FichaParque",
+    meta: {
+      title: 'Ficha do parque',
+    },
+    component: () => import("@/views/parques/FichaParqueView.vue"),
+  },
+  {
+    path: "/ficha-tecnica/:idDoc",
+    name: "FichaSenlleira",
+    meta: {
+      title: 'Ficha da senlleira',
+    },
+    component: () => import("@/views/senlleira/FichaSenlleiraView.vue"),
+  },
+  {
+    path: "/ficha-especie/:idDoc",
+    name: "FichaEspecie",
+    meta: {
+      title: 'Ficha da especie',
+    },
+    component: () => import("@/views/especies/FichaEspecieView.vue"),
+  },
+
+  {
+    path: "/ajustes",
+    name: "ajustes",
+    meta: {
+      title: 'Axustes e infromación',
+    },
+    component: () => import("@/views/ajustes/Ajustes.vue"),
+  },
+
   // ADMIN
   {
     path: "/admin",
@@ -46,6 +113,14 @@ export const routes = [
     component: () => import("@/views/admin/CatalogoEspecies.vue"),
   },
   {
+    path: "/programadores",
+    name: "Programadores",
+    meta: {
+      requiereAuth: true,
+    },
+    component: () => import("@/views/admin/ProgramadoresView.vue"),
+  },
+  {
     path: "/admin-senlleira",
     name: "admin-senlleira",
     meta: {
@@ -54,40 +129,17 @@ export const routes = [
     component: () => import("@/views/admin/CatalogoSenlleiras.vue"),
   },
   {
+    path: "/admin-parque-especies/:idDoc",
+    name: "AdminParqueEspecies",
+    meta: {
+      requiereAuth: true,
+    },
+    component: () => import("@/views/admin/ParqueEspeciesView.vue"),
+  },
+  {
     path: "/admin-parque",
     name: "admin-parque",
     component: () => import("@/views/admin/CatalogoParques.vue"),
   },
-  // test
-  {
-    path: "/catalogo-de-especies",
-    name: "CatalogoDeEspecies",
-    component: () => import("@/views/especies/CatalogoEspecies.vue"),
-  },
-  {
-    path: "/busqueda",
-    name: "Busqueda",
-    component: () => import("@/components/busqueda/Busqueda.vue"),
-  },
-  {
-    path: "/catalogo-de-parques",
-    name: "CatalogoDeParques",
-    component: () => import("@/views/parques/CatalogoParques.vue"),
-  },
-  {
-    path: "/ficha-parque/:idDoc",
-    name: "FichaParque",
-    component: () => import("@/views/parques/FichaParqueView.vue"),
-  },
-  {
-    path: "/ficha-tecnica/:idDoc",
-    name: "FichaSenlleira",
-    component: () => import("@/views/senlleira/FichaSenlleiraView.vue"),
-  },
-  {
-    path: "/prueba",
-    name: "prueba",
-    component: () => import("@/views/PruebasView.vue"),
-  }
 
 ];

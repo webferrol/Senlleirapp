@@ -1,7 +1,18 @@
 <template>
-  <div class="formsenlleira" v-if="loaded">Cargando...</div>
 
   <div class="form-container">
+    <div class="succes-public" v-if="exito">
+      <div  class="alert-succes">
+        <div v-if="loaded" class="cargando">
+        <p>Cargando...</p>
+        </div>
+        <div class="exito" v-else="loaded">
+          <p class="txt">A árbore foi publicada correctamente</p>
+          <button class="btn-succes" @click="exito = false">Volver ao inicio</button>
+        </div>
+      </div>
+    </div>
+
     <form id="senlleiras" method="post" enctype="multipart/form-data" @submit.prevent="handleSubmit">
       <span class="h2-background">
         <h2>Engadir nova árbore </h2>
@@ -44,38 +55,52 @@
         <div class="senlleira-localizacion">
           <label for="zona" class="form-label"> Zona xeográfica <span data-set="Campo obligatorio"
               class="required-user">*</span></label>
-          <input v-model="form.zona_geografica" type="text" name="zona" id="zona" placeholder="Zona geográfica" />
-          <label for="localizacion" class="form-label"> Ubicación parque <span data-set="Campo obligatorio"
+          <input v-model="form.zona_geografica" type="text" name="zona" id="zona" placeholder="Lugar onde esta a arbore" />
+          <label for="localizacion" class="form-label"> Ubicación <span data-set="Campo obligatorio"
               class="required-user">*</span></label>
           <select @change="form.ubicacion_parque = $event.target.options[$event.target.selectedIndex].text"
             v-model="form.idParque" name="localizacion" id="localizacion" required>
             <option value="#"></option>
+            <option value="#">Otros</option>
             <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
               {{ valor.nombre }} </option>
           </select>
-            <!-- geolocalizacion -->
-            <TheGeolocationComponent></TheGeolocationComponent>  
+          <!-- geolocalizacion -->
+          <TheGeolocationComponent></TheGeolocationComponent>
+        </div>
+      </fieldset>
+      <fieldset class="data-senlleira">
+        <legend>Descripción</legend>
+        <div class="senlleira-localizacion">
+          <textarea
+            v-model="form.descripcion"
+            name="descripcion"
+            id="descripcion"
+            cols="30"
+            rows="10"
+            placeholder="breve descripción da árbore"
+          ></textarea>
         </div>
       </fieldset>
       <fieldset>
         <legend> Imaxe </legend>
         <div class="data-senlleira">
-          <theUploader @emitirFichero="gestionFoto"></theUploader>
+          <TheUploader @emitirFichero="gestionFoto"></TheUploader>
           <div v-if="error.error" class="error"> {{ error.message }} </div>
         </div>
         <div v-if="spinner" class="spinner"> Cargando.... </div>
       </fieldset>
-      <button class="btn-form">Publicar Arbore</button>
+      <button :disabled="disabled" class="btn-form">Publicar Arbore</button>
     </form>
   </div>
 </template>
 
 <script setup>
-import TheUploader from '@/components/theUploader.vue';
+import TheUploader from '@/components/TheUploader.vue';
 import { useStoreArbores } from '@/stores/arbores';
 import { useStoreEspecies } from '@/stores/especies';
 import { useStoreParques } from '@/stores/parques';
-import { reactive, ref,provide } from 'vue';
+import { reactive, ref, provide } from 'vue';
 import "@/assets/css/componente/form-arbol.css";
 import TheGeolocationComponent from '../../components/componentesGenerales/TheGeolocationComponent.vue';
 
@@ -84,6 +109,7 @@ const storeEspecies = useStoreEspecies();
 const storeParques = useStoreParques();
 const storeArbores = useStoreArbores();
 
+const disabled = ref(false);
 storeParques.setParques();
 storeArbores.setArbores();
 
@@ -106,9 +132,10 @@ const form = reactive({
   diametro: 0,
   altura: 0,
   descripcion: "",
+  publicado: false,
 });
 
-provide('form',form)
+provide('form', form)
 
 // indica todos los errores que se presenten
 const error = ref({
@@ -117,7 +144,10 @@ const error = ref({
 });
 let tmpImagenes = null;
 const spinner = ref(false);
-const loaded = ref(false);
+
+
+const loaded = ref(true);
+const exito = ref(false)
 
 
 // esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito
@@ -143,10 +173,9 @@ const gestionFoto = async (imagenes) => {
   }
 };
 const handleSubmit = async () => {
-  //Se comprueban errores antes de enviar nada
-  //Enviar
+  disabled.value = true;
+  const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
   if (storeEspecies.especies.length) {
-    const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
     try {
       if (tmpImagenes === null || !tmpImagenes.length)
         throw new Error("Falta imagen");
@@ -158,19 +187,24 @@ const handleSubmit = async () => {
       try {
         error.value = { error: false, message: "" };
         spinner.value = true;
-        loaded.value = true;
+        exito.value = true;
         for (let i = 0, tam = tmpImagenes.length; i < tam; i++) {
           await storeArbores.subirFoto({
             ref: `Arbores/${data.id}`,
             file: tmpImagenes[i],
           });
         }
+        // guardamos url
+        const ref = `Arbores/${data.id}/${tmpImagenes[0].name}`;
+        await storeArbores.google_url_save(data.id, ref);
         spinner.value = false;
       } catch (e) {
         error.value.error = true;
         error.value.message = e.message;
       } finally {
         loaded.value = false;
+        disabled.value = false;
+
       }
     }
   }

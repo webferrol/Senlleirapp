@@ -1,8 +1,15 @@
 <template>
+  <div><span class="lenda">P: Proposta para senlleira</span>. Coloca o árbore na Ficha senlleiras</div>
+  <div><span class="lenda">S: Senlleira</span>. Indica que a árbore está no catálogo oficial de senlleiras</div>
+  <div><span class="lenda">Pu: Publicado</span>. Se o árbore aparece en zoa pública</div>
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
+      <td></td>
       <td>Nomes (científico,galego,castelán)</td>
       <td>Nome da árbore</td>
+      <td title="Propuesta senlleira"><span class="lenda">P</span></td>
+      <td title="Senlleira"><span class="lenda">S</span></td>
+      <td title="Senlleira"><span class="lenda">Pu</span></td>
       <td>Ubicación parque</td>
       <td class="tabla_administrativo_options">
         <span>
@@ -15,8 +22,12 @@
       v-for="(arbore, index) in storeArbores.arbores"
       :key="index"
     >
+      <td>{{(index+1)}}</td>
       <td>{{ arbore.genero }} {{ arbore.especie }},{{ arbore.nombre_comun }},{{ arbore.nombre_comun_gal }}</td>
       <td>{{arbore.nombre_arbol}}</td>
+      <td>{{arbore?.propuesta_senlleira}}</td>
+      <td>{{arbore?.senlleira}}</td>
+      <td>{{arbore?.publicado}}</td>
       <td>{{ arbore.ubicacion_parque }}</td>
       <td class="tabla_administrativo_options">
         <span>
@@ -107,9 +118,10 @@
           type="number"
           v-model="arbore.altura"
           id="altura"
+          step="any"
           placeholder="Altura (metros)"
         />
-        <label for="diametroTronco"> Diámetro do tronco</label>
+        <label for="diametroTronco"> Perímetro do tronco</label>
         <input
           type="number"
           step="any"
@@ -139,24 +151,19 @@
             </option>
           </select>
 
-          <label for="numero-mapa">Número en el mapa</label>
-          <input
-            type="number"
-            v-model.number="arbore.numero_mapa"
-            id="numero-mapa"
-            placeholder="Número en el mapa"
-          />
           <label for="lat" class="form-label">Latitud</label>
           <input
-            type="text"
-            v-model="arbore.lat"
+            type="number"
+            v-model.number="arbore.lat"
+            step="any"
             id="latitud"
             placeholder="Latitud"
           />
           <label for="lng" class="form-label">Longitud</label>
           <input
-            type="text"
-            v-model="arbore.lng"
+            type="number"
+            step="any"
+            v-model.number="arbore.lng"
             id="lng"
             placeholder="Longitud"
           />
@@ -165,7 +172,7 @@
           <legend>Descripción</legend>
           <label for="descripcion"> Descrición</label>
           <textarea
-            type="text"
+            rows="10"
             v-model="arbore.descripcion"
             id="descripcion"
             placeholder="Descripción"
@@ -173,7 +180,7 @@
         </fieldset>
         <fieldset class="data-senlleira">
         <legend>Esta árbore é</legend>
-        <div class="senlleira-arbore">
+        <div class="senlleira-arbore" style="display: flex;gap: .1rem;">
           <input
             type="checkbox"
             v-model="arbore.senlleira"
@@ -181,6 +188,8 @@
             id="senlleira"
           />&nbsp;
           <label class="form-label" for="senlleira">Senlleira</label>
+        </div>
+        <div class="senlleira-arbore" style="display: flex;gap: .1rem;">
           <input
             type="checkbox"
             v-model="arbore.propuesta_senlleira"
@@ -192,6 +201,15 @@
           >
         </div>
       </fieldset>
+       <div class="senlleira-arbore" style="display: flex;gap: .1rem;">
+        <input
+              type="checkbox"
+              v-model="arbore.publicado"
+              name="pubicado"
+              id="publicado"
+            />
+            <label class="form-label" for="publicado">Publicado</label>
+      </div>
         <fieldset class="editar-images">
           <div class="images" v-for="image of images" :key="image.ref">
             <img class="image" :src="image.src" alt="" />
@@ -200,7 +218,7 @@
             </button>
           </div>
         </fieldset>
-        <theUploader @emitirFichero="gestionFoto"></theUploader>
+        <TheUploader @emitirFichero="gestionFoto"></TheUploader>
 
         <input
           type="submit"
@@ -217,7 +235,7 @@
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import "@/assets/css/admin-css/cargarEspecies.css";
-import TheUploader from "@/components/theUploader.vue";
+import TheUploader from "@/components/TheUploader.vue";
 import { useStoreArbores } from "../../../stores/arbores";
 import { useStoreParques } from "@/stores/parques";
 import { updateDocument } from "../../../hook/firestore.hook";
@@ -249,7 +267,7 @@ const borrarArbore = async () => {
 };
 
 const deleteImage = (ref) => {
-  const texto = prompt(`para eliminar la foto comnfirme la referencia: \n ${ref}`);
+  const texto = prompt(`para eliminar la foto comnfirme la referencia:  ${ref}`);
   if (texto === ref) {
     storeArbores.borrarFoto(ref);
   }
@@ -312,6 +330,11 @@ cargarFotos();
 </script>
 
 <style scoped>
+.lenda{
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
 .catalogo_administrativo{
   font-size: .8rem
 }

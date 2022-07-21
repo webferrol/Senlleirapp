@@ -22,6 +22,7 @@
     line-height: 1rem;
     margin-left: 1rem;
     font-weight: 700;
+    color: var(--coloroscuro)
   }
     .componente-stories .tittle svg{
       color: green;
@@ -129,6 +130,12 @@
     }
     .component-arbol:last-child{
       margin-right: 0;
+    }
+
+    /* Mozilla scrollbar */
+    .stories-navigator{
+      scrollbar-width: auto;
+      scrollbar-color: var(--colorprincipal);
     }
   }
 

@@ -8,7 +8,7 @@
       <!-- Botones area administrativa -->
       <ul class="nav-admin" v-if="userStore.user">
         <li>
-          <router-link to="/admin-senlleira">cat-senlleira</router-link>
+          <router-link to="/admin-senlleira">cat-arbores</router-link>
         </li>
         <li>
           <router-link to="/admin-especies">cat-especies</router-link>
@@ -41,7 +41,7 @@
             <icono :icon="['fa', 'sliders']" @click="filtrarDatos"></icono>
             <ul class="elementos-filtro" :class="{ filtroOculto: !mostrarFiltro }">
               <li>
-                <router-link to="/catalogo">
+                <router-link to="/catalogo-senlleiras">
                   <icono :icon="['fa', 'tree']"></icono>
                   <p>Árbores</p>
                 </router-link>
@@ -56,6 +56,12 @@
                 <router-link to="/catalogo-de-especies">
                   <icono :icon="['fa', 'leaf']"></icono>
                   <p>Especies</p>
+                </router-link>
+              </li>
+              <li>
+                <router-link to="/catalogo-propostas">
+                  <icono :icon="['fa', 'user']"></icono>
+                  <p>Cidadanía</p>
                 </router-link>
               </li>
 
@@ -90,9 +96,13 @@ const filtrarDatos = () => {
 const storeGeneral = useStoreGeneral();
 const userStore = useStoreUsers();
 const filtrar = () => {
-  if (router.currentRoute.value.fullPath === '/catalogo') {
-    storeGeneral.filtrarArbores();
-  } else if (router.currentRoute.value.fullPath === '/catalogo-de-especies') {
+  if (router.currentRoute.value.fullPath === '/catalogo-propostas') {
+    storeGeneral.filtraArboresParticipacionCidada();
+    
+  } else if(router.currentRoute.value.fullPath === '/catalogo-senlleiras'){
+    storeGeneral.filtraArboresSenlleirasPropostas();
+  }
+  else if (router.currentRoute.value.fullPath === '/catalogo-de-especies') {
     storeGeneral.filtrarEspecies();
   } else {
     storeGeneral.filtrarParques();
@@ -107,8 +117,6 @@ window.addEventListener(
     }
   }
 );
-
-
 
 </script>
 

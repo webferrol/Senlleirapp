@@ -90,7 +90,7 @@
           />
 
           <label for="perimetroTronco" class="form-label"
-            >Diámetro do tronco (metros)</label
+            >Perímetro do tronco (metros)</label
           >
           <input
             id="perimetroTronco"
@@ -141,13 +141,6 @@
             </option>
           </select>
 
-          <label class="form-label" for="numero-mapa">Número en el mapa</label>
-          <input
-            name="numero-mapa"
-            id="numero-mapa"
-            type="number"
-            v-model.number="form.numero_mapa"
-          />
           <input type="hidden" v-model="form.ubicacion_parque" />
         </div>
       </fieldset>
@@ -185,29 +178,35 @@
           >
         </div>
       </fieldset>
+      <div class="senlleira-arbore">
+        <input
+              type="checkbox"
+              v-model="form.publicado"
+              name="pubicado"
+              id="publicado"
+            />&nbsp;
+            <label class="form-label" for="publicado">Publicado</label>
+      </div>
       <fieldset>
         <legend>Imaxe</legend>
         <div class="data-senlleira">
-          <theUploader
+          <TheUploader
             :required="true"
             @emitirFichero="gestionFoto"
-          ></theUploader>
+          ></TheUploader>
           <div
             style="
               color: white;
               background-color: red;
               font-weight: bold;
-              font-size: large;
-            "
-            v-if="error.error"
-            class="error"
-          >
+              font-size: large;"
+            v-if="error.error" class="error">
             {{ error.message }}
           </div>
         </div>
         <div v-if="spinner" class="spinner">Cargando....</div>
       </fieldset>
-      <button class="btn-form">Publicar Arbol</button>
+      <button :disabled="disabled" class="btn-form" >Publicar Arbol</button>
     </form>
     
   </div>
@@ -215,15 +214,17 @@
 
 <script setup>
 import { provide, reactive, ref } from "vue";
-import TheUploader from "@/components/theUploader.vue";
+import TheUploader from "@/components/TheUploader.vue";
 import { useStoreArbores } from "@/stores/arbores";
 import { useStoreParques } from "@/stores/parques";
 import { useStoreEspecies } from "@/stores/especies";
-
-import "@/assets/css/formularioSenlleira.css";
 import TheGeolocationComponent from "../../componentesGenerales/TheGeolocationComponent.vue";
 
+import "@/assets/css/formularioSenlleira.css";
+
 const emits = defineEmits(["cerrarForm"]);
+
+const disabled = ref(false);
 
 const cerrarForm = () => {
   emits("cerrarForm");
@@ -233,10 +234,8 @@ const form = reactive({
   genero: "",
   especie: "",
   idEspecie: 0,
-  idParque: 0,
   ubicacion_parque: "",
-  numero_mapa: 0, //Es el número que aparece en el mapa de cada uno de los árboles
-  zona_geografica: "", //Conxo por exemplo, onde está situado
+   zona_geografica: "", //Conxo por exemplo, onde está situado
   nombre_arbol: "",
   nombre_comun: "", //Nombre castellano
   nombre_comun_gal: "",
@@ -249,6 +248,7 @@ const form = reactive({
   descripcion: "",
   senlleira: false,
   propuesta_senlleira: false, //Si no es Senlleira ni propuesta es un árbol común
+  publicado:true,
 });
 
 provide('form',form)
@@ -275,8 +275,6 @@ const reset = () => {
   form.genero = "";
   form.especie = "";
   form.idEspecie = 0;
-  form.idParque = 0;
-  form.numero_mapa = 0;
   form.ubicacion_parque = "";
   form.zona_geografica = ""; //Conxo por exemplo, onde está situado
   form.nombre_arbol = "";
@@ -291,6 +289,7 @@ const reset = () => {
   form.descripcion = "";
   form.senlleira = false;
   form.propuesta_senlleira = false;
+  form.publicado = true;
 };
 
 
@@ -320,6 +319,7 @@ const handleSelect = (e) => {
 };
 
 const handleSubmit = async () => {
+  disabled.value = true;
   const data = await storeArbores.insertarArbore(form, tmpImagenes[0].name);
   if (storeEspecies.especies.length) {
     try {
@@ -350,6 +350,7 @@ const handleSubmit = async () => {
         error.value.message = e.message;
       } finally {
         loaded.value = false;
+        disabled.value=false;
       }
     }
   }

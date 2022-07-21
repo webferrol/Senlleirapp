@@ -6,7 +6,7 @@
     grid-template-columns: repeat(2 , minmax(140px, 1fr));
     margin: auto;
     gap: .5rem;
-    background-color: white;
+    background-color: var(--colorclaro);
     max-width: 900px;
 }
 /* Ficha tecnica */
@@ -20,8 +20,8 @@
     border-radius: 5px;
     width: auto;
     min-width: 140px;
+    height: fit-content;
     /* max-width: 220px; */
-    height: 3;
     animation: backgroundAnimation 2s infinite alternate;
 }
     .ficha-descripcion{
@@ -42,8 +42,13 @@
     }
 }
 @media screen and (min-width: 500px) {
+    .container-galeria{
+        justify-content: center;
+    }
     .skeleton-ficha-tecnica{
-        max-width: 250px;
+        min-width: 230px;
+        width: 100%;
+        max-width: 280px;
     }
     .skeleton-ficha-tecnica .skeleton-square{
         height: 300px;
@@ -53,6 +58,11 @@
 @media screen and (min-width: 700px) {
     .container-galeria{
         grid-template-columns: repeat(3, minmax(150px, 1fr));
+    }
+    .skeleton-ficha-tecnica{
+        min-width: 200px;
+        width: 100%;
+        max-width: 280px;
     }
 }
 @media screen and (min-width: 820px) {

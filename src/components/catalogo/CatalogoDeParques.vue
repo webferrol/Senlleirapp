@@ -5,7 +5,7 @@
             v-for="(parque, index) in storeGeneral.tmp" :key="index" identificador=senlleira.id
             @click="cargarDatosFicha(parque)">
                 <img  class="imagen-catalogo" alt="imagen del arbol senlleiro" :src="parque.url_google">
-            <div class="arbol-info">
+            <div class="arbol-info parque-info">
                 <span class="arbol">
                     <icono :icon="['fa', 'leaf']"></icono>
                     <h3 class="arbol-nombre">{{ parque.nombre }}</h3>

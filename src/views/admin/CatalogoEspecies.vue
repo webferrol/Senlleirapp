@@ -17,7 +17,7 @@ const añadirEspecie = ref(false)
 
 <style scoped>
 .admin-add{
-    background-color: var(--colorsecundario);
+    background-color: var(--colorprincipal);
     color: white;
     font-size: 1.2rem;
     margin: 1rem;

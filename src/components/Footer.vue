@@ -1,23 +1,29 @@
 <template>
-   <footer class="main-footer">
-        <nav class="menu-principal" :class="{'administrador-active':userStore.user}">
+    <footer class="main-footer">
+        <nav class="menu-principal" :class="{ 'administrador-active': userStore.user }">
             <ul class="menu-elements">
+                 <li>
+                    <router-link class="menu-inicio" to="/">
+                        <icono :icon="['fa', 'home']"></icono>
+                        <p>Inicio</p>
+                    </router-link>
+                </li>
                 <li>
-                    <router-link class="menu-catalogo" to="/catalogo">
+                    <router-link class="menu-catalogo" to="/catalogo-senlleiras">
                         <icono :icon="['fa', 'images']"></icono>
                         <p>Catálogo</p>
                     </router-link>
                 </li>
                 <li>
-                    <router-link class="menu-inicio" to="/">
-                        <icono :icon="['fa', 'home']"></icono>
-                        <p>Inicio</p>
-              </router-link>
-                </li>
-                <li>
-              <router-link class="mapa" to="/mapaSenlleiras">
+                    <router-link class="mapa" to="/mapa-senlleiras">
                         <icono :icon="['fa', 'map']"></icono>
                         <p>Mapa</p>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link class="ajustes" to="/ajustes">
+                        <icono :icon="['fa', 'gears']"></icono>
+                        <p class="ajuste-txt">Axustes e inf</p>
                     </router-link>
                 </li>
             </ul>

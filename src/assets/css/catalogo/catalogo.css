@@ -10,11 +10,12 @@
   font-size: clamp(1.4rem, 4vw, 2rem);
   text-transform: uppercase;
   font-weight: 600;
-  color: black;
-  background-color: white;
+  color: var(--coloroscuro);
+  background-color: var(--colorclaro);
 }
 /* Estructura del catalogo */
   .catalogo-section-component {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     width: fit-content;
@@ -23,7 +24,7 @@
     align-items: center;
     padding: .5rem .25rem;
     gap:  .5rem .25rem;
-    background-color: white;
+    background-color: var(--colorclaro);
   }
   /* ficha */
   .arbol-catalogo-element {
@@ -54,12 +55,20 @@
   
   .arbol-catalogo-element .arbol-info {
     display: grid;
-    padding: 0.2rem;
+    padding: .5rem;
+    align-items: flex-start;
+    min-height: 75px;
+    padding-bottom: 30px;
+    background-color: var(--colorclaro2);
+  }
+  .arbol-catalogo-element .parque-info{
+    padding: .5rem;
+    min-height: auto;
   }
   .arbol-catalogo-element .arbol-info span {
     display: grid;
-    grid-template-columns: 20px 1fr;
-    gap: .5rem .25rem;
+    grid-template-columns: 17px 1fr;
+    gap: .5rem .20rem;
     justify-content: center;
     align-items: center;
     font-size: 1.1rem;
@@ -68,8 +77,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20px;
-    height: 20px;
+    width: 17px;
+    height: 17px;
   }
 
   .arbol-info .arbol {
@@ -77,9 +86,10 @@
     font-size: 1.1rem;
   }
   .arbol-info .lugar {
-    color: rgba(49, 49, 49, 1);
+    color: var(--coloroscuro);
     font-size: 0.8rem;
   }
+
   .arbol-catalogo-element .arbol-info h3 {
     font-size: 0.9rem;
     line-height: 0.9rem;
@@ -96,21 +106,47 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: black;
+    color: var(--coloroscuro);
     font-weight: 500;
   }
 
+  /* categoria */
+  .categoria{
+    position: absolute;
+    bottom:2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .25rem;
+    width: 100%;
+    padding: .1rem;
+    background-color: var(--colorprincipal);
+  }
+  .categoria svg{
+    width: 15px;
+    height: 15px;
+  }
+  .categoria h4{
+    font-size: .7rem;
+    font-weight: 800;
+  }
+
+  
+  @media screen and (max-width: 400px) {
+    .arbol-catalogo-element .imagen-catalogo{
+      height:  200px;
+    }
+    .arbol-catalogo-element .arbol-info{
+      padding-bottom: 33px;
+    }
+
+  }
   @media screen and (max-width: 480px) {
     .arbol-catalogo-element .imagen-catalogo{
       height:  266px;
     }
   }
-  @media screen and (max-width: 400px) {
-    .arbol-catalogo-element .imagen-catalogo{
-      height:  200px;
-    }
-  }
-
+  
   @media screen and (min-width: 700px ) {
     .catalogo-section-component{
       width: 90vw;

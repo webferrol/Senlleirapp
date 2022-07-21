@@ -1,6 +1,5 @@
 // importar libreria de pinia. sirve para centralizar toda la información
 import { defineStore } from "pinia";
-
 import { useStoreArbores } from "./arbores";
 import { useStoreEspecies } from "./especies";
 import { useStoreParques } from "./parques"
@@ -14,13 +13,20 @@ export const useStoreGeneral = defineStore('busqueda', {
         }
     },
     actions:{
-        filtrarArbores(){
+        filtraArboresSenlleirasPropostas(){
+             // this.tmp = []
+             const storeArbores = useStoreArbores();
+             this.tmp = storeArbores.arboresSenlleirasPropostas.filter((arbor) => {
+                 return arbor.genero.toLowerCase().includes(this.buscador.toLowerCase()) || arbor.especie.toLowerCase().includes(this.buscador.toLowerCase()) || arbor.nombre_comun.toLowerCase().includes(this.buscador.toLowerCase()) || arbor.nombre_arbol.toLowerCase().includes(this.buscador.toLowerCase())
+             })
+        },
+        filtraArboresParticipacionCidada(){
             // this.tmp = []
             const storeArbores = useStoreArbores();
-            this.tmp = storeArbores.arbores.filter((arbor) => {
+            this.tmp = storeArbores.arboresParticipacionCidada.filter((arbor) => {
                 return arbor.genero.toLowerCase().includes(this.buscador.toLowerCase()) || arbor.especie.toLowerCase().includes(this.buscador.toLowerCase()) || arbor.nombre_comun.toLowerCase().includes(this.buscador.toLowerCase()) || arbor.nombre_arbol.toLowerCase().includes(this.buscador.toLowerCase())
-            })
-        },
+            })    
+       },
         filtrarEspecies(){
             // this.tmp = [] 
             const storeEspecies = useStoreEspecies();

@@ -27,10 +27,20 @@
             @click="handleDelete({ id: parque.idDoc, name: parque.nombre })"
           >
           </icono>
-
-          <button @click="editar(parque)">
-            <icono :icon="['fa', 'pen']" to="/arb-:id"></icono>
-          </button>
+          
+            <icono @click="editar(parque)" :icon="['fa', 'pen']" to="/arb-:id"></icono>
+            <router-link
+              class="asign-specie"
+              :to="{
+                name: 'AdminParqueEspecies',
+                params: {
+                  idDoc: parque.idDoc,
+                },
+              }"
+            >
+              Asignar Especies
+            </router-link>
+          
         </span>
       </td>
     </tr>
@@ -98,14 +108,13 @@
           placeholder="Longitud"
         />
 
-         <label for="carballeira" class="form-label">Carballeira</label>
+        <label for="carballeira" class="form-label">Carballeira</label>
         <input
           class="input-parque"
           v-model="parque.carballeira"
           type="checkbox"
           name="carballeira"
           id="carballeira"
-          
         />
         <label for="cronoloxia" class="form-label">Cronoloxía</label>
         <input
@@ -137,8 +146,14 @@
             <button class="btn-eliminar" @click="deleteImage(image.ref)">
               Eliminar
             </button>
-           
-            <input v-model="portada" name="portada" :value="image.ref" type="radio"> Portada
+
+            <input
+              v-model="portada"
+              name="portada"
+              :value="image.ref"
+              type="radio"
+            />
+            Portada
           </div>
         </fieldset>
         <div>Fotos del parque</div>
@@ -161,7 +176,7 @@
 import { ref } from "vue";
 import "@/assets/css/admin-css/catalogoAdmin.css";
 import "@/assets/css/admin-css/cargarEspecies.css";
-import TheUploader from "@/components/theUploader.vue";
+import TheUploader from "@/components/TheUploader.vue";
 import { useStoreParques } from "../../../stores/parques";
 import { updateDocument } from "../../../hook/firestore.hook";
 import { listAllRef, getDownURL } from "../../../hook/storage.hook";
@@ -171,7 +186,7 @@ storeParques.setParques().catch((error) => console.log(error));
 
 const nombre = ref("");
 const loading = ref(false);
-const portada = ref('');
+const portada = ref("");
 let itemDelete = null;
 
 const mostrar = ref(false);
@@ -195,7 +210,7 @@ const borrarParque = async () => {
 const parque = ref(null);
 const editar = async (par) => {
   const refs = await listAllRef(`parques/${par.idDoc}`);
-  const list = await listAllRef ( `parquesficha/${par.idDoc}`   );
+  const list = await listAllRef(`parquesficha/${par.idDoc}`);
 
   images.value = [];
   refs.forEach(async (ref) => {
@@ -217,8 +232,7 @@ const cambiarDatos = async (id) => {
   const docRef = await updateDocument(id, "Parques", parque.value);
   try {
     loading.value = true;
-     if(portada.value.length)
-      parque.value.urlficha = portada.value;
+    if (portada.value.length) parque.value.urlficha = portada.value;
     await updateDocument(id, "Parques", parque.value);
   } catch (error) {
     console.log(error);
@@ -246,28 +260,26 @@ const gestionFoto = async (file) => {
   }
 };
 
-const gestionMapa = async (file) =>{
-  if (file){
-    const imagen = file [0];
-    try{
+const gestionMapa = async (file) => {
+  if (file) {
+    const imagen = file[0];
+    try {
       error.value = "";
       await storeParques.subirParque({
         ref: `parquesficha/${parque.value.idDoc}`,
         file: imagen,
       });
-
-    }catch (e){
+    } catch (e) {
       console.log(e);
       error.value = e.mensage;
     }
   }
-}
-
+};
 
 //Eliminar la imagen en el modulo de editar
 
 const deleteImage = (ref) => {
-  const texto = prompt(`para eliminar a foto confirme a referencia:\n ${ref}`);
+  const texto = prompt(`para eliminar a foto confirme a referencia:${ref}`);
   if (texto === ref) {
     storeParques.borrarFoto(ref);
   }
@@ -289,8 +301,7 @@ cargarFotos();
 
 
 <style scoped>
-
-.editar-images{
+.editar-images {
   display: grid;
   grid-template-columns: auto auto auto;
 }
@@ -306,7 +317,14 @@ cargarFotos();
 .btn-eliminar {
   width: 70px;
   height: 20px;
-  margin-top: .2em;
+  margin-top: 0.2em;
+}
+
+/* Router-link asignar especies */
+.asign-specie {
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
 }
 </style> >
 

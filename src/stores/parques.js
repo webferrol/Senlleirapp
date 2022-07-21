@@ -1,7 +1,9 @@
 // importar libreria de pinia. sirve para centralizar toda la información
 import { defineStore } from 'pinia';
 import { subirFicheros, listAllUrls, getDownURL, deleteFile, listAllRef } from '@/hook/storage.hook';
-import { addDocument, getDocuments, deleteDocument, updateDocument } from '@/hook/firestore.hook';
+import { addDocument, getDocumentsOrderBy,getDocument, deleteDocument, deleteFieldDocument, updateDocument } from '@/hook/firestore.hook';
+import { useStoreEspecies } from './especies';
+
 
 
 export const useStoreParques = defineStore('parques', {
@@ -35,8 +37,27 @@ export const useStoreParques = defineStore('parques', {
             this.parques.push(data)
             return docRef;
         },
-
-
+        async getParque(idDoc){
+            return await getDocument('Parques',idDoc);
+        },
+        //Obtenemos todas las especies de la base de datos
+        async getAllEspecies(){
+            const store = useStoreEspecies();
+            await store.setEspecies();
+            return store.especies;
+        },
+        async updateEspeciesParque(idDoc,data){
+            await updateDocument(idDoc,'Parques',{especies:data});
+            //console.log(idDoc,data)
+        },
+        async deleteEspeciesParque(idDoc){
+            try {
+                await deleteFieldDocument(idDoc,'Parques','especies');
+            } catch (error) {
+                console.log(error)
+            }
+            
+        },
         async borrarParque(ID) {
             //Borrar fotos del storage
             const refs = await listAllRef(`parques/${ID}`);
@@ -58,7 +79,7 @@ export const useStoreParques = defineStore('parques', {
         async setParques() {
             if (this.parques.length > 0) //Por si el array ya está cargado
                 return
-            this.parques = await getDocuments("Parques");
+            this.parques = await getDocumentsOrderBy("Parques","nombre");
             for (let i = 0; i < this.parques.length; i++) {
                 {
                     try {
