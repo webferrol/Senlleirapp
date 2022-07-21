@@ -2,7 +2,7 @@
     <div class="component-btn-darkmode">
         <p>Modo <br>claro</p>
         <div class="switch-button">
-            <input ref="checkbox" type="checkbox" @click="toggleDarkMode" name="switch-button" id="switch-label"
+            <input ref="toggleDark" type="checkbox" @click="toggleDarkMode()" name="switch-button" id="switch-label"
                 class="switch-button__checkbox">
             <label for="switch-label" class="switch-button__label"></label>
         </div>
@@ -13,27 +13,31 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import '@/assets/css/componente/toggle-dark-mode.css';
+import { switchDarkMode} from '../../hook/darkMode.js' 
 
-const body = document.querySelector("body");
-// Comprueba si está activado el modo oscuro y posiciona el botón en ON/OFF
+const toggleDark = ref()
 onMounted(() => {
-    const toggleDark = document.querySelector("#switch-label")
-    if (body.classList.contains('dark-mode')) {
-        toggleDark.checked = true
-    } else {
-        toggleDark.checked = false
+    // Coloca el boton en la posicion indicada dependiendo si el modo oscuro está activado o no
+    if(localStorage.getItem('dark-mode') == 'true'){
+        toggleDark.value.checked = true
+    } else{
+        toggleDark.value.checked = false
     }
-})
-// Cuando el usuario hace click activa desativa el modo oscuro
-const toggleDarkMode = () => {
-    const toggleDark = document.querySelector("#switch-label")
 
-    if (toggleDark.checked) {
-        body.classList.add('dark-mode')
-    }
-    else {
-        body.classList.remove('dark-mode');
+})
+
+const toggleDarkMode = () => {
+    if(toggleDark.value.checked){
+        localStorage.setItem('dark-mode', true)
+        switchDarkMode()
+    }else{
+        localStorage.setItem('dark-mode', false)
+        switchDarkMode()
     }
 }
+
+
+
+
 
 </script>

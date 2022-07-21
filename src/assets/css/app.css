@@ -13,11 +13,18 @@
     --coloroscuro: rgba(0,0,0, 1);
     --colorclaro2: rgba(255,255,255,1)
 }
-.dark-mode{
-  --colorclaro: rgb(41, 41, 41);
-  --colorclaro2: rgb(88, 88, 88);
-  --coloroscuro: rgba(255,255,255, 1);
-}
+
+  :root.dark{
+    --colorprincipal: rgba(97,214,142);
+    --colorprincipal2: rgba(43,187,154);
+    --colorprincipal3: rgba(14,173,159);
+    --colorterciario: rgb(50,50,50);
+    --colorclaro: rgb(41, 41, 41);
+    --colorclaro2: rgb(88, 88, 88);
+    --coloroscuro: rgba(255,255,255, 1);
+  }
+  
+
 
 body{
   background-color: var(--colorclaro);
