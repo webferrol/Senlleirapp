@@ -3,7 +3,9 @@ import { defineStore } from "pinia";
 
 import { useStoreArbores } from "./arbores";
 import { useStoreEspecies } from "./especies";
-import { useStoreParques } from "./parques"
+import { useStoreParques } from "./parques";
+import { initPage,nextPage,previousPage,totalPages,seekItemPage,limitPage } from "../hook/pagination.firestore";
+import { getDocsArray } from "../hook/firestore.hook";
 
 export const useStoreGeneral = defineStore('busqueda', {
     state: () => {
@@ -11,6 +13,11 @@ export const useStoreGeneral = defineStore('busqueda', {
             buscador: '',
             tmp:[],
             categoria: '',
+            tmpPag: [],
+            limit: 6,
+            total: 0,
+            actualPage: 1,
+            tmpPagQuery: []
         }
     },
     actions:{
@@ -34,6 +41,23 @@ export const useStoreGeneral = defineStore('busqueda', {
             this.tmp = storeParques.parques.filter((parques) => {
                 return parques.nombre.toLowerCase().includes(this.buscador.toLowerCase()) || parques.tipoloxia.toLowerCase().includes(this.buscador.toLowerCase()) || parques.localizacion.toLowerCase().includes(this.buscador.toLowerCase()) || parques.cronoloxia.toLowerCase().includes(this.buscador.toLowerCase()) 
             })
+        },
+
+        // Paginación, conseguir paginar normal y el resultado de búsqueda
+        async setPagination() {
+            const querySnapshot = await initPage("Parques", "idDoc", this.limit);
+            this.tmpPagQuery = querySnapshot.docs[querySnapshot.docs.length-1];
+            console.log(this.tmpPagQuery)
+            this.tmpPag = getDocsArray(querySnapshot);
+        },
+
+        async setNextExperiences() {
+            console.log(lastWorkExperiences)
+            this.actualPage++;
+            const lastWorkExperiences = await seekItemPage("Parques", this.tmpPag[this.tmpPag.length-1].ref);
+            const querySnapshot = await nextPage("Parques", "idDoc", lastWorkExperiences, this.limit);
+            this.tmpPag = getDocsArray(querySnapshot)
+
         }
     }
 })

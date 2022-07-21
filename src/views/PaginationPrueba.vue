@@ -1,78 +1,115 @@
 <template>
-<div class="column is-full">
-            <ThePagination @handleNext="onNextClick" @handlePrevious="onPreviousClick"
-                @handlePaginationLink="onPaginationLink" :perPage="store.limit" :actualPage="store.actualPage"
-                :total="store.total"></ThePagination>
+    <div>
+            <h1>Paginación prueba</h1>
+            <br>
+            
+            <button @click="handlePaginar">ver</button> 
+            <button @click="next">next</button>
+            <button @click="previous">previous</button>
+            <br>
 
-        </div> 
+            <!-- <div v-for="(arbol, index) in pages"
+      :key="index">
+                {{arbol}}
+            </div> -->
+            
+    </div> 
 </template>
 
-<script>
-import { useStoreArbores } from "../stores/arbores";
-import { ref, reactive } from "vue";
+<script setup>
+//Dependencias
+import { ref } from "vue";
+import { useStoreArbores } from "@/stores/arbores.js";
+import { db } from "../hook/firebase";
+import { collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc, query, where, orderBy, limit, startAfter } from "firebase/firestore";
+// import { useStoreEspecies } from "../../stores/especies";
+// import FichaTecnicaVue from "./FichaTecnica.vue";
+// import { useStoreGeneral } from "../../stores/general";
+// import { paginarDatos } from "../../hook/firestore.hook"
 
-//Variables
-const loader = reactive({ 'is-active': false });
-const iskeyDown = ref(false);
-const reference = ref('');
-const referenceError = ref('');
-const errorOutput = reactive({
-    error: false,
-    message: ''
-});
-const show = ref(false);
-const experience = ref(null);
-//lanzamos el store
-const store = useStoreArbores();
-//Lanzamos la promesa
-(async () => {
-    try {
-        loader['is-active'] = true;
-        await store.setArbores();
-        // await store.setExperiences();
-    } catch (error) {
-        console.log('Error en fichero WorkExperience.ve', error);
-        errorOutput.error = true;
-        errorOutput.message = error.message;
+//const storeArbores = useStoreArbores();
+// const storeEspecies = useStoreEspecies();
+// const storeGeneral = useStoreGeneral();
 
-    } finally {
-        loader['is-active'] = false;
-    }
-})()
 
-//Paginación
-const onNextClick = async () => {
-    try {
-        loader['is-active'] = true;
-        // await store.setNextExperiences();
-    } catch (error) {
-        errorOutput.error = true;
-        errorOutput.message = error.message;
-    } finally {
-        loader['is-active'] = false;
-    }
+// Cargamos los datos y llamamos al buscador    
+// const loadPage = async () => {
+//   await storeArbores.setArbores();
+// //   await storeArbores.getDownloadURL();
+// //   storeGeneral.filtrarArbores();
+// };
+// loadPage();
 
-}
-const onPreviousClick = async () => {
-    try {
-        loader['is-active'] = true;
-        // await store.setPreviousExperiences();
-    } catch (error) {
-        errorOutput.error = true;
-        errorOutput.message = error.message;
-    } finally {
-        loader['is-active'] = false;
-    }
-}
-const onPaginationLink = async page => {
-    try {
-        loader['is-active'] = true;
-        await store.setPaginationExperiences(page);
-    } catch (error) {
-        errorOutput.error = true;
-        errorOutput.message = error.message;
-    } finally {
-        loader['is-active'] = false;
-    }
-}
+
+
+
+// let pages = null;
+//   const datos = {
+//     tmp: [],
+//     last: []
+//   }
+
+// const handlePaginar = async() => {
+//   const setData = paginarDatos();
+//     pages = await setData.getFirstPage();
+//     console.log(pages)
+// }
+// const next = async () => {
+//     const setData = paginarDatos()
+//     pages = await setData.nextPage(pages.last);
+    
+//     console.log(pages)
+// }
+
+
+// const paginarDatos = ($colection="Parques", $orderby="idDoc",$limit=3) => {
+//   const tmp = [];
+  
+//     // alert('epa!')
+//   const getFirstPage = async () =>{
+//     //console.log(tmp)
+//     const first = query(collection(db, $colection), orderBy($orderby), limit($limit));
+//     const querySnapshot = await getDocs(first);
+//     console.log(querySnapshot.size)
+//     const lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
+//     querySnapshot.forEach((doc) => {
+//       tmp.push({
+//         idDoc: doc.id,
+//         ...doc.data(),
+//       });
+      
+//     });
+//     return {
+//       pages: tmp,
+//       last: lastVisible
+//     }
+//   }
+//   const nextPage = async (last) => {
+//     const nexts = query(collection(db, $colection),
+//     orderBy($orderby),
+//     startAfter(last),
+//     limit($limit));
+
+//     // console.log(nexts)
+    
+//     const querySnapshot = await getDocs(nexts);
+//     const lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
+//     querySnapshot.forEach((doc) => {
+//       tmp.push({
+//         idDoc: doc.id,
+//         ...doc.data(),
+//       });
+      
+//     });
+//     return {
+//       pages: tmp,
+//       last: lastVisible
+//     }
+//   }
+
+  
+//   return {
+//     getFirstPage, nextPage,
+//   }
+// }
 </script>

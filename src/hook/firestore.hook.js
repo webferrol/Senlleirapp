@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc, query, where, orderBy, limit, startAfter } from "firebase/firestore";
+import { collection, addDoc, getDocs, getDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
 
 /**
  *
@@ -62,46 +62,15 @@ export const deleteDocument = async (collection, uid) => {
  */
  export const updateDocument = async(uid = "Qsdfa1fdfdfjdfdj", collection = "especies", data = {}) => await updateDoc(doc(db, collection, uid), data);
 
-
 /**
- * 
- * @param {string} selecColec recibe la colección en dónde va a realizar la búsqueda (Arbores, Especies, Parques)
- * @param {string} selecDoc recibe el documento/campo donde vamos a buscar
- * @param {string} buscar recibe aquello que vamos a buscar
- * @returns 
+ * Se pretende mapear el resultado de una consulta (query) y almacenarlos en un Array
+ * @param {Object} querySnapshot Los resultados de una Promise ¡ya resuelta!!! de tipo QuerySnapshot.
+ * @return {Array} Retorna un array con la propiedad id y el método data de un objeto doc de Firestore
  */
- export const busquedaDatos = async (selecColec, selecDoc, buscar) => {
-  const arbolRef = collection(db, selecColec);
-
-  const q = query(arbolRef, where(selecDoc, "==", buscar));
-  const querySnapshot = await getDocs(q);
-  const tmp = [];
-  querySnapshot.forEach((doc) => {
-    tmp.push({
-      idDoc: doc.id,
-      ...doc.data(),
-    });
-    // console.log(doc.id, " => ", doc.data());
-  })
-  return tmp;
-}
-
-// const querySnapshot = await getDocs(collection(db, "Especies"));
-export const paginarDatos = ($colection="especies", $orderby="genero",$limit=3) => {
-
-  const getFirstPage = async () =>{
-    const tmp = [];
-    const first = query(collection(db, $colection), orderBy($orderby), limit($limit));
-    const querySnapshot = await getDocs(first);
-    querySnapshot.forEach((doc) => {
-      tmp.push({
-        idDoc: doc.id,
-        ...doc.data(),
-      });
-      return tmp;
-    })
-  }
-  return {
-    getFirstPage
-  }
-}
+ export const getDocsArray = querySnapshot => 
+ querySnapshot.docs.map(doc => {
+     return reactive({
+         ref: doc.id,
+         ...doc.data()
+     })
+ });
