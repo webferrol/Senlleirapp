@@ -94,6 +94,7 @@
       <TheGeolocation :lat="fichaDatos.lat" :lng="fichaDatos.lng" />
     </template>
   </FichaTecnicaVue>
+  <!-- <button @click="paginar">Paginar</button> -->
 </template>
 
 <script setup>
@@ -103,6 +104,7 @@ import { useStoreArbores } from "@/stores/arbores.js";
 import { useStoreEspecies } from "../../stores/especies";
 import FichaTecnicaVue from "./FichaTecnica.vue";
 import { useStoreGeneral } from "../../stores/general";
+// import { paginarDatos } from "../../hook/firestore.hook"
 
 import "@/assets/css/catalogo/catalogo.css";
 import TheGeolocation from "../TheGeolocation.vue";
@@ -144,6 +146,8 @@ const loadPage = async () => {
 };
 loadPage();
 
-
-
+// const paginar = async () => {
+//   // alert('epa!')
+//   paginarDatos();
+// }
 </script>
