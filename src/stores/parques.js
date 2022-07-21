@@ -1,8 +1,9 @@
 // importar libreria de pinia. sirve para centralizar toda la información
 import { defineStore } from 'pinia';
 import { subirFicheros, listAllUrls, getDownURL, deleteFile, listAllRef } from '@/hook/storage.hook';
-import { addDocument, getDocuments,getDocument, deleteDocument, deleteFieldDocument, updateDocument } from '@/hook/firestore.hook';
+import { addDocument, getDocumentsOrderBy,getDocument, deleteDocument, deleteFieldDocument, updateDocument } from '@/hook/firestore.hook';
 import { useStoreEspecies } from './especies';
+
 
 
 export const useStoreParques = defineStore('parques', {
@@ -78,7 +79,7 @@ export const useStoreParques = defineStore('parques', {
         async setParques() {
             if (this.parques.length > 0) //Por si el array ya está cargado
                 return
-            this.parques = await getDocuments("Parques");
+            this.parques = await getDocumentsOrderBy("Parques","nombre");
             for (let i = 0; i < this.parques.length; i++) {
                 {
                     try {
