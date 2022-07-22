@@ -104,6 +104,7 @@ import { reactive, ref, provide } from 'vue';
 import "@/assets/css/componente/form-arbol.css";
 import TheGeolocationComponent from '../../components/componentesGenerales/TheGeolocationComponent.vue';
 
+
 // llamada del store
 const storeEspecies = useStoreEspecies();
 const storeParques = useStoreParques();
@@ -144,10 +145,30 @@ const error = ref({
 });
 let tmpImagenes = null;
 const spinner = ref(false);
-
-
 const loaded = ref(true);
-const exito = ref(false)
+const exito = ref(false);
+
+const reset = () =>{
+  form.genero = "";
+  form.especie = "";
+  form.idEspecie = 0;
+  form.idParque= 0;
+  form.ubicacion_parque=  "";
+  form.zona_geografica= "", //Conxo por exemplo, onde está situado
+  form.senlleira= false;
+  form.propuesta_senlleria = false; //Si no es Senlleira ni propuesta es un árbol común
+  form.nombre_arbol= "";
+  form.nombre_comun= ""; //Nombre castellano
+  form.nombre_comun_gal= "";
+  form.storage_ref=  ""; //es el identificador donde se guarda un fichero en el Storage Cloud
+  form.google_url= "";
+  form.lng= ""; //longitud
+  form.lat= ""; //latitud
+  form.diametro= 0;
+  form.altura= 0;
+  form.descripcion= "";
+  form.publicado= false;
+}
 
 
 // esta funcion ayuda a encuentrar dentro de un array el idDoc necesario para poder obtener los datos que necesito
@@ -198,6 +219,7 @@ const handleSubmit = async () => {
         const ref = `Arbores/${data.id}/${tmpImagenes[0].name}`;
         await storeArbores.google_url_save(data.id, ref);
         spinner.value = false;
+        reset();
       } catch (e) {
         error.value.error = true;
         error.value.message = e.message;
