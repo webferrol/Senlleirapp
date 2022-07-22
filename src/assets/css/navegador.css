@@ -111,9 +111,20 @@
   width: 30px;
   height: 30px;
 }
-.icon-filter-busqueda svg{
+  .btn-catalogo-filtro{
+    width: inherit;
+    height: inherit;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+  }
+  .btn-catalogo-filtro:focus{
+    outline: none;
+  }
+.icon-filter-busqueda .btn-catalogo-filtro svg{
   width: inherit;
   height: inherit;
+  color: white;
 }
 .elementos-filtro{
   position: absolute;
@@ -126,7 +137,7 @@
   transition: all .2s linear;
   background: rgb(14, 173, 159);
   overflow: hidden;
-  border-radius: 5px;
+  border-bottom-left-radius: 3px;
   background: linear-gradient(
     37deg,
     rgba(14, 173, 159, 1) 20%,

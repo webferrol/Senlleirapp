@@ -11,7 +11,6 @@
 }
     .nav-mapa a{
         background-color: rgba(0,0,0, .65);
-        
         border-radius: 5px;
         color: white;
         font-weight: 600;
@@ -19,4 +18,7 @@
         width: 100px;
         text-align: center;
         padding: .25rem;
+    }
+    .nav-mapa .router-link-exact-active{
+        background-color: var(--colorprincipal2);
     }
