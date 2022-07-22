@@ -122,7 +122,7 @@ const form = reactive({
   ubicacion_parque: "",
   zona_geografica: "", //Conxo por exemplo, onde está situado
   senlleira: false,
-  propuesta_senlleria: false, //Si no es Senlleira ni propuesta es un árbol común
+  propuesta_senlleira: false, //Si no es Senlleira ni propuesta es un árbol común
   nombre_arbol: "",
   nombre_comun: "", //Nombre castellano
   nombre_comun_gal: "",
@@ -156,7 +156,7 @@ const reset = () =>{
   form.ubicacion_parque=  "";
   form.zona_geografica= "", //Conxo por exemplo, onde está situado
   form.senlleira= false;
-  form.propuesta_senlleria = false; //Si no es Senlleira ni propuesta es un árbol común
+  form.propuesta_senlleira = false; //Si no es Senlleira ni propuesta es un árbol común
   form.nombre_arbol= "";
   form.nombre_comun= ""; //Nombre castellano
   form.nombre_comun_gal= "";
