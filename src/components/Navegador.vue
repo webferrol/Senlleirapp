@@ -38,7 +38,9 @@
         <!-- Filtro búsqueda usuario - CATALOGO -->
         <li class="filtro" v-if="$route.path.includes('catalogo')">
           <div class="icon-filter-busqueda">
-            <icono :icon="['fa', 'sliders']" @click="filtrarDatos"></icono>
+            <button class="btn-catalogo-filtro">
+              <icono :icon="['fa', 'sliders']" @click="filtrarDatos"></icono>
+            </button>
             <ul class="elementos-filtro" :class="{ filtroOculto: !mostrarFiltro }">
               <li>
                 <router-link to="/catalogo-senlleiras">

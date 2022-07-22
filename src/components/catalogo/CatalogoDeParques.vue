@@ -56,3 +56,9 @@ const loadPage = async () => {
 }
 loadPage();
 </script>
+<style scoped>
+.arbol-catalogo-element .parque-info{
+    padding: .5rem;
+}
+
+</style>
