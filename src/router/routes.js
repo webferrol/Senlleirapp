@@ -100,7 +100,7 @@ export const routes = [
 
   // ADMIN
   {
-    path: "/admin",
+    path: "/adpower10",
     name: "administrador",
     component: () => import("@/components/admin/LoginAdmin.vue"),
   },

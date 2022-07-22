@@ -17,7 +17,7 @@
           <router-link to="/admin-parque">cat-parques</router-link>
         </li>
         <li>
-          <router-link to="/admin">admin</router-link>
+          <router-link to="/adpower10">admin</router-link>
         </li>
       </ul>
       <ul class="header-nav-buttons">
