@@ -157,7 +157,7 @@ export const deleteDocument = async (collection, uid) => {
  export const getPropuestaSenlleiras = async ($propuesta_senlleira=true) => {
   
   const tmp = [];
-  const q = query(collection(db, 'Arbores'), where('propuesta_senlleira', "==", $propuesta_senlleira),where('publicado','==',true));
+  const q = query(collection(db, 'Arbores'), where('propuesta_senlleira', "==", $propuesta_senlleira),where('publicado','==',true),orderBy('nombre_arbol'));
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach((doc) => {
     tmp.push({
