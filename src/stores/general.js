@@ -3,8 +3,7 @@ import { defineStore } from "pinia";
 import { useStoreArbores } from "./arbores";
 import { useStoreEspecies } from "./especies";
 import { useStoreParques } from "./parques";
-import { initPage,nextPage,previousPage,totalPages,seekItemPage,limitPage } from "../hook/pagination.firestore";
-import { getDocsArray } from "../hook/firestore.hook";
+import { initPage,nextPage,previousPage,totalPages } from "../hook/pagination.firestore";
 
 export const useStoreGeneral = defineStore('busqueda', {
     state: () => {
@@ -16,7 +15,9 @@ export const useStoreGeneral = defineStore('busqueda', {
             limit: 3,
             total: 0,
             actualPage: 1,
-            tmpNext: []
+            tmpNext: [],
+            btnNext: true,
+            btnPrevious: false
         }
     },
     actions:{
@@ -51,47 +52,23 @@ export const useStoreGeneral = defineStore('busqueda', {
 
         // Paginación, conseguir paginar normal y el resultado de búsqueda
         async setPagination() {
-            const querySnapshot = await initPage("Arbores", "genero", this.limit);
-            console.log(querySnapshot)
-            this.tmpNext = querySnapshot.docs[querySnapshot.docs.length-1];
-            // console.log(this.tmpPagQuery)
-            // this.tmpPag = getDocsArray(querySnapshot);
-            querySnapshot.forEach((doc) => {
-                this.tmpPag.push({
-                    idDoc: doc.id,
-                    ...doc.data(),
-                })
-            })
+            this.tmpPag = await initPage("Arbores", "genero", this.limit);
+            
+    
         },
 
-        async setNextPagination() {
-            // console.log(lastWorkExperiences)
-            this.actualPage++;
-            // const next = await seekItemPage("Arbores", this.tmpPag[this.tmpPag.length-1]);
-            // console.log(next)
-            // console.log(this.tmpPag[this.tmpPag.length-1])
-            const querySnapshot = await nextPage("Arbores", "genero", this.tmpNext, this.limit);
-            // console.log(querySnapshot)
-            querySnapshot.forEach((doc) => {
-                this.tmpPag.push({
-                    idDoc: doc.id,
-                    ...doc.data(),
-                })
-            })
+        async setNextPagination(idDoc) {
+            this.tmpPag = await nextPage("Arbores", "genero", idDoc, this.limit);
+           
         },
 
-        // async setPreviousPagination() {
-        //     // this.actualPage--;
-        //     //Obtenemos el primer elemento doc mostrado en la paginación
-        //     // const previous = await seekItemPage("workExperience", this.workExperiences[0].ref);;           
-        //     // Construct a new query starting at this document
-        //     // const querySnapshot = await previousPage("workExperience",'dateEnd',this.tmpPagQuery,this.limit);
-        //     // querySnapshot.forEach((doc) => {
-        //     //     this.tmpPag.push({
-        //     //         idDoc: doc.id,
-        //     //         ...doc.data(),
-        //     //     })
-        //     // })
-        // },
+        async setPreviousPagination(idDoc) {
+            this.tmpPag = await previousPage("Arbores", "genero", idDoc, this.limit);
+
+        },
+        
+        async setTotalPages() {
+            this.total = await totalPages("Arbores");
+        }
     }
 })
