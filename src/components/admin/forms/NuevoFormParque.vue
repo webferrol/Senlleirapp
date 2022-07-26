@@ -126,6 +126,7 @@ const form = reactive({
   localizacion: "",
   lat: "",
   lng: "",
+  orden:0,
   cronoloxia: "",
   carballeira: false,
   superficie: "",
@@ -149,6 +150,7 @@ const reset = () => {
   form.descripcion = "";
   form.urlficha = "";
   form.urlmapa = "";
+  form.orden = 0;
 };
 
 //Funcion para cargar fotos de los parques

@@ -59,12 +59,13 @@
         <hr class="line-ficha-tecnica" />
         <h2 class="h2-ficha-tecnica">Localización</h2>
       </div>
-      <div class="mapa-global">
+      <div class="mapa-global" >
         <TheLeafletComponent
           v-if="parque.lat"
           icon-url="../parques.png"
           :location="location"
           :centrado="[parque.lat, parque.lng]"
+          lMapHeight="400px"
         />
       </div>
 
@@ -130,9 +131,7 @@ const handleClose = () => {
 </script>
 
 <style scoped>
-.mapa-global{
-  padding: 15px;
-}
+
 
 .mapas {
   display: grid;
@@ -141,7 +140,8 @@ const handleClose = () => {
 }
 
 .mapas img {
-  width: 100%;
+  margin: 0 auto;
+  width: 90%;
 }
 
 .list-parque-arbol{
