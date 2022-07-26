@@ -121,6 +121,11 @@ export const routes = [
     component: () => import("@/views/admin/ProgramadoresView.vue"),
   },
   {
+    path: "/supersecretodeldesarrollador",
+    name: "supersecretpdeldesarrollador",
+    component: () => import("@/views/admin/secreto/ComponenteSecreto.vue"),
+  },
+  {
     path: "/admin-senlleira",
     name: "admin-senlleira",
     meta: {
