@@ -80,6 +80,7 @@ const desconectar = () => {
   padding: 1rem;
   border: 2px solid black;
   border-radius: 5px;
+  background-color: var(--colorclaro2);
 }
 
 .admin_form_input {
@@ -94,6 +95,8 @@ const desconectar = () => {
   gap: 2rem;
 }
 #adminForm .admin_login_btn button {
-  width: fit-content;
+  width: 110px;
+  font-size: 1rem;
+  cursor: pointer;
 }
 </style>

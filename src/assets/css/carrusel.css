@@ -20,7 +20,7 @@
 }
 
 /*Etiqueta img*/
-.carrusel__image {
+.carrusel .carrusel-images-galery li img{
   position: absolute;
   width: 100%;
   height: 100%;

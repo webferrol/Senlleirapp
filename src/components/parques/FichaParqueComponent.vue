@@ -70,7 +70,7 @@
 
       <!-- LISTADO DE ÁRBOLES -->
       <!-- Se elimino router link con el listado de arboles -->
-      <ul v-if="parque?.especies">
+      <ul class="list-parque-arbol" v-if="parque?.especies">
         <li class="component-container" v-for="especie of parque.especies" :key="especie.idDoc">
          <router-link :to="{
           name:'FichaEspecie',
@@ -129,7 +129,7 @@ const handleClose = () => {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .mapa-global{
   padding: 15px;
 }
@@ -144,31 +144,37 @@ const handleClose = () => {
   width: 100%;
 }
 
-.component-container {
-  margin: 10px;
-  margin-top: 0;
-  margin-bottom: 0;
-  background-color: bisque;
- 
-  a {
-    text-decoration: none;
-    color: black;
-    display: block;
-    display: flex;
-    gap: .5em;
-  }
+.list-parque-arbol{
+  width: 100%;
+  display: grid;
+  gap: .25rem;
+  padding: .5rem;
 }
-
+  a{
+    width: inherit;
+    gap: .25rem;
+    text-decoration: none;
+    color: var(--coloroscuro);
+    display: grid;
+    align-items: center;
+    grid-template-columns: 22px 1fr;
+    /* overflow: hidden; */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+ 
 .numero-mapa {
-  color: white;
-  background-color: black;
+  color: var(--colorclaro);
+  background-color: var(--colorprincipal);
+  font-weight: 600;
   border-radius: 50%;
-  font-size: 1rem;
+  font-size: .9rem;
+  padding: .2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1.5em;
-  height: 1.5em;
+  width: 22px;
+  height: 22px;
 }
 
 .texto-arbol {
@@ -176,4 +182,22 @@ const handleClose = () => {
   display: flex;
   align-items: center;
 }
+@media screen and (min-width: 440px) {
+  .list-parque-arbol{
+    grid-template-columns: auto auto;
+  }
+  .list-parque-arbol li{
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+@media screen  and (min-width:700px){
+  .list-parque-arbol{
+    padding: .25rem 1rem;
+  }
+}
+
+
 </style>
