@@ -23,10 +23,30 @@ import {
  * @returns query - Creates a new immutable instance of Query that is extended to also include additional query constraints.
  */
 export const initPage = async (collectionRef, field, pageSize) => {
-  return await getDocs(query(
+    const tmp = {
+        data: [],
+        idDocLast: '',
+        idDocFirst: ''
+    };
+    const querySnapshot =  await getDocs(query(
     collection(db,collectionRef),
     orderBy(field),
     limit(pageSize)));
+    const tam = querySnapshot.size;
+    if(tam>0){
+        querySnapshot.forEach((doc) => {
+            tmp.data.push({
+                idDoc: doc.id,
+                ...doc.data(),
+            })
+        })
+        tmp.idDocLast = querySnapshot.docs[tam-1].id;
+        tmp.idDocFirst = querySnapshot.docs[0].id;
+        return tmp;
+    }
+    return tmp;
+
+   
 }
 
 /**
@@ -37,12 +57,34 @@ export const initPage = async (collectionRef, field, pageSize) => {
  * @param {Number} pageSize - Número de registros a montar 
  * @returns query - Creates a new immutable instance of Query that is extended to also include additional query constraints.
  */
-export const nextPage = async (collectionRef, field, lastDocSnap, pageSize) => {
-    return await getDocs(query(
+export const nextPage = async (collectionRef, field, idDoc, pageSize) => {
+    const tmp = {
+        data: [],
+        idDocLast: '',
+        idDocFirst: ''
+    };
+    const docRef = doc(db, collectionRef, idDoc);
+    const docSnap = await getDoc(docRef);
+
+    const querySnapshot = await getDocs(query(
         collection(db,collectionRef),
         orderBy(field),
-        startAfter(lastDocSnap),
+        startAfter(docSnap),
         limit(pageSize)));
+        
+        const tam = querySnapshot.size;
+        if(tam>0){
+            querySnapshot.forEach((doc) => {
+                tmp.data.push({
+                    idDoc: doc.id,
+                    ...doc.data(),
+                })
+            })
+            tmp.idDocLast = querySnapshot.docs[tam-1].id;
+            tmp.idDocFirst = querySnapshot.docs[0].id;
+            return tmp;
+        }
+        return tmp;
 }
 
 /**
@@ -53,12 +95,34 @@ export const nextPage = async (collectionRef, field, lastDocSnap, pageSize) => {
  * @param {Number} pageSize - Número de registros a montar 
  * @returns query - Creates a new immutable instance of Query that is extended to also include additional query constraints.
  */
-export const previousPage = async (collectionRef,field,lastDocSnap,pageSize) => {
-    return await getDocs(query(
+export const previousPage = async (collectionRef,field,idDoc,pageSize) => {
+    const tmp = {
+        data: [],
+        idDocLast: '',
+        idDocFirst: ''
+
+    };
+    const docRef = doc(db, collectionRef, idDoc);
+    const docSnap = await getDoc(docRef);
+
+    const querySnapshot = await getDocs(query(
         collection(db,collectionRef),
         orderBy(field),
-        endBefore(lastDocSnap),
+        endBefore(docSnap),
         limitToLast(pageSize)));
+        const tam = querySnapshot.size;
+        if(tam>0){
+            querySnapshot.forEach((doc) => {
+                tmp.data.push({
+                    idDoc: doc.id,
+                    ...doc.data(),
+                })
+            })
+            tmp.idDocLast = querySnapshot.docs[tam-1].id;
+            tmp.idDocFirst = querySnapshot.docs[0].id;
+            return tmp;
+        }
+        return tmp;
 }
 /**
  * 
