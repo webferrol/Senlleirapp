@@ -125,7 +125,7 @@
            
           </div>
         </fieldset>
-        <div>Fotos de la especie</div>
+        <div>Fotos da especie</div>
         <TheUploader @emitirFichero="gestionFoto"></TheUploader>
 
 

@@ -55,9 +55,9 @@
       <h2>Atención</h2>
       <span class="borrar_txt">
         <icono :icon="['fa', 'circle-exclamation']"></icono>
-        <p>Se eliminará: {{ nombre }} de maneira irrevesible</p>
+        <p>Eliminarase {{ nombre }} de maneira irrevesible</p>
         <p>
-          !Todas las senlleiras que contentan esta especie se verán afectadas!
+          !Todalas senlleiras que conteñan esta especie veranse afectadas!
         </p>
       </span>
       <span class="borrar_btn">
@@ -151,7 +151,7 @@
             </option>
           </select>
 
-          <label for="lat" class="form-label">Latitud</label>
+          <label for="lat" class="form-label">Latitude</label>
           <input
             type="number"
             v-model.number="arbore.lat"
@@ -159,7 +159,7 @@
             id="latitud"
             placeholder="Latitud"
           />
-          <label for="lng" class="form-label">Longitud</label>
+          <label for="lng" class="form-label">Lonxitude</label>
           <input
             type="number"
             step="any"
@@ -169,7 +169,7 @@
           />
         </fieldset>
         <fieldset>
-          <legend>Descripción</legend>
+          <legend>Descrición</legend>
           <label for="descripcion"> Descrición</label>
           <textarea
             rows="10"
@@ -225,7 +225,7 @@
           value="Editar Senlleira"
           :disabled="arbore === null"
         />
-        <div v-if="loading">Guardando...</div>
+        <div v-if="loading">Gardando...</div>
       </fieldset>
     </form>
   </div>

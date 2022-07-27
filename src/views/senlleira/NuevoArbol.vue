@@ -70,7 +70,7 @@
         </div>
       </fieldset>
       <fieldset class="data-senlleira">
-        <legend>Descripción</legend>
+        <legend>Descrición</legend>
         <div class="senlleira-localizacion">
           <textarea
             v-model="form.descripcion"

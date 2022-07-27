@@ -4,7 +4,7 @@
       <td>Orden</td>
       <td>Nome</td>
       <td>Localización</td>
-      <td>Geolocalización</td>
+      <td>Xeolocalización</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono :icon="['fa', 'gears']"></icono>
@@ -56,7 +56,7 @@
       <h2>Atención</h2>
       <span class="borrar_txt">
         <icono :icon="['fa', 'circle-exclamation']"></icono>
-        <p>Se eliminará {{ nombre }} de manera irrevesible</p>
+        <p>Eliminarase {{ nombre }} de maneira irrevesible</p>
       </span>
       <span class="borrar_btn">
         <button @click="borrarParque">Eliminar</button>
@@ -103,7 +103,7 @@
           id="localizacion"
           placeholder="Localización"
         />
-        <label for="lat" class="form-label">Latitud</label>
+        <label for="lat" class="form-label">Latitude</label>
         <input
           type="number"
           step="any"
@@ -111,7 +111,7 @@
           id="latitud"
           placeholder="Latitud"
         />
-        <label for="lng" class="form-label">Longitud</label>
+        <label for="lng" class="form-label">Lonxitude</label>
         <input
           type="number"
           step="any"
@@ -142,7 +142,7 @@
           id="superficie"
           placeholder="Superficie"
         />
-        <label for="descripcion" class="form-label">Descripción</label>
+        <label for="descripcion" class="form-label">Descrición</label>
         <textarea
           type="text"
           v-model="parque.descripcion"
@@ -168,9 +168,9 @@
             Portada
           </div>
         </fieldset>
-        <div>Fotos del parque</div>
+        <div>Fotos do parque</div>
         <theUploader @emitirFichero="gestionFoto"></theUploader>
-        <div>Mapa del parque</div>
+        <div>Mapa do parque</div>
         <TheUploader @emitirFichero="gestionMapa"></TheUploader>
 
         <input
@@ -178,7 +178,7 @@
           value="Editar Parque"
           :disabled="parque === null"
         />
-        <div v-if="loading">Guardando...</div>
+        <div v-if="loading">Gardando...</div>
       </fieldset>
     </form>
   </div>
