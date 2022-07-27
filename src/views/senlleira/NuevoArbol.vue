@@ -61,7 +61,7 @@
           <select @change="form.ubicacion_parque = $event.target.options[$event.target.selectedIndex].text"
             v-model="form.idParque" name="localizacion" id="localizacion" required>
             <option value="#"></option>
-            <option value="#">Otros</option>
+            <option value="#">Outros</option>
             <option v-for="valor in storeParques.parques" :key="valor.idDoc" :value="valor.idDoc">
               {{ valor.nombre }} </option>
           </select>
