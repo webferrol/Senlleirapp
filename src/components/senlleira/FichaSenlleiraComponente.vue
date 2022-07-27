@@ -71,7 +71,8 @@
         v-if="senlleira?.lat && senlleira?.lng"
         icon-url="../arbolito.png"
         :location="location"
-        :centrado="[Number(senlleira?.lat), Number(senlleira?.lng)]" />
+        :centrado="[Number(senlleira?.lat), Number(senlleira?.lng)]"
+        lMapHeight="400px" />
       </div>
     </article>
   </div>

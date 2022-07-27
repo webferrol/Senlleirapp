@@ -39,7 +39,13 @@ const mapas = ref([]);
       throw new Error(
         `El parque con código ${route.params.idDoc} no existe. Fichero FichaParqueView.vue`
       );
+    const ordenarNumero = (a,b)  => {
+      return (a.numero-b.numero)
+    }
+    parque.value?.especies.sort(ordenarNumero);
     //Carga de imágenes
+
+    console.log(parque.value)
 
     imagenesFichaTecnica.value = await listAllUrls("parques/" + route.params.idDoc);
     mapas.value = await listAllUrls("parquesficha/" + route.params.idDoc);

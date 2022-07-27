@@ -83,6 +83,25 @@ export const getDocument = async (collectionName,reference) => {
   return tmp;
 }
 
+/**
+ * @param {String} $collectionName Nombre de la colección
+ * @param {String} $orderBy Campo por el que se desea ordenar la búsqueda
+ * @returns {Array} Array de objetos con los documentos encontrados o array vacío si no encuentra nada
+ */
+ export const getDocuments2OrderBy = async ($collectionName,$orderBy,$orderBy2) => {
+  
+  const tmp = [];
+  const q = query(collection(db, $collectionName), orderBy($orderBy),orderBy($orderBy2));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    tmp.push({
+      idDoc: doc.id,
+      ...doc.data(), //DESTRUCTURING
+    });
+  });
+  return tmp;
+}
+
 
 /**
  * 

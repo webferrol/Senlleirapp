@@ -1,6 +1,7 @@
 <template>
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
+      <td>Orden</td>
       <td>Nome</td>
       <td>Localización</td>
       <td>Geolocalización</td>
@@ -16,6 +17,7 @@
       v-for="(parque, index) in storeParques.parques"
       :key="index"
     >
+      <td>{{ parque.orden }}</td>
       <td>{{ parque.nombre }}</td>
       <td>{{ parque.localizacion }}</td>
       <td>{{ parque.lat }},{{ parque.lng }}</td>
@@ -27,20 +29,23 @@
             @click="handleDelete({ id: parque.idDoc, name: parque.nombre })"
           >
           </icono>
-          
-            <icono @click="editar(parque)" :icon="['fa', 'pen']" to="/arb-:id"></icono>
-            <router-link
-              class="asign-specie"
-              :to="{
-                name: 'AdminParqueEspecies',
-                params: {
-                  idDoc: parque.idDoc,
-                },
-              }"
-            >
-              Asignar Especies
-            </router-link>
-          
+
+          <icono
+            @click="editar(parque)"
+            :icon="['fa', 'pen']"
+            to="/arb-:id"
+          ></icono>
+          <router-link
+            class="asign-specie"
+            :to="{
+              name: 'AdminParqueEspecies',
+              params: {
+                idDoc: parque.idDoc,
+              },
+            }"
+          >
+            Asignar Especies
+          </router-link>
         </span>
       </td>
     </tr>
@@ -70,6 +75,13 @@
       ></icono>
       <fieldset class="data_especies">
         <h2>Editar Parques</h2>
+        <label for="orden" class="form-label" required>Orden</label>
+        <input
+          type="number"
+          v-model="parque.orden"
+          id="orden"
+          placeholder="Orden"
+        />
         <label for="nombre" class="form-label" required>Nome</label>
         <input
           type="text"
@@ -246,32 +258,36 @@ const error = ref(false);
 
 const gestionFoto = async (file) => {
   if (file) {
-    const imagen = file[0];
-    try {
-      error.value = "";
-      await storeParques.subirParque({
-        ref: `parques/${parque.value.idDoc}`,
-        file: imagen,
-      });
-    } catch (e) {
-      console.log(e);
-      error.value = e.mensage;
+    for (let i = 0, tam = file.length; i < tam; i++) {
+      const imagen = file[i];
+      try {
+        error.value = "";
+        await storeParques.subirParque({
+          ref: `parques/${parque.value.idDoc}`,
+          file: imagen,
+        });
+      } catch (e) {
+        console.log(e);
+        error.value = e.mensage;
+      }
     }
   }
 };
 
 const gestionMapa = async (file) => {
   if (file) {
-    const imagen = file[0];
-    try {
-      error.value = "";
-      await storeParques.subirParque({
-        ref: `parquesficha/${parque.value.idDoc}`,
-        file: imagen,
-      });
-    } catch (e) {
-      console.log(e);
-      error.value = e.mensage;
+    for (let i = 0, tam = file.length; i < tam; i++) {
+      const imagen = file[i];
+      try {
+        error.value = "";
+        await storeParques.subirParque({
+          ref: `parquesficha/${parque.value.idDoc}`,
+          file: imagen,
+        });
+      } catch (e) {
+        console.log(e);
+        error.value = e.mensage;
+      }
     }
   }
 };
