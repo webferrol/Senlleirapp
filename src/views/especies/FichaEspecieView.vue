@@ -39,7 +39,7 @@ const imagenesFichaTecnica = ref([]);
     //console.log(arbores.value)
     if (!especie.value)
       throw new Error(
-        `A especie con código ${route.params.idDoc} non existe. Fichero FichaEspecieView.vue`
+        `A especie con código ${route.params.idDoc} non existe. Ficheiro FichaEspecieView.vue`
       );
     //Carga de imágenes
 

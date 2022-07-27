@@ -41,7 +41,7 @@ const error = ref({
 
     if (!senlleira.value)
       throw new Error(
-        `A senlleira con código ${route.params.idDoc} non existe. Fichero FichaSenlleiraView.vue`
+        `A senlleira con código ${route.params.idDoc} non existe. Ficheiro FichaSenlleiraView.vue`
       );
     //Carga de imágenes
     images.value = await listAllUrls(
