@@ -85,7 +85,7 @@
         <div>Fotos del parque</div>
         <TheUploader :required="true"   @emitirFichero="fotosParques"></TheUploader>
         <div>Mapa del parque</div>
-        <TheUploader :required="true"   @emitirFichero="fotoMapa"></TheUploader>
+        <TheUploader :required="false"   @emitirFichero="fotoMapa"></TheUploader>
 
         <div v-if="error.error" class="error">{{ error.message }}</div>
         <div v-if="spinner" class="spinner">Cargando....</div>

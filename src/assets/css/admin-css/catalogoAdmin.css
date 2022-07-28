@@ -10,13 +10,14 @@
 }
 
 .tabla_datos_administrativo .catalogo_administrativo:nth-child(odd) {
-    background-color: lightgrey;
+    background-color: rgb(150, 150, 150);
 }
 
 .tabla_datos_administrativo tr td {
     border-left: 2px solid black;
     border-bottom: 2px solid black;
     padding: .25rem;
+    color: var(--coloroscuro)
 }
 
 .mostrar_info {
@@ -57,10 +58,21 @@
 
 .tabla_administrativo_options span {
     display: flex;
-    gap: .75rem;
+    gap: .5rem;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+.tabla_administrativo_options span button{
+    border: none;
+    font-size: 1.1rem;
+    background-color: transparent;
+    color: var(--coloroscuro);
+    cursor: pointer;
+    transition: color .3s linear;
+}
+.tabla_administrativo_options span button:hover{
+    color: var(--colorprincipal);
 }
 
 /* Alerta de borrar especie */

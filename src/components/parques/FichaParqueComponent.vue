@@ -33,7 +33,7 @@
             <h3>Superficie</h3>
           </span>
 
-          <p>{{ parque.superficie }} metros cadrados</p>
+          <p>{{ parque.superficie }}</p>
         </div>
         <div>
           <span class="subtitle-caracteristica">

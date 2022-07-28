@@ -339,7 +339,7 @@ cargarFotos();
 /* Router-link asignar especies */
 .asign-specie {
   text-decoration: none;
-  color: black;
+  color: var(--coloroscuro);
   font-weight: 700;
 }
 </style> >
