@@ -3,7 +3,7 @@
         <div class="secreto-container">
         <h3>Grupo sansus 2021 - 2022</h3>
         <p>Acabas de atopar unha ficha supersecreta!</p>
-        <img src="./nadir.jpg" alt="supersecreto">
+        <img src="./foto-sansus-3.jpg" alt="supersecreto">
 
         <p>Somos os alumnos traballadores do Obradoiro Santiago Sustentable 2021 - 2022 (sansus)</p>
         <div class="lista-alumnos">
