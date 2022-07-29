@@ -1,5 +1,5 @@
 <template>
-  <h1 class="tittle-section">Catalogo de Senlleiras</h1>
+  <h1 class="tittle-section">Catálogo de Senlleiras</h1>
   <div class="catalogo-section-component" v-if="loadGaleria">
     <div
       class="arbol-catalogo-element"
