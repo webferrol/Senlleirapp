@@ -10,22 +10,27 @@ h1 {
 .container{
   margin-top: 20px;
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
+  grid-template-columns: repeat(auto-fit,minmax(340px,1fr));
   gap: .5em;
 }
 .formulario {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 260px 60px;
   gap: 5px;
+}
+.formulario div{
+  display: flex;
+  align-items: center;
 }
 
 .number{
-  width: 4rem;
+  width: 1rem;
 }
 .checkbox{
   display: inline-block;
-  margin-right: .5rem;
-  transform: scale(2);
+  margin-right: .25rem;
+  width:20px;
+  height: 20px;
   padding: 2rem;
 }
 
@@ -53,10 +58,19 @@ button:hover {
 }
 
 .listado {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  width: 100%;
+  gap: 1rem;
+}
+.listado .fichas{
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .listado img{
-  width: 400px;
+  width:100%;
+  max-width: 1000px;
   object-fit: cover;
 }
 ul {

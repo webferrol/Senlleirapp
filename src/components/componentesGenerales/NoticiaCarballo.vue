@@ -6,7 +6,7 @@
         <h3>Gañador árbore nacional 2022</h3>
         <router-link :to="{
             name:'FichaSenlleira',
-            params:{'idDoc':'VDipVrgnJqjKrJQzn2Gc'},
+            params:{'idDoc':'uf9njzs2UC7HY0JO55FL'},
         }">Ver árbore</router-link>
     </div>
 </div>

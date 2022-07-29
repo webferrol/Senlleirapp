@@ -1,9 +1,10 @@
 <template>
   <table class="tabla_datos_administrativo">
     <tr class="header_administrativo">
+      <td>Orden</td>
       <td>Nome</td>
       <td>Localización</td>
-      <td>Geolocalización</td>
+      <td>Xeolocalización</td>
       <td class="tabla_administrativo_options">
         <span>
           <icono :icon="['fa', 'gears']"></icono>
@@ -16,6 +17,7 @@
       v-for="(parque, index) in storeParques.parques"
       :key="index"
     >
+      <td>{{ parque.orden }}</td>
       <td>{{ parque.nombre }}</td>
       <td>{{ parque.localizacion }}</td>
       <td>{{ parque.lat }},{{ parque.lng }}</td>
@@ -27,20 +29,23 @@
             @click="handleDelete({ id: parque.idDoc, name: parque.nombre })"
           >
           </icono>
-          
-            <icono @click="editar(parque)" :icon="['fa', 'pen']" to="/arb-:id"></icono>
-            <router-link
-              class="asign-specie"
-              :to="{
-                name: 'AdminParqueEspecies',
-                params: {
-                  idDoc: parque.idDoc,
-                },
-              }"
-            >
-              Asignar Especies
-            </router-link>
-          
+
+          <icono
+            @click="editar(parque)"
+            :icon="['fa', 'pen']"
+            to="/arb-:id"
+          ></icono>
+          <router-link
+            class="asign-specie"
+            :to="{
+              name: 'AdminParqueEspecies',
+              params: {
+                idDoc: parque.idDoc,
+              },
+            }"
+          >
+            Asignar Especies
+          </router-link>
         </span>
       </td>
     </tr>
@@ -51,7 +56,7 @@
       <h2>Atención</h2>
       <span class="borrar_txt">
         <icono :icon="['fa', 'circle-exclamation']"></icono>
-        <p>Se eliminará {{ nombre }} de manera irrevesible</p>
+        <p>Eliminarase {{ nombre }} de maneira irrevesible</p>
       </span>
       <span class="borrar_btn">
         <button @click="borrarParque">Eliminar</button>
@@ -70,6 +75,13 @@
       ></icono>
       <fieldset class="data_especies">
         <h2>Editar Parques</h2>
+        <label for="orden" class="form-label" required>Orden</label>
+        <input
+          type="number"
+          v-model="parque.orden"
+          id="orden"
+          placeholder="Orden"
+        />
         <label for="nombre" class="form-label" required>Nome</label>
         <input
           type="text"
@@ -91,7 +103,7 @@
           id="localizacion"
           placeholder="Localización"
         />
-        <label for="lat" class="form-label">Latitud</label>
+        <label for="lat" class="form-label">Latitude</label>
         <input
           type="number"
           step="any"
@@ -99,7 +111,7 @@
           id="latitud"
           placeholder="Latitud"
         />
-        <label for="lng" class="form-label">Longitud</label>
+        <label for="lng" class="form-label">Lonxitude</label>
         <input
           type="number"
           step="any"
@@ -130,7 +142,7 @@
           id="superficie"
           placeholder="Superficie"
         />
-        <label for="descripcion" class="form-label">Descripción</label>
+        <label for="descripcion" class="form-label">Descrición</label>
         <textarea
           type="text"
           v-model="parque.descripcion"
@@ -156,9 +168,9 @@
             Portada
           </div>
         </fieldset>
-        <div>Fotos del parque</div>
+        <div>Fotos do parque</div>
         <theUploader @emitirFichero="gestionFoto"></theUploader>
-        <div>Mapa del parque</div>
+        <div>Mapa do parque</div>
         <TheUploader @emitirFichero="gestionMapa"></TheUploader>
 
         <input
@@ -166,7 +178,7 @@
           value="Editar Parque"
           :disabled="parque === null"
         />
-        <div v-if="loading">Guardando...</div>
+        <div v-if="loading">Gardando...</div>
       </fieldset>
     </form>
   </div>
@@ -246,32 +258,36 @@ const error = ref(false);
 
 const gestionFoto = async (file) => {
   if (file) {
-    const imagen = file[0];
-    try {
-      error.value = "";
-      await storeParques.subirParque({
-        ref: `parques/${parque.value.idDoc}`,
-        file: imagen,
-      });
-    } catch (e) {
-      console.log(e);
-      error.value = e.mensage;
+    for (let i = 0, tam = file.length; i < tam; i++) {
+      const imagen = file[i];
+      try {
+        error.value = "";
+        await storeParques.subirParque({
+          ref: `parques/${parque.value.idDoc}`,
+          file: imagen,
+        });
+      } catch (e) {
+        console.log(e);
+        error.value = e.mensage;
+      }
     }
   }
 };
 
 const gestionMapa = async (file) => {
   if (file) {
-    const imagen = file[0];
-    try {
-      error.value = "";
-      await storeParques.subirParque({
-        ref: `parquesficha/${parque.value.idDoc}`,
-        file: imagen,
-      });
-    } catch (e) {
-      console.log(e);
-      error.value = e.mensage;
+    for (let i = 0, tam = file.length; i < tam; i++) {
+      const imagen = file[i];
+      try {
+        error.value = "";
+        await storeParques.subirParque({
+          ref: `parquesficha/${parque.value.idDoc}`,
+          file: imagen,
+        });
+      } catch (e) {
+        console.log(e);
+        error.value = e.mensage;
+      }
     }
   }
 };
@@ -323,7 +339,7 @@ cargarFotos();
 /* Router-link asignar especies */
 .asign-specie {
   text-decoration: none;
-  color: black;
+  color: var(--coloroscuro);
   font-weight: 700;
 }
 </style> >

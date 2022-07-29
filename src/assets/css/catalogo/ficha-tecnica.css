@@ -159,5 +159,8 @@
 }
 
 .mapa-global{
-  padding: 0 1rem;
+  width: 80vw;
+  max-width: 400px;
+  min-width: 300px;
+  margin:0 auto;
 }

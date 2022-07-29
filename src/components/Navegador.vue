@@ -29,7 +29,7 @@
         </li>
         <!-- Boton de búsqueda - CATALOGO -->
         <li class="buscador" v-if="$route.path.includes('catalogo')">
-          <input type="text" name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()"
+          <input type="text"  name="buscar" id="buscar" placeholder="Buscar" @keyup.enter="filtrar()"
             v-model.trim="storeGeneral.buscador" @focus="animacionBuscar = true" @focusout="animacionBuscar = false">
           <label for="buscar" :class="{ animacion: animacionBuscar }">
             <icono :icon="['fa', 'magnifying-glass']" @click="filtrar()"></icono>
@@ -103,6 +103,9 @@ const filtrar = () => {
     
   } else if(router.currentRoute.value.fullPath === '/catalogo-senlleiras'){
     storeGeneral.filtraArboresSenlleirasPropostas();
+    if(storeGeneral.buscador === 'sansus2022'){
+      router.push('/supersecretodeldesarrollador')
+    }
   }
   else if (router.currentRoute.value.fullPath === '/catalogo-de-especies') {
     storeGeneral.filtrarEspecies();

@@ -85,7 +85,7 @@
         <div>Fotos del parque</div>
         <TheUploader :required="true"   @emitirFichero="fotosParques"></TheUploader>
         <div>Mapa del parque</div>
-        <TheUploader :required="true"   @emitirFichero="fotoMapa"></TheUploader>
+        <TheUploader :required="false"   @emitirFichero="fotoMapa"></TheUploader>
 
         <div v-if="error.error" class="error">{{ error.message }}</div>
         <div v-if="spinner" class="spinner">Cargando....</div>
@@ -126,6 +126,7 @@ const form = reactive({
   localizacion: "",
   lat: "",
   lng: "",
+  orden:0,
   cronoloxia: "",
   carballeira: false,
   superficie: "",
@@ -149,6 +150,7 @@ const reset = () => {
   form.descripcion = "";
   form.urlficha = "";
   form.urlmapa = "";
+  form.orden = 0;
 };
 
 //Funcion para cargar fotos de los parques
@@ -204,7 +206,7 @@ const handleSubmit = async () => {
   if (tmpImagenes !== null && docRef.id) {
     //Firestore
     const urlficha = `parques/${docRef.id}/${tmpImagenes[0].name}`;
-    console.log(urlficha);
+    // console.log(urlficha);
     await updateDocument(docRef.id, "Parques", { urlficha: urlficha });
     await subidaImagen(tmpImagenes, docRef.id);
   }
@@ -212,7 +214,7 @@ const handleSubmit = async () => {
   if (tmpMapa !== null && docRef.id) {
     //Firestore
     const urlMapa = `parquesficha/${docRef.id}/${tmpMapa[0].name}`;
-    console.log(urlMapa)
+    // console.log(urlMapa)
     //await updateDocument(docRef.id, "Parques", { urlmapa: urlMapa }); Si hace falta una ficha por defecto descomenta esta línea
     await subidaImagen(tmpMapa, docRef.id,'parquesficha');
     // }
