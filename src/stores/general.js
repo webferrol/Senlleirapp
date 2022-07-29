@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import { useStoreArbores } from "./arbores";
 import { useStoreEspecies } from "./especies";
 import { useStoreParques } from "./parques";
-import { initPage,nextPage,previousPage,totalPages } from "../hook/pagination.firestore";
+import { initPage,limitPage,nextPage,previousPage,seekItemPage,totalPages } from "../hook/pagination.firestore";
 
 export const useStoreGeneral = defineStore('busqueda', {
     state: () => {
@@ -69,6 +69,41 @@ export const useStoreGeneral = defineStore('busqueda', {
         
         async setTotalPages() {
             this.total = await totalPages("Arbores");
+        },
+
+        /**
+         * Paginar Una página concreta de las experiencias laborales
+         */
+        async setPaginationNumbers(page){
+            let see = []
+            const newLimit = page*this.limit;
+            const index = (this.limit*page)-this.limit-1;
+            // if(index<0){
+            //     this.tmpPag = [];
+            //     this.actualPage = page;
+            //     see = await this.setPagination();
+            //     return;
+            // }
+            see = await initPage("Arbores", "genero", newLimit);
+            // const arrayLast = see.tmp[see.tmp-1]
+            // this.tmpPag = await nextPage("Arbores", "genero", this.tmpPag.idDocLast, this.limit)
+            console.log(see)
+            console.log(arrayLast)
+            // let querySnapshot = await limitPage("Arbores", "genero", newLimit);
+
+            // const last = querySnapshot.docs[index];
+            // const lastTmpPag = await seekItemPage("Arbores", last.id)
+
+            // querySnapshot = await nextPage("Arbores", "genero", lastTmpPag, this.limit);
+            // this.actualPage = page;
+            // this.tmpPag = await nextPage("Arbores", "genero", this.tmpPag.idDocLast, newLimit )
+
+            // querySnapshot.forEach((doc) => {
+            //     this.tmpPag.data.push({
+            //         idDoc: doc.id,
+            //         ...doc.data(),
+            //     })
+            // })
         }
     }
 })

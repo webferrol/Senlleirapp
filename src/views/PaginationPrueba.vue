@@ -10,6 +10,11 @@
             </div>
             <br>
             <button @click="next" v-if="storeGeneral.btnNext">next</button>
+            <ul>
+              <li v-for="i in pages" :key="i" >
+              <a v-if="storeGeneral.actualPage === i">{{i}}</a><a @click="paginationLink(i)">{{i}}</a>
+              </li>
+            </ul>
             <button @click="previous" v-if="storeGeneral.btnPrevious">previous</button>
             <br>
 
@@ -19,6 +24,7 @@
 
 <script setup>
 //Dependencias
+import { async } from "@firebase/util";
 import { computed } from "vue";
 import { useStoreGeneral } from "../stores/general";
 
@@ -63,5 +69,9 @@ const previous = async () => {
   if(storeGeneral.actualPage<pages.value){
     storeGeneral.btnNext = true;
   }
+}
+
+const paginationLink = async (page) => {
+  await storeGeneral.setPaginationNumbers(page)
 }
 </script>

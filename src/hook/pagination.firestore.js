@@ -124,6 +124,18 @@ export const previousPage = async (collectionRef,field,idDoc,pageSize) => {
         }
         return tmp;
 }
+
+
+// export const paginationNumbers = (idDoc, pageSize, page) => {
+//     // const tmp = {
+//     //     data: [],
+//     //     idDocLast: '',
+//     //     idDocFirst: ''
+//     // };
+//     const newLimit = page*this.l
+// }
+
+
 /**
  * 
  * @param {String} collectionRef - Referencia a un colleción de firestore collection()
@@ -131,11 +143,12 @@ export const previousPage = async (collectionRef,field,idDoc,pageSize) => {
  * @param {Number} end - Límite de página a donde ir 
  * @returns QuerySnapshot
  */
- export const limitPage = async (collectionRef,field,end) => 
- await getDocs(query(
+ export const limitPage = async (collectionRef,field,end) => {
+ return await getDocs(query(
      collection(db,collectionRef),
      orderBy(field),
      limit(end)));
+    }
 /**
  * 
  * @param {String} collectionRef - Referencia a un colleción de firestore collection()
