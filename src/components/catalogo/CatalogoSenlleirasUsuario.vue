@@ -1,5 +1,5 @@
 <template>
-  <h1 class="tittle-section">Catalogo Senlleiras</h1>
+  <h1 class="tittle-section">Catálogo Senlleiras</h1>
   <div class="catalogo-section-component">
     <div
       class="arbol-catalogo-element"

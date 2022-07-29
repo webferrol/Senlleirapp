@@ -1,5 +1,5 @@
 <template>
-  <h1 class="tittle-section">Catalogo especies</h1>
+  <h1 class="tittle-section">Catálogo especies</h1>
   <div class="catalogo-especies-component" v-if="loadGaleria">
     <div class="especie-catalogo-element" data-titulo="Mostrar" title="Máis info"
       v-for="(especie, index) in storeGeneral.tmp" :key="index" identificador="especie.id"
