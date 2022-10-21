@@ -1,35 +1,19 @@
 <template>
     <div style="background-color: rgb(245, 244, 244);">
-        <l-map 
-            :style="`height: ${lMapHeight};width:100%;`" 
-            :options="{attributionControl: false}" 
-            :zoom="theZoom" 
-            :center="centrado" 
-            :maxZoom="maxZoom">
+        <l-map :style="`height: ${lMapHeight};width:100%;`" :options="{attributionControl: false}" :zoom="theZoom"
+            :center="centrado" :maxZoom="maxZoom">
             <l-control-layers position="topright"></l-control-layers>
-            <l-tile-layer
-                v-for="tileProvider in tileProviders"
-                :key="tileProvider.name"
-                :name="tileProvider.name"
-                :visible="tileProvider.visible"
-                :url="tileProvider.url"
-                :attribution="tileProvider.attribution"
-                layer-type="base"
-            />
+            <l-tile-layer v-for="tileProvider in tileProviders" :key="tileProvider.name" :name="tileProvider.name"
+                :visible="tileProvider.visible" :url="tileProvider.url" :attribution="tileProvider.attribution"
+                layer-type="base" />
             <div v-if="location.length">
-                <l-marker
-                    v-for="(loc,index) in location"
-                    :key="index"
-                    :lat-lng="loc.latLong"
-                    @dblclick="handleRoute(loc)"
-                >
-                    <l-icon
-                        :icon-url="iconUrl"
-                        :icon-size="iconSize"
-                    />
+                <l-marker v-for="(loc,index) in location" :key="index" :lat-lng="loc.latLong"
+                    @dblclick="handleRoute(loc)">
+                    <l-icon :icon-url="iconUrl" :icon-size="iconSize" />
                     <l-tooltip>
-                    <div style="font-weight: bold">{{loc.tooltip}}</div><div style="color: red">Doble click para vela ficha</div>
-                </l-tooltip>  
+                        <div style="font-weight: bold">{{loc.tooltip}}</div>
+                        <div style="color: red">Doble click para vela ficha</div>
+                    </l-tooltip>
                 </l-marker>
             </div>
         </l-map>
@@ -37,8 +21,9 @@
 </template>
 
 <script setup>
-import { LMap, LTileLayer, LMarker, LIcon, LControlLayers, LTooltip } from "@vue-leaflet/vue-leaflet";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import { LMap, LTileLayer, LMarker, LIcon, LControlLayers, LTooltip } from "@vue-leaflet/vue-leaflet";
 import { useRouter } from "vue-router";
 import { reactive } from "vue";
 
@@ -73,11 +58,11 @@ defineProps({
         default: () => [
             {
                 tooltip: 'Texto en tooltip',
-                route:{
-                    name:'FichaParque',
-                    params:{ idDoc: 1}
+                route: {
+                    name: 'FichaParque',
+                    params: { idDoc: 1 }
                 },
-                latLong:[42.877702, -8.5508146],
+                latLong: [42.877702, -8.5508146],
             }
         ]
     },
@@ -98,34 +83,34 @@ defineProps({
     /**
      * {Array} width y height del icono que se presenta como marcador
      */
-    iconSize:{
+    iconSize: {
         type: Array,
-        default: [80,80],
+        default: [80, 80],
     }
 });
 
 
 const tileProviders = reactive([
-        {
-          name: 'Mapa rueiro',
-          visible: true,          
-          url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        },
-        {
-          name: 'Mapa xeográfico',
-          visible: false,
-          url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-          attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',      
-        },
-      ]);
+    {
+        name: 'Mapa rueiro',
+        visible: true,
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    },
+    {
+        name: 'Mapa xeográfico',
+        visible: false,
+        url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+        attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+    },
+]);
 
-const handleRoute = ({route}) => {
-   
-  if (route) {
-    router.push(route);    
-  }
-  return;
+const handleRoute = ({ route }) => {
+
+    if (route) {
+        router.push(route);
+    }
+    return;
 }
 
 </script>
@@ -135,6 +120,7 @@ const handleRoute = ({route}) => {
     z-index: 0 !important;
     border-radius: 0.2rem;
 }
+
 .width {
     width: 100%;
     min-width: 18rem;

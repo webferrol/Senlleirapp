@@ -31,7 +31,6 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/vue-fontawesome": "^3.0.1",
     "@google-cloud/vision": "^2.4.2",
-    "@vue-leaflet/vue-leaflet": "^0.6.1",
     "firebase": "^9.8.3",
     "pinia": "^2.0.14",
     "sass": "^1.52.3",
@@ -41,6 +40,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
+    "@vue-leaflet/vue-leaflet": "^0.6.1",
     "@vue/test-utils": "^2.0.0",
     "jsdom": "^19.0.0",
     "vite": "^2.9.9",
