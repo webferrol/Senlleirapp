@@ -36,3 +36,8 @@ coverage
 /src-cordova/platforms
 /src-cordova/plugins
 /public/cordova.js
+
+
+# Doc
+senlleirasapp.docx
+senlleirasapp.pdf
