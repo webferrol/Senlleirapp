@@ -49,6 +49,11 @@ En la capturar de abajo entre otras cosas vemos los errores de la falta de **Gra
 
 - [Instalar Gradle](https://gradle.org/install/)
 
+#### JAVA_HOME
+
+Para esta variable de entorno en principio sigue el siguiente [tutorial](https://www.aprenderaprogramar.com/index.php?option=com_content&view=article&id=389:configurar-java-en-windows-variables-de-entorno-javahome-y-path-cu00610b&catid=68&Itemid=188)
+
+
 
 ### Producción en browser
 
