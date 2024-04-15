@@ -35,6 +35,20 @@ También podemos ver si reunimos los prerequisitos. con el comando <code>cordova
 
 <img src="./assets/cordova-ls-requirements-cmd.webp" with="600" alt="Resultado al comprobar los requirimientos con la plataforma android">
 
+### Posibles errores de _cordova requirements_
+
+#### JDK
+
+- [Instalar JDK](https://www.oracle.com/java/technologies/downloads/)
+
+#### Gradle
+
+En la capturar de abajo entre otras cosas vemos los errores de la falta de **Gradle**.
+
+<img src="./assets/gradle-not-installed.webp" with="600" alt="Errores, entre ellos el de gradle">
+
+- [Instalar Gradle](https://gradle.org/install/)
+
 
 ### Producción en browser
 
