@@ -31,6 +31,10 @@ cd senlleira
 cordova platform add android
 ```
 
+Resultado
+
+<img src="./assets/cordova-platform-add.webp" with="600" alt="Android Target SDK: android-33;   Android Compile SDK: 33">
+
 También podemos ver si reunimos los prerequisitos. con el comando <code>cordova requirements</code>
 
 <img src="./assets/cordova-ls-requirements-cmd.webp" with="600" alt="Resultado al comprobar los requirimientos con la plataforma android">
