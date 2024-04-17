@@ -4,6 +4,12 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## Configuración para utilizar en Android
 
+Algunos links:
+
+1. [Cordova cli](https://cordova.apache.org/docs/en/12.x/guide/cli/index.html)
+2. [Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html)
+3. [Requirimientos para Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html#requirements-and-support)
+
 ## Cordova
 
 Trabajamos con la plataforma de [Córdova Apache](https://cordova.apache.org/)
@@ -14,11 +20,7 @@ A fecha actual para instalar córdova de forma global
 npm install -g cordova
 ```
 
-Algunos links:
-
-1. [Cordova cli](https://cordova.apache.org/docs/en/12.x/guide/cli/index.html)
-2. [Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html)
-3. [Requirimientos para Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html#requirements-and-support)
+Creamos proyecto:
 
 ```sh
 cordova create senlleira io.cordova.senlleira SenlleiraApp
