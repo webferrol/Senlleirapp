@@ -33,38 +33,69 @@ cd senlleira
 cordova platform add android
 ```
 
-Resultado
+Podemos ver el resultado del anterior comando en la imagen inferior. Resaltado en rojo el nivel de la API de **Android**. Importante para la instalación del **SDK** en **Android Studio** en el futuro.
 
 <img src="./assets/cordova-platform-add.webp" with="600" alt="Android Target SDK: android-33;   Android Compile SDK: 33">
 
-También podemos ver si reunimos los prerequisitos. con el comando <code>cordova requirements</code>
+En la tabla inferior fue obtenida de [Android Platform Guide](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html)
+
+| cordova-android version | Android API-Levels (Android Version) | Library & Tooling Version |
+| ----------------------- | ------------------------------------ | ------------------------- |
+| 12.0.x                  | 24 (7.0) - 33 (13.0)                 | Build Tools: ^33.0.2<br>Kotlin: 1.7.21<br>Gradle: 7.6<br>Android Gradle Plugin: 7.4.2<br>AndroidX Compat Library: 1.6.1<br>AndroidX WebKit Library: 1.6.0<br>AndroidX Core SplashScreen: 1.0.0<br>Google Services Gradle Plugin: 4.3.15      |
+
+### Requisitos tras añadir la plataforma
+
+Dependiendo de lo que tengamos instalado en nuestro equipo puede ser necesario realizar ciertas configuraciones (e.g configurar variables de entorno) o instalaciones. Esta información la podemos ver con el siguiente comando:
+
+```sh
+cordova requirements
+```
+
+Si hay errores suelen mostrarse como vemos en la imagen que viene a continuación:
 
 <img src="./assets/cordova-ls-requirements-cmd.webp" with="600" alt="Resultado al comprobar los requirimientos con la plataforma android">
 
-### Posibles errores de _cordova requirements_
+### Configuraciones adicionales
 
 #### JDK
 
-- [Instalar JDK](https://www.oracle.com/java/technologies/downloads/)
+[Documentación de Cordova sobre JDK](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html#java-development-kit-jdk)
+
+>**Java Development Kit (JDK)** <br>If you are using cordova-android 10.0.0 or greater, install the [Java Development Kit (JDK) 11](https://www.oracle.com/java/technologies/downloads/#java11).
+>If you are using any version below cordova-android 10.0.0, install the Java Development Kit (JDK) 8.<br>The JAVA_HOME environment variable must be set according to your JDK installation path. See the Setting Environment Variables section on how to set up environment variables. Alternatively as of cordova-android 10.0.0 or greater, CORDOVA_JAVA_HOME can be set in place of JAVA_HOME, allowing a JDK install to be used specifically for Cordova development.
 
 #### Gradle
 
-En la capturar de abajo entre otras cosas vemos los errores de la falta de **Gradle**.
+[Documentación de Cordova sobre Gradle](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html#gradle)
+
+>As of Cordova-Android 6.4.0, [Gradle](https://gradle.org/install/) is required to be installed.<br>When installing on Windows, you need to add the path to the Gradle's binary directory to your path environment variable. See [Setting Environment Variables](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html#setting-environment-variables)) on how to configure system environment variables.
+
+En la captura de abajo entre otras cosas vemos los errores de la falta de **Gradle**.
 
 <img src="./assets/gradle-not-installed.webp" with="600" alt="Errores, entre ellos el de gradle">
 
-- [Instalar Gradle](https://gradle.org/install/)
+#### Android Studio
 
-#### JAVA_HOME
+[Documentación de Cordova sobre Android Studio](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html#android-studio)
 
-Para esta variable de entorno en principio sigue el siguiente [tutorial](https://www.aprenderaprogramar.com/index.php?option=com_content&view=article&id=389:configurar-java-en-windows-variables-de-entorno-javahome-y-path-cu00610b&catid=68&Itemid=188)
+>Download and install [Android Studio](https://developer.android.com/studio?hl=es-419). Follow the instructions at the linked Android Developer site to get started.
 
+### Variables de entorno
 
+[Documentación de Cordova sobre las variables de entorno](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html#setting-environment-variables)
 
-### Producción en browser
+#### JAVA_HOME y ANDROID_HOME
 
-1. Crear los estáticos para producción
+A modo de ejemplo:
 
-```sh
-npm run build
-```
+<img src="./assets/enviroment-variables.webp" with="600" alt="Rutas de ANDROID_HOME Y JAVA_HOME">
+
+#### Path
+
+A modo de ejemplo
+
+<img src="./assets/path.webp" with="600" alt="Rutas de la variable Path">
+
+Recuerda instalar todos los **Sdk tools** para poder ponerlas en tu variable de entorno path
+
+<img src="./assets/sdk-manager.webp" with="600" alt="SDK manager">
