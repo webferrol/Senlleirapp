@@ -2,15 +2,13 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
-## Configuración para utilizar en Android
-
-Algunos links:
+## Enlaces
 
 1. [Cordova cli](https://cordova.apache.org/docs/en/12.x/guide/cli/index.html)
 2. [Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html)
 3. [Requirimientos para Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html#requirements-and-support)
 
-## Cordova
+## Cordova. Generar una aplicación Android desde ficheros estáticos
 
 Trabajamos con la plataforma de [Córdova Apache](https://cordova.apache.org/)
 
@@ -102,6 +100,8 @@ Recuerda instalar todos los **Sdk tools** para poder ponerlas en tu variable de 
 
 # Errores
 
+Hay errores que me aparecieron cuando emulé la generación del fichero **apk**
+
 ## UnsupportedClassVersionError
 
 ```sh
@@ -114,3 +114,9 @@ by a more recent version of the Java Runtime (class file version 61.0),
 this version of the Java Runtime only recognizes class file versions up to 55.0
 
 [Solución: Rename the 8.0 folder to latest in C:\Users\<USER_NAME>\AppData\Local\Android\Sdk\cmdline-tools](https://stackoverflow.com/questions/76882205/error-linkageerror-occurred-while-loading-main-class-com-android-sdklib-tool-sd)
+
+# Una vez generados al app
+
+1. **NO OLVIDES SUBIR LOS ESTÁTICOS A LA CARPETA www LOS ESTÁTICOS**
+2. Abrir la carpeta /plataforms/android en **Android Studio**
+3. Completa las opciones del menú Build
