@@ -99,3 +99,18 @@ A modo de ejemplo
 Recuerda instalar todos los **Sdk tools** para poder ponerlas en tu variable de entorno path
 
 <img src="./assets/sdk-manager.webp" with="600" alt="SDK manager">
+
+# Errores
+
+## UnsupportedClassVersionError
+
+```sh
+cordova run --emulate
+```
+
+>java.lang.UnsupportedClassVersionError: 
+com/android/sdklib/tool/sdkmanager/SdkManagerCli has been compiled 
+by a more recent version of the Java Runtime (class file version 61.0), 
+this version of the Java Runtime only recognizes class file versions up to 55.0
+
+[Solución: Rename the 8.0 folder to latest in C:\Users\<USER_NAME>\AppData\Local\Android\Sdk\cmdline-tools](https://stackoverflow.com/questions/76882205/error-linkageerror-occurred-while-loading-main-class-com-android-sdklib-tool-sd)
