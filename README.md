@@ -10,9 +10,9 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## Cordova. Generar una aplicación Android desde ficheros estáticos
 
-Trabajamos con la plataforma de [Córdova Apache](https://cordova.apache.org/)
+Trabajamos con la plataforma de [Cordova Apache](https://cordova.apache.org/)
 
-A fecha actual para instalar córdova de forma global
+A fecha actual para instalar **Cordova** de forma global
 
 ```sh
 npm install -g cordova
