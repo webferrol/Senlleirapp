@@ -146,9 +146,4 @@ export const routes = [
     name: "admin-parque",
     component: () => import("@/views/admin/CatalogoParques.vue"),
   },
-  {
-    path: "/prueba2",
-    name: "prueba2",
-    component: () => import("@/views/PaginationPrueba.vue"),
-  },
 ];
