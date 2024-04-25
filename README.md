@@ -4,10 +4,11 @@
 
 ## Enlaces
 
-1. [Cordova cli](https://cordova.apache.org/docs/en/12.x/guide/cli/index.html)
-2. [Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html)
-3. [Requirimientos para Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html#requirements-and-support)
-4. [Google Play Console](https://play.google.com/console/)
+1. Cordova
+  - [Cordova cli](https://cordova.apache.org/docs/en/12.x/guide/cli/index.html)
+  - [Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html)
+  - [Requirimientos para Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html#requirements-and-support)
+2. [Google Play Console](https://play.google.com/console/)
 
 ## Cordova. Generar una aplicación Android desde ficheros estáticos
 
