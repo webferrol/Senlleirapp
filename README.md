@@ -9,6 +9,7 @@
   - [Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html)
   - [Requirimientos para Android](https://cordova.apache.org/docs/en/12.x/guide/platforms/android/index.html#requirements-and-support)
 2. [Google Play Console](https://play.google.com/console/)
+3. [Vídeo de mouredev para publicar](https://www.youtube.com/watch?v=vBHmJHp8Ldo)
 
 ## Cordova. Generar una aplicación Android desde ficheros estáticos
 
